@@ -16,33 +16,36 @@ function App() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
+        {/* 각 섹션을 하나씩 세로로 쌓기 */}
         <LazyDiv className="card-group">
-          {/* 표지 */}
           <Cover />
+        </LazyDiv>
 
-          {/* 모시는 글 */}
+        <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
 
         <LazyDiv className="card-group">
-          {/* 결혼식 날짜 (달력) */}
           <Calendar />
+        </LazyDiv>
 
-          {/* 겔러리 */}
+        <LazyDiv className="card-group">
           <Gallery />
         </LazyDiv>
 
         <LazyDiv className="card-group">
-          {/* 오시는길 */}
           <Location />
         </LazyDiv>
 
         <LazyDiv className="card-group">
-          {/* 마음 전하기 */}
           <Information />
-          {/* 방명록 */}
-          {!STATIC_ONLY && <GuestBook />}
         </LazyDiv>
+
+        {!STATIC_ONLY && (
+          <LazyDiv className="card-group">
+            <GuestBook />
+          </LazyDiv>
+        )}
 
         <ShareButton />
       </div>
