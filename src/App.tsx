@@ -4,7 +4,6 @@ import "./App.scss"
 import { BGEffect } from "./component/bgEffect"
 import { Invitation } from "./component/invitation"
 import { Calendar } from "./component/calendar"
-import { Gallery } from "./component/gallery"
 import { Information } from "./component/information"
 import { GuestBook } from "./component/guestbook"
 import { LazyDiv } from "./component/lazyDiv"
@@ -27,10 +26,6 @@ function App() {
 
         <LazyDiv className="card-group">
           <Calendar />
-        </LazyDiv>
-
-        <LazyDiv className="card-group">
-          <Gallery />
         </LazyDiv>
 
         <LazyDiv className="card-group">
