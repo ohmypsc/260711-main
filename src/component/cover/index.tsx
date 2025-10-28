@@ -8,12 +8,12 @@ import {
 import { LazyDiv } from "../lazyDiv"
 
 const DAY_OF_WEEK = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
+  "일요일",
+  "월요일",
+  "화요일",
+  "수요일",
+  "목요일",
+  "금요일",
   "토요일",
 ]
 
@@ -29,15 +29,30 @@ export const Cover = () => {
         {WEDDING_DATE.format("DD")}
       </div>
 
-      {/* 요일 */}
+      {/* 요일 (한글로 표시) */}
       <div className="wedding-day-of-week">
         {DAY_OF_WEEK[WEDDING_DATE.day()]}
       </div>
 
-      {/* 이미지 제거됨 */}
+      {/* 이미지 제거 — 대신 높이 유지 */}
+      <div
+        className="image-wrapper"
+        style={{
+          width: "100%",
+          height: "35vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "var(--theme-bg-color)",
+        }}
+      >
+        <span style={{ opacity: 0.5, fontSize: "1rem" }}>
+          {/* placeholder */}
+        </span>
+      </div>
 
-      {/* 문구 */}
-      <div className="결혼식에 초대합니다.</div>
+      {/* 안내 문구 */}
+      <div className="subtitle">Save the date for the wedding of</div>
 
       {/* 이름 */}
       <div className="names">
@@ -46,7 +61,7 @@ export const Cover = () => {
         {BRIDE_FULLNAME}
       </div>
 
-      {/* 날짜와 장소 */}
+      {/* 날짜 + 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
     </LazyDiv>
