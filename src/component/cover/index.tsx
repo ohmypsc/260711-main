@@ -5,7 +5,6 @@ import {
   WEDDING_DATE,
   WEDDING_DATE_FORMAT,
 } from "../../const"
-import { COVER_IMAGE } from "../../images"
 import { LazyDiv } from "../lazyDiv"
 
 const DAY_OF_WEEK = [
@@ -15,12 +14,13 @@ const DAY_OF_WEEK = [
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday",
+  "토요일",
 ]
 
 export const Cover = () => {
   return (
     <LazyDiv className="card cover">
+      {/* 날짜 */}
       <div className="wedding-date">
         {WEDDING_DATE.format("YYYY")}
         <div className="divider" />
@@ -28,18 +28,25 @@ export const Cover = () => {
         <div className="divider" />
         {WEDDING_DATE.format("DD")}
       </div>
+
+      {/* 요일 */}
       <div className="wedding-day-of-week">
         {DAY_OF_WEEK[WEDDING_DATE.day()]}
       </div>
-      <div className="image-wrapper">
-        <img src={COVER_IMAGE} alt="sample" />
-      </div>
+
+      {/* 이미지 제거됨 */}
+
+      {/* 문구 */}
       <div className="subtitle">Save the date for the wedding of</div>
+
+      {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
         <div className="divider" />
         {BRIDE_FULLNAME}
       </div>
+
+      {/* 날짜와 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
     </LazyDiv>
