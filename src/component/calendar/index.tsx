@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react"
 import {
   BRIDE_FIRSTNAME,
   GROOM_FIRSTNAME,
-  HOLIDAYS,
   WEDDING_DATE,
   WEDDING_DATE_FORMAT,
 } from "../../const"
@@ -22,7 +21,6 @@ export const Calendar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const diff = WEDDING_DATE.diff()
-
       setTsDiff(diff)
     }, 1000)
 
@@ -67,25 +65,22 @@ export const Calendar = () => {
         <div className="head">
           <span>Sa</span>
         </div>
+
+        {/* 빈칸 채우기 */}
         {Array.from({ length: firstDayOfWeek }).map((_, i) => (
           <div key={i} />
         ))}
+
+        {/* 날짜 렌더링 */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const date = i + 1
-
           const classes = []
 
           const isSunday = (i + firstDayOfWeek) % 7 === 0
-
-          if (isSunday || HOLIDAYS.includes(date)) {
-            classes.push("holiday")
-          }
+          if (isSunday) classes.push("holiday")
 
           const isWeddingDate = date === WEDDING_DATE.date()
-
-          if (isWeddingDate) {
-            classes.push("wedding-date")
-          }
+          if (isWeddingDate) classes.push("wedding-date")
 
           return (
             <div
@@ -98,6 +93,8 @@ export const Calendar = () => {
           )
         })}
       </div>
+
+      {/* 카운트다운 영역 */}
       <div className="countdown-wrapper">
         <div className="countdown">
           <div className="unit">DAY</div>
@@ -115,6 +112,7 @@ export const Calendar = () => {
           <span>:</span>
           <div className="count">{diffs.seconds}</div>
         </div>
+
         <div className="message">
           {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이{" "}
           {dayDiff > 0 ? (
