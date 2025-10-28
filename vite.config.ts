@@ -2,7 +2,6 @@ import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
 import fs from "fs"
-
 import { createHtmlPlugin } from "vite-plugin-html"
 import {
   GROOM_FULLNAME,
@@ -14,12 +13,11 @@ import {
 
 const distFolder = "build"
 
-// ✅ GitHub Pages용 base 경로를 명시적으로 지정
+// ✅ GitHub Pages용 base 경로
 const base = "/260711-main/"
 
-// https://vite.dev/config/
 export default defineConfig({
-  base, // 👈 여기에도 연결됨
+  base,
   plugins: [
     react(),
     svgr(),
