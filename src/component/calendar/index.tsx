@@ -40,30 +40,30 @@ export const Calendar = () => {
 
   return (
     <LazyDiv className="card calendar">
-      <h2 className="english">The Wedding Day</h2>
+      <h2>결혼식 날</h2>
       <div className="break" />
       {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
       <div className="calendar-wrapper">
         <div className="head holiday">
-          <span>Su</span>
+          <span>일</span>
         </div>
         <div className="head">
-          <span>Mo</span>
+          <span>월</span>
         </div>
         <div className="head">
-          <span>Tu</span>
+          <span>화</span>
         </div>
         <div className="head">
-          <span>We</span>
+          <span>수</span>
         </div>
         <div className="head">
-          <span>Th</span>
+          <span>목</span>
         </div>
         <div className="head">
-          <span>Fr</span>
+          <span>금</span>
         </div>
         <div className="head">
-          <span>Sa</span>
+          <span>토</span>
         </div>
 
         {/* 빈칸 채우기 */}
