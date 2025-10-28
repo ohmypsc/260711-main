@@ -4,29 +4,28 @@
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0"
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
       content="<%= GROOM_FULLNAME %> ❤️ <%= BRIDE_FULLNAME %> 결혼합니다."
     />
-    <meta property="og:image" content="./preview_image.png" />
-    <meta property="og:url" content="./" />
+    <meta property="og:image" content="/preview_image.png" />
+    <meta property="og:url" content="%BASE_URL%/" />
     <meta property="og:description" content="<%= DESCRIPTION %>" />
 
-    <!-- ✅ 수정된 부분 -->
-    <link rel="preload" href="./MapoGoldenPierA.woff" as="font" crossorigin />
-    <link rel="preload" href="./AlluraRegular.woff" as="font" crossorigin />
-    <link rel="manifest" href="./manifest.json" />
-    <link rel="icon" href="./favicon.ico" />
-    <link rel="stylesheet" href="./font.css" />
+    <!-- 폰트 및 매니페스트 -->
+    <link rel="preload" href="/MapoGoldenPierA.woff" as="font" crossorigin />
+    <link rel="preload" href="/AlluraRegular.woff" as="font" crossorigin />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/font.css" />
 
     <title><%= GROOM_FULLNAME %> ❤️ <%= BRIDE_FULLNAME %> 결혼합니다.</title>
   </head>
   <body>
     <div id="root"></div>
-    <!-- ✅ 여기도 ./ 로 수정 -->
-    <script type="module" src="./src/index.tsx"></script>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>
