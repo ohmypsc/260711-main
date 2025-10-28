@@ -22,8 +22,8 @@
   --white-color: #ffffff;
   --red-color: #ff0000;
 
-  /* ✅ 전역 폰트: 감성 한글 폰트 중심 */
-  font-family: "MapoGoldenPierA", "Noto Sans KR", sans-serif;
+  /* ✅ 전역 폰트 이름을 실제 폰트와 일치시킴 */
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   font-size: 20px;
 
   @media (max-width: 500px) {
@@ -75,22 +75,22 @@ $colors: (
   }
 }
 
-/* ✅ 버튼도 한글 폰트 통일 */
+/* ✅ 버튼 폰트 통일 */
 button {
-  font-family: "MapoGoldenPierA", "Noto Sans KR", sans-serif;
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   font-size: 1rem;
   border: none;
   background-color: transparent;
   padding: 0;
 }
 
-/* ✅ 전체 바디 폰트도 동일 */
+/* ✅ 전체 바디 폰트 통일 */
 body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
   height: 100vh;
-  font-family: "MapoGoldenPierA", "Noto Sans KR", sans-serif;
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
   &.modal-open {
     overflow-y: hidden;
@@ -206,10 +206,10 @@ h2 {
   font-size: 1.5rem;
   color: var(--theme-color);
   font-weight: normal;
-  font-family: "MapoGoldenPierA", "Noto Sans KR", sans-serif;
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
   &.english {
-    font-family: "Allura", "MapoGoldenPierA", "Noto Sans KR", sans-serif;
+    font-family: "Allura", "MapoGoldenPier", "Noto Sans KR", sans-serif;
   }
 }
 
