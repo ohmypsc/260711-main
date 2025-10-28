@@ -19,22 +19,16 @@ import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
 export const Invitation = () => {
   const { openModal, closeModal } = useModal()
+
   return (
     <LazyDiv className="card invitation">
-      <h2>초대합니다</h2>
+      <h2>초대의 글</h2>
 
       <div className="break" />
 
-      <div className="content">싱그러운 여름 향기 가득한 날</div>
-      <div className="content">소중한 분들을 모시고</div>
-      <div className="content">사랑의 약속을 하려고 합니다.</div>
-      <div className="break" />
-      <div className="content">햇살이 뜨거울 땐 가려주고,</div>
-      <div className="content">비가 오면 우산이 되어주는</div>
-      <div className="content">부부가 되겠습니다.</div>
-      <div className="break" />
-      <div className="content">기쁜날 함께 하시어</div>
-      <div className="content">저희의 앞날을 축복해 주세요.</div>
+      <div className="content">싱그러운 여름의 향기와 함께</div>
+      <div className="content">저희 두 사람이 사랑의 약속을 맺습니다.</div>
+      <div className="content">귀한 걸음으로 축복해 주시면 감사하겠습니다.</div>
 
       <div className="break" />
 
@@ -64,7 +58,7 @@ export const Invitation = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메시지로 축하 인사를 전해보세요.
+                  전화 또는 문자 메시지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
@@ -79,19 +73,15 @@ export const Invitation = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => {
-                              window.open(`tel:${phone}`, "_self")
-                            }}
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => {
-                              window.open(`sms:${phone}`, "_self")
-                            }}
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
                           />
                         </div>
                       </Fragment>
-                    ),
+                    )
                   )}
                 </div>
                 <div className="contact-info">
@@ -103,19 +93,15 @@ export const Invitation = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => {
-                              window.open(`tel:${phone}`, "_self")
-                            }}
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => {
-                              window.open(`sms:${phone}`, "_self")
-                            }}
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
                           />
                         </div>
                       </Fragment>
-                    ),
+                    )
                   )}
                 </div>
               </>
