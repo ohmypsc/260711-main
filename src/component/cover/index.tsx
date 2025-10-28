@@ -34,8 +34,6 @@ export const Cover = () => {
         {DAY_OF_WEEK[WEDDING_DATE.day()]}
       </div>
 
-      {/* ⛔ 이미지 영역 완전히 제거 */}
-
       {/* 안내 문구 */}
       <div className="subtitle">소중한 날에 함께해 주세요</div>
 
