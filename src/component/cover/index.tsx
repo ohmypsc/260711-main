@@ -37,7 +37,7 @@ export const Cover = () => {
       {/* 이미지 제거됨 */}
 
       {/* 문구 */}
-      <div className="subtitle">Save the date for the wedding of</div>
+      <div className="결혼식에 초대합니다.</div>
 
       {/* 이름 */}
       <div className="names">
