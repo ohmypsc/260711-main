@@ -29,30 +29,15 @@ export const Cover = () => {
         {WEDDING_DATE.format("DD")}
       </div>
 
-      {/* 요일 (한글로 표시) */}
+      {/* 요일 */}
       <div className="wedding-day-of-week">
         {DAY_OF_WEEK[WEDDING_DATE.day()]}
       </div>
 
-      {/* 이미지 제거 — 대신 높이 유지 */}
-      <div
-        className="image-wrapper"
-        style={{
-          width: "100%",
-          height: "35vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "var(--theme-bg-color)",
-        }}
-      >
-        <span style={{ opacity: 0.5, fontSize: "1rem" }}>
-          {/* placeholder */}
-        </span>
-      </div>
+      {/* ⛔ 이미지 영역 완전히 제거 */}
 
       {/* 안내 문구 */}
-      <div className="subtitle">Save the date for the wedding of</div>
+      <div className="subtitle">소중한 날에 함께해 주세요</div>
 
       {/* 이름 */}
       <div className="names">
