@@ -14,6 +14,8 @@ export const WEDDING_DATE_FORMAT = `YYYY년 MMMM D일 dddd A h시${
   WEDDING_DATE.minute() === 0 ? "" : " m분"
 }`
 
+// 예식 당월 휴무일 (캘린더 표시용)
+export const HOLIDAYS = [15]
 
 // 📍 장소 정보
 export const LOCATION = "유성컨벤션웨딩홀 3층 그랜드홀"
