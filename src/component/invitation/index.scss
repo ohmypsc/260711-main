@@ -1,16 +1,23 @@
 .invitation {
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+  text-align: center;
+  line-height: 1.8; /* 문장 간격 여유롭게 */
+
   .content {
-    margin-top: 0.8rem;
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem; /* 글씨 조금 키움 */
+    color: var(--dark-color);
   }
 
   .name {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+
     .relation {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       opacity: 0.7;
 
       .relation-name {
@@ -21,8 +28,10 @@
   }
 }
 
+/* 연락하기 모달 */
 .contact-modal {
   width: 22rem;
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
   .header {
     .title-group {
@@ -31,9 +40,11 @@
         font-size: 1.2rem;
         color: var(--theme-color);
         padding: 0.5rem;
+        font-weight: 600;
       }
       .subtitle {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        opacity: 0.8;
       }
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--dark-grey-color);
@@ -41,14 +52,14 @@
   }
 
   .content {
-    padding: 0.7rem;
-    padding-bottom: 1rem;
+    padding: 0.7rem 1rem 1rem 1rem;
 
     .contact-info {
-      padding: 1rem 0.7rem;
+      padding: 1rem 0;
       display: grid;
-      grid-template-columns: 8rem 7rem 1fr;
-      row-gap: 0.5rem;
+      grid-template-columns: 7rem 7rem 1fr;
+      row-gap: 0.6rem;
+      align-items: center;
 
       .relation {
         opacity: 0.7;
@@ -56,12 +67,18 @@
 
       .icon {
         fill: var(--dark-color);
-        margin: 0 0.5rem 0 0.5rem;
-        opacity: 0.7;
-        width: 1rem;
-        height: 1rem;
+        margin: 0 0.4rem;
+        opacity: 0.75;
+        width: 1.1rem;
+        height: 1.1rem;
+        cursor: pointer;
+
         &.flip {
           transform: scaleX(-1);
+        }
+
+        &:hover {
+          opacity: 1;
         }
       }
     }
@@ -70,5 +87,6 @@
   .footer {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 }
