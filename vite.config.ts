@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react"
 import svgr from "vite-plugin-svgr"
 import fs from "fs"
 
-import pkg from "./package.json"
 import { createHtmlPlugin } from "vite-plugin-html"
 import {
   GROOM_FULLNAME,
@@ -15,17 +14,12 @@ import {
 
 const distFolder = "build"
 
-let base = "/"
-
-try {
-  const url = new URL(pkg.homepage)
-  base = url.pathname
-} catch (e) {
-  base = pkg.homepage || "/"
-}
+// ✅ GitHub Pages용 base 경로를 명시적으로 지정
+const base = "/260711-main/"
 
 // https://vite.dev/config/
 export default defineConfig({
+  base, // 👈 여기에도 연결됨
   plugins: [
     react(),
     svgr(),
@@ -51,5 +45,4 @@ export default defineConfig({
   ],
   server: { port: 3000 },
   build: { outDir: distFolder },
-  base,
 })
