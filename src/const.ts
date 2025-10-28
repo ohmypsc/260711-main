@@ -9,7 +9,7 @@ dayjs.locale("ko")
 
 export { dayjs }
 
-export const WEDDING_DATE = dayjs.tz("2025-07-11 11:00", "Asia/Seoul")
+export const WEDDING_DATE = dayjs.tz("2026-07-11 11:00", "Asia/Seoul")
 export const WEDDING_DATE_FORMAT = `YYYY년 MMMM D일 dddd A h시${
   WEDDING_DATE.minute() === 0 ? "" : " m분"
 }`
