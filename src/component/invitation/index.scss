@@ -1,20 +1,26 @@
 .invitation {
-  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   text-align: center;
-  line-height: 1.8; /* 문장 간격 여유롭게 */
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+  padding: 2rem 1.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+    color: var(--theme-color);
+    margin-bottom: 1rem;
+  }
 
   .content {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.05rem; /* 글씨 조금 키움 */
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--dark-color);
   }
 
   .name {
     margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
-    font-size: 1.15rem;
-    font-weight: 500;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
 
     .relation {
       font-size: 0.8rem;
@@ -26,9 +32,25 @@
       }
     }
   }
+
+  /* 📞 연락 버튼 */
+  button {
+    margin-top: 1.5rem;
+    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+    background-color: var(--theme-color);
+    color: var(--white-color);
+    border-radius: 1.2rem;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
 }
 
-/* 연락하기 모달 */
+/* 📱 연락 모달 스타일 */
 .contact-modal {
   width: 22rem;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
@@ -36,30 +58,30 @@
   .header {
     .title-group {
       text-align: center;
+
       .title {
         font-size: 1.2rem;
         color: var(--theme-color);
         padding: 0.5rem;
-        font-weight: 600;
       }
+
       .subtitle {
-        font-size: 0.95rem;
-        opacity: 0.8;
+        font-size: 0.9rem;
       }
+
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--dark-grey-color);
     }
   }
 
   .content {
-    padding: 0.7rem 1rem 1rem 1rem;
+    padding: 1rem;
 
     .contact-info {
-      padding: 1rem 0;
+      padding: 0.7rem 0;
       display: grid;
-      grid-template-columns: 7rem 7rem 1fr;
-      row-gap: 0.6rem;
-      align-items: center;
+      grid-template-columns: 8rem 7rem 1fr;
+      row-gap: 0.5rem;
 
       .relation {
         opacity: 0.7;
@@ -67,18 +89,13 @@
 
       .icon {
         fill: var(--dark-color);
-        margin: 0 0.4rem;
-        opacity: 0.75;
-        width: 1.1rem;
-        height: 1.1rem;
-        cursor: pointer;
+        margin: 0 0.5rem;
+        opacity: 0.7;
+        width: 1rem;
+        height: 1rem;
 
         &.flip {
           transform: scaleX(-1);
-        }
-
-        &:hover {
-          opacity: 1;
         }
       }
     }
@@ -87,6 +104,5 @@
   .footer {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 }
