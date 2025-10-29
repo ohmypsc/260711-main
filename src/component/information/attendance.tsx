@@ -8,11 +8,8 @@ import {
 } from "../../const"
 import { Button } from "../button"
 import { useModal } from "../modal"
-import { useEffect, useRef, useState } from "react"
-import HeartIcon from "../../icons/heart-icon.svg?react"
-import CalendarIcon from "../../icons/calendar-icon.svg?react"
-import MarkerIcon from "../../icons/marker-icon.svg?react"
-import { SERVER_URL } from "../../env"
+import { useRef, useState } from "react"
+import { supabase } from "../../supabaseClient" // ✅ supabase 연결
 
 const RULES = {
   name: {
@@ -25,73 +22,17 @@ const RULES = {
 }
 
 export const AttendanceInfo = () => {
-  const { openModal, closeModal } = useModal()
-
-  const initialized = useRef(false)
-
+  const { openModal } = useModal()
   const now = useRef(dayjs())
 
-  useEffect(() => {
-    if (initialized.current) return
-    initialized.current = true
-
-    if (!SERVER_URL || WEDDING_DATE.isBefore(now.current)) return
-
-    openModal({
-      className: "attendance-info-modal",
-      header: <div className="title">참석 의사 전달 안내</div>,
-      content: (
-        <>
-          <div className="info-message">
-            축하의 마음으로 참석해주시는
-            <br />
-            모든 분들을 귀하게 모실 수 있도록
-            <br />
-            참석 및 식사 여부를 미리 여쭙고자 합니다.
-            <div className="break" />
-            부담없이 알려주시면
-            <br />
-            정성껏 준비하겠습니다.
-          </div>
-          <div className="wedding-info">
-            <HeartIcon /> 신랑 {GROOM_FULLNAME} & 신부 {BRIDE_FULLNAME}
-            <br />
-            <CalendarIcon /> {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
-            <br />
-            <MarkerIcon /> {LOCATION}
-          </div>
-        </>
-      ),
-      footer: (
-        <>
-          <Button
-            buttonStyle="style2"
-            onClick={() => {
-              closeModal()
-              openModal(attendanceModalInfo)
-            }}
-          >
-            참석 의사 전달하기
-          </Button>
-          <Button
-            buttonStyle="style2"
-            className="bg-light-grey-color text-dark-color"
-            onClick={closeModal}
-          >
-            닫기
-          </Button>
-        </>
-      ),
-    })
-  }, [openModal, closeModal])
-
-  if (!SERVER_URL || WEDDING_DATE.isBefore(now.current)) return null
+  // ✅ 자동 팝업 제거. 버튼만 남김.
+  if (WEDDING_DATE.isBefore(now.current)) return null
 
   return (
     <div className="info-card">
       <div className="label">참석 의사 전달</div>
       <div className="content">
-        신랑, 신부에게 참석의사를
+        신랑, 신부에게 참석 의사를
         <br />
         미리 전달할 수 있어요.
       </div>
@@ -137,7 +78,7 @@ const AttendanceModalContent = () => {
         try {
           const side = inputRef.current.side.groom.checked
             ? "groom"
-            : inputRef.current.side.bride
+            : inputRef.current.side.bride.checked
               ? "bride"
               : null
           const name = inputRef.current.name.value
@@ -150,48 +91,25 @@ const AttendanceModalContent = () => {
                 : null
           const count = Number(inputRef.current.count.value)
 
-          if (!side) {
-            alert("신랑 또는 신부를 선택해주세요.")
-            return
-          }
+          if (!side) return alert("신랑 또는 신부를 선택해주세요.")
+          if (!name) return alert("성함을 입력해주세요.")
+          if (name.length > RULES.name.maxLength)
+            return alert(`성함을 ${RULES.name.maxLength}자 이하로 입력해주세요.`)
+          if (!meal) return alert("식사 여부를 선택해주세요.")
+          if (isNaN(count) || count < RULES.count.min)
+            return alert(`참석 인원을 ${RULES.count.min}명 이상으로 입력해주세요.`)
 
-          if (!name) {
-            alert("성함을 입력해주세요.")
-            return
-          }
-          if (name.length > RULES.name.maxLength) {
-            alert(`성함을 ${RULES.name.maxLength}자 이하로 입력해주세요.`)
-            return
-          }
+          // ✅ Supabase 저장
+          const { error } = await supabase.from("attendance").insert([
+            { side, name, meal, count },
+          ])
 
-          if (!meal) {
-            alert("식사 여부를 선택해주세요.")
-            return
-          }
-
-          if (isNaN(count)) {
-            alert("참석 인원을 입력해주세요.")
-            return
-          }
-          if (count < RULES.count.min) {
-            alert(`참석 인원을 ${RULES.count.min}명 이상으로 입력해주세요.`)
-            return
-          }
-
-          const res = await fetch(`${SERVER_URL}/attendance`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ side, name, meal, count }),
-          })
-          if (!res.ok) {
-            throw new Error(res.statusText)
-          }
+          if (error) throw error
 
           alert("참석 의사가 성공적으로 전달되었습니다.")
           closeModal()
-        } catch {
+        } catch (err) {
+          console.error(err)
           alert("참석 의사 전달에 실패했습니다.")
         } finally {
           setLoading(false)
@@ -309,6 +227,7 @@ const AttendanceModalContent = () => {
     </form>
   )
 }
+
 const AttendanceModalFooter = () => {
   const { closeModal } = useModal()
   return (
