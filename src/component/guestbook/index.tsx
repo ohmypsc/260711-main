@@ -3,19 +3,18 @@ import { Button } from "../button"
 import { dayjs } from "../../const"
 import { LazyDiv } from "../lazyDiv"
 import { useModal } from "../modal"
-import { SERVER_URL } from "../../env"
+import { createClient } from "@supabase/supabase-js"
+
+// 🔑 Supabase 연결 (.env 값 사용)
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL!,
+  import.meta.env.VITE_SUPABASE_ANON_KEY!
+)
 
 const RULES = {
-  name: {
-    maxLength: 10,
-  },
-  content: {
-    maxLength: 100,
-  },
-  password: {
-    minLength: 4,
-    maxLength: 20,
-  },
+  name: { maxLength: 10 },
+  content: { maxLength: 100 },
+  password: { minLength: 4, maxLength: 20 },
 }
 
 const PAGES_PER_BLOCK = 5
@@ -32,25 +31,70 @@ export const GuestBook = () => {
   const { openModal, closeModal } = useModal()
   const [posts, setPosts] = useState<Post[]>([])
 
+  // 🔹 글 불러오기
   const loadPosts = async () => {
     try {
-      const res = await fetch(`${SERVER_URL}/guestbook?offset=0&limit=3`)
-      if (res.ok) {
-        const data = await res.json()
-        setPosts(data.posts)
-      }
+      const { data, error } = await supabase
+        .from("guestbook")
+        .select("id, name, content, created_at")
+        .order("created_at", { ascending: false })
+        .limit(3)
+
+      if (error) throw error
+
+      const formatted = data.map((item) => ({
+        id: item.id,
+        name: item.name,
+        content: item.content,
+        timestamp: Math.floor(new Date(item.created_at).getTime() / 1000),
+      }))
+
+      setPosts(formatted)
     } catch (error) {
       console.error("Error loading posts:", error)
     }
   }
 
+  // 🔹 초기 로드 + 실시간 구독
   useEffect(() => {
     loadPosts()
+
+    const subscription = supabase
+      .channel("guestbook-realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "guestbook" },
+        (payload) => {
+          const newPost = payload.new
+          setPosts((prev) => [
+            {
+              id: newPost.id,
+              name: newPost.name,
+              content: newPost.content,
+              timestamp: Math.floor(new Date(newPost.created_at).getTime() / 1000),
+            },
+            ...prev,
+          ])
+        }
+      )
+      .on(
+        "postgres_changes",
+        { event: "DELETE", schema: "public", table: "guestbook" },
+        (payload) => {
+          const deletedId = payload.old.id
+          setPosts((prev) => prev.filter((p) => p.id !== deletedId))
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(subscription)
+    }
   }, [])
 
   return (
     <LazyDiv className="card guestbook">
-      <h2 className="english">Guest Book</h2>
+      <h2>방명록</h2>
 
       <div className="break" />
 
@@ -59,7 +103,7 @@ export const GuestBook = () => {
           <div className="heading">
             <button
               className="close-button"
-              onClick={async () => {
+              onClick={() => {
                 openModal({
                   className: "delete-guestbook-modal",
                   closeOnClickBackground: false,
@@ -67,9 +111,7 @@ export const GuestBook = () => {
                   content: (
                     <DeleteGuestBookModal
                       postId={post.id}
-                      onSuccess={() => {
-                        loadPosts()
-                      }}
+                      onSuccess={() => loadPosts()}
                     />
                   ),
                   footer: (
@@ -173,6 +215,7 @@ export const GuestBook = () => {
   )
 }
 
+// ✏️ 작성 모달
 const WriteGuestBookModal = ({ loadPosts }: { loadPosts: () => void }) => {
   const inputRef = useRef({}) as React.RefObject<{
     name: HTMLInputElement
@@ -194,45 +237,18 @@ const WriteGuestBookModal = ({ loadPosts }: { loadPosts: () => void }) => {
           const content = inputRef.current.content.value.trim()
           const password = inputRef.current.password.value
 
-          if (!name) {
-            alert("이름을 입력해주세요.")
-            return
-          }
-          if (name.length > RULES.name.maxLength) {
-            alert(`이름을 ${RULES.name.maxLength}자 이하로 입력해주세요.`)
+          if (!name || !content || !password) {
+            alert("모든 항목을 입력해주세요.")
             return
           }
 
-          if (!content) {
-            alert("내용을 입력해주세요.")
-            return
-          }
-          if (content.length > RULES.content.maxLength) {
-            alert(`내용을 ${RULES.content.maxLength}자 이하로 입력해주세요.`)
-            return
-          }
+          const { error } = await supabase
+            .from("guestbook")
+            .insert([{ name, content, password }])
 
-          if (password.length < RULES.password.minLength) {
-            alert(`비밀번호를 ${RULES.password.minLength}자 이상 입력해주세요.`)
-            return
-          }
-          if (password.length > RULES.password.maxLength) {
-            alert(`비밀번호를 ${RULES.password.maxLength}자 이하로 입력해주세요.`)
-            return
-          }
+          if (error) throw error
 
-          const res = await fetch(`${SERVER_URL}/guestbook`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name, content, password }),
-          })
-          if (!res.ok) {
-            throw new Error(res.statusText)
-          }
-
-          alert("방명록 작성이 완료되었습니다.")
+          alert("방명록이 등록되었습니다.")
           closeModal()
           loadPosts()
         } catch {
@@ -247,37 +263,26 @@ const WriteGuestBookModal = ({ loadPosts }: { loadPosts: () => void }) => {
         disabled={loading}
         type="text"
         placeholder="이름을 입력해주세요."
-        className="name"
-        ref={(ref) => {
-          inputRef.current.name = ref as HTMLInputElement
-        }}
-        maxLength={RULES.name.maxLength}
+        ref={(ref) => (inputRef.current.name = ref as HTMLInputElement)}
       />
       내용
       <textarea
         disabled={loading}
-        placeholder="축하 메세지를 100자 이내로 입력해주세요."
-        className="content"
-        ref={(ref) => {
-          inputRef.current.content = ref as HTMLTextAreaElement
-        }}
-        maxLength={RULES.content.maxLength}
+        placeholder="축하 메시지를 입력해주세요."
+        ref={(ref) => (inputRef.current.content = ref as HTMLTextAreaElement)}
       />
       비밀번호
       <input
         disabled={loading}
         type="password"
         placeholder="비밀번호를 입력해주세요."
-        className="password"
-        ref={(ref) => {
-          inputRef.current.password = ref as HTMLInputElement
-        }}
-        maxLength={RULES.password.maxLength}
+        ref={(ref) => (inputRef.current.password = ref as HTMLInputElement)}
       />
     </form>
   )
 }
 
+// 📜 전체보기 모달
 const AllGuestBookModal = ({
   loadPosts,
 }: {
@@ -290,22 +295,24 @@ const AllGuestBookModal = ({
 
   const loadPage = async (page: number) => {
     setCurrentPage(page)
-    try {
-      const offset = page * POSTS_PER_PAGE
-      const res = await fetch(
-        `${SERVER_URL}/guestbook?offset=${offset}&limit=${POSTS_PER_PAGE}`,
-      )
-      if (res.ok) {
-        const data = await res.json()
-        setPosts(data.posts)
-        setTotalPages(Math.ceil(data.total / POSTS_PER_PAGE))
-        if (data.total < offset) {
-          setCurrentPage(Math.ceil(data.total / POSTS_PER_PAGE) - 1)
-        }
-      }
-    } catch (error) {
-      console.error("Error loading posts:", error)
-    }
+    const offset = page * POSTS_PER_PAGE
+    const { data, count, error } = await supabase
+      .from("guestbook")
+      .select("*", { count: "exact" })
+      .order("created_at", { ascending: false })
+      .range(offset, offset + POSTS_PER_PAGE - 1)
+
+    if (error) return console.error(error)
+
+    setPosts(
+      data.map((item) => ({
+        id: item.id,
+        name: item.name,
+        content: item.content,
+        timestamp: Math.floor(new Date(item.created_at).getTime() / 1000),
+      }))
+    )
+    setTotalPages(Math.ceil((count || 1) / POSTS_PER_PAGE))
   }
 
   useEffect(() => {
@@ -315,7 +322,7 @@ const AllGuestBookModal = ({
   const pages = useMemo(() => {
     const start = Math.floor(currentPage / PAGES_PER_BLOCK) * PAGES_PER_BLOCK
     const end = Math.min(start + PAGES_PER_BLOCK, totalPages)
-    return Array.from({ length: end - start }).map((_, index) => index + start)
+    return Array.from({ length: end - start }).map((_, i) => i + start)
   }, [currentPage, totalPages])
 
   return (
@@ -373,14 +380,9 @@ const AllGuestBookModal = ({
         </div>
       ))}
 
-      <div className="break" />
-
       <div className="pagination">
         {pages[0] > 0 && (
-          <div
-            className="page"
-            onClick={() => loadPage(pages[0] - 1)}
-          >
+          <div className="page" onClick={() => loadPage(pages[0] - 1)}>
             이전
           </div>
         )}
@@ -406,6 +408,7 @@ const AllGuestBookModal = ({
   )
 }
 
+// 🗑️ 삭제 모달
 const DeleteGuestBookModal = ({
   postId,
   onSuccess,
@@ -426,36 +429,34 @@ const DeleteGuestBookModal = ({
         setLoading(true)
         try {
           const password = inputRef.current.value
-          if (!password || password.length < RULES.password.minLength) {
-            alert(`비밀번호를 ${RULES.password.minLength}자 이상 입력해주세요.`)
+          const { data, error } = await supabase
+            .from("guestbook")
+            .select("password")
+            .eq("id", postId)
+            .single()
+
+          if (error || !data) {
+            alert("삭제 오류가 발생했습니다.")
             return
           }
 
-          if (password.length > RULES.password.maxLength) {
-            alert(`비밀번호를 ${RULES.password.maxLength}자 이하로 입력해주세요.`)
+          if (data.password !== password) {
+            alert("비밀번호가 일치하지 않습니다.")
             return
           }
 
-          const result = await fetch(`${SERVER_URL}/guestbook`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: postId, password }),
-          })
+          const { error: deleteError } = await supabase
+            .from("guestbook")
+            .delete()
+            .eq("id", postId)
 
-          if (!result.ok) {
-            if (result.status === 403) {
-              alert("비밀번호가 일치하지 않습니다.")
-            } else {
-              alert("방명록 삭제에 실패했습니다.")
-            }
-            return
-          }
+          if (deleteError) throw deleteError
 
           alert("삭제되었습니다.")
           closeModal()
           onSuccess()
         } catch {
-          alert("방명록 삭제에 실패했습니다.")
+          alert("삭제에 실패했습니다.")
         } finally {
           setLoading(false)
         }
@@ -467,7 +468,6 @@ const DeleteGuestBookModal = ({
         placeholder="비밀번호를 입력해주세요."
         className="password"
         ref={inputRef}
-        maxLength={RULES.password.maxLength}
       />
     </form>
   )
