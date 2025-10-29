@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+import AdminPage from "./pages/AdminPage"
 import { Cover } from "./component/cover"
 import { Location } from "./component/location"
 import "./App.scss"
@@ -10,7 +12,27 @@ import { LazyDiv } from "./component/lazyDiv"
 import { ShareButton } from "./component/shareButton"
 import { STATIC_ONLY } from "./env"
 
-function App() {
+// ✅ Router 컴포넌트로 관리자 경로 분기
+function Router() {
+  const [path, setPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    const handleChange = () => setPath(window.location.pathname)
+    window.addEventListener("popstate", handleChange)
+    return () => window.removeEventListener("popstate", handleChange)
+  }, [])
+
+  // ✅ /admin 경로일 때 관리자 페이지 열기
+  if (path.endsWith("/admin")) {
+    return <AdminPage />
+  }
+
+  // ✅ 그 외에는 기본 청첩장 페이지
+  return <Home />
+}
+
+// ✅ Home 컴포넌트 (기존 청첩장 메인)
+function Home() {
   return (
     <div className="background">
       <BGEffect />
@@ -48,4 +70,4 @@ function App() {
   )
 }
 
-export default App
+export default Router
