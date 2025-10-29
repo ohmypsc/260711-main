@@ -7,7 +7,7 @@ export default function AdminPage() {
   const [guestbook, setGuestbook] = useState<any[]>([])
   const [attendance, setAttendance] = useState<any[]>([])
 
-  const ADMIN_PASSWORD = "love2026" // ✅ 변경 가능
+  const ADMIN_PASSWORD = "20260711" // ✅ 변경 가능
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
