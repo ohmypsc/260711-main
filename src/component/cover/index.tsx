@@ -40,17 +40,6 @@ export const Cover = () => {
   }, [])
 
 
-
-
-
-
-
-  console.log("✅ Cover 컴포넌트 렌더링됨:", visible);
-
-
-
-
-  
   return (
     <div className={`card cover ${visible ? "visible" : ""}`}>
       {/* 날짜 */}
