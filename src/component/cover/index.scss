@@ -15,6 +15,11 @@
     transform: translateY(0);
   }
 
+  /* ✅ 모든 내부 요소 기본 여백 최소화 */
+  > * {
+    margin: 0.3rem 0 !important;
+  }
+
   /* --- 날짜 --- */
   .wedding-date {
     font-size: 1.5rem;
@@ -23,7 +28,6 @@
     align-items: center;
     gap: 0.6rem;
     color: var(--dark-color);
-    margin-bottom: 0.8rem;
 
     .divider {
       background-color: var(--alt-color);
@@ -37,18 +41,17 @@
     font-size: 1rem;
     color: var(--alt-color);
     opacity: 0.8;
-    margin-bottom: 0.8rem;
   }
 
   /* --- 이름 --- */
   .names {
-    margin: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.6rem;
     font-size: 1.6rem;
     color: var(--theme-color);
+    margin: 0.6rem 0; /* ✅ 살짝만 강조 */
 
     .divider {
       background-color: var(--theme-color);
@@ -59,22 +62,20 @@
 
   /* --- 날짜 + 장소 --- */
   .info {
-    margin-top: 0.6rem;
-    margin-bottom: 0.6rem;
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--dark-color);
   }
 
   /* --- 가족 정보 --- */
   .family {
-    margin-top: 1rem;
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.4;
     color: var(--dark-color);
+    margin-top: 0.5rem; /* ✅ invitation 높이 맞춤 */
 
     .name {
-      margin: 0.3rem 0;
+      margin: 0.2rem 0;
 
       .relation-name {
         color: var(--theme-color);
@@ -83,9 +84,9 @@
     }
   }
 
-  /* --- 버튼 (invitation과 동일한 스타일) --- */
+  /* --- 버튼 (invitation 동일) --- */
   button {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
     background-color: var(--theme-color);
     color: var(--white-color);
@@ -123,7 +124,7 @@
 
     button {
       font-size: 0.9rem;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
   }
 }
