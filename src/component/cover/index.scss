@@ -57,6 +57,9 @@
   }
 
   /* --- 이름 --- */
+.cover {
+  /* 기존 구조 그대로 유지 */
+
   .names {
     margin: 2.5rem 0 2rem;
     display: flex;
@@ -64,9 +67,27 @@
     align-items: center;
     gap: 1.2rem;
     font-size: 2.6rem;
-    color: var(--theme-color);
     font-weight: 700;
-    text-shadow: 0 0 12px rgba(255, 180, 180, 0.35);
+    color: var(--theme-color);
+    position: relative;
+    overflow: hidden;
+
+    /* ✨ 은은한 반짝임용 가상요소 */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.7),
+        transparent
+      );
+      animation: shimmer 5s ease-in-out infinite;
+    }
 
     .divider {
       background-color: var(--theme-color);
@@ -76,6 +97,21 @@
     }
   }
 
+  /* ✨ 부드럽게 흐르는 반짝임 애니메이션 */
+  @keyframes shimmer {
+    0% {
+      left: -75%;
+    }
+    50% {
+      left: 125%;
+    }
+    100% {
+      left: 125%;
+    }
+  }
+}
+
+  
   /* --- 날짜 + 장소 --- */
   .info {
     font-size: 1.1rem;
