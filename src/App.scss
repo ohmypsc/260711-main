@@ -216,10 +216,22 @@ div.break {
   height: 1rem;
 }
 
-/* ✅ Cover는 LazyDiv 효과 비활성화 (둥 뜨는 효과 제거) */
-.cover {
+/* ✅ Cover는 LazyDiv 및 모든 전역 애니메이션 완전 비활성화 */
+.cover,
+.cover.card,
+.card.cover,
+.card-group .cover,
+.card-group .card.cover {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;
   animation: none !important;
+}
+
+/* ✅ 혹시 card-group 전체가 Cover용으로 렌더링될 경우 대비 */
+.card-group.cover,
+.card-group:has(.cover) {
+  opacity: 1 !important;
+  animation: none !important;
+  transition: none !important;
 }
