@@ -237,13 +237,24 @@ div.break {
 }
 
 
-
-
-
 /* ✅ 모든 카드(커버 포함)의 배경지 + 그림자 제거 */
 .card-view .card-group {
   background: none !important;
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+
+/* ✅ Cover가 부드럽게 나타나도록 */
+.cover {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.8s ease, transform 1.8s ease;
+}
+
+/* ✅ 페이지가 로드되면 자연스럽게 등장 */
+.cover.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
