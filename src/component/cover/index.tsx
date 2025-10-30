@@ -32,13 +32,12 @@ const DAY_OF_WEEK = [
 
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
+
+  // ✅ fade-in 효과용 state
   const [visible, setVisible] = useState(false)
-
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 150)
-    return () => clearTimeout(timer)
+    setTimeout(() => setVisible(true), 150)
   }, [])
-
 
   return (
     <div className={`card cover ${visible ? "visible" : ""}`}>
@@ -88,6 +87,7 @@ export const Cover = () => {
       {/* 연락하기 버튼 */}
       <Button
         onClick={() => {
+          console.log("✅ Cover 버튼 클릭됨")
           openModal({
             className: "contact-modal",
             closeOnClickBackground: true,
