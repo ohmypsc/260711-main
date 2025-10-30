@@ -1,30 +1,30 @@
 .cover {
-  /* ✅ 공통 카드와 동일한 폭으로 통일 */
-  display: block;
-  width: 100%;
-  max-width: 940px; /* .card-view 내부 기준 폭 */
-  margin: 12px auto; /* .card-group 여백과 동일 */
-  box-sizing: border-box;
-
+  /* ✅ 기본 카드 스타일과 완전히 동일하게 통일 */
   text-align: center;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  padding: 2rem 1.5rem; /* invitation과 동일한 패딩 */
-  border-radius: 20px;
   background-color: var(--light-color);
   border: 1px solid var(--light-grey-color);
+  border-radius: 20px;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  padding: 1.5rem; /* invitation과 동일 */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto 1rem auto;
   transition: opacity 1.2s ease, transform 1.2s ease;
   opacity: 0;
   transform: translateY(30px);
+  position: relative;
 
+  /* ✅ 등장 애니메이션 */
   &.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* ✅ 내부 여백 균일화 */
+  /* ✅ 내부 간격 통일 (너무 띄지 않도록) */
   > * {
-    margin: 0.3rem 0 !important;
+    margin: 0.4rem 0 !important;
   }
 
   /* --- 날짜 --- */
@@ -91,7 +91,7 @@
     }
   }
 
-  /* --- 버튼 (invitation과 동일 스타일) --- */
+  /* --- 버튼 (다른 카드와 동일) --- */
   button {
     margin-top: 1rem;
     font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
@@ -107,19 +107,10 @@
     }
   }
 
-  /* ✅ 태블릿 이하 폭 맞춤 */
-  @media (max-width: 980px) {
-    max-width: 500px;
-    margin: 8px auto;
-  }
-
-  /* 📱 모바일 폭 고정 */
+  /* ✅ 모바일 전용 (invitation과 동일 비율) */
   @media (max-width: 500px) {
-    width: 100%;
-    max-width: 100vw;
-    margin: 8px auto;
     padding: 1.5rem 1rem;
-    border-radius: 20px;
+    margin-bottom: 0.8rem;
 
     .wedding-date {
       font-size: 1.2rem;
