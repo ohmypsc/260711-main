@@ -1,4 +1,5 @@
 import { Fragment } from "react/jsx-runtime"
+import { useEffect, useState } from "react"
 import {
   BRIDE_FULLNAME,
   BRIDE_FATHER,
@@ -32,8 +33,14 @@ const DAY_OF_WEEK = [
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
+  // ✅ fade-in 효과용 state
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 150)
+  }, [])
+
   return (
-    <div className="card cover">
+    <div className={`card cover ${visible ? "visible" : ""}`}>
       {/* 날짜 */}
       <div className="wedding-date">
         {WEDDING_DATE.format("YYYY")}
