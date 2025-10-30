@@ -11,18 +11,17 @@ import ktalkIcon from "../../icons/ktalk-icon.png"
 import { LazyDiv } from "../lazyDiv"
 import { useKakao } from "../store"
 
-const baseUrl = import.meta.env.BASE_URL
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "") // 끝 슬래시 제거
 
 export const ShareButton = () => {
   const kakao = useKakao()
+
   return (
     <LazyDiv className="footer share-button">
       <button
         className="ktalk-share"
         onClick={() => {
-          if (!kakao) {
-            return
-          }
+          if (!kakao) return
 
           kakao.Share.sendDefault({
             objectType: "location",
@@ -33,22 +32,12 @@ export const ShareButton = () => {
               description:
                 WEDDING_DATE.format(WEDDING_DATE_FORMAT) + "\n" + LOCATION,
               imageUrl:
-                window.location.protocol +
-                "//" +
-                window.location.host +
-                baseUrl +
-                "/preview_image.png",
+                `${window.location.protocol}//${window.location.host}${baseUrl}/preview_image.png`,
               link: {
                 mobileWebUrl:
-                  window.location.protocol +
-                  "//" +
-                  window.location.host +
-                  baseUrl,
+                  `${window.location.protocol}//${window.location.host}${baseUrl}`,
                 webUrl:
-                  window.location.protocol +
-                  "//" +
-                  window.location.host +
-                  baseUrl,
+                  `${window.location.protocol}//${window.location.host}${baseUrl}`,
               },
             },
             buttons: [
@@ -56,15 +45,9 @@ export const ShareButton = () => {
                 title: "초대장 보기",
                 link: {
                   mobileWebUrl:
-                    window.location.protocol +
-                    "//" +
-                    window.location.host +
-                    baseUrl,
+                    `${window.location.protocol}//${window.location.host}${baseUrl}`,
                   webUrl:
-                    window.location.protocol +
-                    "//" +
-                    window.location.host +
-                    baseUrl,
+                    `${window.location.protocol}//${window.location.host}${baseUrl}`,
                 },
               },
             ],
