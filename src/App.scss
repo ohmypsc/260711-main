@@ -236,3 +236,15 @@ div.break {
   transition: none !important;
 }
 
+
+
+
+
+/* ✅ 카드의 그림자만 제거 (떠오르는 구조는 유지) */
+.card-view .card-group {
+  box-shadow: none !important; /* 배경 박스 그림자 제거 */
+}
+
+.card-view .card-group .card {
+  box-shadow: none !important; /* 개별 카드 그림자 제거 */
+}
