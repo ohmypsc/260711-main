@@ -80,6 +80,7 @@ export const Cover = () => {
       {/* 연락하기 버튼 */}
       <Button
         onClick={() => {
+              console.log("✅ Cover 버튼 클릭됨") // ✅ 이 한 줄 추가!
           openModal({
             className: "contact-modal",
             closeOnClickBackground: true,
