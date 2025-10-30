@@ -11,6 +11,9 @@ import { GuestBook } from "./component/guestbook"
 import { LazyDiv } from "./component/lazyDiv"
 import { STATIC_ONLY } from "./env"
 
+/* ✅ 모달 관련 import 추가 */
+import { ModalProvider } from "./component/modal"
+
 // ✅ Router 컴포넌트로 관리자 경로 분기
 function Router() {
   const [path, setPath] = useState(window.location.pathname)
@@ -62,11 +65,16 @@ function Home() {
             <GuestBook />
           </LazyDiv>
         )}
-
-
       </div>
     </div>
   )
 }
 
-export default Router
+/* ✅ Router를 ModalProvider로 감싸서 내보내기 */
+export default function App() {
+  return (
+    <ModalProvider>
+      <Router />
+    </ModalProvider>
+  )
+}
