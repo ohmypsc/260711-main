@@ -1,32 +1,123 @@
-/* ✅ Cover는 LazyDiv 및 모든 전역 애니메이션 완전 비활성화 → ❌ 삭제 / 수정 */
-.cover,
-.cover.card,
-.card.cover,
-.card-group .cover,
-.card-group .card.cover {
-  opacity: 0; /* ✅ 처음에는 안 보이게 */
-  transform: translateY(20px);
-  transition: opacity 1.6s ease, transform 1.6s ease; /* ✅ 자연스럽게 등장 */
+.cover {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+
+  /* 종이 질감 + 은은한 반투명 배경 */
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  .wedding-date {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--dark-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+
+    .divider {
+      background-color: var(--alt-color);
+      width: 1px;
+      height: 0.8rem;
+    }
+  }
+
+  .wedding-day-of-week {
+    font-size: 1rem;
+    color: var(--alt-color);
+    opacity: 0.8;
+    margin-top: 0.4rem;
+  }
+
+  .names {
+    margin: 1.2rem 0 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.6rem;
+    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+    color: var(--theme-color);
+    text-shadow: 0 0 8px rgba(255, 180, 180, 0.4);
+
+    .divider {
+      background-color: var(--theme-color);
+      width: 1px;
+      height: 1rem;
+    }
+  }
+
+  .info {
+    margin-bottom: 0.4rem;
+    opacity: 0.8;
+    font-size: 1rem;
+    color: var(--dark-color);
+  }
+
+  .family {
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--dark-color);
+
+    .name {
+      margin: 0.2rem 0;
+
+      .relation-name {
+        color: var(--theme-color);
+        font-weight: 500;
+      }
+    }
+  }
+
+  /* ✅ 버튼은 전역 스타일로 통일하되, 폭만 지정 */
+  button {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 1.8rem;
+  }
+
+  @media (max-width: 500px) {
+    padding: 1.2rem 0.8rem;
+    border-radius: 12px;
+
+    .wedding-date {
+      font-size: 1.2rem;
+    }
+
+    .names {
+      font-size: 1.3rem;
+    }
+
+    .info {
+      font-size: 0.9rem;
+    }
+
+    .family {
+      font-size: 0.9rem;
+    }
+
+    button {
+      font-size: 0.95rem;
+    }
+  }
 }
 
-/* ✅ Cover가 로드 후 부드럽게 나타나도록 */
-.cover.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ✅ 혹시 card-group 전체가 Cover용으로 렌더링될 경우 대비 */
-.card-group.cover,
-.card-group:has(.cover) {
-  opacity: 1 !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-/* ✅ 모든 카드(커버 포함)의 배경지 + 그림자 제거 */
-.card-view .card-group {
-  background: none !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+/* ✅ 모바일(iOS/Android) 높이 보정 */
+@supports (-webkit-touch-callout: none) {
+  .cover {
+    height: -webkit-fill-available;
+  }
 }
