@@ -35,7 +35,6 @@ export const Cover = () => {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    // 살짝 지연 후 서서히 등장
     const timer = setTimeout(() => setVisible(true), 150)
     return () => clearTimeout(timer)
   }, [])
@@ -144,7 +143,7 @@ export const Cover = () => {
                           <EnvelopeIcon
                             className="icon"
                             onClick={() =>
-                              window.open(`sms:${phone}`, "_self`)
+                              window.open(`sms:${phone}`, "_self")
                             }
                           />
                         </div>
