@@ -240,11 +240,9 @@ div.break {
 
 
 
-/* ✅ 카드의 그림자만 제거 (떠오르는 구조는 유지) */
-.card-view .card-group {
-  box-shadow: none !important; /* 배경 박스 그림자 제거 */
-}
-
-.card-view .card-group .card {
-  box-shadow: none !important; /* 개별 카드 그림자 제거 */
+/* ✅ 커버를 제외한 카드들의 배경만 제거 (그림자는 유지) */
+.card-view .card-group:not(:has(.cover)) {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
 }
