@@ -39,10 +39,12 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover는 LazyDiv나 card-group 밖에 단독 배치 */}
-        <Cover />
+        {/* ✅ Cover: LazyDiv 안에서 동일한 카드 스타일 유지 + 자체 페이드인 효과 적용 */}
+        <LazyDiv className="card-group">
+          <Cover />
+        </LazyDiv>
 
-        {/* ✅ 이후 섹션들은 LazyDiv 유지 */}
+        {/* ✅ 이후 섹션들은 기존 그대로 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
