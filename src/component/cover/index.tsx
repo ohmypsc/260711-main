@@ -4,12 +4,8 @@ import {
   LOCATION,
   WEDDING_DATE,
   WEDDING_DATE_FORMAT,
-  GROOM_FATHER,
-  GROOM_MOTHER,
-  BRIDE_FATHER,
-  BRIDE_MOTHER,
-  GROOM_TITLE,
-  BRIDE_TITLE,
+  BRIDE_INFO,
+  GROOM_INFO,
 } from "../../const"
 import { Button } from "../button"
 import { useModal } from "../modal"
@@ -30,6 +26,7 @@ const DAY_OF_WEEK = [
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
+  // ✅ 연락 모달 열기 함수
   const handleContact = () => {
     openModal({
       className: "contact-modal",
@@ -42,24 +39,48 @@ export const Cover = () => {
       ),
       content: (
         <>
+          {/* 신랑측 */}
           <div className="contact-info">
-            <div className="relation">신랑측</div>
-            <div>{GROOM_FATHER} · {GROOM_MOTHER}의 {GROOM_TITLE}</div>
-            <div>{GROOM_FULLNAME}</div>
-            <div className="icon-row">
-              <PhoneIcon className="flip icon" onClick={() => window.open(`tel:01000000000`, "_self")} />
-              <EnvelopeIcon className="icon" onClick={() => window.open(`sms:01000000000`, "_self")} />
-            </div>
+            {GROOM_INFO.filter(({ phone }) => !!phone).map(
+              ({ relation, name, phone }) => (
+                <Fragment key={relation}>
+                  <div className="relation">{relation}</div>
+                  <div>{name}</div>
+                  <div>
+                    <PhoneIcon
+                      className="flip icon"
+                      onClick={() => window.open(`tel:${phone}`, "_self")}
+                    />
+                    <EnvelopeIcon
+                      className="icon"
+                      onClick={() => window.open(`sms:${phone}`, "_self")}
+                    />
+                  </div>
+                </Fragment>
+              )
+            )}
           </div>
 
+          {/* 신부측 */}
           <div className="contact-info">
-            <div className="relation">신부측</div>
-            <div>{BRIDE_FATHER} · {BRIDE_MOTHER}의 {BRIDE_TITLE}</div>
-            <div>{BRIDE_FULLNAME}</div>
-            <div className="icon-row">
-              <PhoneIcon className="flip icon" onClick={() => window.open(`tel:01000000000`, "_self")} />
-              <EnvelopeIcon className="icon" onClick={() => window.open(`sms:01000000000`, "_self")} />
-            </div>
+            {BRIDE_INFO.filter(({ phone }) => !!phone).map(
+              ({ relation, name, phone }) => (
+                <Fragment key={relation}>
+                  <div className="relation">{relation}</div>
+                  <div>{name}</div>
+                  <div>
+                    <PhoneIcon
+                      className="flip icon"
+                      onClick={() => window.open(`tel:${phone}`, "_self")}
+                    />
+                    <EnvelopeIcon
+                      className="icon"
+                      onClick={() => window.open(`sms:${phone}`, "_self")}
+                    />
+                  </div>
+                </Fragment>
+              )
+            )}
           </div>
         </>
       ),
@@ -101,16 +122,6 @@ export const Cover = () => {
       {/* 날짜 + 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
-
-      {/* 가족 정보 */}
-      <div className="family">
-        <div className="name">
-          {GROOM_FATHER} · {GROOM_MOTHER}의 <span className="relation-name">{GROOM_TITLE}</span> {GROOM_FULLNAME}
-        </div>
-        <div className="name">
-          {BRIDE_FATHER} · {BRIDE_MOTHER}의 <span className="relation-name">{BRIDE_TITLE}</span> {BRIDE_FULLNAME}
-        </div>
-      </div>
 
       {/* 연락하기 버튼 */}
       <button onClick={handleContact}>
