@@ -1,74 +1,90 @@
 .cover {
   text-align: center;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  padding: 2rem 1.5rem; /* ✅ invitation과 동일한 여백 */
-  height: auto;
+  padding: 3rem 1.5rem; /* 상단여백 강화 */
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between; /* 위-아래 자연스러운 공간감 */
   align-items: center;
   box-sizing: border-box;
   margin: 0 auto;
+  background-color: var(--white-color);
 
   /* --- 날짜 --- */
   .wedding-date {
-    font-size: 1.5rem;
+    font-size: 2rem; /* ✅ 포인트 크게 */
+    font-weight: 600;
     color: var(--dark-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.6rem;
+    gap: 1rem;
+    letter-spacing: 0.05em;
 
     .divider {
-      width: 1px;
-      height: 0.7rem;
+      width: 2px;
+      height: 1.2rem;
       background-color: var(--alt-color);
+      opacity: 0.5;
     }
   }
 
   .wedding-day-of-week {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--alt-color);
     opacity: 0.8;
-    margin-top: 0.3rem;
+    margin-top: 0.6rem;
   }
 
   /* --- 이름 --- */
   .names {
-    margin: 1rem 0;
+    margin: 2rem 0 1.5rem; /* ✅ 여백 강조 */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 1.6rem;
+    gap: 1rem;
+    font-size: 2.4rem; /* ✅ 시각 중심 */
     color: var(--theme-color);
-    text-shadow: 0 0 8px rgba(255, 180, 180, 0.4);
+    text-shadow: 0 0 10px rgba(255, 180, 180, 0.4);
+    font-weight: 700;
 
     .divider {
       background-color: var(--theme-color);
-      width: 1px;
-      height: 1rem;
+      width: 2px;
+      height: 1.6rem;
+      opacity: 0.8;
     }
   }
 
   /* --- 날짜 + 장소 --- */
   .info {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    line-height: 1.7;
     color: var(--dark-color);
-    margin: 0.3rem 0;
+    margin: 0.4rem 0;
+    opacity: 0.9;
+
+    &:first-of-type {
+      margin-top: 0.8rem;
+    }
   }
 
   /* --- 가족 정보 --- */
   .family {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    margin-top: 2.5rem; /* ✅ 시각적 구분 */
+    font-size: 1rem;
+    line-height: 1.8;
     color: var(--dark-color);
+    opacity: 0.9;
 
     .name {
-      margin: 0.2rem 0;
+      margin: 0.4rem 0;
+
+      .relation {
+        opacity: 0.7;
+        margin: 0 0.2rem;
+      }
 
       .relation-name {
         color: var(--theme-color);
@@ -79,46 +95,71 @@
 
   /* --- 버튼 --- */
   button {
-    margin-top: 1.5rem;
-    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+    margin-top: 2.5rem;
     background-color: var(--theme-color);
     color: var(--white-color);
-    border-radius: 1.2rem; /* ✅ invitation과 동일 */
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-    transition: all 0.2s ease;
+    border-radius: 2rem;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(255, 150, 150, 0.3);
+    transition: all 0.25s ease;
+    letter-spacing: 0.03em;
 
     &:hover {
+      transform: translateY(-2px);
       opacity: 0.9;
+      box-shadow: 0 6px 14px rgba(255, 150, 150, 0.4);
     }
   }
 
   /* 💻 PC 전용 */
   @media (min-width: 768px) {
-    min-height: 80vh;
-    padding: 2.5rem 2rem;
+    min-height: 90vh;
+    padding: 4rem 2rem;
+
+    .wedding-date {
+      font-size: 2.2rem;
+    }
+    .names {
+      font-size: 2.8rem;
+    }
+    .info {
+      font-size: 1.2rem;
+    }
+    .family {
+      font-size: 1.05rem;
+    }
+    button {
+      font-size: 1.15rem;
+      margin-top: 3rem;
+    }
   }
 
   /* 📱 모바일 전용 */
   @media (max-width: 500px) {
-    padding: 1.5rem 1rem;
+    padding: 2rem 1rem;
 
     .wedding-date {
-      font-size: 1.3rem;
-      gap: 0.4rem;
+      font-size: 1.5rem;
+      gap: 0.6rem;
     }
-
     .names {
-      font-size: 1.3rem;
+      font-size: 1.9rem;
+      gap: 0.5rem;
+      margin: 1.5rem 0 1rem;
     }
-
-    .info,
+    .info {
+      font-size: 0.95rem;
+    }
     .family {
       font-size: 0.9rem;
+      margin-top: 2rem;
     }
-
     button {
-      font-size: 0.9rem;
+      margin-top: 2rem;
+      font-size: 1rem;
+      padding: 0.8rem 1.8rem;
     }
   }
 }
