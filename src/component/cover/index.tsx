@@ -80,7 +80,7 @@ export const Cover = () => {
       {/* 연락하기 버튼 */}
       <Button
         onClick={() => {
-              console.log("✅ Cover 버튼 클릭됨") // ✅ 이 한 줄 추가!
+          console.log("✅ Cover 버튼 클릭됨")
           openModal({
             className: "contact-modal",
             closeOnClickBackground: true,
@@ -104,11 +104,15 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`sms:${phone}`, "_self")
+                            }
                           />
                         </div>
                       </Fragment>
@@ -126,11 +130,15 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`sms:${phone}`, "_self")
+                            }
                           />
                         </div>
                       </Fragment>
