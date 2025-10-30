@@ -1,30 +1,34 @@
 .cover {
-  /* ✅ 기본 카드 스타일과 완전히 동일하게 통일 */
+  /* ✅ 다른 카드와 동일한 레이아웃 기본 구조 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  background-color: var(--light-color);
-  border: 1px solid var(--light-grey-color);
+  position: relative;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  /* ✅ 카드 배경 및 외형 */
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-  padding: 1.5rem; /* invitation과 동일 */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 1.5rem;
   width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  margin: 0 auto 1rem auto;
-  transition: opacity 1.2s ease, transform 1.2s ease;
+  height: auto;
+  min-height: 70vh;
+  margin-bottom: 1rem;
+
+  /* ✅ 자연스러운 페이드인 애니메이션 */
   opacity: 0;
   transform: translateY(30px);
-  position: relative;
+  transition: opacity 1.2s ease, transform 1.2s ease;
 
-  /* ✅ 등장 애니메이션 */
   &.visible {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  /* ✅ 내부 간격 통일 (너무 띄지 않도록) */
-  > * {
-    margin: 0.4rem 0 !important;
   }
 
   /* --- 날짜 --- */
@@ -35,6 +39,7 @@
     align-items: center;
     gap: 0.6rem;
     color: var(--dark-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
     .divider {
       background-color: var(--alt-color);
@@ -48,17 +53,20 @@
     font-size: 1rem;
     color: var(--alt-color);
     opacity: 0.8;
+    margin-top: 0.3rem;
   }
 
   /* --- 이름 --- */
   .names {
+    margin: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.6rem;
     font-size: 1.6rem;
+    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
     color: var(--theme-color);
-    margin: 0.6rem 0;
+    text-shadow: 0 0 8px rgba(255, 180, 180, 0.4);
 
     .divider {
       background-color: var(--theme-color);
@@ -69,17 +77,18 @@
 
   /* --- 날짜 + 장소 --- */
   .info {
+    opacity: 0.9;
     font-size: 1rem;
-    line-height: 1.5;
     color: var(--dark-color);
+    margin-bottom: 0.3rem;
   }
 
   /* --- 가족 정보 --- */
   .family {
+    margin-top: 1rem;
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.6;
     color: var(--dark-color);
-    margin-top: 0.5rem;
 
     .name {
       margin: 0.2rem 0;
@@ -91,26 +100,24 @@
     }
   }
 
-  /* --- 버튼 (다른 카드와 동일) --- */
+  /* --- 버튼 --- */
   button {
-    margin-top: 1rem;
-    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-    background-color: var(--theme-color);
-    color: var(--white-color);
-    border-radius: 1.2rem;
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-
-    &:hover {
-      opacity: 0.9;
-    }
+    width: 100%;
+    max-width: 360px;
+    margin-top: 1.2rem;
   }
 
-  /* ✅ 모바일 전용 (invitation과 동일 비율) */
+  /* 💻 PC 전용 — 여백과 패딩 조정 */
+  @media (min-width: 768px) {
+    min-height: 70vh;
+    margin: 5vh auto;
+    padding: 2.5rem 2rem;
+  }
+
+  /* 📱 모바일 전용 — 여백 축소 */
   @media (max-width: 500px) {
-    padding: 1.5rem 1rem;
-    margin-bottom: 0.8rem;
+    padding: 1rem;
+    border-radius: 14px;
 
     .wedding-date {
       font-size: 1.2rem;
@@ -123,7 +130,7 @@
     }
 
     .info {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .family {
