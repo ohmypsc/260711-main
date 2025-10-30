@@ -11,7 +11,7 @@ import { GuestBook } from "./component/guestbook"
 import { LazyDiv } from "./component/lazyDiv"
 import { STATIC_ONLY } from "./env"
 
-/* ✅ 모달 관련 import 추가 */
+/* ✅ 모달 관련 import */
 import { ModalProvider } from "./component/modal"
 
 // ✅ Router 컴포넌트로 관리자 경로 분기
@@ -39,12 +39,10 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover는 LazyDiv 제거 */}
-        <div className="card-group">
-          <Cover />
-        </div>
+        {/* ✅ Cover는 LazyDiv나 card-group 밖에 단독 배치 */}
+        <Cover />
 
-        {/* ✅ 나머지 섹션은 그대로 LazyDiv 유지 */}
+        {/* ✅ 이후 섹션들은 LazyDiv 유지 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
