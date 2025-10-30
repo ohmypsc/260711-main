@@ -1,8 +1,7 @@
 .cover {
-  /* ✅ 화면에 딱 맞게 (주소창 제외한 실제 높이) */
+  /* 화면 중앙 정렬 */
   min-height: 100vh;
   min-height: 100svh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,6 +10,7 @@
   padding: 2rem 1rem;
   background-color: var(--light-color);
 
+  /* 날짜 */
   .wedding-date {
     margin-top: 1.5rem;
     font-size: 1.4rem;
@@ -26,28 +26,20 @@
     }
   }
 
+  /* 요일 */
   .wedding-day-of-week {
     font-size: 1.1rem;
     opacity: 0.7;
     margin-bottom: 0.8rem;
   }
 
-  /* ✨ 안내 문구 */
-  .subtitle {
-    font-size: 1.4rem;
-    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-    color: var(--alt-color);
-    margin-top: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
+  /* 이름 */
   .names {
     margin: 0.3rem 0 0.6rem;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-
     font-size: 1.3rem;
     font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
@@ -58,18 +50,54 @@
     }
   }
 
+  /* 날짜 + 장소 */
   .info {
     margin-bottom: 0.3rem;
     opacity: 0.8;
     font-size: 1rem;
   }
 
+  /* 가족 정보 */
+  .family {
+    margin-top: 1.4rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--dark-color);
+
+    .name {
+      margin: 0.2rem 0;
+
+      .relation {
+        font-size: 0.9rem;
+        opacity: 0.8;
+
+        .relation-name {
+          color: var(--theme-color);
+        }
+      }
+    }
+  }
+
+  /* 연락하기 버튼 */
+  button {
+    margin-top: 1.8rem;
+    background-color: var(--theme-color);
+    color: var(--white-color);
+    padding: 0.6rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: var(--alt-color);
+    }
+  }
+
   @media (max-width: 500px) {
     padding: 1.5rem 0.5rem;
-
-    .subtitle {
-      font-size: 1.2rem;
-    }
 
     .wedding-date {
       font-size: 1.2rem;
@@ -84,10 +112,19 @@
     .info {
       font-size: 0.9rem;
     }
+
+    .family {
+      font-size: 0.9rem;
+    }
+
+    button {
+      font-size: 0.9rem;
+      padding: 0.5rem 1.2rem;
+    }
   }
 }
 
-/* ✅ iOS·Android에서 완벽히 높이 맞추기 위한 보정 */
+/* ✅ iOS·Android 브라우저 높이 보정 */
 @supports (-webkit-touch-callout: none) {
   .cover {
     height: -webkit-fill-available;
