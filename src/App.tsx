@@ -39,11 +39,12 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* 각 섹션을 하나씩 세로로 쌓기 */}
-        <LazyDiv className="card-group">
+        {/* ✅ Cover는 LazyDiv 제거 */}
+        <div className="card-group">
           <Cover />
-        </LazyDiv>
+        </div>
 
+        {/* ✅ 나머지 섹션은 그대로 LazyDiv 유지 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
