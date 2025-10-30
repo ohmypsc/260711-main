@@ -21,7 +21,6 @@
   --white-color: #ffffff;
   --red-color: #ff0000;
 
-  /* ✅ 전역 폰트 이름을 실제 폰트와 일치시킴 */
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   font-size: 20px;
 
@@ -215,4 +214,12 @@ h2 {
 /* ✅ 여백 유지 */
 div.break {
   height: 1rem;
+}
+
+/* ✅ Cover는 LazyDiv 효과 비활성화 (둥 뜨는 효과 제거) */
+.cover {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
 }
