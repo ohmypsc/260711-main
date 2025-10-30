@@ -49,15 +49,9 @@ $colors: (
 );
 
 @each $name, $color in $colors {
-  .text-#{$name} {
-    color: $color !important;
-  }
-  .bg-#{$name} {
-    background-color: $color !important;
-  }
-  .border-#{$name} {
-    border-color: $color !important;
-  }
+  .text-#{$name} { color: $color !important; }
+  .bg-#{$name} { background-color: $color !important; }
+  .border-#{$name} { border-color: $color !important; }
 }
 
 @keyframes lazy-fade-in {
@@ -90,9 +84,7 @@ body {
   height: 100vh;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
-  &.modal-open {
-    overflow-y: hidden;
-  }
+  &.modal-open { overflow-y: hidden; }
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -117,13 +109,8 @@ body {
     width: 980px;
     text-align: center;
 
-    @media (max-width: 980px) {
-      width: 500px;
-    }
-
-    @media (max-width: 500px) {
-      width: 100vw;
-    }
+    @media (max-width: 980px) { width: 500px; }
+    @media (max-width: 500px) { width: 100vw; }
 
     /* ✅ 세로형 카드 그룹 */
     .card-group {
@@ -135,8 +122,7 @@ body {
 
       opacity: 0;
       &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
+        animation: lazy-fade-in 3s;
         opacity: 1;
       }
 
@@ -160,14 +146,11 @@ body {
         transition: all 0.3s ease;
         margin-bottom: 1rem;
 
-        @media (max-width: 980px) {
-          margin: 0.5rem 0;
-        }
+        @media (max-width: 980px) { margin: 0.5rem 0; }
 
         opacity: 0;
         &.lazy-active {
-          animation-name: lazy-fade-in;
-          animation-duration: 3s;
+          animation: lazy-fade-in 3s;
           opacity: 1;
         }
 
@@ -189,8 +172,7 @@ body {
       opacity: 0;
 
       &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
+        animation: lazy-fade-in 3s;
         opacity: 1;
       }
 
@@ -215,39 +197,31 @@ h2 {
 }
 
 /* ✅ 여백 유지 */
-div.break {
-  height: 1rem;
-}
+div.break { height: 1rem; }
 
-/* ✅ Cover만 LazyDiv 없이 페이드인 — 다른 카드와 완전히 동일한 크기로 맞춤 */
-.cover {
+/* ✅ Cover — .card와 완전히 동일한 크기 + 페이드인 */
+.card-group > .cover {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
   background-color: var(--light-color);
   border: 1px solid var(--light-grey-color);
   border-radius: 20px;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-  display: block; /* flex 제거로 높이 확장 방지 */
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
 
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.2s ease, transform 1.2s ease;
-
-  @media (max-width: 980px) {
-    margin: 0.5rem 0;
-  }
-
-  @media print {
-    opacity: 1;
-    animation: none !important;
-  }
+  transform: translateZ(0); /* 사파리 픽셀보정 */
 }
 
-.cover.visible {
+.card-group > .cover.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -256,11 +230,8 @@ div.break {
 .cover .names,
 .cover .family,
 .cover .info {
-  margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
+  margin: 0.4rem 0;
 }
 
 /* ✅ 첫 번째 카드 상단 간격 보정 */
-.card-view .card-group:first-child {
-  margin-top: 8px;
-}
+.card-view .card-group:first-child { margin-top: 8px; }
