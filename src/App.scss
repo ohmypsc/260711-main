@@ -236,25 +236,3 @@ div.break {
   transition: none !important;
 }
 
-
-
-
-
-
-
-
-.cover {
-  position: relative;
-  z-index: 10; /* 버튼을 항상 클릭 가능한 맨 위로 */
-}
-
-.background,
-.card-view,
-.card-group {
-  pointer-events: auto !important;
-}
-
-button {
-  pointer-events: auto !important;
-}
-
