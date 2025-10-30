@@ -158,6 +158,7 @@ body {
         position: relative;
         box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.1);
         margin-bottom: 1rem;
+        border-radius: 20px; /* ✅ 모든 카드도 커버처럼 둥글게 */
 
         @media (max-width: 980px) {
           margin: 0.5rem 0;
@@ -184,6 +185,7 @@ body {
       margin: 0.5rem;
       padding: 1rem;
       opacity: 0;
+      border-radius: 20px;
 
       &.lazy-active {
         animation-name: lazy-fade-in;
@@ -216,28 +218,24 @@ div.break {
   height: 1rem;
 }
 
-/* ✅ Cover는 LazyDiv 및 모든 전역 애니메이션 완전 비활성화 */
-.cover,
-.cover.card,
-.card.cover,
-.card-group .cover,
-.card-group .card.cover {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-  animation: none !important;
+/* ✅ Cover는 별도 페이드인 (전역 애니메이션 끄지 않음) */
+.cover {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.8s ease, transform 1.8s ease;
+  border-radius: 20px; /* ✅ 통일 */
+  background-color: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-/* ✅ 혹시 card-group 전체가 Cover용으로 렌더링될 경우 대비 */
-.card-group.cover,
-.card-group:has(.cover) {
-  opacity: 1 !important;
-  animation: none !important;
-  transition: none !important;
+/* ✅ 페이지가 로드되면 자연스럽게 등장 */
+.cover.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-
-/* ✅ 모든 카드(커버 포함)의 배경지 + 그림자 제거 */
+/* ✅ 모든 카드의 배경지 제거 */
 .card-view .card-group {
   background: none !important;
   background-color: transparent !important;
@@ -245,16 +243,7 @@ div.break {
   box-shadow: none !important;
 }
 
-
-/* ✅ Cover가 부드럽게 나타나도록 */
-.cover {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1.8s ease, transform 1.8s ease;
-}
-
-/* ✅ 페이지가 로드되면 자연스럽게 등장 */
-.cover.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ✅ 카드 둥근 모서리 통일 */
+.card-view .card-group .card {
+  border-radius: 20px !important;
 }
