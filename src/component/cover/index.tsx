@@ -31,6 +31,7 @@ const DAY_OF_WEEK = [
 ]
 
 export const Cover = () => {
+  console.log("✅ Cover 렌더링 됨")
   const { openModal, closeModal } = useModal()
 
   const [visible, setVisible] = useState(false)
