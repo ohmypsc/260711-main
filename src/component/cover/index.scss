@@ -1,11 +1,11 @@
 .cover {
   text-align: center;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  padding: 2.5rem 1.2rem;
-  min-height: 90svh;
+  padding: 1.8rem 1rem; /* ✅ 화면 여백 최소화 */
+  min-height: 100svh; /* ✅ 모바일 화면 꽉 채움 */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly; /* ✅ 위·중간·아래 균등 배치 */
   align-items: center;
   box-sizing: border-box;
   margin: 0 auto;
@@ -13,13 +13,15 @@
 
   /* --- 날짜 --- */
   .wedding-date {
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 500;
     color: var(--dark-color);
+    letter-spacing: 0.08em;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
+    opacity: 0.9;
 
     .divider {
       width: 1px;
@@ -30,76 +32,77 @@
   }
 
   .wedding-day-of-week {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--alt-color);
     opacity: 0.7;
-    margin-top: 0.3rem;
+    margin-top: 0.25rem;
   }
 
-  /* --- 이름 (✨ 은은한 빛 효과) --- */
+  /* --- 이름 (✨ 은은한 빛 + 중심 포인트) --- */
   .names {
-    margin: 1.8rem 0 1.4rem;
+    margin: 1.4rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.9rem;
-    font-size: 2.4rem;
+    gap: 0.8rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    position: relative;
-
     color: var(--theme-color);
     text-shadow:
-      0 0 6px rgba(255, 150, 150, 0.5),
-      0 0 12px rgba(255, 150, 150, 0.4),
-      0 0 24px rgba(255, 160, 160, 0.2);
+      0 0 8px rgba(255, 150, 150, 0.4),
+      0 0 16px rgba(255, 180, 180, 0.25);
     animation: softGlow 4s ease-in-out infinite alternate;
 
     .divider {
       background-color: var(--theme-color);
       width: 2px;
-      height: 1.4rem;
-      opacity: 0.8;
+      height: 1.3rem;
+      opacity: 0.7;
     }
   }
 
   @keyframes softGlow {
     0% {
       text-shadow:
-        0 0 6px rgba(255, 150, 150, 0.4),
-        0 0 12px rgba(255, 150, 150, 0.3),
-        0 0 20px rgba(255, 150, 150, 0.15);
+        0 0 6px rgba(255, 150, 150, 0.35),
+        0 0 12px rgba(255, 150, 150, 0.2);
     }
     100% {
       text-shadow:
-        0 0 10px rgba(255, 180, 180, 0.7),
-        0 0 20px rgba(255, 190, 190, 0.5),
-        0 0 30px rgba(255, 200, 200, 0.3);
+        0 0 12px rgba(255, 180, 180, 0.7),
+        0 0 24px rgba(255, 190, 190, 0.4);
     }
   }
 
   /* --- 날짜 + 장소 --- */
   .info {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--dark-color);
-    margin: 0.3rem 0;
     opacity: 0.9;
+    margin: 0.25rem 0;
+
+    &:last-of-type {
+      font-weight: 500;
+      color: var(--theme-color);
+      margin-top: 0.4rem;
+    }
   }
 
   /* --- 가족 정보 --- */
   .family {
-    margin-top: 1.8rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
     color: var(--dark-color);
-    opacity: 0.9;
+    opacity: 0.85;
 
     .name {
-      margin: 0.3rem 0;
+      margin: 0.25rem 0;
+      font-weight: 400;
 
       .relation {
         opacity: 0.7;
-        margin: 0 0.2rem;
       }
 
       .relation-name {
@@ -109,64 +112,53 @@
     }
   }
 
-  /* --- 버튼 (공통 버튼 디자인 사용, 여백만 조정) --- */
+  /* --- 버튼 --- */
   button {
-    margin-top: 2rem;
+    margin-top: 1.2rem;
+    width: 100%;
+    max-width: 360px;
   }
 
   /* 💻 PC 전용 */
   @media (min-width: 768px) {
-    min-height: 85vh;
-    padding: 3rem 2rem;
-
+    min-height: 90vh;
+    padding: 2.5rem 2rem;
     .wedding-date {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
-
     .names {
       font-size: 2.6rem;
-      gap: 1rem;
     }
-
     .info {
       font-size: 1.1rem;
     }
-
     .family {
       font-size: 1rem;
-    }
-
-    button {
-      margin-top: 2.5rem;
     }
   }
 
   /* 📱 모바일 전용 */
   @media (max-width: 500px) {
-    /* ✅ 화면 가득 채우기 */
-    min-height: 100svh; 
-    padding: 1.2rem 0.8rem;
-    justify-content: space-evenly; /* ✅ 균등 배치로 위아래 꽉 차게 */
+    padding: 1rem 0.6rem;
+    justify-content: space-evenly; /* ✅ 여백 비율 유지 */
 
     .wedding-date {
-      font-size: 1.4rem;
-      gap: 0.5rem;
+      font-size: 1.3rem;
     }
 
     .names {
       font-size: 2.1rem;
-      margin: 1.3rem 0 1rem;
+      margin: 1rem 0;
     }
 
     .info {
-      font-size: 0.95rem;
-      margin-top: 0.3rem;
-      line-height: 1.7;
+      font-size: 0.9rem;
+      margin: 0.2rem 0;
     }
 
     .family {
-      font-size: 0.9rem;
-      margin-top: 1rem;
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
     }
 
     button {
