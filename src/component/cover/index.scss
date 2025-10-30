@@ -1,36 +1,36 @@
 .cover {
-  min-height: 100vh;
-  min-height: 100svh;
+  /* 📱 전체 화면 기준 높이 */
+  height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2rem 1rem;
   position: relative;
+  margin: 0 auto;
 
-  /* 종이 질감 + 은은한 반투명 배경 */
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(10px);
+  /* ✨ 종이 질감 + 은은한 반투명 배경 */
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 2rem 1.2rem;
 
+  /* --- 날짜 --- */
   .wedding-date {
-    margin-top: 1rem;
     font-size: 1.5rem;
-    font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.6rem;
     color: var(--dark-color);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
     .divider {
       background-color: var(--alt-color);
       width: 1px;
-      height: 0.8rem;
+      height: 0.7rem;
     }
   }
 
@@ -38,11 +38,12 @@
     font-size: 1rem;
     color: var(--alt-color);
     opacity: 0.8;
-    margin-top: 0.4rem;
+    margin-top: 0.3rem;
   }
 
+  /* --- 이름 --- */
   .names {
-    margin: 1.2rem 0 0.8rem;
+    margin: 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,13 +60,15 @@
     }
   }
 
+  /* --- 날짜 + 장소 --- */
   .info {
-    margin-bottom: 0.4rem;
-    opacity: 0.8;
+    opacity: 0.9;
     font-size: 1rem;
     color: var(--dark-color);
+    margin-bottom: 0.3rem;
   }
 
+  /* --- 가족 정보 --- */
   .family {
     margin-top: 1.2rem;
     font-size: 0.95rem;
@@ -82,40 +85,52 @@
     }
   }
 
-  /* ✅ 버튼은 전역 스타일로 통일하되, 폭만 지정 */
+  /* --- 버튼 (전역 스타일 통일) --- */
   button {
     width: 100%;
-    max-width: 400px;
-    margin-top: 1.8rem;
+    max-width: 380px;
+    margin-top: 1.5rem;
   }
 
+  /* 💻 PC 전용 — 공간 여유 있게 중앙 정렬 */
+  @media (min-width: 768px) {
+    height: auto;
+    min-height: 80vh;
+    margin: 6vh auto;
+    padding: 3rem 2rem;
+  }
+
+  /* 📱 모바일 전용 — 화면 꽉 채우기 */
   @media (max-width: 500px) {
     padding: 1.2rem 0.8rem;
-    border-radius: 12px;
+    border-radius: 14px;
 
     .wedding-date {
       font-size: 1.2rem;
+      gap: 0.4rem;
     }
 
     .names {
       font-size: 1.3rem;
+      gap: 0.3rem;
     }
 
     .info {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .family {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     button {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      margin-top: 1rem;
     }
   }
 }
 
-/* ✅ 모바일(iOS/Android) 높이 보정 */
+/* ✅ iOS Safari 높이 보정 */
 @supports (-webkit-touch-callout: none) {
   .cover {
     height: -webkit-fill-available;
