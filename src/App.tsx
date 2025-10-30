@@ -9,7 +9,6 @@ import { Calendar } from "./component/calendar"
 import { Information } from "./component/information"
 import { GuestBook } from "./component/guestbook"
 import { LazyDiv } from "./component/lazyDiv"
-import { ShareButton } from "./component/shareButton"
 import { STATIC_ONLY } from "./env"
 
 // ✅ Router 컴포넌트로 관리자 경로 분기
@@ -64,7 +63,7 @@ function Home() {
           </LazyDiv>
         )}
 
-        <ShareButton />
+
       </div>
     </div>
   )
