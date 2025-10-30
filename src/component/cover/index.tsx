@@ -31,19 +31,18 @@ const DAY_OF_WEEK = [
 ]
 
 export const Cover = () => {
-  console.log("✅ Cover 렌더링 됨")
   const { openModal, closeModal } = useModal()
-
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    // ✅ 페이지 로드 후 살짝 지연 뒤 나타나기
+    // 살짝 지연 후 서서히 등장
     const timer = setTimeout(() => setVisible(true), 150)
     return () => clearTimeout(timer)
   }, [])
 
   return (
     <div className={`card cover ${visible ? "visible" : ""}`}>
+      {/* 날짜 */}
       <div className="wedding-date">
         {WEDDING_DATE.format("YYYY")}
         <div className="divider" />
@@ -52,19 +51,23 @@ export const Cover = () => {
         {WEDDING_DATE.format("DD")}
       </div>
 
+      {/* 요일 */}
       <div className="wedding-day-of-week">
         {DAY_OF_WEEK[WEDDING_DATE.day()]}
       </div>
 
+      {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
         <div className="divider" />
         {BRIDE_FULLNAME}
       </div>
 
+      {/* 날짜 + 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
 
+      {/* 가족 정보 */}
       <div className="family">
         <div className="name">
           {GROOM_FATHER} · {GROOM_MOTHER}
@@ -82,8 +85,9 @@ export const Cover = () => {
         </div>
       </div>
 
+      {/* 연락하기 버튼 */}
       <Button
-        onClick={() =>
+        onClick={() => {
           openModal({
             className: "contact-modal",
             closeOnClickBackground: true,
@@ -97,6 +101,7 @@ export const Cover = () => {
             ),
             content: (
               <>
+                {/* 신랑 측 */}
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -122,6 +127,7 @@ export const Cover = () => {
                   )}
                 </div>
 
+                {/* 신부 측 */}
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -138,7 +144,7 @@ export const Cover = () => {
                           <EnvelopeIcon
                             className="icon"
                             onClick={() =>
-                              window.open(`sms:${phone}`, "_self")
+                              window.open(`sms:${phone}`, "_self`)
                             }
                           />
                         </div>
@@ -158,7 +164,7 @@ export const Cover = () => {
               </Button>
             ),
           })
-        }
+        }}
       >
         축하 인사 전하기
       </Button>
