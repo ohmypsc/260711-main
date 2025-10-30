@@ -1,6 +1,5 @@
 .cover {
-  /* 전체 화면 기준 높이 (패딩 포함 계산) */
-  height: 100svh;
+  /* ✅ 다른 카드와 동일한 레이아웃 기본 구조 */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,13 +9,27 @@
   margin: 0 auto;
   box-sizing: border-box;
 
-  /* ✨ 종이 질감 + 은은한 반투명 배경 */
+  /* ✅ 카드 배경 및 외형 */
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 1.2rem 1rem;
+  padding: 1.5rem;
+  width: 100%;
+  height: auto;
+  min-height: 70vh;
+  margin-bottom: 1rem;
+
+  /* ✅ 자연스러운 페이드인 애니메이션 */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   /* --- 날짜 --- */
   .wedding-date {
@@ -35,6 +48,7 @@
     }
   }
 
+  /* --- 요일 --- */
   .wedding-day-of-week {
     font-size: 1rem;
     color: var(--alt-color);
@@ -86,24 +100,23 @@
     }
   }
 
-  /* --- 버튼 (전역 스타일 통일) --- */
+  /* --- 버튼 --- */
   button {
     width: 100%;
     max-width: 360px;
     margin-top: 1.2rem;
   }
 
-  /* 💻 PC 전용 — 여백 유지 */
+  /* 💻 PC 전용 — 여백과 패딩 조정 */
   @media (min-width: 768px) {
-    height: auto;
-    min-height: 80vh;
+    min-height: 70vh;
     margin: 5vh auto;
     padding: 2.5rem 2rem;
   }
 
-  /* 📱 모바일 전용 — 화면 꽉 채우기 */
+  /* 📱 모바일 전용 — 여백 축소 */
   @media (max-width: 500px) {
-    padding: 0.8rem 0.6rem;
+    padding: 1rem;
     border-radius: 14px;
 
     .wedding-date {
@@ -128,12 +141,5 @@
       font-size: 0.9rem;
       margin-top: 0.8rem;
     }
-  }
-}
-
-/* ✅ iOS Safari 높이 보정 */
-@supports (-webkit-touch-callout: none) {
-  .cover {
-    height: -webkit-fill-available;
   }
 }
