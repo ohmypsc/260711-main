@@ -247,11 +247,3 @@ div.break {
   border: none !important;
   box-shadow: none !important;
 }
-
-/* ✅ 내부 카드(.card)도 배경과 그림자 제거 */
-.card-view .card-group .card {
-  background: none !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
