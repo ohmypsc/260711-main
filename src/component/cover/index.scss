@@ -1,6 +1,8 @@
 .cover {
-  /* 📱 모바일에서 실제 화면 높이에 맞게 조정 */
-  min-height: 100dvh;
+  /* ✅ 화면에 딱 맞게 (주소창 제외한 실제 높이) */
+  min-height: 100vh;
+  min-height: 100svh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,5 +84,12 @@
     .info {
       font-size: 0.9rem;
     }
+  }
+}
+
+/* ✅ iOS·Android에서 완벽히 높이 맞추기 위한 보정 */
+@supports (-webkit-touch-callout: none) {
+  .cover {
+    height: -webkit-fill-available;
   }
 }
