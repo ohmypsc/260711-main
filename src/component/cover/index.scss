@@ -1,5 +1,5 @@
 .cover {
-  /* 📱 전체 화면 기준 높이 */
+  /* 전체 화면 기준 높이 (패딩 포함 계산) */
   height: 100svh;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,7 @@
   text-align: center;
   position: relative;
   margin: 0 auto;
+  box-sizing: border-box;
 
   /* ✨ 종이 질감 + 은은한 반투명 배경 */
   background: rgba(255, 255, 255, 0.82);
@@ -15,7 +16,7 @@
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 2rem 1.2rem;
+  padding: 1.2rem 1rem;
 
   /* --- 날짜 --- */
   .wedding-date {
@@ -70,7 +71,7 @@
 
   /* --- 가족 정보 --- */
   .family {
-    margin-top: 1.2rem;
+    margin-top: 1rem;
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--dark-color);
@@ -88,21 +89,21 @@
   /* --- 버튼 (전역 스타일 통일) --- */
   button {
     width: 100%;
-    max-width: 380px;
-    margin-top: 1.5rem;
+    max-width: 360px;
+    margin-top: 1.2rem;
   }
 
-  /* 💻 PC 전용 — 공간 여유 있게 중앙 정렬 */
+  /* 💻 PC 전용 — 여백 유지 */
   @media (min-width: 768px) {
     height: auto;
     min-height: 80vh;
-    margin: 6vh auto;
-    padding: 3rem 2rem;
+    margin: 5vh auto;
+    padding: 2.5rem 2rem;
   }
 
   /* 📱 모바일 전용 — 화면 꽉 채우기 */
   @media (max-width: 500px) {
-    padding: 1.2rem 0.8rem;
+    padding: 0.8rem 0.6rem;
     border-radius: 14px;
 
     .wedding-date {
@@ -125,7 +126,7 @@
 
     button {
       font-size: 0.9rem;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
   }
 }
