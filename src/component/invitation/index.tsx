@@ -1,125 +1,58 @@
-import { Fragment } from "react/jsx-runtime"
-import {
-  BRIDE_FULLNAME,
-  BRIDE_INFO,
-  BRIDE_FATHER,
-  BRIDE_MOTHER,
-  GROOM_FULLNAME,
-  GROOM_INFO,
-  GROOM_FATHER,
-  GROOM_MOTHER,
-  GROOM_TITLE,
-  BRIDE_TITLE,
-} from "../../const"
-import { useModal } from "../modal"
-import { Button } from "../button"
 import { LazyDiv } from "../lazyDiv"
-import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
-import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
 export const Invitation = () => {
-  const { openModal, closeModal } = useModal()
-
   return (
     <LazyDiv className="card invitation">
       <h2>초대의 글</h2>
 
       <div className="break" />
 
-      <div className="content">싱그러운 여름의 향기와 함께</div>
-      <div className="content">저희 두 사람이 사랑의 약속을 맺습니다.</div>
-      <div className="content">귀한 걸음으로 축복해 주시면 감사하겠습니다.</div>
+      <div className="content">
+        나는 오래된 거리처럼 너를 사랑하고
+        <br />
+        별들은 벌들처럼 웅성거리고
+      </div>
+      <div className="content">
+        여름에는 작은 은색 드럼을 치는 것처럼
+        <br />
+        네 손바닥을 두드리는 비를 줄게
+      </div>
+      <div className="content">
+        과거에게 그랬듯 미래에게도 아첨하지 않을게
+      </div>
+      <div className="content">
+        어린 시절 순결한 비누 거품 속에서 우리가 했던 맹세들을 찾아
+        <br />
+        너의 팔에 모두 적어줄게
+      </div>
+      <div className="content">
+        내가 나를 찾는 술래였던 시간을 모두 돌려줄게
+      </div>
+      <div className="content">
+        나는 오래된 거리처럼 너를 사랑하고
+        <br />
+        벌들은 귓속의 별들처럼 웅성거리고
+      </div>
+      <div className="content">
+        나는 인류가 아닌 단 한 여자를 위해
+        <br />
+        쓴잔을 죄다 마시겠지
+      </div>
+      <div className="content">
+        슬픔이 나의 물컵에 담겨 있다 투명 유리 조각처럼
+      </div>
+
+      <div className="content poet">- 진은영, &lt;청혼&gt;</div>
 
       <div className="break" />
 
-      <div className="name">
-        {GROOM_FATHER} · {GROOM_MOTHER}
-        <span className="relation">
-          의 <span className="relation-name">{GROOM_TITLE}</span>
-        </span>{" "}
-        {GROOM_FULLNAME}
+      <div className="content">
+        오래된 거리처럼 익숙하지만, 시간의 흐름에 기대지 않고 서로에게 최선을 다하며,
+        어린 시절의 순수한 마음으로, 여름 비도 즐거워하고,
+        유리처럼 날카로운 슬픔도 함께하는 부부가 되고자 합니다.
+        <br />
+        이 시작을 함께해 주신다면 감사하겠습니다.
       </div>
-      <div className="name">
-        {BRIDE_FATHER} · {BRIDE_MOTHER}
-        <span className="relation">
-          의 <span className="relation-name">{BRIDE_TITLE}</span>
-        </span>{" "}
-        {BRIDE_FULLNAME}
-      </div>
-
-      <div className="break" />
-
-      <Button
-        onClick={() => {
-          openModal({
-            className: "contact-modal",
-            closeOnClickBackground: true,
-            header: (
-              <div className="title-group">
-                <div className="title">축하 인사 전하기</div>
-                <div className="subtitle">
-                  전화 또는 문자 메시지로 축하 인사를 전해보세요.
-                </div>
-              </div>
-            ),
-            content: (
-              <>
-                <div className="contact-info">
-                  {GROOM_INFO.filter(({ phone }) => !!phone).map(
-                    ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
-                        <div className="relation">{relation}</div>
-                        <div>{name}</div>
-                        <div>
-                          <PhoneIcon
-                            className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
-                          />
-                          <EnvelopeIcon
-                            className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
-                          />
-                        </div>
-                      </Fragment>
-                    )
-                  )}
-                </div>
-                <div className="contact-info">
-                  {BRIDE_INFO.filter(({ phone }) => !!phone).map(
-                    ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
-                        <div className="relation">{relation}</div>
-                        <div>{name}</div>
-                        <div>
-                          <PhoneIcon
-                            className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
-                          />
-                          <EnvelopeIcon
-                            className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
-                          />
-                        </div>
-                      </Fragment>
-                    )
-                  )}
-                </div>
-              </>
-            ),
-            footer: (
-              <Button
-                buttonStyle="style2"
-                className="bg-light-grey-color text-dark-color"
-                onClick={closeModal}
-              >
-                닫기
-              </Button>
-            ),
-          })
-        }}
-      >
-        연락하기
-      </Button>
     </LazyDiv>
   )
 }
