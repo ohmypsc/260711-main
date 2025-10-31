@@ -22,71 +22,12 @@
   --red-color: #ff0000;
 
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-
-  /* ✅ 기본 글자 크기 확대 */
-  font-size: 22px;
-
-  /* ✅ 모바일에서 글씨 더 크게 */
-  @media (max-width: 500px) {
-    font-size: 5vw;
-  }
+  font-size: 16px; /* ✅ 기본 rem 기준 복원 */
 }
 
-@media print {
-  body {
-    print-color-adjust: exact;
-  }
-}
-
-$colors: (
-  theme-color: var(--theme-color),
-  theme-bg-color: var(--theme-bg-color),
-  alt-color: var(--alt-color),
-  alt-bg-color: var(--alt-bg-color),
-  dark-color: var(--dark-color),
-  dark-grey-color: var(--dark-grey-color),
-  light-grey-color: var(--light-grey-color),
-  light-color: var(--light-color),
-  white-color: var(--white-color),
-  red-color: var(--red-color),
-);
-
-@each $name, $color in $colors {
-  .text-#{$name} {
-    color: $color !important;
-  }
-  .bg-#{$name} {
-    background-color: $color !important;
-  }
-  .border-#{$name} {
-    border-color: $color !important;
-  }
-}
-
-@keyframes lazy-fade-in {
-  from {
-    opacity: 0;
-    z-index: 3;
-    transform: translateY(2rem);
-  }
-  to {
-    opacity: 1;
-    z-index: 3;
-    transform: translateY(0);
-  }
-}
-
-/* ✅ 버튼 폰트 통일 + 약간 확대 */
-button {
-  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  font-size: 1.1rem;
-  border: none;
-  background-color: transparent;
-  padding: 0;
-}
-
-/* ✅ 전체 바디 폰트 통일 */
+/* ✅ 텍스트 크기만 확대 */
 body {
+  font-size: 1.1rem; /* 전체 글씨 약간 크게 */
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -101,12 +42,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  color: var(--dark-color);
-  user-select: none;
+/* ✅ 제목, 본문, 버튼 글씨만 조정 */
+h2 {
+  font-size: 1.6rem;
+  color: var(--theme-color);
+  font-weight: normal;
 }
 
+.invitation .content,
+.calendar .message,
+.information .content,
+.location .info-text {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+button {
+  font-size: 1.1rem;
+}
+
+/* ✅ 카드와 배경 관련 설정 그대로 유지 */
 .background {
   background-color: var(--theme-bg-color);
   display: flex;
@@ -115,147 +70,6 @@ body {
   justify-content: center;
   min-height: 100vh;
   min-width: 100vw;
-
-  .card-view {
-    width: 980px;
-    text-align: center;
-
-    @media (max-width: 980px) {
-      width: 500px;
-    }
-
-    @media (max-width: 500px) {
-      width: 100vw;
-    }
-
-    .card-group {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
-      margin: 12px;
-      background-color: var(--light-color);
-
-      opacity: 0;
-      &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
-        opacity: 1;
-      }
-
-      @media print {
-        opacity: 1;
-        animation: none !important;
-      }
-
-      .card {
-        background-color: var(--light-color);
-        padding: 1.5rem;
-        border: 1px solid var(--light-grey-color);
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: relative;
-        box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.1);
-        margin-bottom: 1rem;
-
-        @media (max-width: 980px) {
-          margin: 0.5rem 0;
-        }
-
-        opacity: 0;
-        &.lazy-active {
-          animation-name: lazy-fade-in;
-          animation-duration: 3s;
-          opacity: 1;
-        }
-
-        @media print {
-          opacity: 1;
-          animation: none !important;
-        }
-      }
-    }
-
-    .footer {
-      position: relative;
-      background-color: var(--light-color);
-      box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
-      margin: 0.5rem;
-      padding: 1rem;
-      opacity: 0;
-
-      &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
-        opacity: 1;
-      }
-
-      @media print {
-        opacity: 1;
-        animation: none !important;
-      }
-    }
-  }
-}
-
-h2 {
-  font-size: 1.7rem;
-  color: var(--theme-color);
-  font-weight: normal;
-  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-
-  &.english {
-    font-family: "Allura", "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  }
-}
-
-div.break {
-  height: 1rem;
-}
-
-.cover {
-  opacity: 1;
-  transform: none;
-  transition: none;
-  animation: none;
-}
-
-.fade-in {
-  opacity: 0;
-  animation: cover-fade-in 2s ease forwards;
-}
-
-@keyframes cover-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(2rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card-group .cover {
-  background-color: var(--light-color);
-  border: 1px solid var(--light-grey-color);
-  box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-  padding: 1.5rem;
-
-  @media (max-width: 980px) {
-    margin: 0.5rem 0;
-  }
-}
-
-.card-group.cover,
-.card-group:has(.cover) {
-  opacity: 1 !important;
-  animation: none !important;
-  transition: none !important;
 }
 
 /* ✅ 카드 뒤의 하얀 네모 배경 제거 */
