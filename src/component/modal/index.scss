@@ -23,17 +23,21 @@
   animation: modal-fade-in 0.5s ease;
   z-index: 9999;
 
-  /* ✅ flex 등 상속 제거하되, 이벤트는 유지 */
+  /* ✅ 상속 초기화: 커버 폰트/정렬 영향 방지 */
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  text-align: left;
+  text-align: initial;
   line-height: normal;
 
   > .modal {
     background-color: var(--light-color);
     border-radius: 0.5rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-    width: auto;
-    max-width: 90vw;
+
+    /* ✅ 크기 통일 */
+    width: 24rem;         /* 기본 너비 */
+    max-width: 90vw;      /* 모바일 대응 */
+    padding: 1rem 1.2rem; /* 내부 여백 */
+
     animation: modal-fade-in 0.5s ease;
     opacity: 1;
     pointer-events: auto;
@@ -95,7 +99,7 @@
   }
 }
 
-/* ✅ 아이콘 크기 고정 */
+/* ✅ 아이콘 크기 고정 및 정렬 */
 .modal svg,
 .modal i {
   width: 1em !important;
