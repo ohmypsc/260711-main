@@ -20,21 +20,18 @@ export const Calendar = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const diff = WEDDING_DATE.diff()
-      setTsDiff(diff)
+      setTsDiff(WEDDING_DATE.diff())
     }, 1000)
-
     return () => clearInterval(interval)
-  })
+  }, []) // ✅ 의존성 배열 추가 (불필요한 재등록 방지)
 
   const diffs = useMemo(() => {
-    const tsDiff_ = Math.abs(tsDiff)
-    const seconds = Math.floor((tsDiff_ % 60000) / 1000)
-    const minutes = Math.floor((tsDiff_ % 3600000) / 60000)
-    const hours = Math.floor((tsDiff_ % 86400000) / 3600000)
-    const days = Math.floor(tsDiff_ / 86400000)
+    const tsDiffAbs = Math.abs(tsDiff)
+    const seconds = Math.floor((tsDiffAbs % 60000) / 1000)
+    const minutes = Math.floor((tsDiffAbs % 3600000) / 60000)
+    const hours = Math.floor((tsDiffAbs % 86400000) / 3600000)
+    const days = Math.floor(tsDiffAbs / 86400000)
     const isAfter = tsDiff < 0
-
     return { days, hours, minutes, seconds, isAfter }
   }, [tsDiff])
 
@@ -43,39 +40,23 @@ export const Calendar = () => {
       <h2>결혼식 날</h2>
       <div className="break" />
       {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
+
       <div className="calendar-wrapper">
-        <div className="head holiday">
-          <span>일</span>
-        </div>
-        <div className="head">
-          <span>월</span>
-        </div>
-        <div className="head">
-          <span>화</span>
-        </div>
-        <div className="head">
-          <span>수</span>
-        </div>
-        <div className="head">
-          <span>목</span>
-        </div>
-        <div className="head">
-          <span>금</span>
-        </div>
-        <div className="head">
-          <span>토</span>
-        </div>
+        {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
+          <div key={i} className={`head ${i === 0 ? "holiday" : ""}`}>
+            <span>{d}</span>
+          </div>
+        ))}
 
         {/* 빈칸 채우기 */}
         {Array.from({ length: firstDayOfWeek }).map((_, i) => (
-          <div key={i} />
+          <div key={`empty-${i}`} />
         ))}
 
         {/* 날짜 렌더링 */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const date = i + 1
-          const classes = []
-
+          const classes: string[] = []
           const isSunday = (i + firstDayOfWeek) % 7 === 0
           if (isSunday) classes.push("holiday")
 
@@ -83,10 +64,7 @@ export const Calendar = () => {
           if (isWeddingDate) classes.push("wedding-date")
 
           return (
-            <div
-              key={i}
-              className={classes.length ? classes.join(" ") : undefined}
-            >
+            <div key={i} className={classes.join(" ")}>
               <span>{date}</span>
               {isWeddingDate && <div className="heart" />}
             </div>
@@ -104,6 +82,7 @@ export const Calendar = () => {
           <div className="unit">MIN</div>
           <div />
           <div className="unit">SEC</div>
+
           <div className="count">{diffs.days}</div>
           <span>:</span>
           <div className="count">{diffs.hours}</div>
