@@ -5,6 +5,16 @@ button.button {
   z-index: 3;
   font-size: 1rem;
 
+  /* ✅ 글자 길이에 따라 자연스럽게 늘어나는 설정 */
+  display: inline-flex;        /* 내용에 따라 버튼 크기 자동 조정 */
+  align-items: center;         /* 수직 가운데 정렬 */
+  justify-content: center;     /* 수평 가운데 정렬 */
+  white-space: nowrap;         /* 줄바꿈 방지 */
+  width: auto;                 /* 폭 자동 */
+  max-width: 100%;             /* 부모 영역 벗어나지 않게 */
+  flex-shrink: 0;              /* flex 환경에서도 줄어들지 않게 */
+  cursor: pointer;             /* 마우스 포인터 표시 */
+
   &.button-style-1 {
     background-color: var(--white-color);
     border: solid 0.05rem var(--alt-color);
@@ -17,6 +27,13 @@ button.button {
     background-color: var(--alt-color);
     color: var(--white-color);
     border: none;
+    border-radius: 0.3rem;
     padding: 0.5rem 1rem;
+  }
+
+  /* ✅ (선택) 모바일 대응 — 폰트만 전체 비율 따라감 */
+  @media (max-width: 500px) {
+    font-size: 1em;
+    padding: 0.45rem 0.9rem;
   }
 }
