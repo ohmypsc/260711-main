@@ -9,9 +9,6 @@
 @use "./component/modal";
 @use "./component/shareButton";
 
-/* ==============================
-   🌸 색상 변수 및 기본 설정
-   ============================== */
 :root {
   --theme-color: #ff8585;
   --theme-bg-color: #ffe7e7;
@@ -38,9 +35,6 @@
   }
 }
 
-/* ==============================
-   🎨 색상 헬퍼 클래스 자동 생성
-   ============================== */
 $colors: (
   theme-color: var(--theme-color),
   theme-bg-color: var(--theme-bg-color),
@@ -66,9 +60,6 @@ $colors: (
   }
 }
 
-/* ==============================
-   ✨ 공통 애니메이션
-   ============================== */
 @keyframes lazy-fade-in {
   from {
     opacity: 0;
@@ -82,9 +73,7 @@ $colors: (
   }
 }
 
-/* ==============================
-   🩰 버튼 & 폰트 기본 설정
-   ============================== */
+/* ✅ 버튼 폰트 통일 */
 button {
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   font-size: 1rem;
@@ -93,9 +82,7 @@ button {
   padding: 0;
 }
 
-/* ==============================
-   🪶 전체 바디 스타일
-   ============================== */
+/* ✅ 전체 바디 폰트 통일 */
 body {
   margin: 0;
   overflow-x: hidden;
@@ -111,18 +98,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ==============================
-   🌿 기본 요소 설정
-   ============================== */
 * {
   box-sizing: border-box;
   color: var(--dark-color);
   user-select: none;
 }
 
-/* ==============================
-   🪞 전체 배경 구조
-   ============================== */
 .background {
   background-color: var(--theme-bg-color);
   display: flex;
@@ -219,9 +200,7 @@ body {
   }
 }
 
-/* ==============================
-   🩷 제목 스타일
-   ============================== */
+/* ✅ 제목(H2) 한글 폰트 통일 */
 h2 {
   font-size: 1.5rem;
   color: var(--theme-color);
@@ -233,16 +212,12 @@ h2 {
   }
 }
 
-/* ==============================
-   📏 여백 유지
-   ============================== */
+/* ✅ 여백 유지 */
 div.break {
   height: 1rem;
 }
 
-/* ==============================
-   🪩 Cover 전용 설정
-   ============================== */
+/* ✅ Cover: LazyDiv 효과 비활성화 */
 .cover {
   opacity: 1;
   transform: none;
@@ -250,6 +225,7 @@ div.break {
   animation: none;
 }
 
+/* ✅ Cover 전용 페이드인 애니메이션 */
 .fade-in {
   opacity: 0;
   animation: cover-fade-in 2s ease forwards;
@@ -266,7 +242,7 @@ div.break {
   }
 }
 
-/* ✅ card-group 안에서도 동일한 구조 유지 */
+/* ✅ card-group 안에서도 동일 구조 유지 */
 .card-group .cover {
   background-color: var(--light-color);
   border: 1px solid var(--light-grey-color);
@@ -279,7 +255,7 @@ div.break {
   }
 }
 
-/* ✅ card-group 전체가 Cover용으로 렌더링될 경우 대비 */
+/* ✅ card-group 전체가 Cover용일 때 */
 .card-group.cover,
 .card-group:has(.cover) {
   opacity: 1 !important;
@@ -287,7 +263,7 @@ div.break {
   transition: none !important;
 }
 
-/* ✅ 카드 뒤의 하얀 네모 배경 제거 */
+/* ✅ 카드 뒤 하얀 배경 제거 */
 .background .card-view {
   background: none !important;
   box-shadow: none !important;
