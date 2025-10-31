@@ -257,3 +257,7 @@ div.break {
   animation: none !important;
   transition: none !important;
 }
+
+.card-view {
+  background-color: transparent !important; /* ✅ 카드 뒤 배경 네모 제거 */
+}
