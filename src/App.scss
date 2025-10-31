@@ -262,3 +262,16 @@ div.break {
   animation: none !important;
   transition: none !important;
 }
+
+/* ✅ 카드 뒤의 하얀 네모 배경만 제거 */
+.background .card-view {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.background .card-group {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
