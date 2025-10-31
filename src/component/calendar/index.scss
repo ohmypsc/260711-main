@@ -40,8 +40,8 @@
           transform-origin: center center;
           z-index: 0;
 
-          /* 💗 자연스럽게 커졌다 작아지는 반복 */
-          animation: breathingHeart 3.5s ease-in-out infinite;
+          /* 💗 자연스럽게 커졌다 작아졌다 반복 */
+          animation: breathingHeart 3s linear infinite;
 
           &::before,
           &::after {
@@ -105,19 +105,13 @@
   }
 }
 
-/* 💞 부드럽게 커졌다 작아지는 애니메이션 (끊김 완전 제거) */
+/* 💞 완전히 자연스러운 커졌다 작아졌다 반복 (멈칫 완전 제거) */
 @keyframes breathingHeart {
   0% {
     transform: rotate(45deg) scale(1);
   }
-  25% {
-    transform: rotate(45deg) scale(1.1);
-  }
   50% {
-    transform: rotate(45deg) scale(1.2);
-  }
-  75% {
-    transform: rotate(45deg) scale(1.1);
+    transform: rotate(45deg) scale(1.15);
   }
   100% {
     transform: rotate(45deg) scale(1);
