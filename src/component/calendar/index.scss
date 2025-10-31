@@ -22,7 +22,7 @@
         }
       }
 
-      /* ✅ 하트는 반드시 이 안쪽에 있어야 함 */
+      /* ✅ 결혼식 날짜 */
       &.wedding-date {
         position: relative;
 
@@ -38,52 +38,32 @@
           position: absolute;
           transform: rotate(45deg);
           z-index: 0;
+
+          /* ❤️ 단색 하트 */
+          background: var(--theme-color);
           border-radius: 6px;
 
-          /* ✨ 펄톤 입체감 하트 */
-          background: radial-gradient(
-            circle at 30% 30%,
-            rgba(255, 255, 255, 0.9) 0%,
-            var(--theme-color) 40%,
-            rgba(180, 80, 80, 0.8) 100%
-          );
-          filter: brightness(1.05) contrast(1.1);
+          /* 💓 부드러운 심장 박동 */
+          animation: heartbeatSoft 2s infinite ease-in-out;
 
-          box-shadow:
-            0 6px 14px rgba(0, 0, 0, 0.2),
-            inset 0 0 12px rgba(255, 255, 255, 0.5),
-            inset -4px -4px 10px rgba(255, 150, 150, 0.25);
-
-          /* ❤️ 부드러운 심장 박동 */
-          animation: heartbeatSoft 2.2s infinite ease-in-out;
-
-          /* 💫 은은한 하이라이트 흐름 */
+          /* 하트 윗부분의 원 두 개 */
+          &::before,
           &::after {
-            content: "";
-            position: absolute;
-            width: 180%;
-            height: 180%;
-            top: -40%;
-            left: -40%;
-            background: linear-gradient(
-              120deg,
-              rgba(255, 255, 255, 0.25) 0%,
-              rgba(255, 255, 255, 0) 60%
-            );
-            transform: rotate(45deg);
-            animation: glossy 6s infinite linear;
-            mix-blend-mode: screen;
-          }
-
-          &::before {
             content: "";
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: inherit;
+            background: var(--theme-color);
+          }
+
+          &::before {
             top: -50%;
-            left: 0;
+            left: 0%;
+          }
+
+          &::after {
+            left: -50%;
           }
         }
       }
@@ -129,33 +109,18 @@
   }
 }
 
-/* 💓 부드럽고 느린 박동 */
+/* 💓 부드러운 박동 애니메이션 */
 @keyframes heartbeatSoft {
   0%, 100% {
     transform: rotate(45deg) scale(1);
-    filter: brightness(1.05) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
   }
   30% {
     transform: rotate(45deg) scale(1.15);
-    filter: brightness(1.2) drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
   }
   50% {
     transform: rotate(45deg) scale(1.05);
   }
   70% {
-    transform: rotate(45deg) scale(1.2);
-  }
-}
-
-/* ✨ 부드럽게 흐르는 광택 */
-@keyframes glossy {
-  0% {
-    transform: rotate(45deg) translate(-80%, -80%);
-  }
-  50% {
-    transform: rotate(45deg) translate(80%, 80%);
-  }
-  100% {
-    transform: rotate(45deg) translate(-80%, -80%);
+    transform: rotate(45deg) scale(1.18);
   }
 }
