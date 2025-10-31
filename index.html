@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.2, maximum-scale=1.2, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="<%= GROOM_FULLNAME %> ❤️ <%= BRIDE_FULLNAME %> 결혼합니다." />
@@ -10,6 +10,7 @@
     <meta property="og:url" content="%BASE_URL%/" />
     <meta property="og:description" content="<%= DESCRIPTION %>" />
 
+    <!-- ✅ font.css 복원 (루트 경로 대신 상대경로 사용) -->
     <link rel="stylesheet" href="./font.css" />
 
     <title><%= GROOM_FULLNAME %> ❤️ <%= BRIDE_FULLNAME %> 결혼합니다.</title>
@@ -18,4 +19,4 @@
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
-</html>
+</html> 
