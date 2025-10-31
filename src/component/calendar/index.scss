@@ -40,8 +40,8 @@
           transform-origin: center center;
           z-index: 0;
 
-          /* 💓 부드럽고 자연스러운 두근두근 애니메이션 */
-          animation: heartbeat 3s ease-in-out infinite;
+          /* 💓 일정한 리듬으로 커졌다 작아지는 하트 */
+          animation: steadyHeartbeat 2.5s linear infinite;
 
           &::before,
           &::after {
@@ -105,26 +105,21 @@
   }
 }
 
-/* 💗 부드럽고 자연스러운 하트 두근두근 효과 */
-@keyframes heartbeat {
+/* 💗 일정한 크기 변화로 부드럽게 반복되는 하트 */
+@keyframes steadyHeartbeat {
   0% {
     transform: rotate(45deg) scale(1);
-    opacity: 1;
   }
   25% {
-    transform: rotate(45deg) scale(1.08);
-    opacity: 0.95;
+    transform: rotate(45deg) scale(0.9);
   }
   50% {
-    transform: rotate(45deg) scale(1.12);
-    opacity: 0.9;
+    transform: rotate(45deg) scale(1.1);
   }
   75% {
-    transform: rotate(45deg) scale(1.08);
-    opacity: 0.95;
+    transform: rotate(45deg) scale(0.9);
   }
   100% {
     transform: rotate(45deg) scale(1);
-    opacity: 1;
   }
 }
