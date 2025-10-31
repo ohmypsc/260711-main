@@ -22,10 +22,13 @@
   --red-color: #ff0000;
 
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  font-size: 20px;
 
+  /* ✅ 기본 글자 크기 확대 */
+  font-size: 22px;
+
+  /* ✅ 모바일에서 글씨 더 크게 */
   @media (max-width: 500px) {
-    font-size: 4vw;
+    font-size: 5vw;
   }
 }
 
@@ -73,10 +76,10 @@ $colors: (
   }
 }
 
-/* ✅ 버튼 폰트 통일 */
+/* ✅ 버튼 폰트 통일 + 약간 확대 */
 button {
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border: none;
   background-color: transparent;
   padding: 0;
@@ -125,7 +128,6 @@ body {
       width: 100vw;
     }
 
-    /* ✅ 세로형 카드 구조 */
     .card-group {
       position: relative;
       display: flex;
@@ -177,7 +179,6 @@ body {
       }
     }
 
-    /* ✅ Footer 카드 */
     .footer {
       position: relative;
       background-color: var(--light-color);
@@ -200,9 +201,8 @@ body {
   }
 }
 
-/* ✅ 제목(H2) 한글 폰트 통일 */
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--theme-color);
   font-weight: normal;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
@@ -212,12 +212,10 @@ h2 {
   }
 }
 
-/* ✅ 여백 유지 */
 div.break {
   height: 1rem;
 }
 
-/* ✅ Cover: LazyDiv 효과는 비활성화하고, 자체 페이드인 애니메이션 적용 */
 .cover {
   opacity: 1;
   transform: none;
@@ -225,7 +223,6 @@ div.break {
   animation: none;
 }
 
-/* ✅ Cover 전용 페이드인 애니메이션 */
 .fade-in {
   opacity: 0;
   animation: cover-fade-in 2s ease forwards;
@@ -242,7 +239,6 @@ div.break {
   }
 }
 
-/* ✅ card-group 안에서도 다른 카드와 동일한 구조 유지 */
 .card-group .cover {
   background-color: var(--light-color);
   border: 1px solid var(--light-grey-color);
@@ -255,7 +251,6 @@ div.break {
   }
 }
 
-/* ✅ card-group 전체가 Cover용으로 렌더링될 경우 대비 */
 .card-group.cover,
 .card-group:has(.cover) {
   opacity: 1 !important;
