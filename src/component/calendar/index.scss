@@ -40,8 +40,8 @@
           transform-origin: center center;
           z-index: 0;
 
-          /* 💓 자연스러운 두근두근 애니메이션 */
-          animation: heartbeat 2.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+          /* 💓 부드럽고 자연스러운 두근두근 애니메이션 */
+          animation: heartbeat 3s ease-in-out infinite;
 
           &::before,
           &::after {
@@ -105,29 +105,25 @@
   }
 }
 
-/* 💗 하트 두근두근 효과 정의 */
+/* 💗 부드럽고 자연스러운 하트 두근두근 효과 */
 @keyframes heartbeat {
-  0%, 100% {
+  0% {
     transform: rotate(45deg) scale(1);
     opacity: 1;
   }
-
-  15% {
+  25% {
     transform: rotate(45deg) scale(1.08);
     opacity: 0.95;
   }
-
-  30% {
+  50% {
     transform: rotate(45deg) scale(1.12);
     opacity: 0.9;
   }
-
-  45% {
+  75% {
     transform: rotate(45deg) scale(1.08);
     opacity: 0.95;
   }
-
-  60% {
+  100% {
     transform: rotate(45deg) scale(1);
     opacity: 1;
   }
