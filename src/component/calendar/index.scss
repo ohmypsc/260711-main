@@ -22,7 +22,7 @@
         }
       }
 
-      /* ✅ 이 위치 안으로 옮겨야 함! */
+      /* 💎 결혼식 날짜 하트 */
       &.wedding-date {
         position: relative;
 
@@ -31,37 +31,58 @@
         }
 
         > div.heart {
-          width: 45%;
-          height: 45%;
-          background: var(--theme-color);
+          width: 42%;
+          height: 42%;
           top: 35%;
-          left: 27%;
+          left: 29%;
           position: absolute;
           transform: rotate(45deg);
           z-index: 0;
-          animation: heartbeat 1.5s infinite ease-in-out;
+          border-radius: 6px;
 
-          &::before,
+          /* ✨ 펄톤 입체감 하트 */
+          background: radial-gradient(
+            circle at 30% 30%,
+            #fff8f8 0%,
+            var(--theme-color) 40%,
+            darken(var(--theme-color), 15%) 100%
+          );
+          box-shadow:
+            0 6px 14px rgba(0, 0, 0, 0.2),
+            inset 0 0 12px rgba(255, 255, 255, 0.5),
+            inset -4px -4px 10px rgba(255, 150, 150, 0.25);
+
+          /* ❤️ 부드러운 심장 박동 */
+          animation: heartbeatSoft 2.2s infinite ease-in-out;
+
+          /* 💫 은은한 하이라이트 흐름 */
           &::after {
             content: "";
+            position: absolute;
+            width: 180%;
+            height: 180%;
+            top: -40%;
+            left: -40%;
+            background: linear-gradient(
+              120deg,
+              rgba(255, 255, 255, 0.25) 0%,
+              rgba(255, 255, 255, 0) 60%
+            );
+            transform: rotate(45deg);
+            animation: glossy 6s infinite linear;
+            mix-blend-mode: screen;
+          }
+
+          /* 윗쪽 원형 곡선 */
+          &::before {
+            content: "";
+            position: absolute;
             width: 100%;
             height: 100%;
-            position: absolute;
             border-radius: 50%;
-            background: var(--theme-color);
-          }
-
-          &::before {
+            background: inherit;
             top: -50%;
-            left: 0%;
-          }
-
-          &::after {
-            left: -50%;
-            animation: sparkle 2s infinite ease-in-out;
-            background: radial-gradient(circle at 70% 30%, #fff 10%, transparent 40%) var(--theme-color);
-            mix-blend-mode: screen;
-            opacity: 0.9;
+            left: 0;
           }
         }
       }
@@ -107,33 +128,33 @@
   }
 }
 
-/* ❤️ 두근두근 효과 */
-@keyframes heartbeat {
-  0% {
+/* 💓 부드럽고 느린 박동 */
+@keyframes heartbeatSoft {
+  0%, 100% {
     transform: rotate(45deg) scale(1);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
   }
-  25% {
-    transform: rotate(45deg) scale(1.25);
-  }
-  40% {
-    transform: rotate(45deg) scale(1);
-  }
-  60% {
+  30% {
     transform: rotate(45deg) scale(1.15);
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
   }
-  100% {
-    transform: rotate(45deg) scale(1);
+  50% {
+    transform: rotate(45deg) scale(1.05);
+  }
+  70% {
+    transform: rotate(45deg) scale(1.2);
   }
 }
 
-/* ✨ 반짝이는 효과 */
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0.7;
-    filter: brightness(1);
+/* ✨ 부드럽게 흐르는 광택 */
+@keyframes glossy {
+  0% {
+    transform: rotate(45deg) translate(-80%, -80%);
   }
   50% {
-    opacity: 1;
-    filter: brightness(1.6);
+    transform: rotate(45deg) translate(80%, 80%);
+  }
+  100% {
+    transform: rotate(45deg) translate(-80%, -80%);
   }
 }
