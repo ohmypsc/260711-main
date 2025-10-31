@@ -70,3 +70,14 @@
     }
   }
 }
+
+
+/* 🔧 모달 내부 아이콘 크기 고정 */
+.modal svg,
+.modal i {
+  width: 1em !important;
+  height: 1em !important;
+  flex-shrink: 0;
+  vertical-align: middle;
+  display: inline-block;
+}
