@@ -1,53 +1,113 @@
-&.wedding-date {
-  position: relative;
+.calendar {
+  .calendar-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin: 1rem;
+    border: 1px solid var(--light-grey-color);
 
-  > span {
-    z-index: 1;
+    > div {
+      aspect-ratio: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.head {
+        aspect-ratio: auto;
+        background-color: var(--light-grey-color);
+      }
+
+      &.holiday {
+        > span {
+          color: var(--red-color);
+        }
+      }
+
+      /* ✅ 이 위치 안으로 옮겨야 함! */
+      &.wedding-date {
+        position: relative;
+
+        > span {
+          z-index: 1;
+        }
+
+        > div.heart {
+          width: 45%;
+          height: 45%;
+          background: var(--theme-color);
+          top: 35%;
+          left: 27%;
+          position: absolute;
+          transform: rotate(45deg);
+          z-index: 0;
+          animation: heartbeat 1.5s infinite ease-in-out;
+
+          &::before,
+          &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 50%;
+            background: var(--theme-color);
+          }
+
+          &::before {
+            top: -50%;
+            left: 0%;
+          }
+
+          &::after {
+            left: -50%;
+            animation: sparkle 2s infinite ease-in-out;
+            background: radial-gradient(circle at 70% 30%, #fff 10%, transparent 40%) var(--theme-color);
+            mix-blend-mode: screen;
+            opacity: 0.9;
+          }
+        }
+      }
+    }
   }
 
-  > div.heart {
-    width: 45%;
-    height: 45%;
-    background: var(--theme-color);
-    top: 35%;
-    left: 27%;
-    position: absolute;
-    transform: rotate(45deg);
-    z-index: 0;
+  .countdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    /* 💓 두근두근 효과 */
-    animation: heartbeat 1.5s infinite ease-in-out;
+    .countdown {
+      display: grid;
+      width: 15rem;
+      grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
+      align-items: center;
 
-    &::before,
-    &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      border-radius: 50%;
-      background: var(--theme-color);
+      * {
+        margin: 0 0.1rem;
+      }
+
+      .count {
+        opacity: 0.8;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .unit {
+        font-weight: bold;
+        font-size: 0.6rem;
+        opacity: 0.5;
+      }
     }
 
-    &::before {
-      top: -50%;
-      left: 0%;
-    }
+    .message {
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
 
-    &::after {
-      left: -50%;
-    }
-
-    /* ✨ 반짝이는 하이라이트 효과 */
-    &::after {
-      animation: sparkle 2s infinite ease-in-out;
-      background: radial-gradient(circle at 70% 30%, #fff 10%, transparent 40%) var(--theme-color);
-      mix-blend-mode: screen;
-      opacity: 0.9;
+      .d-day {
+        color: var(--theme-color);
+      }
     }
   }
 }
 
-/* ❤️ 두근두근 애니메이션 */
+/* ❤️ 두근두근 효과 */
 @keyframes heartbeat {
   0% {
     transform: rotate(45deg) scale(1);
