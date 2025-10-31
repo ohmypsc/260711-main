@@ -1,129 +1,64 @@
-.calendar {
-  .calendar-wrapper {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin: 1rem;
-    border: 1px solid var(--light-grey-color);
+&.wedding-date {
+  position: relative;
 
-    > div {
-      aspect-ratio: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &.head {
-        aspect-ratio: auto;
-        background-color: var(--light-grey-color);
-      }
-
-      &.holiday {
-        > span {
-          color: var(--red-color);
-        }
-      }
-
-      /* 💎 결혼식 날짜 하트 */
-      &.wedding-date {
-        position: relative;
-
-        > span {
-          z-index: 1;
-        }
-
-        > div.heart {
-          width: 42%;
-          height: 42%;
-          top: 35%;
-          left: 29%;
-          position: absolute;
-          transform: rotate(45deg);
-          z-index: 0;
-          border-radius: 6px;
-
-          /* ✨ 펄톤 입체감 하트 */
-          background: radial-gradient(
-            circle at 30% 30%,
-            #fff8f8 0%,
-            var(--theme-color) 40%,
-            darken(var(--theme-color), 15%) 100%
-          );
-          box-shadow:
-            0 6px 14px rgba(0, 0, 0, 0.2),
-            inset 0 0 12px rgba(255, 255, 255, 0.5),
-            inset -4px -4px 10px rgba(255, 150, 150, 0.25);
-
-          /* ❤️ 부드러운 심장 박동 */
-          animation: heartbeatSoft 2.2s infinite ease-in-out;
-
-          /* 💫 은은한 하이라이트 흐름 */
-          &::after {
-            content: "";
-            position: absolute;
-            width: 180%;
-            height: 180%;
-            top: -40%;
-            left: -40%;
-            background: linear-gradient(
-              120deg,
-              rgba(255, 255, 255, 0.25) 0%,
-              rgba(255, 255, 255, 0) 60%
-            );
-            transform: rotate(45deg);
-            animation: glossy 6s infinite linear;
-            mix-blend-mode: screen;
-          }
-
-          /* 윗쪽 원형 곡선 */
-          &::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: inherit;
-            top: -50%;
-            left: 0;
-          }
-        }
-      }
-    }
+  > span {
+    z-index: 1;
   }
 
-  .countdown-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  > div.heart {
+    width: 42%;
+    height: 42%;
+    top: 35%;
+    left: 29%;
+    position: absolute;
+    transform: rotate(45deg);
+    z-index: 0;
+    border-radius: 6px;
 
-    .countdown {
-      display: grid;
-      width: 15rem;
-      grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
-      align-items: center;
+    /* ✨ Sass darken() 대신 filter + RGBA 사용 */
+    background: radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.9) 0%,
+      var(--theme-color) 40%,
+      rgba(180, 80, 80, 0.8) 100%
+    );
+    filter: brightness(1.05) contrast(1.1);
 
-      * {
-        margin: 0 0.1rem;
-      }
+    box-shadow:
+      0 6px 14px rgba(0, 0, 0, 0.2),
+      inset 0 0 12px rgba(255, 255, 255, 0.5),
+      inset -4px -4px 10px rgba(255, 150, 150, 0.25);
 
-      .count {
-        opacity: 0.8;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
+    /* ❤️ 부드러운 심장 박동 */
+    animation: heartbeatSoft 2.2s infinite ease-in-out;
 
-      .unit {
-        font-weight: bold;
-        font-size: 0.6rem;
-        opacity: 0.5;
-      }
+    /* 💫 은은한 하이라이트 흐름 */
+    &::after {
+      content: "";
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      top: -40%;
+      left: -40%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 60%
+      );
+      transform: rotate(45deg);
+      animation: glossy 6s infinite linear;
+      mix-blend-mode: screen;
     }
 
-    .message {
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
-
-      .d-day {
-        color: var(--theme-color);
-      }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: inherit;
+      top: -50%;
+      left: 0;
     }
   }
 }
@@ -132,11 +67,11 @@
 @keyframes heartbeatSoft {
   0%, 100% {
     transform: rotate(45deg) scale(1);
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+    filter: brightness(1.05) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
   }
   30% {
     transform: rotate(45deg) scale(1.15);
-    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+    filter: brightness(1.2) drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
   }
   50% {
     transform: rotate(45deg) scale(1.05);
