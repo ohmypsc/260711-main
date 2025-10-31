@@ -7,6 +7,7 @@
   }
 }
 
+/* ✅ 모달 전체 배경 */
 .modal-background {
   position: fixed;
   top: 0;
@@ -15,23 +16,34 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 
-  animation-name: modal-fade-in;
-  animation-duration: 0.5s;
-  opacity: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
+  animation: modal-fade-in 0.5s ease;
+  z-index: 9999;
+
+  /* ✅ 상위(.cover 등) flex, 폰트, 크기 상속 완전 차단 */
+  all: revert;
+  * {
+    all: revert;
+    box-sizing: border-box;
+  }
+
   > .modal {
     background-color: var(--light-color);
-    animation-name: modal-fade-in;
-    animation-duration: 0.5s;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+    width: auto;
+    max-width: 90vw;
+    animation: modal-fade-in 0.5s ease;
     opacity: 1;
 
+    /* ✅ header 영역 */
     .header {
-      padding: 0.5rem;
+      padding: 0.5rem 1rem;
       background-color: var(--light-color);
+      border-bottom: 1px solid var(--light-grey-color);
       z-index: 7;
 
       .close-button-wrapper {
@@ -43,46 +55,56 @@
           z-index: 3;
           width: 1rem;
           height: 1rem;
+          background: none;
+          border: none;
+          cursor: pointer;
 
-          &::before {
-            content: "";
-            width: 0.1rem;
-            height: 100%;
-            background-color: var(--dark-grey-color);
-            position: absolute;
-            transform: rotate(45deg);
-            top: 0;
-            left: 50%;
-          }
-
+          &::before,
           &::after {
             content: "";
             width: 0.1rem;
             height: 100%;
             background-color: var(--dark-grey-color);
             position: absolute;
-            transform: rotate(135deg);
             top: 0;
             left: 50%;
+          }
+
+          &::before {
+            transform: rotate(45deg);
+          }
+
+          &::after {
+            transform: rotate(135deg);
           }
         }
       }
     }
 
+    /* ✅ 내용 부분 */
     .content {
       max-height: 80vh;
       overflow: auto;
+      padding: 1rem;
+    }
+
+    /* ✅ footer (버튼 등) */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
     }
   }
 }
 
-/* 🔧 모달 내부 아이콘 크기 및 정렬 수정 */
+/* ✅ 아이콘 크기 고정 (확실히 균일하게 보이도록) */
 .modal svg,
 .modal i {
   width: 1em !important;
   height: 1em !important;
   flex-shrink: 0;
-  display: inline; /* ✅ 텍스트와 한 줄 정렬 */
-  vertical-align: middle; /* ✅ 세로 정렬 자연스럽게 */
-  margin-right: 0.3em; /* ✅ 글자와 간격 확보 */
+  vertical-align: middle;
+  display: inline-block;
 }
