@@ -106,10 +106,16 @@
 
 /* 💗 하트 두근두근 효과 정의 */
 @keyframes heartbeat {
-  0%, 20%, 40%, 60%, 80%, 100% {
+  0%, 100% {
     transform: rotate(45deg) scale(1);
   }
-  10%, 30%, 50%, 70%, 90% {
-    transform: rotate(45deg) scale(1.15);
+  25% {
+    transform: rotate(45deg) scale(1.03);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.07);
+  }
+  75% {
+    transform: rotate(45deg) scale(1.03);
   }
 }
