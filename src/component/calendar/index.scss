@@ -25,9 +25,7 @@
       &.wedding-date {
         position: relative;
 
-        > span {
-          z-index: 1;
-        }
+        > span { z-index: 1; }
 
         > div.heart {
           width: 50%;
@@ -40,7 +38,7 @@
           transform-origin: center center;
           z-index: 0;
 
-          /* 💗 자연스럽게 커졌다 작아졌다 반복 */
+          /* 멈칫 없이 커졌다 작아졌다만 반복 */
           animation: breathingHeart 3s linear infinite;
 
           &::before,
@@ -53,14 +51,8 @@
             background: var(--theme-color);
           }
 
-          &::before {
-            top: -50%;
-            left: 0;
-          }
-
-          &::after {
-            left: -50%;
-          }
+          &::before { top: -50%; left: 0; }
+          &::after  { left: -50%; }
         }
       }
     }
@@ -77,43 +69,24 @@
       grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
       align-items: center;
 
-      * {
-        margin: 0 0.1rem;
-      }
+      * { margin: 0 0.1rem; }
 
-      .count {
-        opacity: 0.8;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
-
-      .unit {
-        font-weight: bold;
-        font-size: 0.6rem;
-        opacity: 0.5;
-      }
+      .count { opacity: 0.8; font-weight: bold; font-size: 1.2rem; }
+      .unit  { font-weight: bold; font-size: 0.6rem; opacity: 0.5; }
     }
 
     .message {
       margin-top: 2rem;
       margin-bottom: 1.5rem;
 
-      .d-day {
-        color: var(--theme-color);
-      }
+      .d-day { color: var(--theme-color); }
     }
   }
 }
 
-/* 💞 완전히 자연스러운 커졌다 작아졌다 반복 (멈칫 완전 제거) */
+/* 부드럽게 커졌다 작아졌다 (리듬 X) */
 @keyframes breathingHeart {
-  0% {
-    transform: rotate(45deg) scale(1);
-  }
-  50% {
-    transform: rotate(45deg) scale(1.15);
-  }
-  100% {
-    transform: rotate(45deg) scale(1);
-  }
+  0%   { transform: rotate(45deg) scale(1); }
+  50%  { transform: rotate(45deg) scale(1.15); }
+  100% { transform: rotate(45deg) scale(1); }
 }
