@@ -23,12 +23,10 @@
   animation: modal-fade-in 0.5s ease;
   z-index: 9999;
 
-  /* ✅ 상위(.cover 등) flex, 폰트, 크기 상속 완전 차단 */
-  all: revert;
-  * {
-    all: revert;
-    box-sizing: border-box;
-  }
+  /* ✅ flex 등 상속 제거하되, 이벤트는 유지 */
+  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
+  text-align: left;
+  line-height: normal;
 
   > .modal {
     background-color: var(--light-color);
@@ -38,8 +36,8 @@
     max-width: 90vw;
     animation: modal-fade-in 0.5s ease;
     opacity: 1;
+    pointer-events: auto;
 
-    /* ✅ header 영역 */
     .header {
       padding: 0.5rem 1rem;
       background-color: var(--light-color);
@@ -81,14 +79,12 @@
       }
     }
 
-    /* ✅ 내용 부분 */
     .content {
       max-height: 80vh;
       overflow: auto;
       padding: 1rem;
     }
 
-    /* ✅ footer (버튼 등) */
     .footer {
       display: flex;
       justify-content: space-between;
@@ -99,12 +95,11 @@
   }
 }
 
-/* ✅ 아이콘 크기 고정 (확실히 균일하게 보이도록) */
+/* ✅ 아이콘 크기 고정 */
 .modal svg,
 .modal i {
   width: 1em !important;
   height: 1em !important;
-  flex-shrink: 0;
   vertical-align: middle;
   display: inline-block;
 }
