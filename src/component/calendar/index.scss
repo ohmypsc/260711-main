@@ -40,8 +40,8 @@
           transform-origin: center center;
           z-index: 0;
 
-          /* 💓 일정한 리듬으로 커졌다 작아지는 하트 */
-          animation: steadyHeartbeat 2.5s linear infinite;
+          /* 💗 자연스럽게 커졌다 작아지는 반복 */
+          animation: breathingHeart 3.5s ease-in-out infinite;
 
           &::before,
           &::after {
@@ -105,19 +105,19 @@
   }
 }
 
-/* 💗 일정한 크기 변화로 부드럽게 반복되는 하트 */
-@keyframes steadyHeartbeat {
+/* 💞 부드럽게 커졌다 작아지는 애니메이션 (끊김 완전 제거) */
+@keyframes breathingHeart {
   0% {
     transform: rotate(45deg) scale(1);
   }
   25% {
-    transform: rotate(45deg) scale(0.9);
-  }
-  50% {
     transform: rotate(45deg) scale(1.1);
   }
+  50% {
+    transform: rotate(45deg) scale(1.2);
+  }
   75% {
-    transform: rotate(45deg) scale(0.9);
+    transform: rotate(45deg) scale(1.1);
   }
   100% {
     transform: rotate(45deg) scale(1);
