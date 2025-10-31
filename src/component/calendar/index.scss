@@ -1,144 +1,125 @@
 .calendar {
   .calendar-wrapper {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    margin: 1rem auto;
-    border: 1px solid var(--light-grey-color);
+    grid-template-columns: repeat(7, minmax(2.8rem, 1fr));
+    gap: 0.3rem;
+    margin: 1.2rem auto;
+    padding: 0.8rem;
     border-radius: 1rem;
-    overflow: hidden;
     background: var(--white-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--light-grey-color);
+    max-width: 22rem; /* 📏 중심 정렬 시 안정적인 폭 */
 
     > div {
-      aspect-ratio: 1;
+      position: relative;
+      aspect-ratio: 1 / 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      border-radius: 0.6rem;
+      background-color: #fafafa;
+      transition: all 0.25s ease;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
 
       span {
-        font-weight: 500;
+        position: relative;
+        z-index: 1;
+        color: var(--dark-color);
       }
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.03);
-        transform: scale(1.03);
+        background-color: #fef6f8;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
       }
 
       &.head {
-        aspect-ratio: auto;
         background-color: var(--light-grey-color);
         font-weight: bold;
+        color: var(--dark-color);
+        box-shadow: none;
       }
 
       &.holiday > span {
         color: var(--red-color);
+        font-weight: 500;
       }
 
       &.wedding-date {
-        position: relative;
-        border-radius: 50%;
-        overflow: hidden;
+        background: transparent; /* 하트 외 배경 제거 */
+        box-shadow: none;
+      }
 
-        > span {
-          z-index: 1;
-          font-weight: bold;
-          color: var(--white-color);
+      /* 🩷 하트 */
+      .heart {
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        top: 35%;
+        left: 25%;
+        background: var(--theme-color);
+        transform: rotate(45deg);
+        transform-origin: center;
+        z-index: 0;
+        opacity: 0.5;
+        animation: heartbeat 3.5s linear infinite;
+
+        &::before,
+        &::after {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          border-radius: 50%;
+          background: var(--theme-color);
+          opacity: 0.5;
         }
 
-        background: var(--theme-color);
-        box-shadow: 0 0 12px rgba(255, 100, 150, 0.4);
+        &::before {
+          top: -50%;
+          left: 0;
+        }
 
-        > div.heart {
-          width: 55%;
-          height: 55%;
-          background: var(--white-color);
-          opacity: 0.8;
-          top: 35%;
-          left: 22%;
-          position: absolute;
-          transform: rotate(45deg);
-          transform-origin: center center;
-          z-index: 0;
-
-          animation: heartbeat 4s linear infinite;
-
-          &::before,
-          &::after {
-            content: "";
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            border-radius: 50%;
-            background: var(--white-color);
-          }
-
-          &::before {
-            top: -50%;
-            left: 0;
-          }
-
-          &::after {
-            left: -50%;
-          }
+        &::after {
+          left: -50%;
         }
       }
     }
   }
 
-  .countdown-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* 📱 반응형 */
+  @media (max-width: 480px) {
+    .calendar-wrapper {
+      grid-template-columns: repeat(7, minmax(2rem, 1fr));
+      gap: 0.2rem;
+      padding: 0.6rem;
+      max-width: 18rem;
 
-    .countdown {
-      display: grid;
-      width: 15rem;
-      grid-template-columns: repeat(7, auto);
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-
-      .count {
-        opacity: 0.8;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
-
-      .unit {
-        font-weight: bold;
-        font-size: 0.6rem;
-        opacity: 0.5;
-      }
-    }
-
-    .message {
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
-
-      .d-day {
-        color: var(--theme-color);
-        font-weight: bold;
+      > div {
+        font-size: 0.8rem;
+        border-radius: 0.4rem;
       }
     }
   }
 }
 
-/* 💓 부드럽고 이어지는 심장 박동 */
+/* 💓 부드럽고 이어지는 하트 박동 */
 @keyframes heartbeat {
   0% {
     transform: rotate(45deg) scale(1);
-    opacity: 0.9;
+    opacity: 0.8;
   }
-  10% {
-    transform: rotate(45deg) scale(1.05);
+  15% {
+    transform: rotate(45deg) scale(1.06);
     opacity: 1;
   }
-  25% {
+  35% {
     transform: rotate(45deg) scale(1.1);
     opacity: 0.95;
   }
-  50% {
+  55% {
     transform: rotate(45deg) scale(1.04);
     opacity: 0.98;
   }
@@ -148,6 +129,6 @@
   }
   100% {
     transform: rotate(45deg) scale(1);
-    opacity: 0.9;
+    opacity: 0.8;
   }
 }
