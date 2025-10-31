@@ -39,8 +39,8 @@
           transform: rotate(45deg);
           z-index: 0;
 
-          /* 💓 두근두근 애니메이션 */
-          animation: heartbeat 1.5s ease-in-out infinite;
+          /* 💓 차분한 두근두근 애니메이션 */
+          animation: heartbeat 3s ease-in-out infinite;
 
           &::before,
           &::after {
