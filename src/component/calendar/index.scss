@@ -22,7 +22,6 @@
         }
       }
 
-      /* ✅ 결혼식 날짜 */
       &.wedding-date {
         position: relative;
 
@@ -31,39 +30,34 @@
         }
 
         > div.heart {
-          width: 42%;
-          height: 42%;
+          width: 50%;
+          height: 50%;
+          background: var(--theme-color); /* 💗 진한 테마색으로 변경 */
           top: 35%;
-          left: 29%;
+          left: 25%;
           position: absolute;
           transform: rotate(45deg);
           z-index: 0;
 
-          /* ❤️ 단색 하트 */
-          background: var(--theme-color);
-          border-radius: 6px;
-
-          /* 💓 부드러운 심장 박동 */
-          animation: heartbeatSoft 2s infinite ease-in-out;
-
-          /* 하트 윗부분의 원 두 개 */
-          &::before,
-          &::after {
+          &::before {
             content: "";
-            position: absolute;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background: var(--theme-color);
-          }
-
-          &::before {
+            position: absolute;
             top: -50%;
             left: 0%;
+            border-radius: 50%;
+            background: var(--theme-color); /* 💗 동일하게 적용 */
           }
 
           &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
             left: -50%;
+            border-radius: 50%;
+            background: var(--theme-color); /* 💗 동일하게 적용 */
           }
         }
       }
@@ -106,21 +100,5 @@
         color: var(--theme-color);
       }
     }
-  }
-}
-
-/* 💓 부드러운 박동 애니메이션 */
-@keyframes heartbeatSoft {
-  0%, 100% {
-    transform: rotate(45deg) scale(1);
-  }
-  30% {
-    transform: rotate(45deg) scale(1.15);
-  }
-  50% {
-    transform: rotate(45deg) scale(1.05);
-  }
-  70% {
-    transform: rotate(45deg) scale(1.18);
   }
 }
