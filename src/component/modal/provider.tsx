@@ -27,7 +27,6 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     setModalInfoList((list) => {
       if (list.length === 0) return list
       const last = list[list.length - 1]
-      // ✅ 닫기 애니메이션용 플래그
       const updated = [...list.slice(0, -1), { ...last, closing: true }]
       setTimeout(() => {
         setModalInfoList((l) => {
@@ -40,44 +39,12 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     })
   }, [])
 
-  // ✅ ESC로 닫기 + 포커스 트랩
+  // ✅ ESC & Tab focus trap
   useEffect(() => {
     if (modalInfoList.length === 0) return
 
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal()
-
-      if (e.key === "Tab") {
-        const wrapper = modalWrapperRef.current
-        const lastModal = wrapper?.lastElementChild as HTMLElement
-        if (!lastModal) return
-
-        const focusables = lastModal.querySelectorAll<HTMLElement>(
-          "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
-        )
-        if (focusables.length === 0) {
-          e.preventDefault()
-          return
-        }
-
-        if (!modalFocusTrapInitialized.current) {
-          e.preventDefault()
-          modalFocusTrapInitialized.current = true
-          focusables[0].focus()
-        } else if (
-          document.activeElement === focusables[0] &&
-          e.shiftKey
-        ) {
-          e.preventDefault()
-          focusables[focusables.length - 1].focus()
-        } else if (
-          document.activeElement === focusables[focusables.length - 1] &&
-          !e.shiftKey
-        ) {
-          e.preventDefault()
-          focusables[0].focus()
-        }
-      }
     }
 
     window.addEventListener("keydown", handleKey)
@@ -93,7 +60,9 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
             key={modalInfo.key}
             className={`modal-background${modalInfo.closing ? " closing" : ""}`}
             style={{ zIndex: 1000 + idx }}
-            onClick={() => modalInfo.closeOnClickBackground && closeModal()}
+            onClick={() =>
+              modalInfo.closeOnClickBackground && closeModal()
+            }
           >
             <div
               className={`modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
@@ -105,8 +74,19 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
                 </div>
                 {modalInfo.header}
               </div>
-              <div className="content">{modalInfo.content}</div>
-              {modalInfo.footer && <div className="footer">{modalInfo.footer}</div>}
+
+              {/* ✅ 수정 포인트: contact-modal 감싸기 */}
+              <div className="content">
+                {modalInfo.className?.includes("contact-modal") ? (
+                  <div className="contact-modal">{modalInfo.content}</div>
+                ) : (
+                  modalInfo.content
+                )}
+              </div>
+
+              {modalInfo.footer && (
+                <div className="footer">{modalInfo.footer}</div>
+              )}
             </div>
           </div>
         ))}
