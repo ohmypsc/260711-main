@@ -66,7 +66,7 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메세지로 축하 인사를 전해보세요.
+                  전화, 문자메시지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
@@ -80,7 +80,7 @@ export const Cover = () => {
                         <div>{name}</div>
                         <div>
                           <PhoneIcon
-                            className="flip icon"
+                            className="icon"
                             onClick={() =>
                               window.open(`tel:${phone}`, "_self")
                             }
