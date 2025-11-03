@@ -14,6 +14,7 @@ import { ModalProvider } from "./component/modal"
 
 function Router() {
   const [path, setPath] = useState(window.location.pathname)
+
   useEffect(() => {
     const handleChange = () => setPath(window.location.pathname)
     window.addEventListener("popstate", handleChange)
@@ -29,10 +30,11 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover는 LazyDiv나 card-group 밖에 단독 배치 */}
-        <Cover />
+        {/* ✅ Cover도 LazyDiv 안으로 이동 */}
+        <LazyDiv className="card-group">
+          <Cover />
+        </LazyDiv>
 
-        {/* ✅ 이후 섹션들은 LazyDiv 유지 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
