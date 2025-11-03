@@ -35,7 +35,8 @@
 
   > .modal {
     background-color: var(--modal-bg);
-    border-radius: 0.5rem;
+    /* ✅ 모서리 각지게 수정 */
+    border-radius: 0;
     box-shadow: 0 0 1rem var(--modal-shadow);
     width: 90%;
     max-width: 28rem;
@@ -105,18 +106,17 @@
       font-size: 0.95rem;
       color: var(--modal-text);
 
-      /* 🎯 연락처 리스트 (왼쪽 여백 제거 + 중앙 정렬) */
+      /* 🎯 연락처 리스트 */
       .contact-info {
         display: grid;
-        grid-template-columns: 1fr 1.2fr 0.8fr; /* 💡 비율 조정으로 여백 제거 */
+        grid-template-columns: 1fr 1.2fr 0.8fr;
         column-gap: 0.3rem;
         row-gap: 0.7rem;
         align-items: center;
         margin-top: 1rem;
-        padding: 0; /* ✅ 여백 완전 제거 */
+        padding: 0;
       }
 
-      /* 1열: 관계 */
       .contact-info > .relation {
         text-align: right;
         font-size: 0.85rem;
@@ -125,14 +125,12 @@
         padding-right: 0.3rem;
       }
 
-      /* 2열: 이름 (가운데 정렬) */
       .contact-info > :nth-child(3n-1) {
         text-align: center;
         font-size: 0.9rem;
         color: var(--modal-text);
       }
 
-      /* 3열: 아이콘 (오른쪽 끝) */
       .contact-info > :nth-child(3n) {
         display: flex;
         justify-content: flex-end;
