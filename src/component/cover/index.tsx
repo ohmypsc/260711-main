@@ -1,68 +1,45 @@
 import { Fragment } from "react/jsx-runtime"
 import {
   BRIDE_FULLNAME,
+  BRIDE_INFO,
   BRIDE_FATHER,
   BRIDE_MOTHER,
-  BRIDE_TITLE,
-  BRIDE_INFO,
   GROOM_FULLNAME,
+  GROOM_INFO,
   GROOM_FATHER,
   GROOM_MOTHER,
   GROOM_TITLE,
-  GROOM_INFO,
-  LOCATION,
-  WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
+  BRIDE_TITLE,
 } from "../../const"
 import { useModal } from "../modal"
 import { Button } from "../button"
+import { LazyDiv } from "../lazyDiv"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
-
-const DAY_OF_WEEK = [
-  "일요일",
-  "월요일",
-  "화요일",
-  "수요일",
-  "목요일",
-  "금요일",
-  "토요일",
-]
 
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
   return (
-    <div className="card cover fade-in">
-      {/* 날짜 */}
-      <div className="wedding-date">
-        {WEDDING_DATE.format("YYYY")}
-        <div className="divider" />
-        {WEDDING_DATE.format("MM")}
-        <div className="divider" />
-        {WEDDING_DATE.format("DD")}
-      </div>
+    <LazyDiv className="card cover">
+      <h2 className="subtitle">Wedding Invitation</h2>
 
-      {/* 요일 */}
-      <div className="wedding-day-of-week">
-        {DAY_OF_WEEK[WEDDING_DATE.day()]}
-      </div>
-
-      {/* 서브타이틀 */}
-      <div className="subtitle">Wedding Day</div>
-
-      {/* 이름 */}
       <div className="names">
-        {GROOM_FULLNAME}
+        <span>{GROOM_FULLNAME}</span>
         <div className="divider" />
-        {BRIDE_FULLNAME}
+        <span>{BRIDE_FULLNAME}</span>
       </div>
 
-      {/* 날짜 + 장소 */}
-      <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
-      <div className="info">{LOCATION}</div>
+      <div className="wedding-date">
+        <span>2025. 05. 18</span>
+        <div className="divider" />
+        <span>12:00 PM</span>
+      </div>
 
-      {/* 가족 정보 */}
+      <div className="wedding-day-of-week">일요일</div>
+
+      <div className="info">세종컨벤션센터 2층 예식홀</div>
+
       <div className="family">
         <div className="name">
           {GROOM_FATHER} · {GROOM_MOTHER}
@@ -80,9 +57,8 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* 전역 버튼 + 전역 모달 시스템 */}
+      {/* ✅ 모달 호출 버튼 */}
       <Button
-        buttonStyle="style-2"
         onClick={() => {
           openModal({
             className: "contact-modal",
@@ -91,13 +67,12 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메세지로 축하 인사를 전해보세요.
+                  전화 또는 문자로 따뜻한 마음을 전해주세요.
                 </div>
               </div>
             ),
             content: (
               <>
-                {/* 신랑 측 */}
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -107,19 +82,22 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`sms:${phone}`, "_self")
+                            }
                           />
                         </div>
                       </Fragment>
-                    ),
+                    )
                   )}
                 </div>
 
-                {/* 신부 측 */}
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -129,29 +107,37 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`sms:${phone}`, "_self")
+                            }
                           />
                         </div>
                       </Fragment>
-                    ),
+                    )
                   )}
                 </div>
               </>
             ),
             footer: (
-              <Button buttonStyle="style-1" onClick={closeModal}>
+              <Button
+                buttonStyle="style2"
+                className="bg-light-grey-color text-dark-color"
+                onClick={closeModal}
+              >
                 닫기
               </Button>
             ),
           })
         }}
       >
-        축하 인사 전하기
+        연락하기
       </Button>
-    </div>
+    </LazyDiv>
   )
 }
