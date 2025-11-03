@@ -274,3 +274,23 @@ div.break {
   box-shadow: none !important;
   border: none !important;
 }
+
+
+/* ✅ 커버에서 열린 모달 내용 좌정렬로 재정의 */
+.cover .modal .content,
+.cover .modal .header,
+.cover .modal .footer {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+
+/* ✅ 아이콘 크기와 정렬 보정 */
+.cover .modal .icon {
+  width: 1rem !important;
+  height: 1rem !important;
+  display: inline-block !important;
+  vertical-align: middle;
+  margin: 0 0.3rem;
+}
+
