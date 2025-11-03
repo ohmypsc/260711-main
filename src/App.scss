@@ -217,24 +217,24 @@ div.break {
   height: 1rem;
 }
 
-/* ✅ Cover: LazyDiv 효과 비활성화 */
-.cover {
+/* ✅ Cover: LazyDiv 효과 비활성화 (수정된 안전 버전) */
+.card-group.cover,
+.card-group:has(> .cover) {
   opacity: 1;
-  transform: none;
-  transition: none;
   animation: none;
+  transition: none;
 }
 
-/* ✅ Cover 전용 페이드인 애니메이션 */
-.fade-in {
+/* ✅ Cover 전용 부드러운 페이드인 효과 */
+.cover {
   opacity: 0;
-  animation: cover-fade-in 2s ease forwards;
+  animation: cover-fade-in 1.5s ease forwards;
 }
 
 @keyframes cover-fade-in {
   from {
     opacity: 0;
-    transform: translateY(2rem);
+    transform: translateY(1rem);
   }
   to {
     opacity: 1;
@@ -253,14 +253,6 @@ div.break {
   @media (max-width: 980px) {
     margin: 0.5rem 0;
   }
-}
-
-/* ✅ card-group 전체가 Cover용일 때 */
-.card-group.cover,
-.card-group:has(.cover) {
-  opacity: 1 !important;
-  animation: none !important;
-  transition: none !important;
 }
 
 /* ✅ 카드 뒤 하얀 배경 제거 */
