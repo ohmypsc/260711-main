@@ -22,7 +22,7 @@ export const Cover = () => {
 
   return (
     <LazyDiv className="card cover">
-      <h2 className="subtitle">Wedding Invitation</h2>
+      <h2 className="subtitle">초대합니다.</h2>
 
       <div className="names">
         <span>{GROOM_FULLNAME}</span>
@@ -31,9 +31,9 @@ export const Cover = () => {
       </div>
 
       <div className="wedding-date">
-        <span>2025. 05. 18</span>
+        <span>2026. 07. 11</span>
         <div className="divider" />
-        <span>12:00 PM</span>
+        <span>오전 11시</span>
       </div>
 
       <div className="wedding-day-of-week">토요일</div>
