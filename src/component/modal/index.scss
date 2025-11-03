@@ -1,3 +1,6 @@
+/* =============================== */
+/* ✅ 전역 모달 변수 */
+/* =============================== */
 :root {
   --modal-bg: #ffffff;
   --modal-text: #222222;
@@ -12,8 +15,14 @@
 /* ✅ 애니메이션 */
 /* =============================== */
 @keyframes modal-fade-in {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* =============================== */
@@ -85,8 +94,12 @@
           background-color: var(--modal-text);
         }
 
-        &::before { transform: rotate(45deg); }
-        &::after { transform: rotate(135deg); }
+        &::before {
+          transform: rotate(45deg);
+        }
+        &::after {
+          transform: rotate(135deg);
+        }
       }
     }
 
@@ -150,16 +163,18 @@
 .modal.contact-modal {
   width: 22rem;
   max-width: 90vw;
-  text-align: left; /* 원작자 정렬 유지 */
+  text-align: initial; /* ✅ 중앙정렬 상속 차단 (원작자 동일) */
 
   .header {
     .title-group {
       text-align: center;
+
       .title {
         font-size: 1.2rem;
         color: var(--theme-color);
         padding-bottom: 0.5rem;
       }
+
       .subtitle {
         font-size: 0.9rem;
         color: var(--dark-color);
@@ -170,7 +185,8 @@
     }
   }
 
-  .content {
+  /* ✅ 실제 본문 계층: .content > .contact-modal */
+  .content > .contact-modal {
     padding: 1.2rem 1rem;
     text-align: center;
     line-height: 1.8;
@@ -197,7 +213,7 @@
       .icon {
         display: flex;
         justify-content: flex-end;
-        gap: 0.3rem;
+        gap: 0.4rem;
 
         svg {
           width: 1rem;
@@ -211,8 +227,9 @@
             opacity: 1;
           }
 
+          /* ✅ flip 완전 제거 */
           &.flip {
-            transform: scaleX(-1);
+            transform: none;
           }
         }
       }
