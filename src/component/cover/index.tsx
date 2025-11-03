@@ -18,7 +18,7 @@ import { useModal } from "../modal"
 import { Button } from "../button"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
-import { LazyDiv } from "../lazyDiv" // ✅ LazyDiv import 추가
+import { LazyDiv } from "../lazyDiv"
 
 const DAY_OF_WEEK = [
   "일요일",
@@ -34,6 +34,8 @@ export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
   return (
+    // ✅ LazyDiv 추가 (기존 누락된 부분)
+    <LazyDiv className="card-group">
       <div className="card cover fade-in">
         {/* 날짜 */}
         <div className="wedding-date">
@@ -116,7 +118,7 @@ export const Cover = () => {
                             />
                           </div>
                         </Fragment>
-                      )
+                      ),
                     )}
                   </div>
 
@@ -142,7 +144,7 @@ export const Cover = () => {
                             />
                           </div>
                         </Fragment>
-                      )
+                      ),
                     )}
                   </div>
                 </>
@@ -162,6 +164,6 @@ export const Cover = () => {
           축하 인사 전하기
         </Button>
       </div>
-    </LazyDiv>
+    </LazyDiv> // ✅ LazyDiv 닫는 위치 바로 이곳
   )
 }
