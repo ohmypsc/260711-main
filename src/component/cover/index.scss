@@ -73,7 +73,7 @@
     }
   }
 
-  /* 버튼은 전역 시스템(button.component) 스타일 자동 적용 */
+  /* --- 전역 버튼 --- */
   button {
     margin-top: 2rem;
   }
@@ -89,6 +89,8 @@
   color: var(--modal-text);
   border-radius: 0.5rem;
   box-shadow: 0 0 1rem var(--modal-shadow);
+  margin: 0 auto;
+  text-align: center;
 
   /* ✅ 헤더 */
   .header {
@@ -121,16 +123,18 @@
 
     .contact-info {
       display: grid;
-      grid-template-columns: 1fr 1fr auto;
+      grid-template-columns: 1fr 1fr 1fr; /* ✅ 균등 분할로 수정 */
       align-items: center;
-      gap: 0.6rem 0.3rem;
+      justify-items: center; /* ✅ 각 셀을 중앙 정렬 */
+      gap: 0.8rem 0.4rem;
       margin-bottom: 1.2rem;
+      padding: 0.5rem 0;
 
       .relation {
         opacity: 0.7;
-        text-align: right;
         font-size: 0.85rem;
         color: var(--modal-subtext);
+        text-align: center; /* ✅ 오른쪽 정렬 제거 */
       }
 
       .name {
@@ -139,6 +143,10 @@
       }
 
       .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.4rem;
         width: 1.2rem;
         height: 1.2rem;
         fill: var(--modal-text);
@@ -163,5 +171,16 @@
     flex-direction: column;
     padding: 1rem;
     border-top: 1px solid var(--modal-border);
+  }
+
+  /* ✅ 반응형 */
+  @media (min-width: 768px) {
+    width: 24rem;
+
+    .content {
+      .contact-info {
+        gap: 1rem 0.6rem;
+      }
+    }
   }
 }
