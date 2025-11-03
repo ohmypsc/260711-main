@@ -204,15 +204,11 @@ div.break {
   height: 1rem;
 }
 
-/* ===============================
-   ✅ Cover 카드 항상 보이기
-================================= */
-.card-view .card-group:first-child {
-  opacity: 1 !important;
-  animation: none !important;
+/* ✅ Cover 전용 느린 페이드인 애니메이션 */
+.card-view .card-group:first-child.lazy-active {
+  animation: lazy-fade-in 3s ease forwards;
 }
 
-.card-view .card-group:first-child .card {
-  opacity: 1 !important;
-  animation: none !important;
+.card-view .card-group:first-child .card.lazy-active {
+  animation: lazy-fade-in 3s ease forwards;
 }
