@@ -78,7 +78,7 @@
 }
 
 /* =============================== */
-/* ✅ Invitation contact-modal 완전 복제 (정확한 계층, 우선순위 포함) */
+/* ✅ contact-modal (Invitation 모달과 동일) */
 /* =============================== */
 .modal.contact-modal {
   width: 22rem;
@@ -152,7 +152,7 @@
           }
 
           &.flip {
-            transform: none; /* 완전 제거 */
+            transform: none;
           }
         }
       }
@@ -166,26 +166,4 @@
     align-items: center;
     padding: 1rem 0;
   }
-}
-
-/* =============================== */
-/* ✅ 전역 모달 배경 (화면 전체 덮기) */
-/* =============================== */
-.modal-background {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-/* =============================== */
-/* ✅ body 스크롤 잠금 */
-/* =============================== */
-body.modal-open {
-  overflow: hidden;
 }
