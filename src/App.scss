@@ -204,11 +204,25 @@ div.break {
   height: 1rem;
 }
 
-/* ✅ Cover 전용 느린 페이드인 애니메이션 */
+
+
+/* ✅ Cover 전용 느린 페이드인 (내부 카드까지 활성화) */
+.card-view .card-group:first-child {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
 .card-view .card-group:first-child.lazy-active {
+  opacity: 1;
   animation: lazy-fade-in 3s ease forwards;
 }
 
-.card-view .card-group:first-child .card.lazy-active {
+.card-view .card-group:first-child .card {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.card-view .card-group:first-child.lazy-active .card {
+  opacity: 1;
   animation: lazy-fade-in 3s ease forwards;
 }
