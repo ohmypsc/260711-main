@@ -1,5 +1,5 @@
 /* =============================== */
-/* ✅ Cover 본문 그대로 유지 */
+/* ✅ Cover 본문 (유지) */
 /* =============================== */
 .cover {
   .wedding-date {
@@ -78,92 +78,9 @@
 }
 
 /* =============================== */
-/* ✅ contact-modal (Invitation 모달과 동일) */
+/* ✅ 연락하기 모달 (전역 modal.scss 스타일 상속받기만 함) */
 /* =============================== */
-.modal.contact-modal {
-  width: 22rem;
-  max-width: 90vw;
-  margin: 0 auto;
-  border-radius: 0;
-  background-color: var(--modal-bg);
-  color: var(--dark-color);
-  text-align: initial;
-
-  /* ===== 헤더 ===== */
-  .header {
-    .title-group {
-      text-align: center;
-
-      .title {
-        font-size: 1.2rem;
-        color: var(--theme-color);
-        padding: 0.5rem;
-      }
-
-      .subtitle {
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--dark-grey-color);
-    }
-  }
-
-  /* ===== 내용 ===== */
-  .content > .contact-modal {
-    padding: 1.2rem 1rem;
-    text-align: center;
-    line-height: 1.8;
-    font-size: 0.9rem;
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: 8rem 7rem 1fr;
-      align-items: center;
-      row-gap: 0.5rem;
-      font-size: 0.85rem;
-      margin-top: 1rem;
-
-      .relation {
-        text-align: left;
-        opacity: 0.7;
-      }
-
-      .name {
-        text-align: center;
-      }
-
-      .icon {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.4rem;
-
-        svg {
-          width: 1rem;
-          height: 1rem;
-          opacity: 0.7;
-          fill: var(--dark-color);
-          cursor: pointer;
-          transition: opacity 0.2s ease;
-
-          &:hover {
-            opacity: 1;
-          }
-
-          &.flip {
-            transform: none;
-          }
-        }
-      }
-    }
-  }
-
-  /* ===== 푸터 ===== */
-  .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 0;
-  }
+.contact-modal {
+  /* 커버 전용 override 완전 제거 */
+  /* 전역 modal.scss의 .modal.contact-modal 스타일 사용 */
 }
