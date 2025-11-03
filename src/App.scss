@@ -36,12 +36,9 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover는 LazyDiv 밖에서 직접 렌더링 */}
-        <div className="card-group lazy-active">
-          <Cover />
-        </div>
-
+        {/* ✅ Cover + Invitation을 같은 LazyDiv로 묶음 */}
         <LazyDiv className="card-group">
+          <Cover />
           <Invitation />
         </LazyDiv>
 
