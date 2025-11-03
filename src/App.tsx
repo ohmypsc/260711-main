@@ -36,27 +36,32 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover를 LazyDiv 안으로 이동, 항상 보이게 lazy-active 지정 */}
-        <LazyDiv className="card-group lazy-active">
+        {/* ✅ Cover (항상 보이도록 설정됨) */}
+        <LazyDiv className="card-group">
           <Cover />
         </LazyDiv>
 
+        {/* ✅ 초대 글 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
 
+        {/* ✅ 달력 */}
         <LazyDiv className="card-group">
           <Calendar />
         </LazyDiv>
 
+        {/* ✅ 오시는 길 */}
         <LazyDiv className="card-group">
           <Location />
         </LazyDiv>
 
+        {/* ✅ 마음 전하기 */}
         <LazyDiv className="card-group">
           <Information />
         </LazyDiv>
 
+        {/* ✅ 방명록 (정적 모드가 아닐 때만 표시) */}
         {!STATIC_ONLY && (
           <LazyDiv className="card-group">
             <GuestBook />
