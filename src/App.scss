@@ -42,7 +42,7 @@
 }
 
 /* ===============================
-   ✅ 색상 유틸리티 클래스 생성
+   ✅ 색상 유틸리티 클래스
 ================================= */
 $colors: (
   theme-color: var(--theme-color),
@@ -70,7 +70,7 @@ $colors: (
 }
 
 /* ===============================
-   ✅ 애니메이션 정의
+   ✅ 애니메이션
 ================================= */
 @keyframes lazy-fade-in {
   from {
@@ -84,7 +84,7 @@ $colors: (
 }
 
 /* ===============================
-   ✅ 전역 버튼 및 폰트 스타일
+   ✅ 전역 스타일
 ================================= */
 button {
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
@@ -99,7 +99,6 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100vh;
-  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
   &.modal-open {
     overflow-y: hidden;
@@ -116,7 +115,7 @@ body {
 }
 
 /* ===============================
-   ✅ 배경 및 카드 레이아웃
+   ✅ 카드 레이아웃 (세로형)
 ================================= */
 .background {
   background-color: var(--theme-bg-color);
@@ -157,7 +156,7 @@ body {
         animation: none !important;
       }
 
-      /* ✅ 개별 카드 스타일 */
+      /* ✅ 개별 카드 */
       .card {
         background-color: var(--light-color);
         padding: 1.5rem;
@@ -171,12 +170,12 @@ body {
         margin-bottom: 1rem;
         opacity: 0;
 
-        @media (max-width: 980px) {
-          margin: 0.5rem 0;
-        }
-
         &.lazy-active {
           animation: lazy-fade-in 2.5s ease forwards;
+        }
+
+        @media (max-width: 980px) {
+          margin: 0.5rem 0;
         }
 
         @media print {
@@ -189,16 +188,15 @@ body {
 }
 
 /* ===============================
-   ✅ 제목 및 여백
+   ✅ 제목
 ================================= */
 h2 {
   font-size: 1.5rem;
   color: var(--theme-color);
   font-weight: normal;
-  font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
 
   &.english {
-    font-family: "Allura", "MapoGoldenPier", "Noto Sans KR", sans-serif;
+    font-family: "Allura";
   }
 }
 
@@ -207,13 +205,14 @@ div.break {
 }
 
 /* ===============================
-   ✅ Cover를 LazyDiv 안에 둘 때 보정
+   ✅ Cover 카드 항상 보이기
 ================================= */
-
-/* 1️⃣ 첫 번째 카드 그룹(Cover)은 항상 표시 */
 .card-view .card-group:first-child {
   opacity: 1 !important;
   animation: none !important;
 }
 
-
+.card-view .card-group:first-child .card {
+  opacity: 1 !important;
+  animation: none !important;
+}
