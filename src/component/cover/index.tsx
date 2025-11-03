@@ -16,7 +16,7 @@ import { Button } from "../button"
 import { LazyDiv } from "../lazyDiv"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
-import "./index.scss" // ✅ 스타일 연결
+import "./index.scss"
 
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
@@ -57,7 +57,6 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* ✅ 연락하기 모달 */}
       <Button
         onClick={() => {
           openModal({
@@ -66,9 +65,7 @@ export const Cover = () => {
             header: (
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
-                <div className="subtitle">
-                  전화, 문자메시지로 축하 인사를 전해보세요.
-                </div>
+                <div className="subtitle">전화, 문자메시지로 축하 인사를 전해보세요.</div>
               </div>
             ),
             content: (
@@ -76,7 +73,7 @@ export const Cover = () => {
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
+                      <Fragment key={`g-${relation}`}>
                         <div className="relation">{relation}</div>
                         <div className="name">{name}</div>
                         <div className="icon">
@@ -96,7 +93,7 @@ export const Cover = () => {
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
+                      <Fragment key={`b-${relation}`}>
                         <div className="relation">{relation}</div>
                         <div className="name">{name}</div>
                         <div className="icon">
