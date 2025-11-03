@@ -1,16 +1,17 @@
-/* ✅ 전역/공용 모듈 우선 */
-@use "./component/modal";     // 전역 모달 시스템
+/* ✅ 공용 모듈은 나중에 불러오기 (모달이 모든 걸 덮게) */
 @use "./component/button";
-
-/* ✅ 그다음 개별 섹션 컴포넌트 */
 @use "./component/bgEffect";
 @use "./component/calendar";
 @use "./component/location";
 @use "./component/invitation";
 @use "./component/information";
 @use "./component/guestbook";
-@use "./component/cover";     // ✅ contact-modal은 마지막 (override)
+@use "./component/cover";
 @use "./component/shareButton";
+
+/* ✅ 마지막에 modal (전역 오버레이가 덮어쓰도록) */
+@use "./component/modal";
+
 
 
 /* ===============================
