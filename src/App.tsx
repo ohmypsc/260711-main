@@ -29,10 +29,10 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover는 '단독'으로 렌더링 (card-group로 감싸지 마세요) */}
+        {/* ✅ Cover는 LazyDiv나 card-group 밖에 단독 배치 */}
         <Cover />
 
-        {/* ✅ 나머지는 LazyDiv로 유지 */}
+        {/* ✅ 이후 섹션들은 LazyDiv 유지 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
