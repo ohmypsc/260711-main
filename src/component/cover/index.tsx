@@ -1,10 +1,15 @@
 import { useState, Fragment } from "react"
 import {
-  BRIDE_INFO, GROOM_INFO,
-  BRIDE_FULLNAME, GROOM_FULLNAME,
-  BRIDE_FATHER, BRIDE_MOTHER,
-  GROOM_FATHER, GROOM_MOTHER,
-  BRIDE_TITLE, GROOM_TITLE,
+  BRIDE_FULLNAME,
+  BRIDE_INFO,
+  BRIDE_FATHER,
+  BRIDE_MOTHER,
+  GROOM_FULLNAME,
+  GROOM_INFO,
+  GROOM_FATHER,
+  GROOM_MOTHER,
+  BRIDE_TITLE,
+  GROOM_TITLE,
 } from "../../const"
 import { Button } from "../button"
 import { LazyDiv } from "../lazyDiv"
@@ -61,7 +66,7 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메세지로 축하 인사를 전해보세요.
+                  전화, 문자메시지로 축하 인사를 전해보세요.
                 </div>
               </div>
             </div>
@@ -72,7 +77,7 @@ export const Cover = () => {
                   ({ relation, name, phone }) => (
                     <Fragment key={relation}>
                       <div className="relation">{relation}</div>
-                      <div>{name}</div>
+                      <div className="name">{name}</div>
                       <div className="icon">
                         <PhoneIcon
                           className="flip"
@@ -92,10 +97,9 @@ export const Cover = () => {
                   ({ relation, name, phone }) => (
                     <Fragment key={relation}>
                       <div className="relation">{relation}</div>
-                      <div>{name}</div>
+                      <div className="name">{name}</div>
                       <div className="icon">
                         <PhoneIcon
-                          className="flip"
                           onClick={() => window.open(`tel:${phone}`, "_self")}
                         />
                         <EnvelopeIcon
