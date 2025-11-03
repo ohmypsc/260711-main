@@ -13,7 +13,7 @@ import { STATIC_ONLY } from "./env";
 import { ModalProvider } from "./component/modal";
 
 /* ===============================
-   ✅ 라우터 컴포넌트
+   ✅ 라우터
 ================================= */
 function Router() {
   const [path, setPath] = useState(window.location.pathname);
@@ -36,10 +36,11 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover는 LazyDiv나 card-group 밖에 단독 배치 */}
-        <Cover />
+        {/* ✅ Cover를 LazyDiv 안으로 이동, 항상 보이게 lazy-active 지정 */}
+        <LazyDiv className="card-group lazy-active">
+          <Cover />
+        </LazyDiv>
 
-        {/* ✅ 이후 섹션들은 LazyDiv 유지 */}
         <LazyDiv className="card-group">
           <Invitation />
         </LazyDiv>
@@ -67,7 +68,7 @@ function Home() {
 }
 
 /* ===============================
-   ✅ 앱 루트 컴포넌트
+   ✅ 앱 루트
 ================================= */
 export default function App() {
   return (
