@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react"
+import { useState, Fragment, useEffect } from "react"
 import {
   BRIDE_FULLNAME,
   BRIDE_INFO,
@@ -18,6 +18,24 @@ import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
 export const Cover = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
+
+  // ✅ ESC 키로 닫기
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) handleClose()
+    }
+    window.addEventListener("keydown", handleKey)
+    return () => window.removeEventListener("keydown", handleKey)
+  }, [isOpen])
+
+  const handleClose = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setIsOpen(false)
+      setIsClosing(false)
+    }, 250)
+  }
 
   return (
     <>
@@ -59,8 +77,12 @@ export const Cover = () => {
         <Button onClick={() => setIsOpen(true)}>연락하기</Button>
       </LazyDiv>
 
+      {/* ✅ 모달은 Cover 밖에 위치해야 전체화면 배경이 정상 */}
       {isOpen && (
-        <div className="modal-background" onClick={() => setIsOpen(false)}>
+        <div
+          className={`modal-background ${isClosing ? "closing" : ""}`}
+          onClick={handleClose}
+        >
           <div className="contact-modal" onClick={(e) => e.stopPropagation()}>
             <div className="header">
               <div className="title-group">
@@ -72,6 +94,7 @@ export const Cover = () => {
             </div>
 
             <div className="content">
+              {/* ✅ 신랑 쪽 */}
               <div className="contact-info">
                 {GROOM_INFO.filter(({ phone }) => !!phone).map(
                   ({ relation, name, phone }) => (
@@ -92,6 +115,7 @@ export const Cover = () => {
                 )}
               </div>
 
+              {/* ✅ 신부 쪽 */}
               <div className="contact-info">
                 {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                   ({ relation, name, phone }) => (
@@ -116,7 +140,7 @@ export const Cover = () => {
               <Button
                 buttonStyle="style2"
                 className="bg-light-grey-color text-dark-color"
-                onClick={() => setIsOpen(false)}
+                onClick={handleClose}
               >
                 닫기
               </Button>
