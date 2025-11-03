@@ -1,15 +1,15 @@
 import { Fragment } from "react/jsx-runtime"
 import {
   BRIDE_FULLNAME,
-  BRIDE_INFO,
   BRIDE_FATHER,
   BRIDE_MOTHER,
   BRIDE_TITLE,
+  BRIDE_INFO,
   GROOM_FULLNAME,
-  GROOM_INFO,
   GROOM_FATHER,
   GROOM_MOTHER,
   GROOM_TITLE,
+  GROOM_INFO,
   LOCATION,
   WEDDING_DATE,
   WEDDING_DATE_FORMAT,
@@ -80,9 +80,9 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* 🎁 전역 버튼 + 전역 모달 시스템 사용 */}
+      {/* 전역 버튼 + 전역 모달 시스템 */}
       <Button
-        buttonStyle="style-2" // 이미 존재하는 전역 스타일 적용
+        buttonStyle="style-2"
         onClick={() => {
           openModal({
             className: "contact-modal",
@@ -91,7 +91,7 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메시지로 축하 인사를 전해보세요.
+                  전화, 문자메세지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
@@ -143,10 +143,7 @@ export const Cover = () => {
               </>
             ),
             footer: (
-              <Button
-                buttonStyle="style-1" // 전역 서브 스타일 적용
-                onClick={closeModal}
-              >
+              <Button buttonStyle="style-1" onClick={closeModal}>
                 닫기
               </Button>
             ),
