@@ -235,16 +235,33 @@ div.break {
 }
 
 /* ===============================
-   ✅ Cover 예외 처리
+   ✅ Cover 관련 설정
 ================================= */
 .cover {
   opacity: 1;
   transform: none;
   transition: none;
   animation: none;
+
+  /* ✨ 모달 내부는 상속 방지 (좌정렬 유지) */
+  .modal,
+  .modal * {
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+
+  /* ✅ 아이콘 크기 보정 */
+  .modal .icon {
+    width: 1rem !important;
+    height: 1rem !important;
+    display: inline-block !important;
+    vertical-align: middle;
+    margin: 0 0.3rem;
+  }
 }
 
-/* ✅ Cover 전용 페이드인 애니메이션 */
+/* ✅ Cover 전용 페이드인 */
 .fade-in {
   opacity: 0;
   animation: cover-fade-in 2s ease forwards;
@@ -261,7 +278,7 @@ div.break {
   }
 }
 
-/* ✅ card-group 안에서도 동일 구조 유지 */
+/* ✅ card-group 내 Cover 구조 유지 */
 .card-group .cover {
   background-color: var(--light-color);
   border: 1px solid var(--light-grey-color);
@@ -274,7 +291,7 @@ div.break {
   }
 }
 
-/* ✅ card-group 전체가 Cover용일 때 */
+/* ✅ Cover만 있는 그룹은 애니메이션 비활성 */
 .card-group.cover,
 .card-group:has(.cover) {
   opacity: 1 !important;
@@ -282,7 +299,7 @@ div.break {
   transition: none !important;
 }
 
-/* ✅ 카드 뒤 하얀 배경 제거 */
+/* ✅ 카드 뒤 배경 제거 */
 .background .card-view {
   background: none !important;
   box-shadow: none !important;
@@ -292,22 +309,4 @@ div.break {
   background: none !important;
   box-shadow: none !important;
   border: none !important;
-}
-
-/* ✅ 커버에서 열린 모달 내용 좌정렬 */
-.cover .modal .content,
-.cover .modal .header,
-.cover .modal .footer {
-  text-align: left !important;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-}
-
-/* ✅ 아이콘 크기와 정렬 보정 */
-.cover .modal .icon {
-  width: 1rem !important;
-  height: 1rem !important;
-  display: inline-block !important;
-  vertical-align: middle;
-  margin: 0 0.3rem;
 }
