@@ -8,134 +8,226 @@
   --modal-theme: #ff8585;
 }
 
+/* =============================== */
+/* ✅ 애니메이션 */
+/* =============================== */
 @keyframes modal-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+/* =============================== */
+/* ✅ 배경 (화면 전체 덮기) */
+/* =============================== */
 .modal-background {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: modal-fade-in 0.5s ease;
   z-index: 9999;
+  animation: modal-fade-in 0.3s ease;
 
   &.closing {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
+}
 
-  > .modal {
-    background-color: var(--modal-bg);
-    border-radius: 0; /* 각진 */
-    box-shadow: 0 0 1rem var(--modal-shadow);
+/* =============================== */
+/* ✅ 기본 모달 박스 */
+/* =============================== */
+.modal {
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
+  width: 90%;
+  max-width: 28rem;
+  border-radius: 0; /* 각진 네모 */
+  box-shadow: 0 0 1rem var(--modal-shadow);
+  display: flex;
+  flex-direction: column;
+  animation: modal-fade-in 0.4s ease;
+  overflow: hidden;
 
-    /* 반응형: 모바일 90%, 데스크톱 최대 22rem */
-    width: 90%;
-    max-width: 22rem;
-    margin: 0 auto;
+  @media (min-width: 768px) {
+    max-width: 30rem;
+  }
 
-    /* 텍스트 상속 방지 (부모가 center라도 초기화) */
-    text-align: initial;
+  /* ===== 헤더 ===== */
+  .header {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--modal-border);
+    position: relative;
 
-    display: flex;
-    flex-direction: column;
-    animation: modal-fade-in 0.5s ease;
-
-    .header {
-      padding: 0.5rem;
-      background-color: var(--modal-bg);
-      z-index: 7;
-
-      .close-button-wrapper {
-        display: flex;
-        justify-content: flex-end;
-
-        .close-button {
-          position: relative;
-          z-index: 3;
-          width: 1rem;
-          height: 1rem;
-          background: none;
-          border: none;
-          cursor: pointer;
-
-          &::before,
-          &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 0.1rem;
-            height: 100%;
-            background-color: var(--modal-text);
-          }
-          &::before { transform: rotate(45deg); }
-          &::after { transform: rotate(135deg); }
-        }
-      }
-
-      .title-group {
-        text-align: center;
-        .title {
-          font-size: 1.2rem;
-          color: var(--modal-theme);
-          font-weight: 600;
-        }
-        .subtitle {
-          font-size: 0.9rem;
-          color: var(--modal-subtext);
-          opacity: 0.8;
-        }
-      }
-    }
-
-    .content {
-      padding: 1rem;
-      max-height: 80vh;
-      overflow: auto;
-      font-size: 0.95rem;
-      color: var(--modal-text);
-    }
-
-    .footer {
+    .close-button-wrapper {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-      border-top: 1px solid var(--modal-border);
+      justify-content: flex-end;
 
-      button {
-        flex: 1;
-        padding: 0.6rem;
-        font-size: 0.9rem;
-        border-radius: 0.3rem;
+      .close-button {
+        width: 1.2rem;
+        height: 1.2rem;
+        background: none;
         border: none;
-        color: var(--modal-text);
-        background-color: rgba(0, 0, 0, 0.05);
         cursor: pointer;
-        transition: background-color 0.2s ease;
+        position: relative;
 
-        &:hover { background-color: rgba(0, 0, 0, 0.1); }
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 0.12rem;
+          height: 100%;
+          background-color: var(--modal-text);
+        }
+
+        &::before { transform: rotate(45deg); }
+        &::after { transform: rotate(135deg); }
+      }
+    }
+
+    .title-group {
+      text-align: center;
+      margin-top: 0.5rem;
+
+      .title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--modal-theme);
+        padding-bottom: 0.3rem;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+        color: var(--modal-subtext);
+        opacity: 0.8;
+      }
+    }
+  }
+
+  /* ===== 내용 ===== */
+  .content {
+    padding: 1rem 1rem 1.5rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    text-align: left;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+
+  /* ===== 푸터 ===== */
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-top: 1px solid var(--modal-border);
+
+    button {
+      min-width: 6rem;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 0.3rem;
+      background-color: rgba(0, 0, 0, 0.05);
+      color: var(--modal-text);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
       }
     }
   }
 }
 
-/* 공통 아이콘 크기 */
-.modal svg,
-.modal i {
-  width: 1.2rem !important;
-  height: 1.2rem !important;
-  vertical-align: middle;
+/* =============================== */
+/* ✅ 연락하기(Contact) 전용 모달 스타일 */
+/* =============================== */
+.modal.contact-modal {
+  width: 22rem;
+  max-width: 90vw;
+  text-align: left; /* 원작자 정렬 유지 */
+
+  .header {
+    .title-group {
+      text-align: center;
+      .title {
+        font-size: 1.2rem;
+        color: var(--theme-color);
+        padding-bottom: 0.5rem;
+      }
+      .subtitle {
+        font-size: 0.9rem;
+        color: var(--dark-color);
+        opacity: 0.8;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--dark-grey-color);
+      }
+    }
+  }
+
+  .content {
+    padding: 1.2rem 1rem;
+    text-align: center;
+    line-height: 1.8;
+    font-size: 0.9rem;
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: 8rem 7rem 1fr;
+      align-items: center;
+      row-gap: 0.5rem;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+
+      .relation {
+        text-align: left;
+        opacity: 0.7;
+        color: var(--dark-color);
+      }
+
+      .name {
+        text-align: center;
+      }
+
+      .icon {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.3rem;
+
+        svg {
+          width: 1rem;
+          height: 1rem;
+          opacity: 0.7;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+          fill: var(--dark-color);
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &.flip {
+            transform: scaleX(-1);
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    justify-content: center;
+    padding: 1rem 0;
+  }
 }
 
-.modal .close-button::before,
-.modal .close-button::after {
-  width: 0.1rem !important;
+/* =============================== */
+/* ✅ body 스크롤 잠금 */
+/* =============================== */
+body.modal-open {
+  overflow: hidden;
 }
-
-body.modal-open { overflow: hidden; }
