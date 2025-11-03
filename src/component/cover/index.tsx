@@ -39,6 +39,9 @@ export const Cover = () => {
 
   return (
     <>
+      {/* =============================== */}
+      {/* ✅ Cover 본문 */}
+      {/* =============================== */}
       <LazyDiv className="card cover">
         <h2 className="subtitle">Wedding Invitation</h2>
 
@@ -77,7 +80,9 @@ export const Cover = () => {
         <Button onClick={() => setIsOpen(true)}>연락하기</Button>
       </LazyDiv>
 
-      {/* ✅ 모달은 Cover 밖에 위치해야 전체화면 배경이 정상 */}
+      {/* =============================== */}
+      {/* ✅ 연락하기 모달 */}
+      {/* =============================== */}
       {isOpen && (
         <div
           className={`modal-background ${isClosing ? "closing" : ""}`}
