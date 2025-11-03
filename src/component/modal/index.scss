@@ -1,77 +1,80 @@
-@keyframes app-modal-fade-in {
+/* ✅ 밝은 모드 기본 색상 정의 */
+:root {
+  --modal-bg: #ffffff;
+  --modal-text: #222222;
+  --modal-subtext: #555555;
+  --modal-border: #e0e0e0;
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --modal-shadow: rgba(0, 0, 0, 0.25);
+  --modal-theme: #007aff;
+}
+
+
+/* ✨ 모달 페이드 인 애니메이션 */
+@keyframes modal-fade-in {
   from {
     opacity: 0;
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
+    transform: scale(1);
   }
 }
 
-/* ✅ 스크롤 잠금 */
-body.modal-open {
-  overflow: hidden;
-}
-
-/* ✅ 다크 모드 변수 */
-:root {
-  --app-modal-bg: #ffffff;
-  --app-modal-text: #222;
-  --app-modal-border: #e0e0e0;
-  --app-modal-shadow: rgba(0, 0, 0, 0.25);
-  --app-modal-theme: #007aff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --app-modal-bg: #1e1e1e;
-    --app-modal-text: #eaeaea;
-    --app-modal-border: #333;
-    --app-modal-shadow: rgba(0, 0, 0, 0.6);
-    --app-modal-theme: #339aff;
-  }
-}
-
-/* ✅ 모달 전체 배경 */
-.app-modal-background {
+/* ✅ 전체 배경 */
+.modal-background {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: app-modal-fade-in 0.4s ease;
+  animation: modal-fade-in 0.3s ease;
   z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 
-  > .app-modal {
-    background-color: var(--app-modal-bg);
+  &.closing {
+    opacity: 0;
+  }
+
+  > .modal {
+    background-color: var(--modal-bg);
     border-radius: 0.5rem;
-    box-shadow: 0 0 1rem var(--app-modal-shadow);
+    box-shadow: 0 0 1rem var(--modal-shadow);
     width: 90%;
     max-width: 28rem;
+    animation: modal-fade-in 0.3s ease;
     display: flex;
     flex-direction: column;
-    color: var(--app-modal-text);
+    color: var(--modal-text);
+    pointer-events: auto;
 
     @media (min-width: 768px) {
       max-width: 30rem;
     }
 
     /* ✅ 헤더 영역 */
-    .app-modal-header {
+    .header {
       padding: 0.8rem 1rem;
-      border-bottom: 1px solid var(--app-modal-border);
+      border-bottom: 1px solid var(--modal-border);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 0.3rem;
+      background-color: var(--modal-bg);
 
-      .app-modal-close-wrapper {
+      .close-button-wrapper {
         display: flex;
         justify-content: flex-end;
         width: 100%;
 
-        .app-modal-close {
+        .close-button {
           position: relative;
           width: 1rem;
           height: 1rem;
@@ -84,7 +87,7 @@ body.modal-open {
             content: "";
             width: 0.1rem;
             height: 100%;
-            background-color: var(--app-modal-text);
+            background-color: var(--modal-text);
             position: absolute;
             left: 50%;
             top: 0;
@@ -100,32 +103,33 @@ body.modal-open {
         }
       }
 
-      .app-modal-title-group {
+      .title-group {
         text-align: center;
 
-        .app-modal-title {
+        .title {
           font-size: 1.2rem;
-          color: var(--app-modal-theme);
+          color: var(--modal-theme);
           font-weight: bold;
         }
 
-        .app-modal-subtitle {
+        .subtitle {
           font-size: 0.9rem;
-          color: var(--app-modal-text);
-          opacity: 0.7;
+          color: var(--modal-subtext);
+          opacity: 0.8;
         }
       }
     }
 
     /* ✅ 내용 영역 */
-    .app-modal-content {
+    .content {
       padding: 1rem;
       max-height: 80vh;
       overflow-y: auto;
       line-height: 1.6;
       font-size: 0.95rem;
+      color: var(--modal-text);
 
-      .app-modal-contact-info {
+      .contact-info {
         display: grid;
         grid-template-columns: 1fr 1fr auto;
         align-items: center;
@@ -136,11 +140,12 @@ body.modal-open {
           opacity: 0.7;
           text-align: right;
           font-size: 0.85rem;
+          color: var(--modal-subtext);
         }
 
         .name {
           font-size: 0.9rem;
-          color: var(--app-modal-text);
+          color: var(--modal-text);
         }
 
         .icon {
@@ -162,12 +167,13 @@ body.modal-open {
     }
 
     /* ✅ 푸터 영역 */
-    .app-modal-footer {
+    .footer {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
       padding: 1rem;
+      border-top: 1px solid var(--modal-border);
 
       button {
         flex: 1;
@@ -175,7 +181,7 @@ body.modal-open {
         font-size: 0.9rem;
         border-radius: 0.3rem;
         border: none;
-        color: var(--app-modal-text);
+        color: var(--modal-text);
         background-color: rgba(0, 0, 0, 0.05);
         cursor: pointer;
         transition: background-color 0.2s ease;
@@ -188,10 +194,22 @@ body.modal-open {
   }
 }
 
-/* ✅ 아이콘 및 닫기 버튼 보정 */
-.app-modal svg,
-.app-modal i {
+/* ✅ 모든 모달 내부 아이콘 크기 통일 */
+.modal svg,
+.modal i {
   width: 1.2rem !important;
   height: 1.2rem !important;
   vertical-align: middle;
+}
+
+/* ✅ 닫기 버튼 선 두께 고정 */
+.modal .close-button::before,
+.modal .close-button::after {
+  width: 0.1rem !important;
+  height: 100% !important;
+}
+
+/* ✅ 스크롤 잠금 */
+body.modal-open {
+  overflow: hidden;
 }
