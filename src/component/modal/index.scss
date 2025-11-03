@@ -35,17 +35,20 @@
 
   > .modal {
     background-color: var(--modal-bg);
-    /* ✅ 모서리 각지게 수정 */
-    border-radius: 0;
+    border-radius: 0; /* ✅ 각지게 유지 */
     box-shadow: 0 0 1rem var(--modal-shadow);
-    width: 90%;
-    max-width: 28rem;
+
+    /* ✅ 원작자 기준: 고정폭 + 중앙 정렬 */
+    width: 22rem;
+    margin: 0 auto;
+    text-align: left;
+
     display: flex;
     flex-direction: column;
     animation: modal-fade-in 0.5s ease;
 
     @media (min-width: 768px) {
-      max-width: 30rem;
+      width: 22rem;
     }
 
     /* ✅ 헤더 */
@@ -85,11 +88,13 @@
 
       .title-group {
         text-align: center;
+
         .title {
           font-size: 1.2rem;
           color: var(--modal-theme);
           font-weight: 600;
         }
+
         .subtitle {
           font-size: 0.9rem;
           color: var(--modal-subtext);
@@ -109,7 +114,7 @@
       /* 🎯 연락처 리스트 */
       .contact-info {
         display: grid;
-        grid-template-columns: 1fr 1.2fr 0.8fr;
+        grid-template-columns: 8rem 7rem 1fr;
         column-gap: 0.3rem;
         row-gap: 0.7rem;
         align-items: center;
@@ -137,7 +142,8 @@
         align-items: center;
         gap: 0.45rem;
 
-        .icon {
+        .icon,
+        svg {
           width: 1.2rem;
           height: 1.2rem;
           opacity: 0.7;
