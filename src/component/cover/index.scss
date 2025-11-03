@@ -75,12 +75,15 @@
 }
 
 /* =============================== */
-/* ✅ 원작자의 연락하기(Contact) 모달 스타일 */
+/* ✅ 원작자 Invitation ‘연락하기’ 모달 완전 복원 */
 /* =============================== */
 .contact-modal {
-  width: 22rem;
+  width: 90%;
+  max-width: 22rem;
   background-color: var(--modal-bg);
   color: var(--modal-text);
+  margin: 0 auto;
+  text-align: left;
 
   .header {
     .title-group {
@@ -107,26 +110,25 @@
 
     .contact-info {
       display: grid;
-      grid-template-columns: 8rem 7rem 1fr;
+      grid-template-columns: 1fr 1fr 1fr; /* ✅ 원작자 그리드 */
       align-items: center;
       row-gap: 0.5rem;
       font-size: 0.85rem;
       margin-top: 1rem;
 
       .relation {
-        text-align: right;
-        opacity: 0.6;
+        text-align: left; /* ✅ 관계 왼쪽 정렬 */
+        opacity: 0.7;
+        color: var(--dark-color);
       }
 
-      /* 이름 칸 중앙 정렬 */
-      div:nth-child(2) {
-        text-align: center;
+      .name {
+        text-align: center; /* ✅ 이름 가운데 */
       }
 
-      /* 아이콘 영역 */
-      div:nth-child(3) {
+      .icon {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-end; /* ✅ 아이콘 오른쪽 */
         gap: 0.4rem;
 
         svg {
