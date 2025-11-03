@@ -75,12 +75,10 @@ $colors: (
 @keyframes lazy-fade-in {
   from {
     opacity: 0;
-    z-index: 3;
     transform: translateY(2rem);
   }
   to {
     opacity: 1;
-    z-index: 3;
     transform: translateY(0);
   }
 }
@@ -141,21 +139,23 @@ body {
       width: 100vw;
     }
 
-    /* ✅ 세로형 카드 구조 */
+    /* ✅ 세로형 카드 그룹 */
     .card-group {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+
+      /* 🎯 그룹 배경/테두리 제거 */
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+
       margin: 12px;
-      background-color: var(--light-color);
       opacity: 0;
 
       &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
-        opacity: 1;
+        animation: lazy-fade-in 2.5s ease forwards;
       }
 
       @media print {
@@ -163,6 +163,7 @@ body {
         animation: none !important;
       }
 
+      /* ✅ 카드(개별 흰색 박스)는 유지 */
       .card {
         background-color: var(--light-color);
         padding: 1.5rem;
@@ -172,7 +173,7 @@ body {
         flex-direction: column;
         justify-content: center;
         position: relative;
-        box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
         margin-bottom: 1rem;
         opacity: 0;
 
@@ -181,36 +182,13 @@ body {
         }
 
         &.lazy-active {
-          animation-name: lazy-fade-in;
-          animation-duration: 3s;
-          opacity: 1;
+          animation: lazy-fade-in 2.5s ease forwards;
         }
 
         @media print {
           opacity: 1;
           animation: none !important;
         }
-      }
-    }
-
-    /* ✅ Footer 카드 */
-    .footer {
-      position: relative;
-      background-color: var(--light-color);
-      box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
-      margin: 0.5rem;
-      padding: 1rem;
-      opacity: 0;
-
-      &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
-        opacity: 1;
-      }
-
-      @media print {
-        opacity: 1;
-        animation: none !important;
       }
     }
   }
@@ -261,7 +239,7 @@ div.break {
   opacity: 1 !important;
 }
 
-/* 4️⃣ 모든 모달 내용 좌정렬 (Cover 포함 전역 적용) */
+/* 4️⃣ 모든 모달 내용 좌정렬 (전역 통일 적용) */
 .modal {
   text-align: left !important;
 
