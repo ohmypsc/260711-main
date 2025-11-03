@@ -56,7 +56,6 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* ✅ Invitation 모달 완전 복제 */}
       <Button
         onClick={() => {
           openModal({
@@ -105,7 +104,7 @@ export const Cover = () => {
                         <div>{name}</div>
                         <div>
                           <PhoneIcon
-                            className="flip icon"
+                            className="icon" // ✅ flip 제거
                             onClick={() =>
                               window.open(`tel:${phone}`, "_self")
                             }
