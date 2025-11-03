@@ -74,30 +74,17 @@
   }
 }
 
-/* =============================== */
-/* ✅ 원작자의 연락하기 모달 완전 복원 */
-/* =============================== */
+/* ✅ 원작자 Invitation 모달 디자인 복사 (클래스명만 contact-modal로 유지) */
 .contact-modal {
   width: 22rem;
-  margin: 0 auto;
 
   .header {
-    .title-group {
+    .title {
       text-align: center;
-
-      .title {
-        font-size: 1.2rem;
-        color: var(--theme-color);
-        padding-bottom: 0.5rem;
-      }
-
-      .subtitle {
-        font-size: 0.85rem;
-        opacity: 0.8;
-        color: var(--dark-color);
-        border-bottom: 1px solid var(--dark-grey-color);
-        padding-bottom: 1rem;
-      }
+      font-size: 1.2rem;
+      color: var(--theme-color);
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--dark-grey-color);
     }
   }
 
@@ -107,40 +94,48 @@
     line-height: 1.8;
     font-size: 0.9rem;
 
-    .contact-info {
-      display: grid;
-      grid-template-columns: 8rem 7rem 1fr; /* ✅ 원작자 비율 */
-      align-items: center;
-      row-gap: 0.5rem;
-      font-size: 0.85rem;
-
-      .relation {
-        text-align: right;
-        opacity: 0.6;
+    .invitation-contact {
+      .intro {
+        margin-bottom: 1rem;
+        color: var(--dark-color);
+        opacity: 0.8;
       }
 
-      .name {
-        text-align: center;
-      }
+      .contact-info {
+        display: grid;
+        grid-template-columns: 8rem 7rem 1fr;
+        align-items: center;
+        row-gap: 0.5rem;
+        font-size: 0.85rem;
 
-      .icon {
-        display: flex;
-        justify-content: flex-end;
-        gap: 0.4rem;
+        .relation {
+          text-align: right;
+          opacity: 0.6;
+        }
 
-        svg {
-          width: 1.2rem;
-          height: 1.2rem;
-          opacity: 0.7;
-          cursor: pointer;
-          transition: opacity 0.2s ease;
+        .name {
+          text-align: center;
+        }
 
-          &:hover {
-            opacity: 1;
-          }
+        .icon {
+          display: flex;
+          justify-content: flex-end;
+          gap: 0.4rem;
 
-          &.flip {
-            transform: scaleX(-1);
+          svg {
+            width: 1.2rem;
+            height: 1.2rem;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+              opacity: 1;
+            }
+
+            &.flip {
+              transform: scaleX(-1);
+            }
           }
         }
       }
