@@ -7,6 +7,7 @@
   }
 }
 
+/* ✅ 모달 전체 배경 */
 .modal-background {
   position: fixed;
   top: 0;
@@ -14,59 +15,166 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-
-  animation-name: modal-fade-in;
-  animation-duration: 0.5s;
-  opacity: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: modal-fade-in 0.4s ease;
+  z-index: 9999;
 
   > .modal {
     background-color: var(--light-color);
-    animation-name: modal-fade-in;
-    animation-duration: 0.5s;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.25);
+    width: 90%;
+    max-width: 28rem;
+    animation: modal-fade-in 0.4s ease;
     opacity: 1;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
 
+    @media (min-width: 768px) {
+      max-width: 30rem;
+    }
+
+    /* ✅ 헤더 영역 */
     .header {
-      padding: 0.5rem;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--light-grey-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
       background-color: var(--light-color);
-      z-index: 7;
+
       .close-button-wrapper {
         display: flex;
         justify-content: flex-end;
+        width: 100%;
+
         .close-button {
           position: relative;
-          z-index: 3;
           width: 1rem;
           height: 1rem;
-          &::before {
-            content: "";
-            width: 0.1rem;
-            height: 100%;
-            background-color: var(--dark-grey-color);
-            position: absolute;
-            transform: rotate(45deg);
-            top: 0;
-            left: 50%;
-          }
+          background: none;
+          border: none;
+          cursor: pointer;
+
+          &::before,
           &::after {
             content: "";
             width: 0.1rem;
             height: 100%;
             background-color: var(--dark-grey-color);
             position: absolute;
-            transform: rotate(135deg);
-            top: 0;
             left: 50%;
+            top: 0;
+          }
+
+          &::before {
+            transform: rotate(45deg);
+          }
+
+          &::after {
+            transform: rotate(135deg);
+          }
+        }
+      }
+
+      .title-group {
+        text-align: center;
+
+        .title {
+          font-size: 1.2rem;
+          color: var(--theme-color);
+          font-weight: bold;
+        }
+
+        .subtitle {
+          font-size: 0.9rem;
+          color: var(--alt-color);
+          opacity: 0.8;
+        }
+      }
+    }
+
+    /* ✅ 내용 영역 */
+    .content {
+      padding: 1rem;
+      max-height: 80vh;
+      overflow-y: auto;
+      line-height: 1.6;
+      font-size: 0.95rem;
+
+      /* 연락처용 공통 레이아웃 */
+      .contact-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        align-items: center;
+        gap: 0.5rem 0.3rem;
+        margin-bottom: 1.5rem;
+
+        .relation {
+          opacity: 0.7;
+          text-align: right;
+          font-size: 0.85rem;
+        }
+
+        .name {
+          font-size: 0.9rem;
+          color: var(--dark-color);
+        }
+
+        .icon {
+          width: 1.2rem;
+          height: 1.2rem;
+          cursor: pointer;
+          opacity: 0.7;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &.flip {
+            transform: scaleX(-1);
           }
         }
       }
     }
-    .content {
-      max-height: 80vh;
-      overflow: auto;
+
+    /* ✅ 푸터 영역 */
+    .footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
+
+      button {
+        flex: 1;
+        padding: 0.6rem;
+        font-size: 0.9rem;
+        border-radius: 0.3rem;
+      }
     }
   }
+}
+
+/* ✅ 모든 모달 내부 아이콘 크기 통일 */
+.modal svg,
+.modal i {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  vertical-align: middle;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ✅ X 닫기 버튼 크기 및 선 두께 고정 */
+.modal .close-button::before,
+.modal .close-button::after {
+  width: 0.1rem !important;
+  height: 100% !important;
 }
