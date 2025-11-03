@@ -73,7 +73,7 @@ $colors: (
   }
 }
 
-/* 버튼 폰트 통일 */
+/* ✅ 버튼 폰트 통일 */
 button {
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   font-size: 1rem;
@@ -82,7 +82,7 @@ button {
   padding: 0;
 }
 
-/* 전체 바디 폰트 통일 */
+/* ✅ 전체 바디 폰트 통일 */
 body {
   margin: 0;
   overflow-x: hidden;
@@ -104,6 +104,7 @@ body {
   user-select: none;
 }
 
+/* ✅ 배경 및 카드 공통 구조 */
 .background {
   background-color: var(--theme-bg-color);
   display: flex;
@@ -125,7 +126,7 @@ body {
       width: 100vw;
     }
 
-    /* 공통 카드 그룹 */
+    /* ✅ 카드 그룹 */
     .card-group {
       position: relative;
       display: flex;
@@ -135,9 +136,10 @@ body {
       margin: 12px;
       background-color: var(--light-color);
       opacity: 0;
+      transition: opacity 0.8s ease;
 
       &.lazy-active {
-        animation: lazy-fade-in 3s;
+        animation: lazy-fade-in 1.5s ease;
         opacity: 1;
       }
 
@@ -160,7 +162,7 @@ body {
         opacity: 0;
 
         &.lazy-active {
-          animation: lazy-fade-in 3s;
+          animation: lazy-fade-in 1.5s ease;
           opacity: 1;
         }
 
@@ -175,7 +177,14 @@ body {
       }
     }
 
-    /* Footer 카드 */
+    /* ✅ Cover는 항상 표시되도록 예외 처리 */
+    .card-group.cover {
+      opacity: 1 !important;
+      animation: none !important;
+      transition: none !important;
+    }
+
+    /* ✅ Footer 카드 */
     .footer {
       background-color: var(--light-color);
       box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
@@ -184,7 +193,7 @@ body {
       opacity: 0;
 
       &.lazy-active {
-        animation: lazy-fade-in 3s;
+        animation: lazy-fade-in 1.5s ease;
         opacity: 1;
       }
 
@@ -196,7 +205,7 @@ body {
   }
 }
 
-/* 제목 폰트 */
+/* ✅ 제목 폰트 */
 h2 {
   font-size: 1.5rem;
   color: var(--theme-color);
@@ -208,22 +217,13 @@ h2 {
   }
 }
 
-/* 여백 유지 */
+/* ✅ 여백 유지 */
 div.break {
   height: 1rem;
 }
 
-/* 카드뷰 전체 배경 투명 */
+/* ✅ 카드뷰 배경 투명 */
 .background .card-view {
   background: none !important;
   box-shadow: none !important;
 }
-
-
-/* ✅ Cover는 항상 보이도록 예외 처리 */
-.card-group.cover {
-  opacity: 1 !important;
-  animation: none !important;
-  transition: none !important;
-}
-
