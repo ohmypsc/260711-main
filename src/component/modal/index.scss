@@ -248,3 +248,13 @@
 body.modal-open {
   overflow: hidden;
 }
+
+
+/* =============================== */
+/* ✅ 모바일 Safari 가로 스크롤 방지 */
+/* =============================== */
+@supports (-webkit-touch-callout: none) {
+  .modal-background {
+    width: 100%;
+  }
+}
