@@ -4,7 +4,7 @@
 }
 
 .modal-background {
-  all: unset; /* ✅ 모든 상속 초기화 */
+  all: unset; /* ✅ 모든 상속 초기화 (cover 스타일 영향 차단) */
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -13,9 +13,12 @@
   animation: modal-fade-in 0.5s ease;
   z-index: 9999;
 
+  /* ✅ cover나 다른 컴포넌트의 상속 차단용 보정 */
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   text-align: initial;
   line-height: normal;
+  color: var(--dark-color);
+  box-sizing: border-box;
 
   > .modal {
     background-color: var(--light-color);
@@ -35,12 +38,15 @@
     .header {
       padding: 0.5rem 1rem;
       border-bottom: 1px solid var(--light-grey-color);
+
       .close-button-wrapper {
         display: flex; justify-content: flex-end;
+
         .close-button {
           width: 1rem; height: 1rem;
           background: none; border: none; cursor: pointer;
           position: relative;
+
           &::before, &::after {
             content: "";
             width: 0.1rem; height: 100%;
@@ -54,12 +60,17 @@
     }
 
     .content {
-      max-height: 80vh; overflow: auto; padding: 1rem;
+      max-height: 80vh;
+      overflow: auto;
+      padding: 1rem;
     }
 
     .footer {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 0.5rem; padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem;
     }
   }
 }
@@ -70,84 +81,4 @@
   height: 1em !important;
   vertical-align: middle;
   display: inline-block;
-}
-
-
-/* === 공통 상세 모달 스타일 (Cover, Information, Attendance 전부 통일) === */
-.modal.donation-modal,
-.modal.attendance-modal,
-.modal.attendance-info-modal {
-  width: 22rem;
-  background-color: var(--light-color);
-  border-radius: 0.5rem;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
-
-  .header {
-    .title {
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--theme-color);
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--dark-grey-color);
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--alt-color);
-      opacity: 0.8;
-      margin-top: 0.3rem;
-    }
-  }
-
-  .content {
-    padding: 1rem;
-    line-height: 1.6;
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: 1fr 1fr auto;
-      align-items: center;
-      gap: 0.5rem 0.3rem;
-      margin-bottom: 1.5rem;
-
-      .relation {
-        opacity: 0.7;
-        text-align: right;
-        font-size: 0.85rem;
-      }
-
-      .name {
-        font-size: 0.9rem;
-        color: var(--dark-color);
-      }
-
-      .icon {
-        width: 1.2rem;
-        height: 1.2rem;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
-
-        &:hover {
-          opacity: 1;
-        }
-
-        &.flip {
-          transform: scaleX(-1);
-        }
-      }
-    }
-  }
-
-  .footer {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-
-    button {
-      width: 100%;
-      padding: 0.6rem;
-      font-size: 0.9rem;
-    }
-  }
 }
