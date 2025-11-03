@@ -80,10 +80,10 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* ✅ 이미 존재하는 전역 버튼 스타일 사용 */}
+      {/* 🎁 전역 버튼 + 전역 모달 시스템 사용 */}
       <Button
-        buttonStyle="style-2" // 👉 .button.button-style-2 적용됨
-        onClick={() =>
+        buttonStyle="style-2" // 이미 존재하는 전역 스타일 적용
+        onClick={() => {
           openModal({
             className: "contact-modal",
             closeOnClickBackground: true,
@@ -91,12 +91,13 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메세지로 축하 인사를 전해보세요.
+                  전화, 문자메시지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
             content: (
               <>
+                {/* 신랑 측 */}
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -106,21 +107,19 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() =>
-                              window.open(`tel:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() =>
-                              window.open(`sms:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
                           />
                         </div>
                       </Fragment>
                     ),
                   )}
                 </div>
+
+                {/* 신부 측 */}
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -130,15 +129,11 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() =>
-                              window.open(`tel:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() =>
-                              window.open(`sms:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
                           />
                         </div>
                       </Fragment>
@@ -149,14 +144,14 @@ export const Cover = () => {
             ),
             footer: (
               <Button
-                buttonStyle="style-1" // 👉 닫기 버튼은 서브스타일 적용
+                buttonStyle="style-1" // 전역 서브 스타일 적용
                 onClick={closeModal}
               >
                 닫기
               </Button>
             ),
           })
-        }
+        }}
       >
         축하 인사 전하기
       </Button>
