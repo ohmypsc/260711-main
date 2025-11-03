@@ -218,3 +218,12 @@ div.break {
   background: none !important;
   box-shadow: none !important;
 }
+
+
+/* ✅ Cover는 항상 보이도록 예외 처리 */
+.card-group.cover {
+  opacity: 1 !important;
+  animation: none !important;
+  transition: none !important;
+}
+
