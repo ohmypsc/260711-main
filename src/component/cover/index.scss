@@ -1,4 +1,6 @@
-/* ========== Cover 본문(그대로) ========== */
+/* =============================== */
+/* ✅ Cover 본문 (그대로 유지) */
+/* =============================== */
 .cover {
   .wedding-date {
     margin-top: 2rem;
@@ -7,10 +9,19 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    .divider { background-color: var(--dark-color); width: 1px; height: 0.7rem; }
+
+    .divider {
+      background-color: var(--dark-color);
+      width: 1px;
+      height: 0.7rem;
+    }
   }
 
-  .wedding-day-of-week { font-size: 1.2rem; opacity: 0.7; margin-bottom: 1rem; }
+  .wedding-day-of-week {
+    font-size: 1.2rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
 
   .subtitle {
     font-size: 1.5rem;
@@ -20,106 +31,140 @@
   }
 
   .names {
-    margin-top: 0.5rem; margin-bottom: 0.8rem;
-    display: flex; justify-content: center; align-items: center; gap: 0.7rem;
-    .divider { background-color: var(--dark-color); width: 1px; height: 0.7rem; }
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+
+    .divider {
+      background-color: var(--dark-color);
+      width: 1px;
+      height: 0.7rem;
+    }
   }
 
-  .info { margin-bottom: 0.3rem; opacity: 0.7; }
+  .info {
+    margin-bottom: 0.3rem;
+    opacity: 0.7;
+  }
 
   .family {
-    margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.7; color: var(--dark-color); opacity: 0.9;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--dark-color);
+    opacity: 0.9;
+
     .name {
       margin: 0.3rem 0;
-      .relation { opacity: 0.7; margin: 0 0.2rem; }
-      .relation-name { color: var(--theme-color); font-weight: 500; }
+
+      .relation {
+        opacity: 0.7;
+        margin: 0 0.2rem;
+      }
+
+      .relation-name {
+        color: var(--theme-color);
+        font-weight: 500;
+      }
     }
   }
 
-  button { margin-top: 2rem; }
+  button {
+    margin-top: 2rem;
+  }
 }
 
-/* ========== 모달: 바깥(.modal)과 안쪽(.content > .contact-modal)을 분리 ========== */
-
-/* 1) 바깥 컨테이너: ModalProvider가 만드는 .modal에 className이 합쳐져서
-   <div class="modal contact-modal"> 형태가 되므로, 여기서 '틀'만 잡는다. */
-.modal.contact-modal {
-  /* 원작자 폭/모서리/기본값 */
-  width: 22rem;          /* 원작자 값 */
-  max-width: 90vw;       /* 작은 화면 대응 */
+/* =============================== */
+/* ✅ 원작자 Invitation 모달 완전 복원 */
+/* =============================== */
+.contact-modal {
+  width: 22rem;
+  max-width: 90vw; /* 반응형 대응 */
   margin: 0 auto;
-  border-radius: 0;      /* 각진 네모 */
-  text-align: initial;   /* 부모 center 상속 차단 */
-}
+  border-radius: 0; /* 각진 네모 */
+  background-color: var(--modal-bg);
+  color: var(--dark-color);
 
-/* 2) 안쪽 내용 래퍼: ModalProvider 내부에서 .content 안에 우리가 주입한
-   <div class="contact-modal"> 만을 정확히 겨냥해서 '내용 스타일'을 준다. */
-.modal .content > .contact-modal {
-  /* === 원작자 Invitation 모달 본문 그대로 === */
+  /* 헤더 */
+  .header {
+    .title-group {
+      text-align: center;
 
-  /* 헤더(제목/부제)는 ModalProvider가 .header에 렌더링하므로, 여기서는 본문부터 */
-  padding: 1.2rem 1rem;   /* 원작자 값 */
-  text-align: center;
-  line-height: 1.8;
-  font-size: 0.9rem;
+      .title {
+        font-size: 1.2rem;
+        color: var(--theme-color);
+        padding: 0.5rem;
+      }
 
-  /* 연락처 그리드 */
-  .contact-info {
-    display: grid;
-    grid-template-columns: 8rem 7rem 1fr;  /* ✅ 원작자 비율 */
-    align-items: center;
-    row-gap: 0.5rem;                       /* ✅ 원작자 간격 */
-    font-size: 0.85rem;
-  }
+      .subtitle {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
 
-  /* 첫 열: 관계(신랑/신부/부모) — 원작자는 오른쪽 정렬 */
-  .contact-info .relation {
-    text-align: right;
-    opacity: 0.6;
-  }
-
-  /* 둘째 열: 이름 — 가운데 */
-  .contact-info .name {
-    text-align: center;
-  }
-
-  /* 셋째 열: 아이콘 — 오른쪽 끝 정렬 */
-  .contact-info .icon {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.4rem;
-
-    svg {
-      width: 1.2rem;
-      height: 1.2rem;
-      opacity: 0.7;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-      &:hover { opacity: 1; }
-      &.flip { transform: scaleX(-1); }  /* 신랑쪽만 flip 주면 원작자와 동일 방향 */
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--dark-grey-color);
     }
   }
-}
 
-/* 선택: 헤더(제목/부제) 스타일 — 원작자 그대로 */
-.modal.contact-modal .header .title-group .title {
-  text-align: center;
-  font-size: 1.2rem;
-  color: var(--theme-color);
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--dark-grey-color);
-}
-.modal.contact-modal .header .title-group .subtitle {
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.8;
-  color: var(--dark-color);
-  padding-top: 0.5rem; /* 시각적 균형용(원작자와 유사) */
-}
+  /* 본문 */
+  .content {
+    padding: 0.7rem;
+    padding-bottom: 1rem;
+    line-height: 1.8;
+    font-size: 0.9rem;
+    text-align: center;
 
-/* footer 중앙 정렬 */
-.modal.contact-modal .footer {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0;
+    .contact-info {
+      padding: 1rem 0.7rem;
+      display: grid;
+      grid-template-columns: 8rem 7rem 1fr; /* ✅ 원작자 비율 */
+      align-items: center;
+      row-gap: 0.5rem;
+      font-size: 0.85rem;
+
+      .relation {
+        opacity: 0.7;
+        text-align: left; /* ✅ 원작자는 왼쪽 정렬 */
+      }
+
+      .name {
+        text-align: center;
+      }
+
+      .icon {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.4rem;
+
+        svg {
+          fill: var(--dark-color);
+          opacity: 0.7;
+          width: 1rem;
+          height: 1rem;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &.flip {
+            transform: scaleX(-1);
+          }
+        }
+      }
+    }
+  }
+
+  /* footer */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    justify-content: center;
+    align-items: center;
+  }
 }
