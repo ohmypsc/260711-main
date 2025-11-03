@@ -11,68 +11,66 @@ type ModalInfoWithKey = ModalInfo & { key: number }
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
   const [modalInfoList, setModalInfoList] = useState<ModalInfoWithKey[]>([])
-
-  const modalWrapperRef = useRef<HTMLDivElement>(
-    null,
-  ) as React.RefObject<HTMLDivElement>
+  const modalWrapperRef = useRef<HTMLDivElement>(null)
   const modalFocusTrapInitialized = useRef(false)
   const modalKey = useRef(0)
 
   const openModal = useCallback((modalInfo: ModalInfo) => {
-    setModalInfoList((modalInfoList) => {
-      if (modalInfoList.length === 0) {
-        document.body.classList.add("modal-open")
-      }
-      return [...modalInfoList, { ...modalInfo, key: modalKey.current++ }]
+    setModalInfoList((list) => {
+      if (list.length === 0) document.body.classList.add("modal-open")
+      return [...list, { ...modalInfo, key: modalKey.current++ }]
     })
     modalFocusTrapInitialized.current = false
   }, [])
+
   const closeModal = useCallback(() => {
-    setModalInfoList((modalInfoList) => {
-      const result = modalInfoList.slice(0, -1)
-      if (result.length === 0) {
-        document.body.classList.remove("modal-open")
-      }
-      return result
+    setModalInfoList((list) => {
+      const updated = list.slice(0, -1)
+      if (updated.length === 0) document.body.classList.remove("modal-open")
+      return updated
     })
   }, [])
 
+  // 🔒 포커스 트랩 + ESC 닫기
   useEffect(() => {
     if (modalInfoList.length === 0) return
 
     const focusTrap = (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
-        const lastChild = modalWrapperRef.current.lastElementChild
-        if (!lastChild) return
+      if (e.key === "Escape") {
+        closeModal()
+        return
+      }
 
-        const FocusableElements = lastChild.querySelectorAll(
-          "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])",
+      if (e.key === "Tab") {
+        const wrapper = modalWrapperRef.current
+        const lastModal = wrapper?.lastElementChild as HTMLElement
+        if (!lastModal) return
+
+        const focusables = lastModal.querySelectorAll<HTMLElement>(
+          "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
         )
 
-        if (FocusableElements.length === 0) {
+        if (focusables.length === 0) {
           e.preventDefault()
-        } else if (!modalFocusTrapInitialized.current) {
+          return
+        }
+
+        if (!modalFocusTrapInitialized.current) {
           e.preventDefault()
           modalFocusTrapInitialized.current = true
-          ;(FocusableElements[0] as HTMLElement).focus()
-        } else if (!document.activeElement) {
-          e.preventDefault()
-          ;(FocusableElements[0] as HTMLElement).focus()
+          focusables[0].focus()
         } else if (
-          document.activeElement === FocusableElements[0] &&
+          document.activeElement === focusables[0] &&
           e.shiftKey
         ) {
           e.preventDefault()
-          ;(
-            FocusableElements[FocusableElements.length - 1] as HTMLElement
-          ).focus()
+          focusables[focusables.length - 1].focus()
         } else if (
-          document.activeElement ===
-            FocusableElements[FocusableElements.length - 1] &&
+          document.activeElement === focusables[focusables.length - 1] &&
           !e.shiftKey
         ) {
           e.preventDefault()
-          ;(FocusableElements[0] as HTMLElement).focus()
+          focusables[0].focus()
         }
       }
     }
@@ -88,35 +86,33 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
       window.removeEventListener("keydown", focusTrap)
       window.removeEventListener("focus", onFocus, true)
     }
-  }, [modalInfoList])
+  }, [modalInfoList, closeModal])
 
   return (
     <ModalContext.Provider value={{ modalInfoList, openModal, closeModal }}>
       {children}
-      <div className="modals-wrappeer" ref={modalWrapperRef}>
+      <div className="app-modals-wrapper" ref={modalWrapperRef}>
         {modalInfoList.map((modalInfo, idx) => (
           <div
             key={modalInfo.key}
-            className="modal-background"
-            style={{ zIndex: 4 + idx }}
+            className="app-modal-background"
+            style={{ zIndex: 1000 + idx }}
             onClick={() => {
               if (modalInfo.closeOnClickBackground) closeModal()
             }}
           >
             <div
-              className={`modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
-              onClick={(e) => {
-                e.stopPropagation()
-              }}
+              className={`app-modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="header">
-                <div className="close-button-wrapper">
-                  <button className="close-button" onClick={closeModal} />
-                </div>
+              <div className="app-modal-header">
+                <button className="app-modal-close" onClick={closeModal} />
                 {modalInfo.header}
               </div>
-              <div className="content">{modalInfo.content}</div>
-              <div className="footer">{modalInfo.footer}</div>
+              <div className="app-modal-content">{modalInfo.content}</div>
+              {modalInfo.footer && (
+                <div className="app-modal-footer">{modalInfo.footer}</div>
+              )}
             </div>
           </div>
         ))}
