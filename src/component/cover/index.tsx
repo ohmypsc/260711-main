@@ -1,4 +1,4 @@
-import { Fragment } from "react"
+import { Fragment } from "react/jsx-runtime"
 import {
   BRIDE_INFO,
   GROOM_INFO,
@@ -56,7 +56,7 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* ✅ 원작자 방식: useModal() 훅 사용 */}
+      {/* ✅ Invitation 모달 완전 복제 */}
       <Button
         onClick={() => {
           openModal({
@@ -66,7 +66,7 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메시지로 축하 인사를 전해보세요.
+                  전화, 문자메세지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
@@ -77,13 +77,16 @@ export const Cover = () => {
                     ({ relation, name, phone }) => (
                       <Fragment key={relation}>
                         <div className="relation">{relation}</div>
-                        <div className="name">{name}</div>
-                        <div className="icon">
+                        <div>{name}</div>
+                        <div>
                           <PhoneIcon
-                            className="flip"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            className="flip icon"
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
+                            className="icon"
                             onClick={() =>
                               window.open(`sms:${phone}`, "_self")
                             }
@@ -99,12 +102,16 @@ export const Cover = () => {
                     ({ relation, name, phone }) => (
                       <Fragment key={relation}>
                         <div className="relation">{relation}</div>
-                        <div className="name">{name}</div>
-                        <div className="icon">
+                        <div>{name}</div>
+                        <div>
                           <PhoneIcon
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            className="flip icon"
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
+                            className="icon"
                             onClick={() =>
                               window.open(`sms:${phone}`, "_self")
                             }
