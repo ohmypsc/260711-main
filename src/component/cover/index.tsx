@@ -84,7 +84,7 @@ export const Cover = () => {
         <Button
           onClick={() =>
             openModal({
-              className: "contact-modal",
+              className: "donation-modal",
               closeOnClickBackground: true,
               header: (
                 <div className="title-group">
