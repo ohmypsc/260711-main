@@ -15,6 +15,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
   const modalFocusTrapInitialized = useRef(false)
   const modalKey = useRef(0)
 
+  /* ✅ 모달 열기 */
   const openModal = useCallback((modalInfo: ModalInfo) => {
     setModalInfoList((list) => {
       if (list.length === 0) document.body.classList.add("modal-open")
@@ -23,6 +24,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     modalFocusTrapInitialized.current = false
   }, [])
 
+  /* ✅ 닫기 (애니메이션 포함) */
   const closeModal = useCallback(() => {
     setModalInfoList((list) => {
       if (list.length === 0) return list
@@ -39,6 +41,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     })
   }, [])
 
+  /* ✅ ESC로 닫기 */
   useEffect(() => {
     if (modalInfoList.length === 0) return
     const handleKey = (e: KeyboardEvent) => {
@@ -48,6 +51,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     return () => window.removeEventListener("keydown", handleKey)
   }, [modalInfoList, closeModal])
 
+  /* ✅ 렌더링 */
   return (
     <ModalContext.Provider value={{ modalInfoList, openModal, closeModal }}>
       {children}
@@ -56,15 +60,16 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
           <div
             key={modalInfo.key}
             className={`modal-background${modalInfo.closing ? " closing" : ""}`}
-            style={{ zIndex: 1000 + idx }}
-            onClick={() =>
-              modalInfo.closeOnClickBackground && closeModal()
-            }
+            style={{ zIndex: 9999 + idx }}
+            onClick={() => modalInfo.closeOnClickBackground && closeModal()}
           >
             <div
-              className={`modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
+              className={`modal${
+                modalInfo.className ? ` ${modalInfo.className}` : ""
+              }`}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* ✅ 헤더 */}
               <div className="header">
                 <div className="close-button-wrapper">
                   <button className="close-button" onClick={closeModal} />
@@ -72,16 +77,13 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
                 {modalInfo.header}
               </div>
 
-              {/* ✅ contact-modal을 .content 안에서 감싸 중앙정렬 영향 받게 */}
-              <div className="content">
-                {modalInfo.className?.includes("contact-modal") ? (
-                  <div className="contact-modal">{modalInfo.content}</div>
-                ) : (
-                  modalInfo.content
-                )}
-              </div>
+              {/* ✅ 원작자처럼: content 직접 렌더 (중첩 X) */}
+              <div className="content">{modalInfo.content}</div>
 
-              {modalInfo.footer && <div className="footer">{modalInfo.footer}</div>}
+              {/* ✅ footer 있을 때만 렌더 */}
+              {modalInfo.footer && (
+                <div className="footer">{modalInfo.footer}</div>
+              )}
             </div>
           </div>
         ))}
