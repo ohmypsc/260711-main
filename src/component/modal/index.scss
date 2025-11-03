@@ -105,15 +105,15 @@
       font-size: 0.95rem;
       color: var(--modal-text);
 
-      /* 🎯 원작자형 연락처 리스트 */
+      /* 🎯 연락처 리스트 (왼쪽 여백 제거 + 중앙 정렬) */
       .contact-info {
         display: grid;
-        grid-template-columns: 8rem 1fr 3rem;
-        column-gap: 0.4rem;
+        grid-template-columns: 1fr 1.2fr 0.8fr; /* 💡 비율 조정으로 여백 제거 */
+        column-gap: 0.3rem;
         row-gap: 0.7rem;
         align-items: center;
-        padding: 0 0.5rem;
         margin-top: 1rem;
+        padding: 0; /* ✅ 여백 완전 제거 */
       }
 
       /* 1열: 관계 */
