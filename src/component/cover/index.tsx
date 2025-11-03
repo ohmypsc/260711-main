@@ -20,9 +20,10 @@ import { useModal } from "../modal"
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
+  // Invitation 모달 열기 함수
   const handleOpenModal = () => {
     openModal({
-      className: "invitation-modal", // ✅ Invitation용 스타일
+      className: "invitation-modal",
       closeOnClickBackground: true,
       header: <div className="title">신랑 · 신부에게 연락하기</div>,
       content: (
@@ -30,6 +31,7 @@ export const Cover = () => {
           <p className="intro">
             직접 축하 인사를 전하고 싶으시다면 아래로 연락 부탁드립니다.
           </p>
+
           <div className="contact-info">
             {[...GROOM_INFO, ...BRIDE_INFO].map(({ relation, name, phone }) => (
               <Fragment key={`${relation}-${name}`}>
