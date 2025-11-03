@@ -1,13 +1,17 @@
-@use "./component/cover";
-@use "./component/invitation";
+/* ✅ 전역/공용 모듈 우선 */
+@use "./component/modal";     // 전역 모달 시스템
 @use "./component/button";
+
+/* ✅ 그다음 개별 섹션 컴포넌트 */
 @use "./component/bgEffect";
 @use "./component/calendar";
 @use "./component/location";
+@use "./component/invitation";
 @use "./component/information";
 @use "./component/guestbook";
-@use "./component/modal";
+@use "./component/cover";     // ✅ contact-modal은 마지막 (override)
 @use "./component/shareButton";
+
 
 /* ===============================
    ✅ 기본 색상 및 폰트 설정
