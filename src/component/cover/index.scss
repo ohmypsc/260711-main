@@ -7,10 +7,18 @@
     align-items: center;
     gap: 1rem;
 
-    .divider { background-color: var(--dark-color); width: 1px; height: 0.7rem; }
+    .divider {
+      background-color: var(--dark-color);
+      width: 1px;
+      height: 0.7rem;
+    }
   }
 
-  .wedding-day-of-week { font-size: 1.2rem; opacity: 0.7; margin-bottom: 1rem; }
+  .wedding-day-of-week {
+    font-size: 1.2rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
 
   .subtitle {
     font-size: 1.5rem;
@@ -20,80 +28,128 @@
   }
 
   .names {
-    margin-top: 0.5rem; margin-bottom: 0.8rem;
-    display: flex; justify-content: center; align-items: center; gap: 0.7rem;
-    .divider { background-color: var(--dark-color); width: 1px; height: 0.7rem; }
-  }
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
 
-  .info { margin-bottom: 0.3rem; opacity: 0.7; }
-
-  .family {
-    margin-top: 1.5rem; font-size: 0.95rem; line-height: 1.7; color: var(--dark-color); opacity: 0.9;
-    .name {
-      margin: 0.3rem 0;
-      .relation { opacity: 0.7; margin: 0 0.2rem; }
-      .relation-name { color: var(--theme-color); font-weight: 500; }
+    .divider {
+      background-color: var(--dark-color);
+      width: 1px;
+      height: 0.7rem;
     }
   }
 
-  button { margin-top: 2rem; }
+  .info {
+    margin-bottom: 0.3rem;
+    opacity: 0.7;
+  }
+
+  .family {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--dark-color);
+    opacity: 0.9;
+
+    .name {
+      margin: 0.3rem 0;
+
+      .relation {
+        opacity: 0.7;
+        margin: 0 0.2rem;
+      }
+
+      .relation-name {
+        color: var(--theme-color);
+        font-weight: 500;
+      }
+    }
+  }
+
+  button {
+    margin-top: 2rem;
+  }
 }
 
 /* =============================== */
-/* 연락하기(contact) 모달 — 원작자 복원 + Fragment 대응 */
+/* ✅ 원작자의 연락하기 모달 완전 복원 */
 /* =============================== */
 .contact-modal {
-  width: 100%;
-  max-width: 22rem;
+  width: 22rem;
   margin: 0 auto;
-  text-align: left;
-  background: var(--modal-bg);
-  color: var(--modal-text);
 
   .header {
     .title-group {
       text-align: center;
-      .title { font-size: 1.2rem; color: var(--theme-color); padding-bottom: 0.5rem; }
+
+      .title {
+        font-size: 1.2rem;
+        color: var(--theme-color);
+        padding-bottom: 0.5rem;
+      }
+
       .subtitle {
-        font-size: 0.85rem; opacity: 0.8; color: var(--dark-color);
-        border-bottom: 1px solid var(--dark-grey-color); padding-bottom: 1rem;
+        font-size: 0.85rem;
+        opacity: 0.8;
+        color: var(--dark-color);
+        border-bottom: 1px solid var(--dark-grey-color);
+        padding-bottom: 1rem;
       }
     }
   }
 
   .content {
-    padding: 1rem;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    line-height: 1.8;
+    font-size: 0.9rem;
 
     .contact-info {
       display: grid;
-      grid-template-columns: 8rem 7rem 1fr; /* 관계 / 이름 / 아이콘 */
+      grid-template-columns: 8rem 7rem 1fr; /* ✅ 원작자 비율 */
       align-items: center;
-      row-gap: 0.6rem;
-      column-gap: 0.3rem;
+      row-gap: 0.5rem;
       font-size: 0.85rem;
-    }
 
-    .contact-info .relation {
-      justify-self: start;
-      text-align: left;
-      opacity: 0.7; color: var(--dark-color);
-    }
+      .relation {
+        text-align: right;
+        opacity: 0.6;
+      }
 
-    .contact-info .name {
-      justify-self: center;
-      text-align: center;
-    }
+      .name {
+        text-align: center;
+      }
 
-    .contact-info .icon {
-      justify-self: end;
-      display: flex; justify-content: flex-end; gap: 0.4rem;
-      svg {
-        width: 1.2rem; height: 1.2rem; opacity: 0.7; cursor: pointer; transition: opacity 0.2s ease;
-        &:hover { opacity: 1; }
-        &.flip { transform: scaleX(-1); }
+      .icon {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.4rem;
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+          opacity: 0.7;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &.flip {
+            transform: scaleX(-1);
+          }
+        }
       }
     }
   }
 
-  .footer { display: flex; justify-content: center; padding: 1rem 0; }
+  .footer {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
 }
