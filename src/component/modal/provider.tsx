@@ -27,7 +27,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     setModalInfoList((list) => {
       if (list.length === 0) return list
       const last = list[list.length - 1]
-      // 1️⃣ 닫기 애니메이션을 위해 closing 플래그 추가
+      // 닫기 애니메이션을 위해 closing 플래그 추가
       const updated = [...list.slice(0, -1), { ...last, closing: true }]
       setTimeout(() => {
         setModalInfoList((l) => {
@@ -100,29 +100,29 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
   return (
     <ModalContext.Provider value={{ modalInfoList, openModal, closeModal }}>
       {children}
-      <div className="app-modals-wrapper" ref={modalWrapperRef}>
+      <div className="modals-wrapper" ref={modalWrapperRef}>
         {modalInfoList.map((modalInfo, idx) => (
           <div
             key={modalInfo.key}
-            className={`app-modal-background${modalInfo.closing ? " closing" : ""}`}
+            className={`modal-background${modalInfo.closing ? " closing" : ""}`}
             style={{ zIndex: 1000 + idx }}
             onClick={() => {
               if (modalInfo.closeOnClickBackground) closeModal()
             }}
           >
             <div
-              className={`app-modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
+              className={`modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="app-modal-header">
-                <div className="app-modal-close-wrapper">
-                  <button className="app-modal-close" onClick={closeModal} />
+              <div className="header">
+                <div className="close-button-wrapper">
+                  <button className="close-button" onClick={closeModal} />
                 </div>
                 {modalInfo.header}
               </div>
-              <div className="app-modal-content">{modalInfo.content}</div>
+              <div className="content">{modalInfo.content}</div>
               {modalInfo.footer && (
-                <div className="app-modal-footer">{modalInfo.footer}</div>
+                <div className="footer">{modalInfo.footer}</div>
               )}
             </div>
           </div>
