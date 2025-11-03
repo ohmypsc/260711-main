@@ -27,7 +27,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     setModalInfoList((list) => {
       if (list.length === 0) return list
       const last = list[list.length - 1]
-      // 닫기 애니메이션을 위해 closing 플래그 추가
+      // ✅ 닫기 애니메이션용 플래그
       const updated = [...list.slice(0, -1), { ...last, closing: true }]
       setTimeout(() => {
         setModalInfoList((l) => {
@@ -35,20 +35,17 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
           if (result.length === 0) document.body.classList.remove("modal-open")
           return result
         })
-      }, 300) // CSS transition 시간과 맞춤
+      }, 300)
       return updated
     })
   }, [])
 
-  // 포커스 트랩 + ESC 닫기
+  // ✅ ESC로 닫기 + 포커스 트랩
   useEffect(() => {
     if (modalInfoList.length === 0) return
 
-    const focusTrap = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        closeModal()
-        return
-      }
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeModal()
 
       if (e.key === "Tab") {
         const wrapper = modalWrapperRef.current
@@ -58,7 +55,6 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
         const focusables = lastModal.querySelectorAll<HTMLElement>(
           "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
         )
-
         if (focusables.length === 0) {
           e.preventDefault()
           return
@@ -84,17 +80,8 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
       }
     }
 
-    const onFocus = () => {
-      modalFocusTrapInitialized.current = true
-    }
-
-    window.addEventListener("keydown", focusTrap)
-    window.addEventListener("focus", onFocus, true)
-
-    return () => {
-      window.removeEventListener("keydown", focusTrap)
-      window.removeEventListener("focus", onFocus, true)
-    }
+    window.addEventListener("keydown", handleKey)
+    return () => window.removeEventListener("keydown", handleKey)
   }, [modalInfoList, closeModal])
 
   return (
@@ -106,9 +93,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
             key={modalInfo.key}
             className={`modal-background${modalInfo.closing ? " closing" : ""}`}
             style={{ zIndex: 1000 + idx }}
-            onClick={() => {
-              if (modalInfo.closeOnClickBackground) closeModal()
-            }}
+            onClick={() => modalInfo.closeOnClickBackground && closeModal()}
           >
             <div
               className={`modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
@@ -121,9 +106,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
                 {modalInfo.header}
               </div>
               <div className="content">{modalInfo.content}</div>
-              {modalInfo.footer && (
-                <div className="footer">{modalInfo.footer}</div>
-              )}
+              {modalInfo.footer && <div className="footer">{modalInfo.footer}</div>}
             </div>
           </div>
         ))}
