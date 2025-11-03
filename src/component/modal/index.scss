@@ -14,15 +14,18 @@
   to { opacity: 1; }
 }
 
-/* ✅ 모달 전체 배경 */
+/* ✅ 전체 배경 */
 .modal-background {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: modal-fade-in 0.3s ease;
+  animation: modal-fade-in 0.5s ease;
   z-index: 9999;
 
   &.closing {
@@ -38,8 +41,7 @@
     max-width: 28rem;
     display: flex;
     flex-direction: column;
-    color: var(--modal-text);
-    animation: modal-fade-in 0.3s ease;
+    animation: modal-fade-in 0.5s ease;
 
     @media (min-width: 768px) {
       max-width: 30rem;
@@ -47,8 +49,9 @@
 
     /* ✅ 헤더 */
     .header {
-      padding: 0.8rem 1rem;
-      border-bottom: 1px solid var(--modal-border);
+      padding: 0.5rem;
+      background-color: var(--modal-bg);
+      z-index: 7;
 
       .close-button-wrapper {
         display: flex;
@@ -56,6 +59,7 @@
 
         .close-button {
           position: relative;
+          z-index: 3;
           width: 1rem;
           height: 1rem;
           background: none;
@@ -66,8 +70,8 @@
           &::after {
             content: "";
             position: absolute;
-            left: 50%;
             top: 0;
+            left: 50%;
             width: 0.1rem;
             height: 100%;
             background-color: var(--modal-text);
@@ -80,13 +84,11 @@
 
       .title-group {
         text-align: center;
-
         .title {
           font-size: 1.2rem;
           color: var(--modal-theme);
           font-weight: 600;
         }
-
         .subtitle {
           font-size: 0.9rem;
           color: var(--modal-subtext);
@@ -99,19 +101,19 @@
     .content {
       padding: 1rem;
       max-height: 80vh;
-      overflow-y: auto;
+      overflow: auto;
       font-size: 0.95rem;
       color: var(--modal-text);
 
-      /* 🎯 연락처 리스트 (관계 왼쪽 / 이름 가운데 / 아이콘 오른쪽) */
+      /* 🎯 원작자형 연락처 리스트 */
       .contact-info {
         display: grid;
-        grid-template-columns: 8rem minmax(6rem, 1fr) 3rem;
-        column-gap: 0.5rem;
-        row-gap: 0.8rem;
+        grid-template-columns: 8rem 1fr 3rem;
+        column-gap: 0.4rem;
+        row-gap: 0.7rem;
         align-items: center;
-        margin-bottom: 1.5rem;
-        padding: 0 0.7rem;
+        padding: 0 0.5rem;
+        margin-top: 1rem;
       }
 
       /* 1열: 관계 */
@@ -123,14 +125,14 @@
         padding-right: 0.3rem;
       }
 
-      /* 2열: 이름 */
+      /* 2열: 이름 (가운데 정렬) */
       .contact-info > :nth-child(3n-1) {
         text-align: center;
         font-size: 0.9rem;
         color: var(--modal-text);
       }
 
-      /* 3열: 아이콘 */
+      /* 3열: 아이콘 (오른쪽 끝) */
       .contact-info > :nth-child(3n) {
         display: flex;
         justify-content: flex-end;
