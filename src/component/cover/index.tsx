@@ -36,9 +36,9 @@ export const Cover = () => {
         <span>12:00 PM</span>
       </div>
 
-      <div className="wedding-day-of-week">일요일</div>
+      <div className="wedding-day-of-week">토요일</div>
 
-      <div className="info">세종컨벤션센터 2층 예식홀</div>
+      <div className="info">유성컨벤션센터 3층 그랜드홀</div>
 
       <div className="family">
         <div className="name">
