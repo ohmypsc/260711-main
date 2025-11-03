@@ -80,9 +80,10 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* 🎁 축하 인사 전하기 버튼 */}
+      {/* ✅ 이미 존재하는 전역 버튼 스타일 사용 */}
       <Button
-        onClick={() => {
+        buttonStyle="style-2" // 👉 .button.button-style-2 적용됨
+        onClick={() =>
           openModal({
             className: "contact-modal",
             closeOnClickBackground: true,
@@ -96,7 +97,6 @@ export const Cover = () => {
             ),
             content: (
               <>
-                {/* 신랑 측 */}
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -106,23 +106,21 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => {
+                            onClick={() =>
                               window.open(`tel:${phone}`, "_self")
-                            }}
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => {
+                            onClick={() =>
                               window.open(`sms:${phone}`, "_self")
-                            }}
+                            }
                           />
                         </div>
                       </Fragment>
                     ),
                   )}
                 </div>
-
-                {/* 신부 측 */}
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -132,15 +130,15 @@ export const Cover = () => {
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => {
+                            onClick={() =>
                               window.open(`tel:${phone}`, "_self")
-                            }}
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
-                            onClick={() => {
+                            onClick={() =>
                               window.open(`sms:${phone}`, "_self")
-                            }}
+                            }
                           />
                         </div>
                       </Fragment>
@@ -151,15 +149,14 @@ export const Cover = () => {
             ),
             footer: (
               <Button
-                buttonStyle="style2"
-                className="bg-light-grey-color text-dark-color"
+                buttonStyle="style-1" // 👉 닫기 버튼은 서브스타일 적용
                 onClick={closeModal}
               >
                 닫기
               </Button>
             ),
           })
-        }}
+        }
       >
         축하 인사 전하기
       </Button>
