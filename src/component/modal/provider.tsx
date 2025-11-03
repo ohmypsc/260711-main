@@ -39,14 +39,11 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     })
   }, [])
 
-  // ✅ ESC & Tab focus trap
   useEffect(() => {
     if (modalInfoList.length === 0) return
-
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal()
     }
-
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
   }, [modalInfoList, closeModal])
@@ -75,7 +72,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
                 {modalInfo.header}
               </div>
 
-              {/* ✅ 수정 포인트: contact-modal 감싸기 */}
+              {/* ✅ contact-modal을 .content 안에서 감싸 중앙정렬 영향 받게 */}
               <div className="content">
                 {modalInfo.className?.includes("contact-modal") ? (
                   <div className="contact-modal">{modalInfo.content}</div>
@@ -84,9 +81,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
                 )}
               </div>
 
-              {modalInfo.footer && (
-                <div className="footer">{modalInfo.footer}</div>
-              )}
+              {modalInfo.footer && <div className="footer">{modalInfo.footer}</div>}
             </div>
           </div>
         ))}
