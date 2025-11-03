@@ -74,68 +74,70 @@
   }
 }
 
-/* ✅ Invitation 모달 디자인 복사 */
-.invitation-modal {
+/* =============================== */
+/* ✅ 원작 Invitation 모달 디자인 */
+/* =============================== */
+.contact-modal {
   width: 22rem;
 
   .header {
-    .title {
+    .title-group {
       text-align: center;
-      font-size: 1.2rem;
-      color: var(--theme-color);
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--dark-grey-color);
+
+      .title {
+        font-size: 1.2rem;
+        color: var(--theme-color);
+        padding-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+        opacity: 0.8;
+        color: var(--dark-color);
+        border-bottom: 1px solid var(--dark-grey-color);
+        padding-bottom: 1rem;
+      }
     }
   }
 
   .content {
-    padding: 1.2rem 1rem;
-    text-align: center;
-    line-height: 1.8;
-    font-size: 0.9rem;
+    padding: 1rem;
 
-    .invitation-contact {
-      .intro {
-        margin-bottom: 1rem;
-        color: var(--dark-color);
-        opacity: 0.8;
+    .contact-info {
+      display: grid;
+      grid-template-columns: 8rem 7rem 1fr;
+      align-items: center;
+      row-gap: 0.5rem;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+
+      .relation {
+        text-align: right;
+        opacity: 0.6;
       }
 
-      .contact-info {
-        display: grid;
-        grid-template-columns: 8rem 7rem 1fr;
-        align-items: center;
-        row-gap: 0.5rem;
-        font-size: 0.85rem;
+      div:nth-child(2) {
+        text-align: center;
+      }
 
-        .relation {
-          text-align: right;
-          opacity: 0.6;
-        }
+      .icon {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.4rem;
 
-        .name {
-          text-align: center;
+        .flip {
+          transform: scaleX(-1);
         }
 
         .icon {
-          display: flex;
-          justify-content: flex-end;
-          gap: 0.4rem;
+          width: 1.2rem;
+          height: 1.2rem;
+          opacity: 0.7;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
 
-          svg {
-            width: 1.2rem;
-            height: 1.2rem;
-            opacity: 0.7;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-
-            &:hover {
-              opacity: 1;
-            }
-
-            &.flip {
-              transform: scaleX(-1);
-            }
+          &:hover {
+            opacity: 1;
           }
         }
       }
