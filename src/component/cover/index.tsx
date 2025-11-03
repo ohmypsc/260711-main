@@ -22,51 +22,31 @@ export const Cover = () => {
 
   const handleOpenModal = () => {
     openModal({
-      className: "donation-modal", // ✅ 원작 스타일 클래스
+      className: "invitation-modal", // ✅ Invitation용 스타일
       closeOnClickBackground: true,
-      header: (
-        <div className="title" style={{ textAlign: "center" }}>
-          축하 인사 전하기
-        </div>
-      ),
+      header: <div className="title">신랑 · 신부에게 연락하기</div>,
       content: (
-        <div className="contact-info" style={{ padding: "1rem" }}>
-          {[...GROOM_INFO, ...BRIDE_INFO].map(({ relation, name, phone }) => (
-            <Fragment key={`${relation}-${name}`}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "8rem 7rem 1fr",
-                  alignItems: "center",
-                  rowGap: "0.5rem",
-                  fontSize: "0.9rem",
-                  marginBottom: "0.4rem",
-                }}
-              >
-                <div style={{ textAlign: "right", opacity: 0.7 }}>
-                  {relation}
-                </div>
-                <div style={{ textAlign: "center" }}>{name}</div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    gap: "0.4rem",
-                  }}
-                >
+        <div className="invitation-contact">
+          <p className="intro">
+            직접 축하 인사를 전하고 싶으시다면 아래로 연락 부탁드립니다.
+          </p>
+          <div className="contact-info">
+            {[...GROOM_INFO, ...BRIDE_INFO].map(({ relation, name, phone }) => (
+              <Fragment key={`${relation}-${name}`}>
+                <div className="relation">{relation}</div>
+                <div className="name">{name}</div>
+                <div className="icon">
                   <PhoneIcon
                     className="flip"
                     onClick={() => window.open(`tel:${phone}`, "_self")}
-                    style={{ cursor: "pointer" }}
                   />
                   <EnvelopeIcon
                     onClick={() => window.open(`sms:${phone}`, "_self")}
-                    style={{ cursor: "pointer" }}
                   />
                 </div>
-              </div>
-            </Fragment>
-          ))}
+              </Fragment>
+            ))}
+          </div>
         </div>
       ),
       footer: (
@@ -97,8 +77,8 @@ export const Cover = () => {
         <span>12:00 PM</span>
       </div>
 
-      <div className="wedding-day-of-week">토요일</div>
-      <div className="info">유성컨벤션센터 3층 그랜드홀</div>
+      <div className="wedding-day-of-week">일요일</div>
+      <div className="info">세종컨벤션센터 2층 예식홀</div>
 
       <div className="family">
         <div className="name">
