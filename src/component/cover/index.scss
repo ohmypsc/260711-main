@@ -110,25 +110,31 @@
 
     .contact-info {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr; /* ✅ 원작자 그리드 */
+      grid-template-columns: 1fr 1fr 1fr;
       align-items: center;
       row-gap: 0.5rem;
       font-size: 0.85rem;
       margin-top: 1rem;
 
+      /* ✅ 첫 번째 열 (관계) */
       .relation {
-        text-align: left; /* ✅ 관계 왼쪽 정렬 */
+        grid-column: 1 / 2;
+        text-align: left;
         opacity: 0.7;
         color: var(--dark-color);
       }
 
+      /* ✅ 두 번째 열 (이름) */
       .name {
-        text-align: center; /* ✅ 이름 가운데 */
+        grid-column: 2 / 3;
+        text-align: center;
       }
 
+      /* ✅ 세 번째 열 (아이콘) */
       .icon {
+        grid-column: 3 / 4;
         display: flex;
-        justify-content: flex-end; /* ✅ 아이콘 오른쪽 */
+        justify-content: flex-end;
         gap: 0.4rem;
 
         svg {
