@@ -136,7 +136,7 @@ export const Cover = () => {
                           <EnvelopeIcon
                             className="icon"
                             onClick={() =>
-                              window.open(`sms:${phone}`, "_self`)
+                              window.open(`sms:${phone}`, "_self")
                             }
                           />
                         </div>
