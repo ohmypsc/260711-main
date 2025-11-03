@@ -145,12 +145,6 @@ body {
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      /* 🎯 그룹 배경/테두리 제거 */
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-
       margin: 12px;
       opacity: 0;
 
@@ -163,7 +157,7 @@ body {
         animation: none !important;
       }
 
-      /* ✅ 카드(개별 흰색 박스)는 유지 */
+      /* ✅ 개별 카드 스타일 */
       .card {
         background-color: var(--light-color);
         padding: 1.5rem;
@@ -221,4 +215,3 @@ div.break {
   opacity: 1 !important;
   animation: none !important;
 }
-
