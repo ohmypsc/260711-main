@@ -10,7 +10,6 @@ import { Information } from "./component/information"
 import { GuestBook } from "./component/guestbook"
 import { LazyDiv } from "./component/lazyDiv"
 import { STATIC_ONLY } from "./env"
-import { ModalProvider } from "./component/modal"
 
 function Router() {
   const [path, setPath] = useState(window.location.pathname)
@@ -30,7 +29,7 @@ function Home() {
     <div className="background">
       <BGEffect />
       <div className="card-view">
-        {/* ✅ Cover도 LazyDiv 안으로 이동 */}
+        {/* ✅ Cover도 LazyDiv 안에 포함 */}
         <LazyDiv className="card-group">
           <Cover />
         </LazyDiv>
@@ -62,9 +61,5 @@ function Home() {
 }
 
 export default function App() {
-  return (
-    <ModalProvider>
-      <Router />
-    </ModalProvider>
-  )
+  return <Router />
 }
