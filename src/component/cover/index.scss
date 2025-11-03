@@ -72,31 +72,9 @@
       }
     }
   }
-}
 
-
-/* --- 축하 인사 전하기 버튼 --- */
-button {
-  margin-top: 2rem;
-  background-color: var(--theme-color);
-  color: var(--white-color);
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.8rem 1.8rem;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.25s ease;
-
-  &:hover {
-    background-color: var(--theme-color-dark, #c46a6a);
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* 버튼은 전역 시스템(button.component) 스타일 자동 적용 */
+  button {
+    margin-top: 2rem;
   }
 }
-
