@@ -1,16 +1,23 @@
+import { Fragment } from "react/jsx-runtime"
 import {
   BRIDE_FULLNAME,
   BRIDE_FATHER,
   BRIDE_MOTHER,
   BRIDE_TITLE,
+  BRIDE_INFO,
   GROOM_FULLNAME,
   GROOM_FATHER,
   GROOM_MOTHER,
   GROOM_TITLE,
+  GROOM_INFO,
   LOCATION,
   WEDDING_DATE,
   WEDDING_DATE_FORMAT,
 } from "../../const"
+import { useModal } from "../modal"
+import { Button } from "../button"
+import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
+import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
 const DAY_OF_WEEK = [
   "일요일",
@@ -23,6 +30,8 @@ const DAY_OF_WEEK = [
 ]
 
 export const Cover = () => {
+  const { openModal, closeModal } = useModal()
+
   return (
     <div className="card cover fade-in">
       {/* 날짜 */}
@@ -70,6 +79,82 @@ export const Cover = () => {
           {BRIDE_FULLNAME}
         </div>
       </div>
+
+      {/* 🎁 축하 인사 전하기 버튼 */}
+      <Button
+        onClick={() => {
+          openModal({
+            className: "contact-modal",
+            closeOnClickBackground: true,
+            header: (
+              <div className="title-group">
+                <div className="title">축하 인사 전하기</div>
+                <div className="subtitle">
+                  전화 또는 문자 메시지로 축하 인사를 전해보세요.
+                </div>
+              </div>
+            ),
+            content: (
+              <>
+                {/* 신랑 측 */}
+                <div className="contact-info">
+                  {GROOM_INFO.filter(({ phone }) => !!phone).map(
+                    ({ relation, name, phone }) => (
+                      <Fragment key={relation}>
+                        <div className="relation">{relation}</div>
+                        <div>{name}</div>
+                        <div>
+                          <PhoneIcon
+                            className="flip icon"
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                          />
+                          <EnvelopeIcon
+                            className="icon"
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                          />
+                        </div>
+                      </Fragment>
+                    ),
+                  )}
+                </div>
+
+                {/* 신부 측 */}
+                <div className="contact-info">
+                  {BRIDE_INFO.filter(({ phone }) => !!phone).map(
+                    ({ relation, name, phone }) => (
+                      <Fragment key={relation}>
+                        <div className="relation">{relation}</div>
+                        <div>{name}</div>
+                        <div>
+                          <PhoneIcon
+                            className="flip icon"
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                          />
+                          <EnvelopeIcon
+                            className="icon"
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                          />
+                        </div>
+                      </Fragment>
+                    ),
+                  )}
+                </div>
+              </>
+            ),
+            footer: (
+              <Button
+                buttonStyle="style2"
+                className="bg-light-grey-color text-dark-color"
+                onClick={closeModal}
+              >
+                닫기
+              </Button>
+            ),
+          })
+        }}
+      >
+        축하 인사 전하기
+      </Button>
     </div>
   )
 }
