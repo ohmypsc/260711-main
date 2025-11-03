@@ -34,8 +34,6 @@ export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
   return (
-    // ✅ LazyDiv로 감싸서 card-group 스타일 동일하게 적용
-    <LazyDiv className="card-group">
       <div className="card cover fade-in">
         {/* 날짜 */}
         <div className="wedding-date">
@@ -84,7 +82,7 @@ export const Cover = () => {
         <Button
           onClick={() =>
             openModal({
-              className: "donation-modal",
+              className: "contact-modal",
               closeOnClickBackground: true,
               header: (
                 <div className="title-group">
