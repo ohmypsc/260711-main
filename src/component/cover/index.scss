@@ -75,10 +75,12 @@
 }
 
 /* =============================== */
-/* ✅ 원작 Invitation 모달 디자인 */
+/* ✅ 원작자의 연락하기(Contact) 모달 스타일 */
 /* =============================== */
 .contact-modal {
   width: 22rem;
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
 
   .header {
     .title-group {
@@ -116,20 +118,18 @@
         opacity: 0.6;
       }
 
+      /* 이름 칸 중앙 정렬 */
       div:nth-child(2) {
         text-align: center;
       }
 
-      .icon {
+      /* 아이콘 영역 */
+      div:nth-child(3) {
         display: flex;
         justify-content: flex-end;
         gap: 0.4rem;
 
-        .flip {
-          transform: scaleX(-1);
-        }
-
-        .icon {
+        svg {
           width: 1.2rem;
           height: 1.2rem;
           opacity: 0.7;
@@ -138,6 +138,10 @@
 
           &:hover {
             opacity: 1;
+          }
+
+          &.flip {
+            transform: scaleX(-1);
           }
         }
       }
