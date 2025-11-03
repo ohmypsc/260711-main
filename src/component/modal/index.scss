@@ -54,7 +54,7 @@
   color: var(--modal-text);
   width: 90%;
   max-width: 28rem;
-  border-radius: 0; /* 각진 네모 */
+  border-radius: 0;
   box-shadow: 0 0 1rem var(--modal-shadow);
   display: flex;
   flex-direction: column;
@@ -65,7 +65,6 @@
     max-width: 30rem;
   }
 
-  /* ===== 헤더 ===== */
   .header {
     padding: 0.5rem 1rem;
     border-bottom: 1px solid var(--modal-border);
@@ -122,7 +121,6 @@
     }
   }
 
-  /* ===== 내용 ===== */
   .content {
     padding: 1rem 1rem 1.5rem;
     line-height: 1.7;
@@ -132,7 +130,6 @@
     max-height: 80vh;
   }
 
-  /* ===== 푸터 ===== */
   .footer {
     display: flex;
     justify-content: center;
@@ -163,7 +160,7 @@
 .modal.contact-modal {
   width: 22rem;
   max-width: 90vw;
-  text-align: initial; /* ✅ 중앙정렬 상속 차단 (원작자 동일) */
+  text-align: initial;
 
   .header {
     .title-group {
@@ -185,8 +182,8 @@
     }
   }
 
-  /* ✅ 실제 본문 계층: .content > .contact-modal */
-  .content > .contact-modal {
+  /* ✅ 이게 핵심 수정 — 계층 정확히 맞게 변경 */
+  .content {
     padding: 1.2rem 1rem;
     text-align: center;
     line-height: 1.8;
@@ -216,18 +213,17 @@
         gap: 0.4rem;
 
         svg {
-          width: 1rem;
-          height: 1rem;
+          width: 1rem !important;
+          height: 1rem !important;
           opacity: 0.7;
+          fill: var(--dark-color);
           cursor: pointer;
           transition: opacity 0.2s ease;
-          fill: var(--dark-color);
 
           &:hover {
             opacity: 1;
           }
 
-          /* ✅ flip 완전 제거 */
           &.flip {
             transform: none;
           }
@@ -248,7 +244,6 @@
 body.modal-open {
   overflow: hidden;
 }
-
 
 /* =============================== */
 /* ✅ 모바일 Safari 가로 스크롤 방지 */
