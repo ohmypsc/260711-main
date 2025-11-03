@@ -8,11 +8,13 @@
   --modal-theme: #ff8585;
 }
 
+/* ✅ 페이드 인 애니메이션 */
 @keyframes modal-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
+/* ✅ 모달 전체 배경 */
 .modal-background {
   position: fixed;
   inset: 0;
@@ -43,6 +45,7 @@
       max-width: 30rem;
     }
 
+    /* ✅ 헤더 */
     .header {
       padding: 0.8rem 1rem;
       border-bottom: 1px solid var(--modal-border);
@@ -92,6 +95,7 @@
       }
     }
 
+    /* ✅ 본문 */
     .content {
       padding: 1rem;
       max-height: 80vh;
@@ -99,44 +103,55 @@
       font-size: 0.95rem;
       color: var(--modal-text);
 
-      /* ✅ 연락처 구조 (이름 가운데, 아이콘 오른쪽 정렬) */
+      /* 🎯 연락처 리스트 (이름 가운데, 아이콘 오른쪽 끝) */
       .contact-info {
-        display: grid;
-        grid-template-columns: 1fr 1fr 2.5rem;
-        align-items: center;
-        gap: 0.5rem 0.3rem;
-        margin-bottom: 1.2rem;
-        padding: 0 0.7rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
 
-        .relation {
-          text-align: right;
-          font-size: 0.85rem;
-          opacity: 0.7;
-          color: var(--modal-subtext);
-        }
-
-        .name {
-          text-align: center; /* 🎯 이름 중앙 */
-          font-size: 0.9rem;
-          color: var(--modal-text);
-        }
-
-        .icon {
+        > div {
           display: flex;
-          justify-content: flex-end; /* 🎯 아이콘 오른쪽 끝 정렬 */
-          gap: 0.4rem;
-          width: 100%;
-          height: 1.2rem;
-          cursor: pointer;
-          opacity: 0.7;
-          transition: opacity 0.2s ease;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 0.8rem;
 
-          &:hover { opacity: 1; }
-          &.flip { transform: scaleX(-1); }
+          .relation {
+            flex: 1;
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--modal-subtext);
+            opacity: 0.7;
+            padding-right: 0.5rem;
+          }
+
+          .name {
+            flex: 1;
+            text-align: center; /* ✅ 이름 정확히 중앙 */
+            font-size: 0.9rem;
+            color: var(--modal-text);
+          }
+
+          .icon {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end; /* ✅ 아이콘 오른쪽 정렬 */
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 0.7;
+            width: auto;
+            height: 1.2rem;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+
+            &:hover { opacity: 1; }
+            &.flip { transform: scaleX(-1); }
+          }
         }
       }
     }
 
+    /* ✅ 푸터 */
     .footer {
       display: flex;
       justify-content: center;
@@ -163,6 +178,7 @@
   }
 }
 
+/* ✅ 아이콘 크기 통일 */
 .modal svg,
 .modal i {
   width: 1.2rem !important;
@@ -170,6 +186,7 @@
   vertical-align: middle;
 }
 
+/* ✅ 닫기 버튼 선 두께 */
 .modal .close-button::before,
 .modal .close-button::after {
   width: 0.1rem !important;
