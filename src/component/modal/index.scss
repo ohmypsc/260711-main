@@ -9,15 +9,13 @@
   --modal-theme: #007aff;
 }
 
-/* ✨ 모달 페이드 인 애니메이션 */
+/* ✨ 모달 페이드 인 애니메이션 (scale 제거, 자연스러운 fade-in만) */
 @keyframes modal-fade-in {
   from {
     opacity: 0;
-    transform: scale(0.96);
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -56,8 +54,8 @@
     flex-direction: column;
     color: var(--modal-text);
     pointer-events: auto;
-    transform-origin: center center;
     margin: 0 auto;
+    transform-origin: center center; /* 유지하되 scale 제거로 안정화 */
   }
 
   @media (min-width: 768px) {
@@ -130,25 +128,27 @@
 
   /* ✅ 내용 영역 */
   .content {
-    padding: 1rem;
+    padding: 1rem 1.2rem;
     max-height: 80vh;
     overflow-y: auto;
     line-height: 1.6;
     font-size: 0.95rem;
     color: var(--modal-text);
+    text-align: center; /* 중앙 정렬로 통일 */
 
     .contact-info {
       display: grid;
-      grid-template-columns: 1fr 1fr auto;
+      grid-template-columns: 1fr 1fr 1fr; /* 균등 분배 */
       align-items: center;
-      gap: 0.5rem 0.3rem;
+      justify-items: center;
+      gap: 0.6rem 0.4rem;
       margin-bottom: 1.5rem;
 
       .relation {
         opacity: 0.7;
-        text-align: right;
         font-size: 0.85rem;
         color: var(--modal-subtext);
+        text-align: center;
       }
 
       .name {
