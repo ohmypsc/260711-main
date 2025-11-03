@@ -178,3 +178,12 @@
   width: 0.1rem !important;
   height: 100% !important;
 }
+
+
+/* ✅ Cover의 중앙정렬이 모달 내부에 상속되지 않게 */
+.cover .modal,
+.cover .modal * {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
