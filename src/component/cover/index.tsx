@@ -1,134 +1,164 @@
-import { Fragment } from "react"
-import {
-  BRIDE_INFO,
-  GROOM_INFO,
-  BRIDE_FULLNAME,
-  GROOM_FULLNAME,
-  BRIDE_FATHER,
-  BRIDE_MOTHER,
-  GROOM_FATHER,
-  GROOM_MOTHER,
-  GROOM_TITLE,
-  BRIDE_TITLE,
-} from "../../const"
-import { useModal } from "../modal"
-import { Button } from "../button"
-import { LazyDiv } from "../lazyDiv"
-import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
-import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
+.cover {
+  .wedding-date {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 
-export const Cover = () => {
-  const { openModal, closeModal } = useModal()
+    .divider {
+      background-color: var(--dark-color);
+      width: 1px;
+      height: 0.7rem;
+    }
+  }
 
-  return (
-    <LazyDiv className="card cover">
-      <h2 className="subtitle">Wedding Invitation</h2>
+  .wedding-day-of-week {
+    font-size: 1.2rem;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
 
-      <div className="names">
-        <span>{GROOM_FULLNAME}</span>
-        <div className="divider" />
-        <span>{BRIDE_FULLNAME}</span>
-      </div>
+  .subtitle {
+    font-size: 1.5rem;
+    font-family: "Allura", cursive;
+    color: var(--alt-color);
+    margin-top: 1rem;
+  }
 
-      <div className="wedding-date">
-        <span>2025. 05. 18</span>
-        <div className="divider" />
-        <span>12:00 PM</span>
-      </div>
+  .names {
+    margin-top: 0.5rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
 
-      <div className="wedding-day-of-week">일요일</div>
-      <div className="info">세종컨벤션센터 2층 예식홀</div>
+    .divider {
+      background-color: var(--dark-color);
+      width: 1px;
+      height: 0.7rem;
+    }
+  }
 
-      <div className="family">
-        <div className="name">
-          {GROOM_FATHER} · {GROOM_MOTHER}
-          <span className="relation">
-            의 <span className="relation-name">{GROOM_TITLE}</span>
-          </span>{" "}
-          {GROOM_FULLNAME}
-        </div>
-        <div className="name">
-          {BRIDE_FATHER} · {BRIDE_MOTHER}
-          <span className="relation">
-            의 <span className="relation-name">{BRIDE_TITLE}</span>
-          </span>{" "}
-          {BRIDE_FULLNAME}
-        </div>
-      </div>
+  .info {
+    margin-bottom: 0.3rem;
+    opacity: 0.7;
+  }
 
-      {/* ✅ 원작자 모달 그대로 이식 */}
-      <Button
-        onClick={() => {
-          openModal({
-            className: "contact-modal",
-            closeOnClickBackground: true,
-            header: (
-              <div className="title-group">
-                <div className="title">축하 인사 전하기</div>
-                <div className="subtitle">
-                  전화, 문자메시지로 축하 인사를 전해보세요.
-                </div>
-              </div>
-            ),
-            content: (
-              <>
-                <div className="contact-info">
-                  {GROOM_INFO.filter(({ phone }) => !!phone).map(
-                    ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
-                        <div className="relation">{relation}</div>
-                        <div>{name}</div>
-                        <div>
-                          <PhoneIcon
-                            className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
-                          />
-                          <EnvelopeIcon
-                            className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
-                          />
-                        </div>
-                      </Fragment>
-                    )
-                  )}
-                </div>
+  .family {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--dark-color);
+    opacity: 0.9;
 
-                <div className="contact-info">
-                  {BRIDE_INFO.filter(({ phone }) => !!phone).map(
-                    ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
-                        <div className="relation">{relation}</div>
-                        <div>{name}</div>
-                        <div>
-                          <PhoneIcon
-                            className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
-                          />
-                          <EnvelopeIcon
-                            className="icon"
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
-                          />
-                        </div>
-                      </Fragment>
-                    )
-                  )}
-                </div>
-              </>
-            ),
-            footer: (
-              <Button
-                buttonStyle="style2"
-                className="bg-light-grey-color text-dark-color"
-                onClick={closeModal}
-              >
-                닫기
-              </Button>
-            ),
-          })
-        }}
-      >
-        연락하기
-      </Button>
-    </LazyDiv>
-  )
+    .name {
+      margin: 0.3rem 0;
+
+      .relation {
+        opacity: 0.7;
+        margin: 0 0.2rem;
+      }
+
+      .relation-name {
+        color: var(--theme-color);
+        font-weight: 500;
+      }
+    }
+  }
+
+  button {
+    margin-top: 2rem;
+  }
+}
+
+/* =============================== */
+/* ✅ 원작자 Invitation ‘연락하기’ 모달 완전 복원 */
+/* =============================== */
+.contact-modal {
+  width: 90%;
+  max-width: 22rem;
+  background-color: var(--modal-bg);
+  color: var(--modal-text);
+  margin: 0 auto;
+  text-align: left;
+
+  .header {
+    .title-group {
+      text-align: center;
+
+      .title {
+        font-size: 1.2rem;
+        color: var(--theme-color);
+        padding-bottom: 0.5rem;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+        opacity: 0.8;
+        color: var(--dark-color);
+        border-bottom: 1px solid var(--dark-grey-color);
+        padding-bottom: 1rem;
+      }
+    }
+  }
+
+  .content {
+    padding: 1rem;
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      row-gap: 0.5rem;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+
+      /* ✅ 첫 번째 열 (관계) */
+      .relation {
+        grid-column: 1 / 2;
+        text-align: left;
+        opacity: 0.7;
+        color: var(--dark-color);
+      }
+
+      /* ✅ 두 번째 열 (이름) */
+      .relation + div {
+        grid-column: 2 / 3;
+        text-align: center;
+      }
+
+      /* ✅ 세 번째 열 (아이콘 영역) */
+      .relation + div + div {
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.4rem;
+
+        svg {
+          width: 1.2rem;
+          height: 1.2rem;
+          opacity: 0.7;
+          cursor: pointer;
+          transition: opacity 0.2s ease;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &.flip {
+            transform: scaleX(-1);
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+  }
 }
