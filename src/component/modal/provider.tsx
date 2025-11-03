@@ -5,10 +5,9 @@ import {
   useRef,
   useState,
 } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { type ModalInfo, ModalContext } from "./context"
 
-type ModalInfoWithKey = ModalInfo & { key: number }
+type ModalInfoWithKey = ModalInfo & { key: number; closing?: boolean }
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
   const [modalInfoList, setModalInfoList] = useState<ModalInfoWithKey[]>([])
@@ -26,13 +25,22 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
 
   const closeModal = useCallback(() => {
     setModalInfoList((list) => {
-      const updated = list.slice(0, -1)
-      if (updated.length === 0) document.body.classList.remove("modal-open")
+      if (list.length === 0) return list
+      const last = list[list.length - 1]
+      // 1️⃣ 닫기 애니메이션을 위해 closing 플래그 추가
+      const updated = [...list.slice(0, -1), { ...last, closing: true }]
+      setTimeout(() => {
+        setModalInfoList((l) => {
+          const result = l.slice(0, -1)
+          if (result.length === 0) document.body.classList.remove("modal-open")
+          return result
+        })
+      }, 300) // CSS transition 시간과 맞춤
       return updated
     })
   }, [])
 
-  // ✅ 포커스 트랩 + ESC 닫기
+  // 포커스 트랩 + ESC 닫기
   useEffect(() => {
     if (modalInfoList.length === 0) return
 
@@ -93,44 +101,32 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     <ModalContext.Provider value={{ modalInfoList, openModal, closeModal }}>
       {children}
       <div className="app-modals-wrapper" ref={modalWrapperRef}>
-        <AnimatePresence>
-          {modalInfoList.map((modalInfo, idx) => (
-            <motion.div
-              key={modalInfo.key}
-              className="app-modal-background"
-              style={{ zIndex: 1000 + idx }}
-              onClick={() => {
-                if (modalInfo.closeOnClickBackground) closeModal()
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+        {modalInfoList.map((modalInfo, idx) => (
+          <div
+            key={modalInfo.key}
+            className={`app-modal-background${modalInfo.closing ? " closing" : ""}`}
+            style={{ zIndex: 1000 + idx }}
+            onClick={() => {
+              if (modalInfo.closeOnClickBackground) closeModal()
+            }}
+          >
+            <div
+              className={`app-modal${modalInfo.className ? ` ${modalInfo.className}` : ""}`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                className={`app-modal${
-                  modalInfo.className ? ` ${modalInfo.className}` : ""
-                }`}
-                onClick={(e) => e.stopPropagation()}
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-              >
-                <div className="app-modal-header">
-                  <div className="app-modal-close-wrapper">
-                    <button className="app-modal-close" onClick={closeModal} />
-                  </div>
-                  {modalInfo.header}
+              <div className="app-modal-header">
+                <div className="app-modal-close-wrapper">
+                  <button className="app-modal-close" onClick={closeModal} />
                 </div>
-                <div className="app-modal-content">{modalInfo.content}</div>
-                {modalInfo.footer && (
-                  <div className="app-modal-footer">{modalInfo.footer}</div>
-                )}
-              </motion.div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+                {modalInfo.header}
+              </div>
+              <div className="app-modal-content">{modalInfo.content}</div>
+              {modalInfo.footer && (
+                <div className="app-modal-footer">{modalInfo.footer}</div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </ModalContext.Provider>
   )
