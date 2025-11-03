@@ -35,21 +35,18 @@
 
   > .modal {
     background-color: var(--modal-bg);
-    border-radius: 0; /* ✅ 각지게 유지 */
+    border-radius: 0; /* ✅ 각진 모서리 유지 */
     box-shadow: 0 0 1rem var(--modal-shadow);
 
-    /* ✅ 원작자 기준: 고정폭 + 중앙 정렬 */
-    width: 22rem;
+    /* ✅ 반응형 크기 (원작자와 동일) */
+    width: 90%;
+    max-width: 22rem;
     margin: 0 auto;
     text-align: left;
 
     display: flex;
     flex-direction: column;
     animation: modal-fade-in 0.5s ease;
-
-    @media (min-width: 768px) {
-      width: 22rem;
-    }
 
     /* ✅ 헤더 */
     .header {
