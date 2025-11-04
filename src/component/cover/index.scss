@@ -5,72 +5,77 @@
   align-items: center;
   text-align: center;
   padding: 3.5rem 1.5rem;
-  min-height: 100svh; /* ✅ 주소창 영향 없는 세로 높이 */
+  min-height: 100svh;
   min-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
-  transition: all 0.3s ease; /* ✅ 부드러운 크기 변화 */
+  transition: all 0.3s ease;
+
+  /* 이름 */
+  > .names {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    margin-bottom: 1.8rem; /* 이름 아래 여백 늘림 */
+    line-height: 1.2;
+
+    .divider {
+      background-color: var(--dark-color);
+      width: 1.5px;
+      height: 1.6rem;
+      opacity: 0.5;
+    }
+  }
 
   /* 날짜 */
   > .wedding-date {
-    margin-top: 0.8rem;
-    font-size: clamp(1.6rem, 4.5vw, 2rem);
+    margin-top: 0.5rem;
+    font-size: clamp(1.5rem, 4.2vw, 2rem);
     font-weight: 600;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
     letter-spacing: 0.08rem;
 
     .divider {
       background-color: var(--dark-color);
       width: 1.5px;
-      height: 1.1rem;
-      opacity: 0.6;
+      height: 1rem;
+      opacity: 0.5;
     }
   }
 
   /* 요일 */
   .wedding-day-of-week {
     font-size: clamp(1rem, 3vw, 1.2rem);
-    opacity: 0.6;
-    margin: 0.6rem 0 1rem 0;
+    opacity: 0.65;
+    margin-top: 0.5rem;
+    margin-bottom: 1.4rem;
     letter-spacing: 0.05rem;
-  }
-
-  /* 이름 */
-  > .names {
-    margin-top: 0.8rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.8rem;
-    font-size: clamp(1.8rem, 5vw, 2.4rem);
-    font-weight: 700;
-
-    .divider {
-      background-color: var(--dark-color);
-      width: 1.5px;
-      height: 1.4rem;
-      opacity: 0.6;
-    }
   }
 
   /* 부가 정보 */
   .info {
-    margin-bottom: 0.5rem;
     opacity: 0.8;
-    font-size: clamp(1rem, 3.5vw, 1.1rem);
-    line-height: 1.5;
+    font-size: clamp(1rem, 3.4vw, 1.15rem);
+    line-height: 1.6;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    max-width: 90%;
   }
 
   /* 가족 정보 섹션 */
   .family-section {
-    margin-top: 1.5rem;
-    font-size: clamp(0.9rem, 3vw, 1rem);
+    margin-top: 1.8rem;
+    font-size: clamp(0.9rem, 2.8vw, 1rem);
     opacity: 0.85;
     line-height: 1.7;
+    letter-spacing: 0.02rem;
 
     .name {
       display: flex;
@@ -89,43 +94,54 @@
     }
   }
 
-  /* ✅ 모바일 반응형 */
+  /* 반응형 */
   @media (max-width: 768px) {
     padding: 2.5rem 1rem;
 
+    > .names {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      gap: 0.8rem;
+    }
+
     > .wedding-date {
       gap: 0.6rem;
+      font-size: clamp(1.3rem, 4vw, 1.6rem);
       .divider {
         width: 1px;
         height: 0.9rem;
       }
     }
 
-    > .names {
-      gap: 0.5rem;
+    .wedding-day-of-week {
+      margin-bottom: 1rem;
     }
 
     .info {
-      line-height: 1.6;
+      font-size: clamp(0.95rem, 3.3vw, 1.05rem);
+      line-height: 1.5;
     }
   }
 
-  /* ✅ 작은 모바일 (아이폰 SE, 갤럭시 S 미니 등) */
   @media (max-width: 480px) {
     padding: 2rem 1rem;
     justify-content: center;
-    min-height: 100svh; /* 세로 꽉 차기 */
-
-    > .wedding-date {
-      font-size: clamp(1.3rem, 5vw, 1.5rem);
-    }
+    min-height: 100svh;
 
     > .names {
-      font-size: clamp(1.4rem, 6vw, 1.7rem);
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
+    }
+
+    > .wedding-date {
+      font-size: clamp(1.2rem, 4.5vw, 1.4rem);
+    }
+
+    .wedding-day-of-week {
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
     }
 
     .info {
       font-size: clamp(0.9rem, 3.8vw, 1rem);
+      max-width: 95%;
     }
   }
 }
