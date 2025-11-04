@@ -9,9 +9,8 @@ import { Calendar } from "./component/calendar";
 import { Information } from "./component/information";
 import { GuestBook } from "./component/guestbook";
 import { LazyDiv } from "./component/lazyDiv";
-import { ShareButton } from "./component/shareButton"
-import { STATIC_ONLY } from "./env"
-
+import { ShareButton } from "./component/shareButton";
+import { STATIC_ONLY } from "./env";
 
 function App() {
   return (
@@ -29,6 +28,7 @@ function App() {
         <LazyDiv className="card-group">
           {/* 결혼식 날짜 (달력) */}
           <Calendar />
+        </LazyDiv>
 
         <LazyDiv className="card-group">
           {/* 오시는길 */}
@@ -45,7 +45,7 @@ function App() {
         <ShareButton />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
