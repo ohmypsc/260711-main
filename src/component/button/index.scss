@@ -6,6 +6,12 @@ button.button {
   font-size: 1rem; /* ✅ 기존 그대로 유지 */
   white-space: nowrap; /* ✅ 줄바꿈 방지 */
   box-sizing: border-box; /* ✅ padding 포함 계산 */
+  display: inline-flex; /* ✅ 버튼 폭이 내용에 따라 자동 결정 */
+  align-items: center;
+  justify-content: center;
+  width: fit-content; /* ✅ 글자 수에 따라 가로폭이 자연스럽게 확장 */
+  max-width: 100%; /* ✅ 화면 밖으로 넘치지 않도록 제한 */
+  cursor: pointer; /* ✅ 클릭 가능 표시 */
 
   &.button-style-1 {
     background-color: var(--white-color);
