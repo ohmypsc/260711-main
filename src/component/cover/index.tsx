@@ -27,7 +27,7 @@ const DAY_OF_WEEK = [
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday",
+  "토요일",
 ]
 
 export const Cover = () => {
@@ -65,14 +65,14 @@ export const Cover = () => {
         <div className="name">
           {GROOM_FATHER} · {GROOM_MOTHER}
           <span className="relation">
-            의 <span className="relation-name">{GROOM_TITLE}</span>
+          의 <span className="relation-name">{GROOM_TITLE}</span>
           </span>{" "}
           {GROOM_FULLNAME}
         </div>
         <div className="name">
           {BRIDE_FATHER} · {BRIDE_MOTHER}
           <span className="relation">
-            의 <span className="relation-name">{BRIDE_TITLE}</span>
+          의 <span className="relation-name">{BRIDE_TITLE}</span>
           </span>{" "}
           {BRIDE_FULLNAME}
         </div>
