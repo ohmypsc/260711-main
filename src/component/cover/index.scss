@@ -60,6 +60,35 @@
     line-height: 1.5;
   }
 
+
+  .family-section {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  opacity: 0.85;
+  line-height: 1.8;
+
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.3rem;
+  }
+
+  .relation {
+    margin: 0 0.3rem;
+  }
+
+  .relation-name {
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+}
+
   // ✅ 모바일 반응형
   @media (max-width: 768px) {
     padding: 2rem 1rem;
