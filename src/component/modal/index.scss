@@ -17,11 +17,9 @@
 @keyframes modal-fade-in {
   from {
     opacity: 0;
-    transform: translateY(-10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -30,20 +28,16 @@
 /* =============================== */
 .modal-background {
   position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: modal-fade-in 0.5s ease;
   z-index: 9999;
-  animation: modal-fade-in 0.3s ease;
-
-  &.closing {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
 }
 
 /* =============================== */
@@ -54,43 +48,42 @@
   color: var(--modal-text);
   width: 90%;
   max-width: 28rem;
-  border-radius: 0;
   box-shadow: 0 0 1rem var(--modal-shadow);
   display: flex;
   flex-direction: column;
-  animation: modal-fade-in 0.4s ease;
+  animation: modal-fade-in 0.5s ease;
   overflow: hidden;
+  font-size: 1rem; /* ✅ 전체 글씨 크기 복원 */
 
   @media (min-width: 768px) {
     max-width: 30rem;
   }
 
   .header {
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid var(--modal-border);
-    position: relative;
+    padding: 0.5rem;
+    background-color: var(--light-color);
 
     .close-button-wrapper {
       display: flex;
       justify-content: flex-end;
 
       .close-button {
-        width: 1.2rem;
-        height: 1.2rem;
+        position: relative;
+        width: 1rem;
+        height: 1rem;
         background: none;
         border: none;
         cursor: pointer;
-        position: relative;
 
         &::before,
         &::after {
           content: "";
+          width: 0.1rem;
+          height: 100%;
+          background-color: var(--dark-grey-color);
           position: absolute;
           top: 0;
           left: 50%;
-          width: 0.12rem;
-          height: 100%;
-          background-color: var(--modal-text);
         }
 
         &::before {
@@ -107,24 +100,26 @@
       margin-top: 0.5rem;
 
       .title {
-        font-size: 1.2rem;
+        font-size: 1.3rem; /* ✅ 확대 */
         font-weight: 600;
         color: var(--modal-theme);
         padding-bottom: 0.3rem;
       }
 
       .subtitle {
-        font-size: 0.85rem;
+        font-size: 1rem; /* ✅ 확대 */
         color: var(--modal-subtext);
         opacity: 0.8;
+        /* ❌ border-bottom 삭제 */
+        padding-bottom: 0.5rem;
       }
     }
   }
 
   .content {
     padding: 1rem 1rem 1.5rem;
-    line-height: 1.7;
-    font-size: 0.95rem;
+    line-height: 1.8;
+    font-size: 1rem; /* ✅ 확대 */
     text-align: left;
     overflow-y: auto;
     max-height: 80vh;
@@ -145,7 +140,7 @@
       background-color: rgba(0, 0, 0, 0.05);
       color: var(--modal-text);
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      font-size: 1rem;
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.1);
@@ -155,46 +150,24 @@
 }
 
 /* =============================== */
-/* ✅ 연락하기(Contact) 전용 모달 스타일 */
+/* ✅ 연락하기(Contact) 전용 모달 */
 /* =============================== */
 .modal.contact-modal {
   width: 22rem;
   max-width: 90vw;
   text-align: initial;
 
-  .header {
-    .title-group {
-      text-align: center;
-
-      .title {
-        font-size: 1.2rem;
-        color: var(--theme-color);
-        padding-bottom: 0.5rem;
-      }
-
-      .subtitle {
-        font-size: 0.9rem;
-        color: var(--dark-color);
-        opacity: 0.8;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--dark-grey-color);
-      }
-    }
-  }
-
-  /* ✅ 이게 핵심 수정 — 계층 정확히 맞게 변경 */
   .content {
-    padding: 1.2rem 1rem;
     text-align: center;
+    font-size: 1rem; /* ✅ 확대 */
     line-height: 1.8;
-    font-size: 0.9rem;
 
     .contact-info {
       display: grid;
       grid-template-columns: 8rem 7rem 1fr;
       align-items: center;
       row-gap: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.95rem; /* ✅ 확대 */
       margin-top: 1rem;
 
       .relation {
@@ -223,10 +196,6 @@
           &:hover {
             opacity: 1;
           }
-
-          &.flip {
-            transform: none;
-          }
         }
       }
     }
@@ -235,21 +204,5 @@
   .footer {
     justify-content: center;
     padding: 1rem 0;
-  }
-}
-
-/* =============================== */
-/* ✅ body 스크롤 잠금 */
-/* =============================== */
-body.modal-open {
-  overflow: hidden;
-}
-
-/* =============================== */
-/* ✅ 모바일 Safari 가로 스크롤 방지 */
-/* =============================== */
-@supports (-webkit-touch-callout: none) {
-  .modal-background {
-    width: 100%;
   }
 }
