@@ -32,6 +32,11 @@
     color: #222222; /* 대비 약간 강화 (가독성 향상) */
   }
 
+  /* ✅ 본문 전체(.background 이하 포함) 글자 크기 확실히 확대 */
+  .background {
+    font-size: 1.2rem;
+  }
+
   h1, h2, h3 {
     line-height: 1.3;
   }
@@ -133,6 +138,14 @@ body {
 input,
 textarea {
   user-select: text;
+}
+
+/* ✅ 어절 단위 줄바꿈 (배경·카드·푸터 모두 적용) */
+.background,
+.background .card,
+.background .footer {
+  word-break: keep-all;        /* ✅ 한글은 어절 단위로 줄바꿈 */
+  overflow-wrap: break-word;   /* ✅ 긴 영어/URL도 자동 줄바꿈 */
 }
 
 /* 전체 배경 */
