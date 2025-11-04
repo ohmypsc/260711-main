@@ -1,61 +1,55 @@
-import { Fragment } from "react/jsx-runtime"
 import {
-  BRIDE_INFO,
-  GROOM_INFO,
   BRIDE_FULLNAME,
   GROOM_FULLNAME,
-  BRIDE_FATHER,
-  BRIDE_MOTHER,
-  GROOM_FATHER,
-  GROOM_MOTHER,
-  GROOM_TITLE,
-  BRIDE_TITLE,
+  LOCATION,
+  WEDDING_DATE,
+  WEDDING_DATE_FORMAT,
+  GROOM_INFO,
+  BRIDE_INFO,
 } from "../../const"
+import { LazyDiv } from "../lazyDiv"
 import { useModal } from "../modal"
 import { Button } from "../button"
-import { LazyDiv } from "../lazyDiv"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
+
+const DAY_OF_WEEK = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]
 
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
   return (
     <LazyDiv className="card cover">
-      <h2 className="subtitle">Wedding Invitation</h2>
+      <div className="wedding-date">
+        {WEDDING_DATE.format("YYYY")}
+        <div className="divider" />
+        {WEDDING_DATE.format("MM")}
+        <div className="divider" />
+        {WEDDING_DATE.format("DD")}
+      </div>
+
+      <div className="wedding-day-of-week">
+        {DAY_OF_WEEK[WEDDING_DATE.day()]}
+      </div>
 
       <div className="names">
-        <span>{GROOM_FULLNAME}</span>
+        {GROOM_FULLNAME}
         <div className="divider" />
-        <span>{BRIDE_FULLNAME}</span>
+        {BRIDE_FULLNAME}
       </div>
 
-      <div className="wedding-date">
-        <span>2025. 05. 18</span>
-        <div className="divider" />
-        <span>12:00 PM</span>
-      </div>
+      <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
+      <div className="info">{LOCATION}</div>
 
-      <div className="wedding-day-of-week">일요일</div>
-      <div className="info">세종컨벤션센터 2층 예식홀</div>
-
-      <div className="family">
-        <div className="name">
-          {GROOM_FATHER} · {GROOM_MOTHER}
-          <span className="relation">
-            의 <span className="relation-name">{GROOM_TITLE}</span>
-          </span>{" "}
-          {GROOM_FULLNAME}
-        </div>
-        <div className="name">
-          {BRIDE_FATHER} · {BRIDE_MOTHER}
-          <span className="relation">
-            의 <span className="relation-name">{BRIDE_TITLE}</span>
-          </span>{" "}
-          {BRIDE_FULLNAME}
-        </div>
-      </div>
-
+      {/* ✅ 연락하기 버튼 추가 */}
       <Button
         onClick={() => {
           openModal({
@@ -65,7 +59,7 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화, 문자메시지로 축하 인사를 전해보세요.
+                  전화 또는 문자메시지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
@@ -74,40 +68,46 @@ export const Cover = () => {
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
+                      <div key={relation} className="contact-row">
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
-                        {/* ✅ 아이콘 래퍼 구조 수정 */}
-                        <div className="icon">
+                        <div>
                           <PhoneIcon
+                            className="flip icon"
                             onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                            className="icon"
+                            onClick={() =>
+                              window.open(`sms:${phone}`, "_self")
+                            }
                           />
                         </div>
-                      </Fragment>
-                    )
+                      </div>
+                    ),
                   )}
                 </div>
 
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
+                      <div key={relation} className="contact-row">
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
-                        {/* ✅ 아이콘 래퍼 구조 수정 */}
-                        <div className="icon">
+                        <div>
                           <PhoneIcon
+                            className="flip icon"
                             onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
-                            onClick={() => window.open(`sms:${phone}`, "_self")}
+                            className="icon"
+                            onClick={() =>
+                              window.open(`sms:${phone}`, "_self")
+                            }
                           />
                         </div>
-                      </Fragment>
-                    )
+                      </div>
+                    ),
                   )}
                 </div>
               </>
