@@ -77,18 +77,13 @@ export const Cover = () => {
                       <Fragment key={relation}>
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
-                        <div>
+                        {/* ✅ 아이콘 래퍼 구조 수정 */}
+                        <div className="icon">
                           <PhoneIcon
-                            className="icon"
-                            onClick={() =>
-                              window.open(`tel:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
-                            className="icon"
-                            onClick={() =>
-                              window.open(`sms:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
                           />
                         </div>
                       </Fragment>
@@ -102,18 +97,13 @@ export const Cover = () => {
                       <Fragment key={relation}>
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
-                        <div>
+                        {/* ✅ 아이콘 래퍼 구조 수정 */}
+                        <div className="icon">
                           <PhoneIcon
-                            className="icon" // ✅ flip 제거
-                            onClick={() =>
-                              window.open(`tel:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`tel:${phone}`, "_self")}
                           />
                           <EnvelopeIcon
-                            className="icon"
-                            onClick={() =>
-                              window.open(`sms:${phone}`, "_self")
-                            }
+                            onClick={() => window.open(`sms:${phone}`, "_self")}
                           />
                         </div>
                       </Fragment>
