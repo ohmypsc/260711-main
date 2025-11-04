@@ -1,35 +1,13 @@
-/* =============================== */
-/* ✅ 전역/공용 스타일 (순서 매우 중요) */
-/* =============================== */
-
-/* 1️⃣ 모달 시스템 - 가장 먼저 */
-@use "./component/modal";
-
-/* 2️⃣ 버튼 - 모달 내부 버튼에도 영향을 주므로 초기에 로드 */
+@use "./component/cover";
+@use "./component/invitation";
 @use "./component/button";
-
-/* =============================== */
-/* ✅ 개별 섹션 컴포넌트 */
-/* =============================== */
-
-/* 순서 중요: 위에 있을수록 아래에서 덮어씌워짐 */
 @use "./component/bgEffect";
 @use "./component/calendar";
+@use "./component/gallery";
 @use "./component/location";
-@use "./component/invitation";
 @use "./component/information";
 @use "./component/guestbook";
-
-/* =============================== */
-/* ✅ Cover (마지막에 둬야 함)
-   이유: Cover에 포함된 contact-modal이 기존 invitation 스타일을 override해야 하므로
-   import 순서가 제일 뒤여야 함 */
-/* =============================== */
-@use "./component/cover";
-
-/* =============================== */
-/* ✅ 공유 버튼 (독립 요소이므로 가장 끝에 둬도 무방) */
-/* =============================== */
+@use "./component/modal";    /* ✅ modal은 항상 맨 뒤! */
 @use "./component/shareButton";
 
 
