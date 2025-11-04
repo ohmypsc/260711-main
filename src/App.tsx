@@ -12,10 +12,11 @@ import { LazyDiv } from "./component/lazyDiv";
 import { STATIC_ONLY } from "./env";
 
 function App() {
-  const path = window.location.pathname;
+  // ✅ GitHub Pages 배포 환경에서도 동작하도록 보정
+  const path = window.location.pathname.replace(import.meta.env.BASE_URL, "");
 
-  // ✅ 주소가 "/admin"이면 관리자 페이지 렌더링
-  if (path.includes("/admin")) {
+  // ✅ "/admin" 포함 여부 확인
+  if (path.startsWith("admin")) {
     return <AdminPage />;
   }
 
