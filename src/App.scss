@@ -21,42 +21,42 @@
   --red-color: #ff0000;
 
   font-family: "MapoGoldenPier";
-  /* ✅ 루트 폰트 크기 조정 (글자 과대 현상 해결) */
-  font-size: clamp(15px, 2.8vw, 18px);
+  /* ✅ 중간 수준 폰트 크기 (적당히 여유 있고 과하지 않음) */
+  font-size: clamp(16px, 3.2vw, 20px);
 }
 
 @media (max-width: 500px) {
-  /* ✅ 모바일 글자 크기 안정화 */
+  /* ✅ 모바일에서 약간 확대 (루트 대비 10% 정도) */
   body {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #222222;
   }
 
-  /* ✅ 불필요한 전체 확대 제거 */
+  /* ✅ 카드 폰트는 본문 중심 비율 유지 */
   .background,
   .background .card,
   .background .information,
   .background .invitation,
   .background .guestbook,
   .background .footer {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   h1, h2, h3 {
-    line-height: 1.4;
+    line-height: 1.35;
   }
 
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.45rem;
   }
 
   button {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 
   input,
   textarea {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 }
 
@@ -249,7 +249,7 @@ textarea {
 
 /* 제목 */
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   color: var(--theme-color);
   font-weight: normal;
 }
