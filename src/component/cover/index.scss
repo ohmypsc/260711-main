@@ -6,7 +6,7 @@
   text-align: center;
   padding: 4rem 1.5rem;
   min-height: 100vh;
-  min-height: 100dvh; 
+  min-height: 100dvh; // ✅ 브라우저 UI 제외한 실제 화면 높이 반영
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
 
@@ -64,6 +64,7 @@
   @media (max-width: 768px) {
     padding: 2rem 1rem;
     min-height: 100vh;
+    min-height: 100dvh; // ✅ 추가
 
     > .wedding-date {
       font-size: 1.6rem;
@@ -89,6 +90,7 @@
   @media (max-width: 480px) {
     justify-content: center;
     min-height: 100vh;
+    min-height: 100dvh; // ✅ 추가
 
     > .wedding-date {
       font-size: 1.4rem;
