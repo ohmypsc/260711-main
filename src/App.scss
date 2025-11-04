@@ -22,6 +22,7 @@
 
   font-family: "MapoGoldenPier";
   font-size: 20px;
+
   @media (max-width: 500px) {
     font-size: 4vw;
   }
@@ -33,6 +34,7 @@
   }
 }
 
+/* 색상 변수 자동 클래스화 */
 $colors: (
   theme-color: var(--theme-color),
   theme-bg-color: var(--theme-bg-color),
@@ -58,19 +60,19 @@ $colors: (
   }
 }
 
+/* 카드 페이드 인 애니메이션 */
 @keyframes lazy-fade-in {
   from {
     opacity: 0;
-    z-index: 3;
     transform: translateY(2rem);
   }
   to {
     opacity: 1;
-    z-index: 3;
     transform: translateY(0);
   }
 }
 
+/* 버튼 기본값 */
 button {
   font-family: "MapoGoldenPier";
   font-size: 1rem;
@@ -79,11 +81,13 @@ button {
   padding: 0;
 }
 
+/* 기본 body 스타일 */
 body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
   height: 100vh;
+
   &.modal-open {
     overflow-y: hidden;
   }
@@ -92,12 +96,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 기본 박스 */
 * {
   box-sizing: border-box;
   color: var(--dark-color);
   user-select: none;
 }
 
+/* 전체 배경 */
 .background {
   background-color: var(--theme-bg-color);
   display: flex;
@@ -119,13 +125,13 @@ body {
       width: 100vw;
     }
 
-    /* ✅ 그룹 배경 제거 & 세로형 고정 */
+    /* 그룹 배경 제거 & 세로형 고정 */
     .card-group {
       position: relative;
       display: flex;
       flex-direction: column;
-      background-color: transparent; /* 그룹 배경 제거 */
-      box-shadow: none; /* 그림자 제거 */
+      background-color: transparent;
+      box-shadow: none;
       margin: 10px;
       opacity: 0;
 
@@ -137,11 +143,10 @@ body {
 
       @media print {
         opacity: 1;
-        animation-name: inherit !important;
-        animation-duration: inherit !important;
+        animation: none !important;
       }
 
-      /* ✅ 카드만 흰색 네모 박스로 표시 */
+      /* 각 카드 기본 스타일 */
       .card {
         background-color: var(--light-color);
         padding: 1rem;
@@ -153,8 +158,8 @@ body {
         position: relative;
         margin: 0.5rem 0;
         box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
-
         opacity: 0;
+
         &.lazy-active {
           animation-name: lazy-fade-in;
           animation-duration: 3s;
@@ -163,12 +168,12 @@ body {
 
         @media print {
           opacity: 1;
-          animation-name: inherit !important;
-          animation-duration: inherit !important;
+          animation: none !important;
         }
       }
     }
 
+    /* 하단 푸터 */
     .footer {
       position: relative;
       background-color: var(--light-color);
@@ -176,6 +181,7 @@ body {
       margin: 0.5rem;
       padding: 1rem;
       opacity: 0;
+
       &.lazy-active {
         animation-name: lazy-fade-in;
         animation-duration: 3s;
@@ -184,22 +190,35 @@ body {
 
       @media print {
         opacity: 1;
-        animation-name: inherit !important;
-        animation-duration: inherit !important;
+        animation: none !important;
       }
     }
   }
 }
 
+/* 제목 */
 h2 {
   font-size: 1.5rem;
   color: var(--theme-color);
   font-weight: normal;
+
   &.english {
     font-family: "Allura";
   }
 }
 
+/* 구분용 여백 */
 div.break {
   height: 1rem;
+}
+
+/* 🌸 꽃잎 효과 항상 카드 위로 */
+.bgEffect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10; /* 카드보다 항상 위 */
+  pointer-events: none; /* 클릭 방해 X */
 }
