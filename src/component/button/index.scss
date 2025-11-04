@@ -5,7 +5,6 @@ button.button {
   z-index: 3;
   font-size: 1rem; /* ✅ 기존 그대로 유지 */
   white-space: nowrap; /* ✅ 줄바꿈 방지 */
-  width: 100%; /* ✅ 모바일에서도 버튼이 가로로 꽉 차게 */
   box-sizing: border-box; /* ✅ padding 포함 계산 */
 
   &.button-style-1 {
