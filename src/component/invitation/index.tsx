@@ -3,7 +3,7 @@ import { LazyDiv } from "../lazyDiv"
 export const Invitation = () => {
   return (
     <LazyDiv className="card invitation">
-      <h2>초대의 글</h2>
+      <h2>모시는 글</h2>
 
       <div className="break" />
 
