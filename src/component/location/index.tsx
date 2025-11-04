@@ -8,7 +8,7 @@ export const Location = () => {
   return (
     <>
       <LazyDiv className="card location">
-        <h2>장소</h2>
+        <h2>오시는 길</h2>
         <div className="addr">
           {LOCATION}
           <div className="detail">{LOCATION_ADDRESS}</div>
@@ -25,7 +25,7 @@ export const Location = () => {
           <div className="heading">대중교통</div>
           <div />
           <div className="content">
-            * 지하철 이용 시(돌다리 얘기 넣어 말아 고민고민쓰)
+            * 지하철 이용 시<br />(돌다리 얘기 넣어 말아 고민고민쓰)
             <br />
             <b>대전 1호선 유성온천역</b> 하차 후 도보 약 8분 거리
             <br />
