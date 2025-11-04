@@ -13,37 +13,39 @@ import { STATIC_ONLY } from "./env";
 
 function App() {
   return (
-    <div className="background">
-      <BGEffect />
-      <div className="card-view">
-        <LazyDiv className="card-group">
-          {/* 표지 */}
-          <Cover />
+    <>
+      <div className="background">
+        <div className="card-view">
+          <LazyDiv className="card-group">
+            {/* 표지 */}
+            <Cover />
 
-          {/* 모시는 글 */}
-          <Invitation />
-        </LazyDiv>
+            {/* 모시는 글 */}
+            <Invitation />
+          </LazyDiv>
 
-        <LazyDiv className="card-group">
-          {/* 결혼식 날짜 (달력) */}
-          <Calendar />
-        </LazyDiv>
+          <LazyDiv className="card-group">
+            {/* 결혼식 날짜 (달력) */}
+            <Calendar />
+          </LazyDiv>
 
-        <LazyDiv className="card-group">
-          {/* 오시는길 */}
-          <Location />
-        </LazyDiv>
+          <LazyDiv className="card-group">
+            {/* 오시는길 */}
+            <Location />
+          </LazyDiv>
 
-        <LazyDiv className="card-group">
-          {/* 마음 전하기 */}
-          <Information />
-          {/* 방명록 */}
-          {!STATIC_ONLY && <GuestBook />}
-        </LazyDiv>
-
-
+          <LazyDiv className="card-group">
+            {/* 마음 전하기 */}
+            <Information />
+            {/* 방명록 */}
+            {!STATIC_ONLY && <GuestBook />}
+          </LazyDiv>
+        </div>
       </div>
-    </div>
+
+      {/* 🌸 꽃잎 효과는 항상 카드 위에 표시되도록 background 밖으로 이동 */}
+      <BGEffect />
+    </>
   );
 }
 
