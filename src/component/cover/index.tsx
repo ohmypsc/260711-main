@@ -1,3 +1,4 @@
+import { Fragment } from "react/jsx-runtime"
 import {
   BRIDE_FULLNAME,
   GROOM_FULLNAME,
@@ -6,11 +7,16 @@ import {
   WEDDING_DATE_FORMAT,
   GROOM_INFO,
   BRIDE_INFO,
+  GROOM_FATHER,
+  GROOM_MOTHER,
+  BRIDE_FATHER,
+  BRIDE_MOTHER,
+  GROOM_TITLE,
+  BRIDE_TITLE,
 } from "../../const"
 import { LazyDiv } from "../lazyDiv"
 import { useModal } from "../modal"
 import { Button } from "../button"
-import { Fragment } from "react/jsx-runtime"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
@@ -50,37 +56,29 @@ export const Cover = () => {
         {BRIDE_FULLNAME}
       </div>
 
-      {/* 날짜, 장소 */}
+      {/* 날짜 / 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
 
-      {/* ✅ 가족관계 추가 (버튼 위에) */}
+      {/* ✅ 가족관계 추가 */}
       <div className="family-section">
-        <div className="family-line">
-          <div className="side-label">신랑측</div>
-          <div>
-            {GROOM_INFO.map(({ relation, name }, idx) => (
-              <span key={`g-${relation}-${idx}`}>
-                {relation} {name}
-                {idx < GROOM_INFO.length - 1 && " · "}
-              </span>
-            ))}
-          </div>
+        <div className="name">
+          {GROOM_FATHER} · {GROOM_MOTHER}
+          <span className="relation">
+            의 <span className="relation-name">{GROOM_TITLE}</span>
+          </span>{" "}
+          {GROOM_FULLNAME}
         </div>
-        <div className="family-line">
-          <div className="side-label">신부측</div>
-          <div>
-            {BRIDE_INFO.map(({ relation, name }, idx) => (
-              <span key={`b-${relation}-${idx}`}>
-                {relation} {name}
-                {idx < BRIDE_INFO.length - 1 && " · "}
-              </span>
-            ))}
-          </div>
+        <div className="name">
+          {BRIDE_FATHER} · {BRIDE_MOTHER}
+          <span className="relation">
+            의 <span className="relation-name">{BRIDE_TITLE}</span>
+          </span>{" "}
+          {BRIDE_FULLNAME}
         </div>
       </div>
 
-      {/* 기존 버튼 그대로 */}
+      {/* ✅ 버튼 (Invitation 그대로 유지) */}
       <Button
         onClick={() => {
           openModal({
