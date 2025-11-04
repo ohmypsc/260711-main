@@ -10,6 +10,7 @@ import {
 import { LazyDiv } from "../lazyDiv"
 import { useModal } from "../modal"
 import { Button } from "../button"
+import { Fragment } from "react/jsx-runtime"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
@@ -49,7 +50,7 @@ export const Cover = () => {
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
 
-      {/* ✅ 연락하기 버튼 추가 */}
+      {/* ✅ 연락하기 버튼 (Invitation 구조 그대로 복원) */}
       <Button
         onClick={() => {
           openModal({
@@ -59,7 +60,7 @@ export const Cover = () => {
               <div className="title-group">
                 <div className="title">축하 인사 전하기</div>
                 <div className="subtitle">
-                  전화 또는 문자메시지로 축하 인사를 전해보세요.
+                  전화, 문자메시지로 축하 인사를 전해보세요.
                 </div>
               </div>
             ),
@@ -68,13 +69,15 @@ export const Cover = () => {
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <div key={relation} className="contact-row">
+                      <Fragment key={relation}>
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
@@ -83,21 +86,22 @@ export const Cover = () => {
                             }
                           />
                         </div>
-                      </div>
+                      </Fragment>
                     ),
                   )}
                 </div>
-
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <div key={relation} className="contact-row">
+                      <Fragment key={relation}>
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
                         <div>
                           <PhoneIcon
                             className="flip icon"
-                            onClick={() => window.open(`tel:${phone}`, "_self")}
+                            onClick={() =>
+                              window.open(`tel:${phone}`, "_self")
+                            }
                           />
                           <EnvelopeIcon
                             className="icon"
@@ -106,7 +110,7 @@ export const Cover = () => {
                             }
                           />
                         </div>
-                      </div>
+                      </Fragment>
                     ),
                   )}
                 </div>
