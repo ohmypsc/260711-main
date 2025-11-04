@@ -78,9 +78,9 @@ export const Cover = () => {
         </div>
       </div>
 
-      {/* ✅ 버튼 (Invitation 그대로 유지하되, 가로 100% 적용) */}
+      {/* ✅ 버튼 (Invitation 그대로 유지하되, 가로 90% 적용) */}
       <Button
-        style={{ width: "100%" }} // ✅ 추가된 부분: 버튼 가로폭을 100%로 확장
+        style={{ width: "90%" }} // ✅ 추가된 부분: 버튼 가로폭을 90%로 확장
         onClick={() => {
           openModal({
             className: "contact-modal",
