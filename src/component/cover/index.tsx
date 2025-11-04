@@ -29,6 +29,7 @@ export const Cover = () => {
 
   return (
     <LazyDiv className="card cover">
+      {/* 날짜 */}
       <div className="wedding-date">
         {WEDDING_DATE.format("YYYY")}
         <div className="divider" />
@@ -37,20 +38,50 @@ export const Cover = () => {
         {WEDDING_DATE.format("DD")}
       </div>
 
+      {/* 요일 */}
       <div className="wedding-day-of-week">
         {DAY_OF_WEEK[WEDDING_DATE.day()]}
       </div>
 
+      {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
         <div className="divider" />
         {BRIDE_FULLNAME}
       </div>
 
+      {/* 날짜 & 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
 
-      {/* ✅ 연락하기 버튼 (Invitation 구조 그대로 복원) */}
+      {/* 가족 관계 */}
+      <div className="family-section">
+        <div className="family-line">
+          <div className="side-label">신랑측</div>
+          <div>
+            {GROOM_INFO.map(({ relation, name }) => (
+              <span key={`${relation}-${name}`}>
+                {relation} {name}{" "}
+                {relation !== GROOM_INFO[GROOM_INFO.length - 1].relation && "· "}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="family-line">
+          <div className="side-label">신부측</div>
+          <div>
+            {BRIDE_INFO.map(({ relation, name }) => (
+              <span key={`${relation}-${name}`}>
+                {relation} {name}{" "}
+                {relation !== BRIDE_INFO[BRIDE_INFO.length - 1].relation && "· "}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ 연락하기 버튼 */}
       <Button
         onClick={() => {
           openModal({
@@ -69,7 +100,7 @@ export const Cover = () => {
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
+                      <Fragment key={`g-${relation}`}>
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
                         <div>
@@ -90,10 +121,11 @@ export const Cover = () => {
                     ),
                   )}
                 </div>
+
                 <div className="contact-info">
                   {BRIDE_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
-                      <Fragment key={relation}>
+                      <Fragment key={`b-${relation}`}>
                         <div className="relation">{relation}</div>
                         <div>{name}</div>
                         <div>
