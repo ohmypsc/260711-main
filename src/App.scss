@@ -21,20 +21,25 @@
   --red-color: #ff0000;
 
   font-family: "MapoGoldenPier";
-  /* ✅ 글자 크기 자동 반응형으로 변경 (최소 16px, 최대 20px) */
-  font-size: clamp(16px, 4vw, 20px);
+  /* ✅ 루트 폰트 크기 전체적으로 상향 (모바일 포함 모든 rem 단위에 영향) */
+  font-size: clamp(18px, 5vw, 22px);
 }
 
 @media (max-width: 500px) {
-  /* ✅ 모바일에서 전체 글자 약간 확대 */
+  /* ✅ 모바일 글자 크기 확실히 확대 */
   body {
     font-size: 1.2rem;
-    color: #222222; /* 대비 약간 강화 (가독성 향상) */
+    color: #222222;
   }
 
-  /* ✅ 본문 전체(.background 이하 포함) 글자 크기 확실히 확대 */
-  .background {
-    font-size: 1.2rem;
+  /* ✅ 모든 본문 요소(카드, 초대글, 정보, 방명록 포함) 확대 */
+  .background,
+  .background .card,
+  .background .information,
+  .background .invitation,
+  .background .guestbook,
+  .background .footer {
+    font-size: 1.3rem !important;
   }
 
   h1, h2, h3 {
@@ -42,16 +47,16 @@
   }
 
   h2 {
-    font-size: 1.6rem; /* 제목 약간 확대 */
+    font-size: 1.6rem;
   }
 
   button {
-    font-size: 1.1rem; /* 버튼 클릭 시 보기 좋은 크기 */
+    font-size: 1.1rem;
   }
 
   input,
   textarea {
-    font-size: 1.1rem; /* 입력창 글자 확대 */
+    font-size: 1.1rem;
   }
 }
 
@@ -115,9 +120,9 @@ body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 100dvh; // ✅ 주소창 제외한 실제 높이 반영
+  height: 100dvh;
   @supports not (height: 100dvh) {
-    height: 100vh; // ✅ 구형 브라우저 대응
+    height: 100vh;
   }
 
   &.modal-open {
@@ -140,12 +145,12 @@ textarea {
   user-select: text;
 }
 
-/* ✅ 어절 단위 줄바꿈 (배경·카드·푸터 모두 적용) */
+/* ✅ 어절 단위 줄바꿈 */
 .background,
 .background .card,
 .background .footer {
-  word-break: keep-all;        /* ✅ 한글은 어절 단위로 줄바꿈 */
-  overflow-wrap: break-word;   /* ✅ 긴 영어/URL도 자동 줄바꿈 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* 전체 배경 */
@@ -154,7 +159,7 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; // ✅ 상단부터 자연스럽게 쌓이도록
+  justify-content: flex-start;
   min-height: 100dvh;
   min-width: 100vw;
 
@@ -171,10 +176,9 @@ textarea {
     }
 
     @media (max-width: 500px) {
-      width: 100vw; // ✅ dvw 대신 vw 사용 (수평 스크롤 방지)
+      width: 100vw;
     }
 
-    /* 그룹 배경 제거 & 세로형 고정 */
     .card-group {
       position: relative;
       display: flex;
@@ -195,7 +199,6 @@ textarea {
         animation: none !important;
       }
 
-      /* 각 카드 기본 스타일 */
       .card {
         background-color: var(--light-color);
         padding: 1rem;
@@ -222,7 +225,6 @@ textarea {
       }
     }
 
-    /* 하단 푸터 */
     .footer {
       position: relative;
       background-color: var(--light-color);
@@ -264,6 +266,6 @@ div.break {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10; /* 카드보다 항상 위 */
-  pointer-events: none; /* 클릭 방해 X */
+  z-index: 10;
+  pointer-events: none;
 }
