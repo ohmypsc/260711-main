@@ -50,38 +50,37 @@ export const Cover = () => {
         {BRIDE_FULLNAME}
       </div>
 
-      {/* 날짜 & 장소 */}
+      {/* 날짜, 장소 */}
       <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
       <div className="info">{LOCATION}</div>
 
-      {/* 가족 관계 */}
+      {/* ✅ 가족관계 추가 (버튼 위에) */}
       <div className="family-section">
         <div className="family-line">
           <div className="side-label">신랑측</div>
           <div>
-            {GROOM_INFO.map(({ relation, name }) => (
-              <span key={`${relation}-${name}`}>
-                {relation} {name}{" "}
-                {relation !== GROOM_INFO[GROOM_INFO.length - 1].relation && "· "}
+            {GROOM_INFO.map(({ relation, name }, idx) => (
+              <span key={`g-${relation}-${idx}`}>
+                {relation} {name}
+                {idx < GROOM_INFO.length - 1 && " · "}
               </span>
             ))}
           </div>
         </div>
-
         <div className="family-line">
           <div className="side-label">신부측</div>
           <div>
-            {BRIDE_INFO.map(({ relation, name }) => (
-              <span key={`${relation}-${name}`}>
-                {relation} {name}{" "}
-                {relation !== BRIDE_INFO[BRIDE_INFO.length - 1].relation && "· "}
+            {BRIDE_INFO.map(({ relation, name }, idx) => (
+              <span key={`b-${relation}-${idx}`}>
+                {relation} {name}
+                {idx < BRIDE_INFO.length - 1 && " · "}
               </span>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ✅ 연락하기 버튼 */}
+      {/* 기존 버튼 그대로 */}
       <Button
         onClick={() => {
           openModal({
