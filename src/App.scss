@@ -86,7 +86,10 @@ body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 100vh;
+  height: 100dvh; // ✅ 주소창 제외한 실제 높이 반영
+  @supports not (height: 100dvh) {
+    height: 100vh; // ✅ 구형 브라우저 대응
+  }
 
   &.modal-open {
     overflow-y: hidden;
@@ -100,7 +103,12 @@ body {
 * {
   box-sizing: border-box;
   color: var(--dark-color);
-  user-select: none;
+}
+
+/* 입력 가능 영역은 선택 허용 */
+input,
+textarea {
+  user-select: text;
 }
 
 /* 전체 배경 */
@@ -109,9 +117,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: flex-start; // ✅ 상단부터 자연스럽게 쌓이도록
+  min-height: 100dvh;
   min-width: 100vw;
+
+  @supports not (min-height: 100dvh) {
+    min-height: 100vh;
+  }
 
   .card-view {
     width: 980px;
@@ -122,7 +134,7 @@ body {
     }
 
     @media (max-width: 500px) {
-      width: 100vw;
+      width: 100vw; // ✅ dvw 대신 vw 사용 (수평 스크롤 방지)
     }
 
     /* 그룹 배경 제거 & 세로형 고정 */
@@ -201,10 +213,6 @@ h2 {
   font-size: 1.5rem;
   color: var(--theme-color);
   font-weight: normal;
-
-  &.english {
-    font-family: "Allura";
-  }
 }
 
 /* 구분용 여백 */
