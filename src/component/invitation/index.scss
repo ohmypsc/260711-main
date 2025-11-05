@@ -5,11 +5,12 @@
   word-break: keep-all;
   white-space: normal;
   line-height: 1.9;
-  color: #3b2d2d;
+  color: var(--dark-color); 
 
-  /* ✅ 전역 h2 스타일 적용 — 로컬 h2는 제거 */
+  /* 제목 */
   h2 {
-    margin-bottom: 2rem; /* 제목 아래 여백만 추가 */
+    margin-bottom: 2rem;
+    color: var(--theme-color); 
   }
 
   /* 본문 */
@@ -18,12 +19,13 @@
     font-size: clamp(1rem, 3.4vw, 1.1rem);
     line-height: 1.9;
     letter-spacing: 0.02rem;
-    color: rgba(60, 40, 40, 0.9);
+    color: var(--dark-color);
+    opacity: 0.9;
     max-width: 92%;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
-  /* 시 본문 */
+  /* 시 본문 (내용 일부 살짝 투명도) */
   .content:not(.poet):nth-child(-n + 6) {
     opacity: 0.9;
   }
@@ -35,25 +37,27 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
     font-style: italic;
+    color: var(--alt-color); /* 보조색: 팥죽색 (#c28080) */
   }
 
   /* 마지막 인사문 */
   .content:last-of-type {
-    border-top: 1px solid rgba(200, 150, 150, 0.2);
+    border-top: 1px solid var(--dark-grey-color);
     padding-top: 2rem;
     margin-top: 2.4rem;
     font-weight: 500;
     opacity: 0.95;
+    color: var(--dark-color);
   }
 
-  /* ✅ 하단 여백 시각 보정 */
+  /* 하단 여백 */
   &::after {
     content: "";
     display: block;
-    height: 3rem; /* h2 margin-bottom(2rem) + .break(1rem) */
+    height: 3rem; /* 시각 여백 */
   }
 
-  /* 모바일 대응 */
+  /* 📱 모바일 대응 */
   @media (max-width: 480px) {
     padding: 2rem 1rem;
 
@@ -74,7 +78,7 @@
     }
 
     &::after {
-      height: 3rem; /* 모바일도 동일한 여백 보정 */
+      height: 3rem;
     }
   }
 }
