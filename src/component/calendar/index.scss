@@ -1,3 +1,16 @@
+:root {
+  --theme-color: #ff8585;
+  --theme-bg-color: #ffe7e7;
+  --alt-color: #d88a8a;
+  --alt-bg-color: #f7eaea;
+  --dark-color: #282c34;
+  --dark-grey-color: #d2d2d2;
+  --light-grey-color: #eaeaea;
+  --light-color: #f9f9f9;
+  --white-color: #ffffff;
+  --red-color: #ff0000;
+}
+
 .calendar {
   .calendar-wrapper {
     display: grid;
@@ -11,9 +24,15 @@
       justify-content: center;
       align-items: center;
 
+      /* 요일 헤더 스타일 */
       &.head {
         aspect-ratio: auto;
-        background-color: var(--light-grey-color);
+        background-color: var(--alt-bg-color);
+        color: var(--dark-color);
+        font-weight: bold;
+        font-size: 0.9rem;
+        padding: 0.8rem 0; /* 높이 확대 */
+        border-bottom: 1px solid var(--light-grey-color);
       }
 
       &.holiday > span {
