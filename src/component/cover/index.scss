@@ -31,7 +31,7 @@
     }
   }
 
-  /* 새 날짜 라인 */
+  /* 날짜 줄 */
   .wedding-date-line {
     font-size: clamp(1.2rem, 4vw, 1.6rem);
     font-weight: 600;
@@ -49,10 +49,16 @@
     max-width: 90%;
   }
 
-  /* 가족 정보 */
+  /* 구분선 */
+  .divider-line {
+    width: 60%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.08);
+    margin: 1.6rem 0;
+  }
+
+  /* 가족 섹션 */
   .family-section {
-    margin-top: 1.8rem;
-    margin-bottom: 2.8rem;
     font-size: clamp(0.9rem, 2.8vw, 1rem);
     opacity: 0.9;
     line-height: 1.8;
@@ -79,7 +85,24 @@
 
   /* 버튼 */
   .contact-button {
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  /* 스크롤 유도 표시 */
+  .scroll-hint {
+    font-size: 1.6rem;
+    opacity: 0.4;
+    margin-top: 2.2rem;
+    animation: bounce 1.8s infinite ease-in-out;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
   }
 
   /* 반응형 */
@@ -90,17 +113,13 @@
       font-size: clamp(1.8rem, 5vw, 2.2rem);
     }
 
-    .wedding-date-line {
-      font-size: clamp(1.1rem, 4vw, 1.4rem);
-      margin-bottom: 0.8rem;
+    .divider-line {
+      width: 70%;
+      margin: 1.4rem 0;
     }
 
-    .family-section {
-      margin-bottom: 2.5rem;
-    }
-
-    .contact-button {
-      margin-top: 1.2rem;
+    .scroll-hint {
+      margin-top: 1.8rem;
     }
   }
 
@@ -111,16 +130,14 @@
       font-size: clamp(1.5rem, 5vw, 1.8rem);
     }
 
-    .wedding-date-line {
-      font-size: clamp(1rem, 4.5vw, 1.3rem);
+    .divider-line {
+      width: 75%;
+      margin: 1.2rem 0;
     }
 
-    .family-section {
-      margin-bottom: 2rem;
-    }
-
-    .contact-button {
-      margin-top: 1rem;
+    .scroll-hint {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
     }
   }
 }
