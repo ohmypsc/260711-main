@@ -70,7 +70,6 @@ export const Calendar = () => {
           return (
             <div key={i} className={classes}>
               <span>{date}</span>
-              {isWeddingDate && <div className="heart" />}
             </div>
           )
         })}
