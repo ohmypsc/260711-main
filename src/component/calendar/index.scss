@@ -1,5 +1,5 @@
 /* ================================
-   💞 Calendar Section (Final Rosegold Heart Edition + Edge Fix)
+   💫 Calendar Section (Soft Circle Highlight Version)
    ================================ */
 .calendar {
   padding: 2rem 1rem 2.4rem;
@@ -16,141 +16,83 @@
     color: var(--dark-color);
   }
 
-  /* 📅 달력 전체 */
+  /* 📅 달력 */
   .calendar-wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 44rem;
-    margin: 1.5rem auto;
-    background: var(--light-color);
-    border-radius: 1rem;
-    padding: 1.5rem 1.2rem 1.8rem;
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
-    justify-items: center;
-    align-items: center;
-  }
+    margin: 1rem auto;
+    border: 1px solid var(--light-grey-color);
+    max-width: 26rem;
 
-  /* 🔤 요일 헤더 — Edge 차이 완전 해결 */
-  .head {
-    font-weight: 500;
-    opacity: 0.9;
-    font-size: 16px; /* ✅ 절대값으로 고정 */
-    border-radius: 0.5rem;
-    background: var(--theme-bg-color);
-    width: 100%;
-    height: 2.4rem;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    color: var(--dark-color);
-    letter-spacing: 0.02em;
-    transform: scaleY(0.97);
-    -webkit-text-size-adjust: none;
-    text-rendering: geometricPrecision;
-
-    &.holiday {
-      color: #e07474;
-      font-weight: 500;
-    }
-
-    /* ⚙️ Edge 전용 보정 */
-    @supports (-ms-ime-align:auto) {
-      transform: scaleY(0.96);
-    }
-  }
-
-  /* 📆 날짜 셀 */
-  .day,
-  .holiday,
-  .wedding-date,
-  .empty {
-    aspect-ratio: 1;
-    min-height: 2.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    font-size: 1.15rem;
-    border-radius: 0.6rem;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s ease;
-
-    &.holiday span {
-      color: var(--red-color);
-      font-weight: 500;
-      line-height: 1;
-      display: inline-block;
-    }
-  }
-
-  /* 💖 결혼식 날짜 — 부드러운 하트 & 숫자 가독성 개선 */
-  .wedding-date {
-    position: relative;
-    font-weight: 700;
-    color: var(--white-color);
-    z-index: 1;
-
-    span {
+    > div {
+      aspect-ratio: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
-      z-index: 2;
-    }
 
-    /* 💕 둥근 하트 — border-radius 기반 */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 2.2rem;
-      height: 2rem;
-      background: var(--theme-color);
-      transform: translate(-50%, -50%) rotate(-45deg);
-      border-radius: 0.6rem 0.6rem 0 0;
-      z-index: 1;
-      animation: pulseHeart 3s ease-in-out infinite;
-      box-shadow: 0 0 10px rgba(255, 150, 150, 0.4);
-    }
+      &.head {
+        aspect-ratio: auto;
+        background-color: var(--light-grey-color);
+        font-weight: 600;
+      }
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: calc(50% - 1rem);
-      left: calc(50% - 1rem);
-      width: 1rem;
-      height: 1rem;
-      background: var(--theme-color);
-      border-radius: 50%;
-      transform: translate(0, 0);
-      z-index: 0;
+      &.holiday > span {
+        color: var(--red-color);
+      }
+
+      /* 🌸 결혼식 날짜: 은은한 원형 하이라이트 */
+      &.wedding-date {
+        > span {
+          position: relative;
+          z-index: 2;
+          color: var(--dark-color);
+          font-weight: 700;
+        }
+
+        /* ✅ 하트 대신 원형 강조 */
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 70%;
+          height: 70%;
+          background: radial-gradient(
+            circle at center,
+            rgba(255, 180, 180, 0.5) 0%,
+            rgba(255, 200, 200, 0.25) 40%,
+            transparent 70%
+          );
+          border-radius: 50%;
+          box-shadow: 0 0 8px rgba(255, 180, 180, 0.3);
+          z-index: 1;
+          animation: softPulse 4s ease-in-out infinite;
+        }
+      }
     }
   }
 
-  /* 💓 자연스러운 하트 펄스 애니메이션 */
-  @keyframes pulseHeart {
+  /* 🌿 부드러운 펄스 애니메이션 */
+  @keyframes softPulse {
     0%, 100% {
-      transform: translate(-50%, -50%) rotate(-45deg) scale(1);
-      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.9;
     }
     50% {
-      transform: translate(-50%, -50%) rotate(-45deg) scale(1.15);
-      opacity: 0.85;
+      transform: translate(-50%, -50%) scale(1.15);
+      opacity: 0.6;
     }
   }
 
-  /* ⏰ 카운트다운 */
+  /* ⏰ 카운트다운 (기존 디자인 유지) */
   .countdown-wrapper {
     margin-top: 2.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding-bottom: 0.5rem;
 
     .countdown-label {
       font-size: 1rem;
@@ -203,14 +145,12 @@
   @media (max-width: 500px) {
     .calendar-wrapper {
       max-width: 100%;
-      gap: 0.4rem;
-      padding: 1.2rem;
+      margin: 0.8rem;
     }
 
     .head {
       font-size: 0.95rem;
       font-weight: 500;
-      height: 2.2rem;
     }
 
     .day,
