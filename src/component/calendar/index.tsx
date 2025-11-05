@@ -39,7 +39,11 @@ export const Calendar = () => {
     <LazyDiv className="card calendar">
       <h2>결혼식 날</h2>
       <div className="break" />
-      {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
+
+      {/* 📅 결혼식 날짜 강조 표시 */}
+      <div className="wedding-date-display">
+        {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
+      </div>
 
       <div className="calendar-wrapper">
         {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
