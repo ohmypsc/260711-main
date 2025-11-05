@@ -46,6 +46,13 @@
     opacity: 0.95;
   }
 
+  /* ✅ 하단 여백 시각 보정 */
+  &::after {
+    content: "";
+    display: block;
+    height: 3rem; /* h2 margin-bottom(2rem) + .break(1rem) */
+  }
+
   /* 모바일 대응 */
   @media (max-width: 480px) {
     padding: 2rem 1rem;
@@ -64,6 +71,10 @@
     .content:last-of-type {
       margin-top: 2rem;
       padding-top: 1.6rem;
+    }
+
+    &::after {
+      height: 3rem; /* 모바일도 동일한 여백 보정 */
     }
   }
 }
