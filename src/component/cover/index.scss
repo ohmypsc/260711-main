@@ -21,14 +21,14 @@
     letter-spacing: 0.05rem;
     margin-bottom: 1.8rem;
     line-height: 1.2;
-    color: #3b2d2d; /* 종이에 잉크 번진 듯한 톤 */
+    color: #3b2d2d;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 
-    /* ✦ 심볼만 은은하게 빛나게 */
+    /* ✦ 심볼만 은은하게 반짝임 */
     .divider {
       font-size: 1.4rem;
       margin: 0 0.6rem;
-      color: #d6a7a5; /* 로즈골드빛 */
+      color: #d6a7a5;
       text-shadow: 0 0 6px rgba(245, 200, 190, 0.8),
                    0 0 12px rgba(230, 180, 170, 0.5);
       animation: twinkle 3s ease-in-out infinite;
@@ -73,39 +73,35 @@
     margin: 1.6rem 0;
   }
 
-  /* 가족관계 */
+  /* 가족관계 — 단정하고 정제된 형태 */
   .family-section {
-    font-size: clamp(1rem, 2.8vw, 1.15rem);
-    opacity: 0.95;
-    line-height: 1.9;
-    letter-spacing: 0.02rem;
+    font-size: clamp(1rem, 2.8vw, 1.1rem);
+    opacity: 0.9;
+    line-height: 1.8;
+    letter-spacing: 0.01rem;
     margin-top: 1rem;
     margin-bottom: 1.2rem;
-    color: rgba(90, 60, 60, 0.9);
+    color: rgba(55, 40, 40, 0.9);
 
     .name {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 0.6rem;
-      gap: 0.3rem;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      margin-bottom: 0.4rem;
+      gap: 0.25rem;
     }
 
     .parent-names {
-      font-weight: 700;
-      font-size: 1.1em;
-      letter-spacing: 0.03rem;
+      font-weight: 600;
+      letter-spacing: 0.02rem;
       white-space: nowrap;
-      color: rgba(80, 50, 50, 0.95);
     }
 
     .relation-name {
       font-weight: 500;
+      color: inherit;
       opacity: 0.85;
-      color: rgba(100, 70, 70, 0.8);
-      font-style: italic;
     }
   }
 
