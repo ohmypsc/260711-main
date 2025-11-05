@@ -36,7 +36,7 @@ export const Cover = () => {
 
       {/* 날짜 + 요일 + 시간 */}
       <div className="wedding-date-line">
-        {WEDDING_DATE.format("YYYY.MM.DD")} ({DAY_OF_WEEK[WEDDING_DATE.day()]}){" "}
+        {WEDDING_DATE.format("YYYY.MM.DD.")} ({DAY_OF_WEEK[WEDDING_DATE.day()]}){" "}
         {WEDDING_DATE.format("A h시")}
       </div>
 
@@ -150,9 +150,6 @@ export const Cover = () => {
       >
         연락하기
       </Button>
-
-      {/* 스크롤 유도 표시 */}
-      <div className="scroll-hint">⌄</div>
     </LazyDiv>
   )
 }
