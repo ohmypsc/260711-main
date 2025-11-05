@@ -31,8 +31,7 @@ export const Calendar = () => {
     const minutes = Math.floor((tsDiffAbs % 3600000) / 60000)
     const hours = Math.floor((tsDiffAbs % 86400000) / 3600000)
     const days = Math.floor(tsDiffAbs / 86400000)
-    const isAfter = tsDiff < 0
-    return { days, hours, minutes, seconds, isAfter }
+    return { days, hours, minutes, seconds }
   }, [tsDiff])
 
   return (
@@ -47,23 +46,25 @@ export const Calendar = () => {
           </div>
         ))}
 
-        {/* 빈칸 채우기 */}
+        {/* 빈칸 */}
         {Array.from({ length: firstDayOfWeek }).map((_, i) => (
           <div key={`empty-${i}`} className="empty" />
         ))}
 
-        {/* 날짜 렌더링 */}
+        {/* 날짜 */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const date = i + 1
-          const classes: string[] = []
           const isSunday = (i + firstDayOfWeek) % 7 === 0
-          if (isSunday) classes.push("holiday")
-
           const isWeddingDate = date === WEDDING_DATE.date()
-          if (isWeddingDate) classes.push("wedding-date")
+          const classes = [
+            isSunday ? "holiday" : "",
+            isWeddingDate ? "wedding-date" : "",
+          ]
+            .filter(Boolean)
+            .join(" ")
 
           return (
-            <div key={i} className={classes.join(" ")}>
+            <div key={i} className={classes}>
               <span>{date}</span>
               {isWeddingDate && <div className="heart" />}
             </div>
@@ -71,14 +72,14 @@ export const Calendar = () => {
         })}
       </div>
 
-      {/* 날짜 문장 */}
+      {/* 💒 날짜/시간 문장 */}
       <div className="wedding-date-text">
         💒 {WEDDING_DATE.format(WEDDING_DATE_FORMAT)} 💒
       </div>
 
-      {/* 카운트다운 영역 */}
+      {/* 카운트다운 */}
       <div className="countdown-wrapper">
-        <div className="countdown-label">💫 결혼식까지 남은 시간 💫</div>
+        <div className="countdown-label">결혼식까지 남은 시간</div>
         <div className="countdown">
           {[
             { label: "일", value: diffs.days },
