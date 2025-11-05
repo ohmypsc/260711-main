@@ -1,6 +1,4 @@
-/* ================================
-   💞 Calendar Section (Stable + Animated Heart)
-   ================================ */
+
 .calendar {
   padding: 2rem 1rem;
   text-align: center;
@@ -75,7 +73,7 @@
         z-index: 2;
       }
 
-      /* ❤️ 펄스 하트 배경 복원 */
+      /* ❤️ 펄스 하트 배경 */
       .heart {
         position: absolute;
         width: 70%;
@@ -122,17 +120,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
 
+    /* 상단 안내 문구 */
+    .countdown-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--theme-color);
+      opacity: 0.9;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.05rem;
+    }
+
+    /* 숫자와 단위를 가로로 */
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 2.2rem;
+      align-items: baseline;
+      gap: 1.8rem;
 
       .time-block {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.25rem;
 
         .count {
           font-size: 1.6rem;
@@ -142,9 +153,9 @@
         }
 
         .unit {
-          font-size: 0.75rem;
-          opacity: 0.6;
-          margin-top: 0.2rem;
+          font-size: 0.9rem;
+          opacity: 0.65;
+          color: var(--dark-color);
         }
       }
     }
@@ -185,7 +196,7 @@
     }
 
     .countdown-wrapper .countdown {
-      gap: 1.4rem;
+      gap: 1.2rem;
     }
 
     .countdown-wrapper .countdown .count {
