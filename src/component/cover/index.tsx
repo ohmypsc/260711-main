@@ -29,7 +29,7 @@ export const Cover = () => {
       {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
-        <div className="divider">💞</div>
+        <div className="divider">♥</div>
         {BRIDE_FULLNAME}
       </div>
 
