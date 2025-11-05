@@ -1,5 +1,5 @@
 /* ================================
-   💞 Calendar Section (2025 Unified Version)
+   💞 Calendar Section (Rosegold Point Final)
    ================================ */
 .calendar {
   padding: 2rem 1rem 2.4rem;
@@ -13,12 +13,7 @@
     letter-spacing: 0.05rem;
     padding: 0.8rem 1.2rem;
     display: inline-block;
-
-    background: linear-gradient(90deg, #d7a6a2 0%, #f5d4c7 50%, #d7a6a2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    color: var(--dark-color); /* ✅ 검정색으로 변경 */
   }
 
   /* 📅 달력 */
@@ -27,7 +22,7 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 0.5rem;
     width: 100%;
-    max-width: 40rem;
+    max-width: 44rem; /* ✅ 카드 폭에 맞춤 */
     margin: 1.5rem auto;
     background: var(--light-color);
     border-radius: 1rem;
@@ -37,9 +32,9 @@
     align-items: center;
   }
 
-  /* 🔤 요일 헤더 (일요일도 균일하게 보정) */
+  /* 🔤 요일 헤더 */
   .head {
-    font-weight: 500; /* ✅ 살짝 낮춰 균일화 */
+    font-weight: 500;
     opacity: 0.9;
     font-size: 1.05rem;
     padding: 0.6rem 0;
@@ -49,9 +44,11 @@
     text-align: center;
     color: var(--dark-color);
 
+    /* 일요일 붉은색 톤 완화 + 두께 균일 */
     &.holiday {
-      color: #d56c6c; /* ✅ 붉은 톤 유지하되 과한 두께 방지 */
+      color: #e07474;
       font-weight: 500;
+      text-shadow: 0 0 0.3px rgba(0, 0, 0, 0.05);
     }
   }
 
@@ -70,57 +67,53 @@
     width: 100%;
     text-align: center;
     position: relative;
+    transition: transform 0.3s ease;
 
     &.holiday span {
       color: var(--red-color);
-      font-weight: 500; /* ✅ 일요일 두께 통일 */
+      font-weight: 500;
     }
 
+    /* 💞 결혼식 날짜 강조 — 하트 대신 로즈골드 원형 포인트 */
     &.wedding-date {
-      color: var(--white-color);
-      font-weight: 700;
       position: relative;
       z-index: 1;
+      font-weight: 700;
+      color: var(--theme-color);
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 150, 150, 0.35) 0%,
+        rgba(255, 150, 150, 0.1) 60%,
+        transparent 100%
+      );
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 140, 140, 0.3);
+      animation: pulseCircle 3s ease-in-out infinite;
 
-      > span {
-        position: relative;
-        z-index: 2;
-      }
-
-      .heart {
+      /* ✨ 반사광 효과 */
+      &::after {
+        content: "";
         position: absolute;
-        width: 80%;
-        height: 80%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(45deg);
-        background: var(--theme-color);
-        border-radius: 4px;
-        animation: heartPulse 2.8s ease-in-out infinite;
-
-        &::before,
-        &::after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: var(--theme-color);
-          border-radius: 50%;
-        }
-        &::before { top: -50%; left: 0; }
-        &::after { left: -50%; top: 0; }
+        width: 35%;
+        height: 35%;
+        top: 25%;
+        left: 25%;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        filter: blur(2px);
       }
     }
   }
 
-  @keyframes heartPulse {
+  /* 🌸 부드러운 맥박 애니메이션 */
+  @keyframes pulseCircle {
     0%, 100% {
-      transform: translate(-50%, -50%) rotate(45deg) scale(1);
+      transform: scale(1);
       opacity: 1;
     }
     50% {
-      transform: translate(-50%, -50%) rotate(45deg) scale(1.25);
-      opacity: 0.85;
+      transform: scale(1.1);
+      opacity: 0.9;
     }
   }
 
