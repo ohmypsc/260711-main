@@ -42,7 +42,9 @@ export const Calendar = () => {
 
       {/* 📅 결혼식 날짜 강조 표시 */}
       <div className="wedding-date-display">
-        {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
+        <span className="icon">💍</span>
+        <span className="date-text">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</span>
+        <span className="icon">💐</span>
       </div>
 
       <div className="calendar-wrapper">
