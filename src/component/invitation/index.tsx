@@ -23,7 +23,7 @@ export const Invitation = () => {
         <p>너의 팔에 모두 적어줄게</p>
       </div>
 
-      <div className="inv-content poet">- 진은영, &lt;청혼&gt; 중</div>
+      <div className="inv-content poet"> 진은영, &lt;청혼&gt; 중</div>
 
       <div className="divider-line" />
 
