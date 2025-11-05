@@ -37,6 +37,10 @@ export const Calendar = () => {
   return (
     <LazyDiv className="card calendar">
       <h2>결혼식 날</h2>
+      {/* 💒 날짜/시간 텍스트 (달력 위로 이동) */}
+      <div className="wedding-date-text">
+        💒 {WEDDING_DATE.format(WEDDING_DATE_FORMAT)} 💒
+      </div>
 
       {/* 📅 달력 */}
       <div className="calendar-wrapper">
@@ -72,14 +76,9 @@ export const Calendar = () => {
         })}
       </div>
 
-      {/* 💒 날짜/시간 문장 */}
-      <div className="wedding-date-text">
-        💒 {WEDDING_DATE.format(WEDDING_DATE_FORMAT)} 💒
-      </div>
-
       {/* 카운트다운 */}
       <div className="countdown-wrapper">
-        <div className="countdown-label">결혼식까지 남은 시간</div>
+        <div className="countdown-label">💫결혼식까지 남은 시간💫</div>
         <div className="countdown">
           {[
             { label: "일", value: diffs.days },
