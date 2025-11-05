@@ -1,8 +1,7 @@
 /* ================================
-   💌 Invitation Section (Mobile-optimized, Safe scoped)
+   💌 Invitation Section (Final mobile version)
    ================================ */
 .invitation {
-  text-align: center;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   padding: 2.8rem 1.6rem;
   word-break: keep-all;
@@ -10,7 +9,7 @@
   color: var(--dark-color);
   letter-spacing: 0.015em;
 
-  /* 제목은 전역 스타일을 그대로 사용 */
+  /* 제목은 전역 스타일 사용 */
 
   /* 본문 */
   > .inv-content {
@@ -21,26 +20,25 @@
     opacity: 0.9;
     max-width: 92%;
     text-align: left;
-    text-justify: auto;
-    word-spacing: 0.03em;
     font-weight: 400;
+    padding: 0.4rem 0;
 
-    /* 문단별 여유감을 위한 subtle spacing */
-    padding: 0.3rem 0;
+    p {
+      margin: 0.2rem 0;
+    }
   }
 
-  /* 시 본문 */
+  /* 시 부분 */
   > .inv-content.poet {
     text-align: center;
     font-size: clamp(0.95rem, 3vw, 1rem);
     opacity: 0.65;
     margin-top: 1.4rem;
-    margin-bottom: 2.2rem;
+    margin-bottom: 2.4rem;
     font-style: italic;
     color: var(--alt-color);
     letter-spacing: 0.02em;
 
-    /* 시 느낌 살리는 장식 */
     &::before,
     &::after {
       content: "·";
@@ -52,24 +50,32 @@
     }
   }
 
+  /* 구분선 */
+  .divider-line {
+    width: 65%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(200, 150, 150, 0.25) 50%,
+      transparent 100%
+    );
+    margin: 2rem auto;
+  }
+
   /* 마지막 인사문 */
   > .inv-content:last-of-type {
-    border-top: 1px dashed var(--dark-grey-color);
-    padding-top: 2.2rem;
-    margin-top: 2.6rem;
     font-weight: 500;
     opacity: 0.95;
     line-height: 2.1;
-    word-spacing: 0.05em;
     text-align: center;
     font-style: italic;
+    word-spacing: 0.04em;
   }
 
-  /* 섹션 하단 여백 */
-  &::after {
-    content: "";
-    display: block;
-    height: 3rem;
+  /* break 간격 통일 */
+  .break {
+    height: 1.2rem;
   }
 
   /* 📱 모바일 대응 */
@@ -80,24 +86,15 @@
       font-size: 0.96rem;
       line-height: 1.95;
       margin: 1.2rem auto;
-      text-align: left;
     }
 
-    > .inv-content.poet {
-      margin: 1.8rem 0;
-      &::before,
-      &::after {
-        content: "";
-      }
+    .divider-line {
+      width: 75%;
+      margin: 1.6rem auto;
     }
 
-    > .inv-content:last-of-type {
-      margin-top: 2.2rem;
-      padding-top: 1.6rem;
-    }
-
-    &::after {
-      height: 2.6rem;
+    .break {
+      height: 0.8rem;
     }
   }
 }
