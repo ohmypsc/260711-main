@@ -74,6 +74,7 @@ export const Calendar = () => {
 
       {/* 카운트다운 영역 */}
       <div className="countdown-wrapper">
+        <div className="countdown-label">💫 결혼식까지 남은 시간 💫</div>
         <div className="countdown">
           {[
             { label: "일", value: diffs.days },
