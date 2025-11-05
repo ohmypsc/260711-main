@@ -1,39 +1,37 @@
 /* ================================
-   💞 Calendar Section (통합형 완성)
+   💞 Calendar Section (Mobile Polished Final)
    ================================ */
 .calendar {
-  padding: 2rem 1rem; /* 카드 상하 여백 균등 */
+  padding: 2rem 1rem;
   text-align: center;
 
-  /* 📅 달력 전체 */
+  /* 📅 달력 */
   .calendar-wrapper {
     display: grid;
-    grid-template-columns: repeat(7, minmax(2.8rem, 1fr));
+    grid-template-columns: repeat(7, 1fr);
     gap: 0.5rem;
     width: 100%;
-    max-width: 36rem;
+    max-width: 40rem;
     margin: 1.8rem auto;
     background: var(--light-color);
     border-radius: 1rem;
-    padding: 1.5rem 1rem 1.8rem;
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 1.2rem 1.8rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
     justify-items: center;
     align-items: center;
   }
 
-  /* 🔤 요일 헤더 */
+  /* 🔤 요일 헤더 — 크기 통일 */
   .head {
     font-weight: 600;
     opacity: 0.9;
+    font-size: 1.05rem;
     padding: 0.6rem 0;
     border-radius: 0.5rem;
     background: var(--theme-bg-color);
-    font-size: 1rem;
     width: 100%;
     text-align: center;
-
-    &:first-child { color: var(--red-color); }
-    &:last-child  { color: #567bff; }
+    color: var(--dark-color);
   }
 
   /* 📆 날짜 셀 */
@@ -48,23 +46,11 @@
     font-weight: 500;
     font-size: 1.15rem;
     border-radius: 0.6rem;
-    transition: all 0.2s ease;
     width: 100%;
-    position: relative;
     text-align: center;
-
-    &:hover {
-      background-color: var(--theme-bg-color);
-      transform: scale(1.05);
-    }
+    position: relative;
 
     &.holiday span { color: var(--red-color); }
-
-    &.today span {
-      color: var(--theme-color);
-      font-weight: 700;
-      text-shadow: 0 0 6px rgba(255, 150, 150, 0.4);
-    }
 
     &.wedding-date {
       color: var(--white-color);
@@ -85,7 +71,6 @@
         left: 50%;
         transform: translate(-50%, -50%) rotate(45deg);
         background: var(--theme-color);
-        z-index: 1;
         border-radius: 4px;
         animation: heartPulse 2.8s ease-in-out infinite;
 
@@ -98,7 +83,6 @@
           background: var(--theme-color);
           border-radius: 50%;
         }
-
         &::before { top: -50%; left: 0; }
         &::after { left: -50%; top: 0; }
       }
@@ -116,13 +100,25 @@
     }
   }
 
-  /* 📜 날짜 문장 */
+  /* 💒 날짜 문장 (로즈골드 스타일) */
   .wedding-date-text {
-    margin-top: 1.2rem;
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: var(--dark-color);
-    opacity: 0.9;
+    margin-top: 1.8rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.8rem;
+    display: inline-block;
+
+    /* 로즈골드 그라데이션 */
+    background: linear-gradient(90deg, #d7a6a2 0%, #f5d4c7 50%, #d7a6a2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    /* 은은한 바탕 */
+    background-color: var(--theme-bg-color);
+    box-shadow: 0 0 0.5rem rgba(215, 166, 162, 0.25);
   }
 
   /* ⏰ 카운트다운 */
@@ -136,15 +132,15 @@
     .countdown-label {
       font-size: 1rem;
       font-weight: 600;
-      color: var(--theme-color);
-      opacity: 0.9;
+      color: var(--dark-color);
+      opacity: 0.95;
     }
 
     .countdown {
       display: flex;
       justify-content: center;
       align-items: baseline;
-      gap: 2rem;
+      gap: 1.6rem;
 
       .time-block {
         display: flex;
@@ -153,27 +149,21 @@
         gap: 0.25rem;
 
         .count {
-          font-size: 1.7rem;
+          font-size: 1.6rem;
           font-weight: 700;
-          color: var(--theme-color);
-          animation: sparkle 3s ease-in-out infinite;
+          color: var(--dark-color);
         }
 
         .unit {
-          font-size: 1rem;
+          font-size: 0.9rem;
           opacity: 0.7;
           color: var(--dark-color);
         }
       }
     }
 
-    @keyframes sparkle {
-      0%, 100% { text-shadow: 0 0 5px rgba(255,150,150,0.3); }
-      50% { text-shadow: 0 0 15px rgba(255,170,170,0.6); }
-    }
-
     .message {
-      margin-top: 1.5rem;
+      margin-top: 1.4rem;
       color: var(--dark-color);
       font-size: 1.05rem;
 
@@ -181,7 +171,6 @@
         color: var(--theme-color);
         font-weight: 700;
         font-size: 1.25rem;
-        animation: sparkle 3s ease-in-out infinite;
       }
     }
   }
@@ -189,10 +178,12 @@
   /* 📱 반응형 */
   @media (max-width: 500px) {
     .calendar-wrapper {
-      max-width: 95%;
+      max-width: 100%;
       gap: 0.3rem;
       padding: 1rem;
     }
+
+    .head { font-size: 0.95rem; }
 
     .day,
     .holiday,
@@ -200,8 +191,13 @@
       font-size: 1rem;
     }
 
+    .wedding-date-text {
+      font-size: 1rem;
+      margin-top: 1.5rem;
+    }
+
     .countdown-wrapper .countdown {
-      gap: 1.4rem;
+      gap: 1.2rem;
     }
 
     .countdown-wrapper .countdown .count {
