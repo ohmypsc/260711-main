@@ -26,7 +26,7 @@
         color: var(--red-color);
       }
 
-      /* 결혼식 날짜 (은은하게 빛나는 원형) */
+      /* 결혼식 날짜 (반딧불이처럼 빛나는 원형) */
       &.wedding-date {
         position: relative;
 
@@ -39,15 +39,19 @@
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 60%;
-          height: 60%;
-          background: var(--theme-color);
+          width: 55%;
+          height: 55%;
           border-radius: 50%;
           transform: translate(-50%, -50%);
-          z-index: 0;
-          opacity: 0.8;
-          box-shadow: 0 0 15px var(--theme-color);
-          animation: glowCircle 3s ease-in-out infinite;
+          background: radial-gradient(
+            circle at center,
+            var(--theme-color) 0%,
+            rgba(255, 255, 255, 0.5) 30%,
+            transparent 70%
+          );
+          opacity: 0.9;
+          filter: blur(2px);
+          animation: fireflyGlow 4s ease-in-out infinite;
         }
       }
     }
@@ -99,21 +103,24 @@
   }
 }
 
-/* 💫 은은하게 빛나는 원형 효과 */
-@keyframes glowCircle {
+/* 💫 반딧불이처럼 은은히 깜빡이는 효과 */
+@keyframes fireflyGlow {
   0% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 0 10px var(--theme-color), 0 0 20px var(--theme-bg-color);
-    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.6;
+    filter: blur(3px);
+    box-shadow: 0 0 8px 2px rgba(var(--theme-color-rgb, 255, 133, 133), 0.4);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.15);
-    box-shadow: 0 0 25px var(--theme-color), 0 0 45px var(--theme-bg-color);
+    transform: translate(-50%, -50%) scale(1.1);
     opacity: 1;
+    filter: blur(4px);
+    box-shadow: 0 0 18px 6px rgba(var(--theme-color-rgb, 255, 133, 133), 0.6);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 0 10px var(--theme-color), 0 0 20px var(--theme-bg-color);
-    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.6;
+    filter: blur(3px);
+    box-shadow: 0 0 8px 2px rgba(var(--theme-color-rgb, 255, 133, 133), 0.4);
   }
 }
