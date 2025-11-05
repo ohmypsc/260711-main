@@ -112,6 +112,8 @@ button {
   border: none;
   background-color: transparent;
   padding: 0;
+  position: relative; /* ✅ 버튼에 새로운 컨텍스트 방지 */
+  z-index: 1;
 }
 
 /* 기본 body 스타일 */
@@ -209,6 +211,7 @@ textarea {
         margin: 0.5rem 0;
         box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
         opacity: 0;
+        z-index: 0; /* ✅ 카드보다 꽃잎이 위로 가게 */
 
         &.lazy-active {
           animation-name: lazy-fade-in;
@@ -230,6 +233,7 @@ textarea {
       margin: 0.5rem;
       padding: 1rem;
       opacity: 0;
+      z-index: 0; /* ✅ 꽃잎보다 아래 */
 
       &.lazy-active {
         animation-name: lazy-fade-in;
@@ -273,13 +277,13 @@ div.break {
 
 /* 🌸 꽃잎 효과 항상 카드 위로 */
 .bgEffect {
-  position: fixed;
+  position: fixed !important;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999; /* ✅ 버튼 위로 확실히 올림 */
   pointer-events: none;
+  z-index: 2147483647 !important; /* ✅ 모든 요소 위로 */
 }
 
 /* 🌙 다크모드 대응 */
@@ -318,7 +322,7 @@ div.break {
     -webkit-text-fill-color: transparent;
     color: transparent;
 
-    /* 글자 외곽에 밝은 윤곽 추가로 선명도 확보 */
+    /* 밝은 윤곽 추가 */
     text-shadow:
       0 0 6px rgba(255, 190, 190, 0.7),
       0 0 12px rgba(255, 180, 180, 0.6),
