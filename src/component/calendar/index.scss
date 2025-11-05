@@ -1,5 +1,5 @@
 /* ================================
-   💫 Calendar Section (Full-width + Elegant Rose Highlight)
+   💫 Calendar Section (Full Height + Elegant Highlight)
    ================================ */
 .calendar {
   padding: 2rem 1rem 2.4rem;
@@ -16,53 +16,40 @@
     color: var(--dark-color);
   }
 
-  /* 📅 달력 */
+  /* 📅 달력 (원본 크기 복원) */
   .calendar-wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 100%;
-    margin: 1.2rem auto;
-    padding: 0.6rem 0.4rem;
+    margin: 1rem;
     border: 1px solid var(--light-grey-color);
-    border-radius: 0.6rem;
-    justify-items: center;
-    align-items: center;
-    background: var(--light-color);
 
     > div {
       aspect-ratio: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
       font-size: clamp(1rem, 2.2vw, 1.15rem);
-      color: var(--dark-color);
+      position: relative;
 
       /* 🔤 요일 헤더 */
       &.head {
         aspect-ratio: auto;
+        background-color: var(--light-grey-color);
         font-weight: 600;
-        width: 100%;
-        background: linear-gradient(
-          90deg,
-          rgba(255, 210, 200, 0.4),
-          rgba(255, 230, 230, 0.2)
-        );
-        border-bottom: 1px solid var(--light-grey-color);
-        padding: 0.7rem 0;
-        text-align: center;
+        color: var(--dark-color);
       }
 
-      /* 일요일 */
-      &.holiday span {
+      /* 📅 일요일 */
+      &.holiday > span {
         color: var(--red-color);
       }
 
       /* 🌸 결혼식 날짜: 은은한 원형 하이라이트 */
       &.wedding-date {
+        position: relative;
+
         > span {
-          position: relative;
-          z-index: 2;
+          z-index: 1;
           color: var(--dark-color);
           font-weight: 700;
         }
@@ -73,17 +60,17 @@
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 80%;
-          height: 80%;
+          width: 75%;
+          height: 75%;
+          border-radius: 50%;
           background: radial-gradient(
             circle at center,
             rgba(255, 182, 182, 0.55) 0%,
             rgba(255, 200, 200, 0.25) 45%,
             transparent 75%
           );
-          border-radius: 50%;
           box-shadow: 0 0 10px rgba(255, 180, 180, 0.3);
-          z-index: 1;
+          z-index: 0;
           animation: softPulse 4s ease-in-out infinite;
         }
       }
@@ -160,17 +147,13 @@
   /* 📱 반응형 */
   @media (max-width: 500px) {
     .calendar-wrapper {
-      gap: 0.3rem;
-      padding: 0.8rem 0.4rem;
+      margin: 0.8rem;
+      gap: 0.25rem;
     }
 
     .calendar-wrapper > div {
       font-size: 1rem;
-      min-height: 3rem;
-    }
-
-    .head {
-      font-size: 0.95rem;
+      min-height: 3.3rem; /* ✅ 세로 여유 */
     }
 
     .countdown-wrapper .countdown {
@@ -189,15 +172,10 @@
 @media (prefers-color-scheme: dark) {
   .calendar {
     .calendar-wrapper {
-      background: var(--light-color);
       border-color: rgba(255, 255, 255, 0.1);
 
       .head {
-        background: linear-gradient(
-          90deg,
-          rgba(255, 210, 190, 0.15),
-          rgba(255, 230, 220, 0.08)
-        );
+        background-color: rgba(255, 255, 255, 0.06);
         color: #f3e9e8;
         border-color: rgba(255, 255, 255, 0.08);
       }
@@ -206,6 +184,12 @@
         color: #f4f0ef;
       }
 
+      /* 일요일 */
+      .holiday > span {
+        color: #ffb6b6;
+      }
+
+      /* 결혼식 날짜 하이라이트 */
       .wedding-date::before {
         background: radial-gradient(
           circle at center,
