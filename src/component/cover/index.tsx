@@ -148,7 +148,7 @@ export const Cover = () => {
           })
         }}
       >
-        축하 인사하기
+        연락하기
       </Button>
     </LazyDiv>
   )
