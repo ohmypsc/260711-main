@@ -30,7 +30,7 @@ export const Cover = () => {
       {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
-        <div className="divider">✦</div>
+       <div className="divider">✦</div>
         {BRIDE_FULLNAME}
       </div>
 
@@ -84,8 +84,7 @@ export const Cover = () => {
               </div>
             ),
             content: (
-              /* ✅ 오직 이 부분만 수정됨 */
-              <div className="content">
+              <>
                 <div className="contact-info">
                   {GROOM_INFO.filter(({ phone }) => !!phone).map(
                     ({ relation, name, phone }) => (
@@ -135,7 +134,7 @@ export const Cover = () => {
                     ),
                   )}
                 </div>
-              </div>
+              </>
             ),
             footer: (
               <Button
