@@ -23,7 +23,7 @@ export const Calendar = () => {
       setTsDiff(WEDDING_DATE.diff())
     }, 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, []) // ✅ 의존성 배열 추가 (불필요한 재등록 방지)
 
   const diffs = useMemo(() => {
     const tsDiffAbs = Math.abs(tsDiff)
@@ -31,70 +31,67 @@ export const Calendar = () => {
     const minutes = Math.floor((tsDiffAbs % 3600000) / 60000)
     const hours = Math.floor((tsDiffAbs % 86400000) / 3600000)
     const days = Math.floor(tsDiffAbs / 86400000)
-    return { days, hours, minutes, seconds }
+    const isAfter = tsDiff < 0
+    return { days, hours, minutes, seconds, isAfter }
   }, [tsDiff])
 
   return (
     <LazyDiv className="card calendar">
       <h2>결혼식 날</h2>
+      <div className="break" />
+      {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
 
-      {/* 💒 날짜/시간 텍스트 */}
-      <div className="wedding-date-text">
-        {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
-      </div>
-
-      {/* 📅 달력 */}
       <div className="calendar-wrapper">
-        {/* 요일 헤더 */}
         {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
           <div key={i} className={`head ${i === 0 ? "holiday" : ""}`}>
             <span>{d}</span>
           </div>
         ))}
 
-        {/* 빈칸 */}
+        {/* 빈칸 채우기 */}
         {Array.from({ length: firstDayOfWeek }).map((_, i) => (
-          <div key={`empty-${i}`} className="empty" />
+          <div key={`empty-${i}`} />
         ))}
 
-        {/* 날짜 */}
+        {/* 날짜 렌더링 */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const date = i + 1
+          const classes: string[] = []
           const isSunday = (i + firstDayOfWeek) % 7 === 0
+          if (isSunday) classes.push("holiday")
+
           const isWeddingDate = date === WEDDING_DATE.date()
-          const classes = [
-            isSunday ? "holiday" : "",
-            isWeddingDate ? "wedding-date" : "",
-          ]
-            .filter(Boolean)
-            .join(" ")
+          if (isWeddingDate) classes.push("wedding-date")
 
           return (
-            <div key={i} className={classes}>
+            <div key={i} className={classes.join(" ")}>
               <span>{date}</span>
+              {isWeddingDate && <div className="heart" />}
             </div>
           )
         })}
       </div>
 
-      {/* ⏰ 카운트다운 */}
+      {/* 카운트다운 영역 */}
       <div className="countdown-wrapper">
-        <div className="countdown-label">💫 결혼식까지 남은 시간 💫</div>
         <div className="countdown">
-          {[
-            { label: "일", value: diffs.days },
-            { label: "시간", value: diffs.hours },
-            { label: "분", value: diffs.minutes },
-            { label: "초", value: diffs.seconds },
-          ].map((item) => (
-            <div className="time-block" key={item.label}>
-              <div className="count">{item.value}</div>
-              <div className="unit">{item.label}</div>
-            </div>
-          ))}
+          <div className="unit">일</div>
+          <div />
+          <div className="unit">시간</div>
+          <div />
+          <div className="unit">분</div>
+          <div />
+          <div className="unit">초</div>
+
+          <div className="count">{diffs.days}</div>
+          <span>:</span>
+          <div className="count">{diffs.hours}</div>
+          <span>:</span>
+          <div className="count">{diffs.minutes}</div>
+          <span>:</span>
+          <div className="count">{diffs.seconds}</div>
         </div>
 
-        {/* 🕊️ 디데이 문구 */}
         <div className="message">
           {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이{" "}
           {dayDiff > 0 ? (
