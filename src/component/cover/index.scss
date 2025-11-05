@@ -21,15 +21,15 @@
     letter-spacing: 0.05rem;
     margin-bottom: 1.8rem;
     line-height: 1.2;
-    color: #3b2d2d;
+    color: var(--dark-color); /* ✅ 전역 색상 */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 
     /* ✦ 심볼만 은은하게 반짝임 */
     .divider {
       font-size: 1.4rem;
       margin: 0 0.6rem;
-      color: #d6a7a5;
-      text-shadow: 0 0 6px rgba(245, 200, 190, 0.8),
+      color: var(--theme-color); /* ✅ 전역 포인트 색상 */
+      text-shadow: 0 0 6px rgba(255, 200, 190, 0.8),
                    0 0 12px rgba(230, 180, 170, 0.5);
       animation: twinkle 3s ease-in-out infinite;
     }
@@ -46,13 +46,13 @@
     }
   }
 
-  /* 날짜 & 장소 — 통일된 디자인 */
+  /* 날짜 & 장소 */
   .wedding-date-line,
   .info {
     font-size: clamp(1rem, 3.4vw, 1.2rem);
     font-weight: 500;
     letter-spacing: 0.04rem;
-    color: #4b3b3b;
+    color: var(--dark-color); /* ✅ 전역 색상 */
     opacity: 0.88;
     line-height: 1.6;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
@@ -73,7 +73,7 @@
     margin: 1.6rem 0;
   }
 
-  /* 가족관계 — 단정하고 정제된 형태 */
+  /* 가족관계 */
   .family-section {
     font-size: clamp(1rem, 2.8vw, 1.1rem);
     opacity: 0.9;
@@ -81,7 +81,7 @@
     letter-spacing: 0.01rem;
     margin-top: 1rem;
     margin-bottom: 1.2rem;
-    color: rgba(55, 40, 40, 0.9);
+    color: var(--dark-color); /* ✅ 전역 색상 */
 
     .name {
       display: flex;
@@ -100,7 +100,6 @@
 
     .relation-name {
       font-weight: 500;
-      color: inherit;
       opacity: 0.85;
     }
   }
@@ -108,6 +107,8 @@
   /* 버튼 */
   .contact-button {
     margin-top: 0.8rem;
+    z-index: 1;
+    position: relative;
   }
 
   /* 반응형 */
@@ -147,7 +148,7 @@
     }
   }
 
-  /* relation-name 폭 맞춤용 */
+  /* relation-name 폭 맞춤 */
   .relation-name {
     display: inline-block;
     text-align: center;
@@ -157,6 +158,6 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: 3.5em; /* 글자 길이에 상관없이 균등 정렬 */
+    min-width: 3.5em;
   }
 }
