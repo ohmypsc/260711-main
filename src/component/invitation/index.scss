@@ -1,79 +1,88 @@
 /* ================================
-   💌 Invitation Section (Final mobile version)
+   💌 Invitation Section (Centered Final)
    ================================ */
 .invitation {
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
   padding: 2.8rem 1.6rem;
   word-break: keep-all;
-  white-space: normal;
   color: var(--dark-color);
   letter-spacing: 0.015em;
+  line-height: 2;
+  text-align: center; /* ✅ 본문 전체 중앙 정렬 */
 
-  /* 제목은 전역 스타일 사용 */
-
-  /* 본문 */
+  /* 본문 공통 */
   > .inv-content {
+    max-width: 92%;
     margin: 1.6rem auto;
     font-size: clamp(1rem, 3.5vw, 1.1rem);
-    line-height: 2.05;
-    letter-spacing: 0.03rem;
-    opacity: 0.9;
-    max-width: 92%;
-    text-align: left;
+    opacity: 0.92;
     font-weight: 400;
-    padding: 0.4rem 0;
 
     p {
-      margin: 0.2rem 0;
+      margin: 0.3rem 0;
+      line-height: 1.9;
     }
   }
 
-  /* 시 부분 */
+  /* 시(詩) 구절 */
   > .inv-content.poet {
-    text-align: center;
-    font-size: clamp(0.95rem, 3vw, 1rem);
-    opacity: 0.65;
-    margin-top: 1.4rem;
-    margin-bottom: 2.4rem;
     font-style: italic;
     color: var(--alt-color);
+    opacity: 0.7;
+    margin-top: 1.6rem;
+    margin-bottom: 2.2rem;
     letter-spacing: 0.02em;
 
     &::before,
     &::after {
-      content: "·";
+      content: "❧";
       display: inline-block;
-      opacity: 0.5;
       margin: 0 0.4rem;
-      font-size: 1rem;
+      opacity: 0.4;
+      font-size: 0.9rem;
       vertical-align: middle;
     }
   }
 
   /* 구분선 */
   .divider-line {
-    width: 65%;
+    width: 60%;
     height: 1px;
+    margin: 2rem auto;
     background: linear-gradient(
       90deg,
       transparent 0%,
       rgba(200, 150, 150, 0.25) 50%,
       transparent 100%
     );
-    margin: 2rem auto;
   }
 
-  /* 마지막 인사문 */
-  > .inv-content:last-of-type {
+  /* 마지막 인사문 — 기울임 X, 단정한 마무리 */
+  > .inv-content.closing {
     font-weight: 500;
     opacity: 0.95;
-    line-height: 2.1;
-    text-align: center;
-    font-style: italic;
-    word-spacing: 0.04em;
+    color: var(--dark-color);
+    font-style: normal;
+    margin-top: 0;
+    padding-top: 0;
+
+    p {
+      margin: 0.3rem 0;
+      line-height: 2;
+    }
+
+    /* 시와 구분용 얇은 점선 */
+    &::before {
+      content: "";
+      display: block;
+      width: 30%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
+      margin: 1.6rem auto 1.8rem;
+    }
   }
 
-  /* break 간격 통일 */
+  /* 섹션 간 여백 */
   .break {
     height: 1.2rem;
   }
@@ -90,7 +99,11 @@
 
     .divider-line {
       width: 75%;
-      margin: 1.6rem auto;
+      margin: 1.8rem auto;
+    }
+
+    > .inv-content.closing::before {
+      width: 40%;
     }
 
     .break {
