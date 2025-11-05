@@ -1,95 +1,109 @@
 /* ================================
-   💌 Invitation Section (Safe scoped)
+   💌 Invitation Section (Mobile-optimized, Safe scoped)
    ================================ */
 .invitation {
   text-align: center;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  padding: 2.8rem 1.8rem;
+  padding: 2.8rem 1.6rem;
   word-break: keep-all;
   white-space: normal;
   color: var(--dark-color);
   letter-spacing: 0.015em;
 
-  /* 제목은 전역 스타일을 그대로 따름 */
+  /* 제목은 전역 스타일을 그대로 사용 */
 
-  /* 본문 (inv-content만 스타일링) */
+  /* 본문 */
   > .inv-content {
-    margin: 1.4rem auto;
-    font-size: clamp(1rem, 3.4vw, 1.1rem);
-    line-height: 2;
+    margin: 1.6rem auto;
+    font-size: clamp(1rem, 3.5vw, 1.1rem);
+    line-height: 2.05;
     letter-spacing: 0.03rem;
     opacity: 0.9;
     max-width: 92%;
-    text-align: justify;
-    text-justify: inter-word;
-    word-spacing: 0.05em;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    text-justify: auto;
+    word-spacing: 0.03em;
+    font-weight: 400;
+
+    /* 문단별 여유감을 위한 subtle spacing */
+    padding: 0.3rem 0;
   }
 
-  /* 시 본문 (조금 더 은은하게) */
-  > .inv-content:not(.poet):nth-child(-n + 6) {
-    opacity: 0.85;
-  }
-
-  /* 시인 이름 */
+  /* 시 본문 */
   > .inv-content.poet {
+    text-align: center;
     font-size: clamp(0.95rem, 3vw, 1rem);
-    opacity: 0.6;
-    margin-top: 1.2rem;
+    opacity: 0.65;
+    margin-top: 1.4rem;
     margin-bottom: 2.2rem;
     font-style: italic;
     color: var(--alt-color);
     letter-spacing: 0.02em;
+
+    /* 시 느낌 살리는 장식 */
+    &::before,
+    &::after {
+      content: "·";
+      display: inline-block;
+      opacity: 0.5;
+      margin: 0 0.4rem;
+      font-size: 1rem;
+      vertical-align: middle;
+    }
   }
 
   /* 마지막 인사문 */
   > .inv-content:last-of-type {
-    border-top: 1px solid var(--dark-grey-color);
+    border-top: 1px dashed var(--dark-grey-color);
     padding-top: 2.2rem;
     margin-top: 2.6rem;
     font-weight: 500;
     opacity: 0.95;
-    line-height: 2;
-    word-spacing: 0.06em;
+    line-height: 2.1;
+    word-spacing: 0.05em;
+    text-align: center;
+    font-style: italic;
   }
 
-  /* 하단 여백 */
+  /* 섹션 하단 여백 */
   &::after {
     content: "";
     display: block;
-    height: 3.2rem;
+    height: 3rem;
   }
 
   /* 📱 모바일 대응 */
   @media (max-width: 480px) {
-    padding: 2rem 1rem;
+    padding: 2rem 1.2rem;
 
     > .inv-content {
-      font-size: 0.95rem;
-      line-height: 1.9;
-      max-width: 90%;
-      margin: 1rem auto;
+      font-size: 0.96rem;
+      line-height: 1.95;
+      margin: 1.2rem auto;
       text-align: left;
     }
 
     > .inv-content.poet {
-      margin-bottom: 1.8rem;
-      text-align: center; /* 시 구절만 모바일에서 중앙 정렬 */
+      margin: 1.8rem 0;
+      &::before,
+      &::after {
+        content: "";
+      }
     }
 
     > .inv-content:last-of-type {
-      margin-top: 2rem;
+      margin-top: 2.2rem;
       padding-top: 1.6rem;
     }
 
     &::after {
-      height: 2.8rem;
+      height: 2.6rem;
     }
   }
 }
 
 /* ================================
-   ✅ Contact Modal (unchanged, isolated)
+   ✅ Contact Modal (unchanged)
    ================================ */
 .contact-modal {
   width: 22rem;
