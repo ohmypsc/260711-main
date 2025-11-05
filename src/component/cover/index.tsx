@@ -20,35 +20,13 @@ import { Button } from "../button"
 import PhoneIcon from "../../icons/phone-flip-icon.svg?react"
 import EnvelopeIcon from "../../icons/envelope-icon.svg?react"
 
-const DAY_OF_WEEK = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "토요일",
-]
+const DAY_OF_WEEK = ["일", "월", "화", "수", "목", "금", "토"]
 
 export const Cover = () => {
   const { openModal, closeModal } = useModal()
 
   return (
     <LazyDiv className="card cover">
-      {/* 날짜 */}
-      <div className="wedding-date">
-        {WEDDING_DATE.format("YYYY")}
-        <div className="divider" />
-        {WEDDING_DATE.format("MM")}
-        <div className="divider" />
-        {WEDDING_DATE.format("DD")}
-      </div>
-
-      {/* 요일 */}
-      <div className="wedding-day-of-week">
-        {DAY_OF_WEEK[WEDDING_DATE.day()]}
-      </div>
-
       {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
@@ -56,30 +34,36 @@ export const Cover = () => {
         {BRIDE_FULLNAME}
       </div>
 
-      {/* 날짜 / 장소 */}
-      <div className="info">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</div>
+      {/* 날짜 + 요일 + 시간 */}
+      <div className="wedding-date-line">
+        {WEDDING_DATE.format("YYYY.MM.DD")} ({DAY_OF_WEEK[WEDDING_DATE.day()]}){" "}
+        {WEDDING_DATE.format("A h시")}
+      </div>
+
+      {/* 장소 */}
       <div className="info">{LOCATION}</div>
 
       {/* 가족관계 */}
       <div className="family-section">
         <div className="name">
-          {GROOM_FATHER} · {GROOM_MOTHER}
-          <span className="relation">
-            의 <span className="relation-name">{GROOM_TITLE}</span>
+          <span className="parent-names">
+            {GROOM_FATHER} · {GROOM_MOTHER}의
           </span>{" "}
+          <span className="relation-name">{GROOM_TITLE}</span>{" "}
           {GROOM_FULLNAME}
         </div>
         <div className="name">
-          {BRIDE_FATHER} · {BRIDE_MOTHER}
-          <span className="relation">
-            의 <span className="relation-name">{BRIDE_TITLE}</span>
+          <span className="parent-names">
+            {BRIDE_FATHER} · {BRIDE_MOTHER}의
           </span>{" "}
+          <span className="relation-name">{BRIDE_TITLE}</span>{" "}
           {BRIDE_FULLNAME}
         </div>
       </div>
 
-      {/* 버튼 (Invitation 그대로 유지하되, 가로 90% 적용) */}
+      {/* 버튼 */}
       <Button
+        className="contact-button"
         style={{ width: "90%" }}
         onClick={() => {
           openModal({
