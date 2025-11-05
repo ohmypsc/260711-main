@@ -308,15 +308,24 @@ div.break {
     color: var(--dark-color);
   }
 
-  h2 {
-    /* 다크모드용 로즈골드 그라데이션 (더 밝고 선명하게) */
-    background: linear-gradient(90deg, #ffbcbc 0%, #ffe3d4 50%, #ffbcbc 100%);
+h2 {
+    /* 다크모드용 로즈골드 + 밝기 대비 강화 */
+    background: linear-gradient(
+      90deg,
+      #ffd1d1 0%, 
+      #ffe9e0 50%, 
+      #ffcaca 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.15);
-  }
 
+    /* 글자 외곽에 밝은 윤곽 추가로 선명도 확보 */
+    text-shadow:
+      0 0 6px rgba(255, 200, 200, 0.6),
+      0 0 10px rgba(255, 180, 180, 0.4);
+  }
+  
   .card,
   .footer {
     background-color: var(--light-color);
