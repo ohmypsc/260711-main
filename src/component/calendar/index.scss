@@ -6,16 +6,31 @@
     font-weight: bold;
   }
 
-  /* 📅 결혼식 날짜 표시 */
+  /* 📅 결혼식 날짜 표시 (아이콘+텍스트 한 줄) */
   .wedding-date-display {
-    font-size: 1.3rem;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
     margin-top: 0.5rem;
     margin-bottom: 1.2rem;
-    color: var(--theme-color);
+    white-space: nowrap; /* ✅ 한 줄 고정 */
+  }
+
+  .wedding-date-display .date-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--dark-color); /* ✅ 검정색 텍스트 */
     letter-spacing: 0.04rem;
   }
 
+  .wedding-date-display .icon {
+    font-size: 1.3rem;
+    line-height: 1;
+    transform: translateY(1px);
+  }
+
+  /* 📆 달력 */
   .calendar-wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -72,38 +87,55 @@
     }
   }
 
+  /* ⏰ 카운트다운 영역 */
   .countdown-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    /* 💞 제목 */
+    .countdown-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark-color);
+      margin-bottom: 0.8rem;
+      white-space: nowrap;
+    }
+
     .countdown {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.6rem; /* 숫자 그룹 간 간격 살짝 확장 */
 
       .count-item {
         display: flex;
         align-items: baseline;
-        gap: 0.2rem;
+        gap: 0.28rem;
 
         .count {
-          font-weight: bold;
-          font-size: 1.2rem;
-          opacity: 0.8;
+          font-weight: 800;
+          font-size: 2rem;    /* ⬆️ 더 큼 */
+          line-height: 1;
+          opacity: 0.9;
+          font-variant-numeric: tabular-nums; /* 숫자 자간 안정화 */
         }
 
         .unit {
-          font-weight: bold;
-          font-size: 0.7rem;
-          opacity: 0.5;
+          font-weight: 700;
+          font-size: 0.85rem; /* 단위도 살짝 키움 */
+          opacity: 0.55;
+          line-height: 1;
         }
       }
 
+      /* 구분자 : */
       span {
-        font-weight: bold;
-        opacity: 0.6;
+        font-weight: 800;
+        font-size: 1.4rem; /* ⬆️ 더 큼 */
+        line-height: 1;
+        opacity: 0.65;
+        transform: translateY(1px);
       }
     }
 
@@ -114,6 +146,31 @@
       .d-day {
         color: var(--theme-color);
       }
+    }
+  }
+
+  /* 📱 모바일 최적화 */
+  @media (max-width: 480px) {
+    .wedding-date-display {
+      gap: 0.3rem;
+    }
+    .wedding-date-display .date-text,
+    .wedding-date-display .icon {
+      font-size: 1.15rem;
+    }
+
+    .countdown-wrapper .countdown {
+      gap: 0.5rem;
+    }
+
+    .countdown-wrapper .countdown .count-item .count {
+      font-size: 1.6rem;  /* ⬇️ 화면에 맞춰 살짝 축소 */
+    }
+    .countdown-wrapper .countdown .count-item .unit {
+      font-size: 0.8rem;
+    }
+    .countdown-wrapper .countdown > span {
+      font-size: 1.2rem;  /* ⬇️ 구분자도 살짝 축소 */
     }
   }
 }
