@@ -1,60 +1,99 @@
+/* ================================
+   💌 Invitation Section
+   ================================ */
 .invitation {
   text-align: center;
   font-family: "MapoGoldenPier", "Noto Sans KR", sans-serif;
-  padding: 2rem 1.5rem;
-  word-break: keep-all;     /* 단어가 중간에서 끊기지 않게 */
-  white-space: normal;      /* 줄이 자연스럽게 바뀌도록 */
-  line-height: 1.8;
+  padding: 2.5rem 1.5rem;
+  word-break: keep-all;
+  white-space: normal;
+  line-height: 1.9;
+  color: var(--dark-color);
 
+  /* 제목 */
   h2 {
-    font-size: 1.5rem;
+    margin-bottom: 2rem;
     color: var(--theme-color);
-    margin-bottom: 1rem;
   }
 
+  /* 본문 */
   .content {
-    margin: 0.8rem auto;
-    font-size: 1rem;
-    line-height: 1.8;
+    margin: 1rem auto;
+    font-size: clamp(1rem, 3.4vw, 1.1rem);
+    line-height: 1.9;
+    letter-spacing: 0.02rem;
     color: var(--dark-color);
-    max-width: 95%;         /* 긴 문단이 너무 넓지 않게 */
+    opacity: 0.9;
+    max-width: 92%;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
-  .name {
-    margin-top: 1.2rem;
-    margin-bottom: 0.8rem;
-    font-size: 1.1rem;
+  /* 시 본문 (내용 일부 살짝 투명도) */
+  .content:not(.poet):nth-child(-n + 6) {
+    opacity: 0.9;
+  }
 
-    .relation {
-      font-size: 0.8rem;
-      opacity: 0.7;
+  /* 시인 이름 */
+  .content.poet {
+    font-size: clamp(0.95rem, 3vw, 1rem);
+    opacity: 0.65;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: var(--alt-color);
+  }
 
-      .relation-name {
-        display: inline-block;
-        min-width: 2em;
-      }
-    }
+  /* 마지막 인사문 */
+  .content:last-of-type {
+    border-top: 1px solid var(--dark-grey-color);
+    padding-top: 2rem;
+    margin-top: 2.4rem;
+    font-weight: 500;
+    opacity: 0.95;
+    color: var(--dark-color);
+  }
+
+  /* 하단 여백 */
+  &::after {
+    content: "";
+    display: block;
+    height: 3rem;
   }
 
   /* 📱 모바일 대응 */
   @media (max-width: 480px) {
-    padding: 1.5rem 1rem;
-
-    h2 {
-      font-size: 1.3rem;
-    }
+    padding: 2rem 1rem;
 
     .content {
       font-size: 0.95rem;
-      line-height: 1.7;
+      line-height: 1.8;
       max-width: 90%;
+      margin: 0.9rem auto;
+    }
+
+    .content.poet {
+      margin-bottom: 1.8rem;
+    }
+
+    .content:last-of-type {
+      margin-top: 2rem;
+      padding-top: 1.6rem;
+    }
+
+    &::after {
+      height: 3rem;
     }
   }
 }
 
-/* ✅ 연락하기 모달 스타일 */
+/* ================================
+   ☎️  Contact Modal (분리 & 안전화)
+   ================================ */
 .contact-modal {
   width: 22rem;
+  text-align: left; /* ✅ 상위 .invitation 중앙정렬 상속 방지 */
+  font-family: "Noto Sans KR", sans-serif; /* ✅ 폰트 상속 방지 */
+  line-height: 1.5; /* ✅ 초대장 line-height 상속 방지 */
 
   .header {
     .title-group {
@@ -75,7 +114,8 @@
     }
   }
 
-  .content {
+  /* ✅ .invitation .content 오염 방지 */
+  > .modal-content {
     padding: 0.7rem;
     padding-bottom: 1rem;
 
