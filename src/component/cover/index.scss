@@ -1,163 +1,237 @@
-.cover {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* ================================
+   💞 Calendar Section (Final Rosegold Heart Edition)
+   ================================ */
+.calendar {
+  padding: 2rem 1rem 2.4rem;
   text-align: center;
-  padding: 3.8rem 1.5rem;
-  min-height: 100svh;
-  background-color: var(--light-bg-color, #fff);
-  color: var(--dark-color);
-  transition: all 0.3s ease;
 
-  /* 이름 */
-  > .names {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    font-size: clamp(2rem, 5vw, 2.6rem);
-    font-weight: 700;
+  /* 💒 날짜/시간 텍스트 */
+  .wedding-date-text {
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
     letter-spacing: 0.05rem;
-    margin-bottom: 1.8rem;
-    line-height: 1.2;
-    color: var(--dark-color); /* ✅ 전역 색상 */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    padding: 0.8rem 1.2rem;
+    display: inline-block;
+    color: var(--dark-color);
+  }
 
-    /* ✦ 심볼만 은은하게 반짝임 */
-    .divider {
-      font-size: 1.4rem;
-      margin: 0 0.6rem;
-      color: var(--theme-color); /* ✅ 전역 포인트 색상 */
-      text-shadow: 0 0 6px rgba(255, 200, 190, 0.8),
-                   0 0 12px rgba(230, 180, 170, 0.5);
-      animation: twinkle 3s ease-in-out infinite;
+  /* 📅 달력 전체 */
+  .calendar-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 44rem;
+    margin: 1.5rem auto;
+    background: var(--light-color);
+    border-radius: 1rem;
+    padding: 1.5rem 1.2rem 1.8rem;
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.08);
+    justify-items: center;
+    align-items: center;
+  }
+
+  /* 🔤 요일 헤더 (높이·정렬 완전 통일) */
+  .head {
+    font-weight: 500;
+    opacity: 0.9;
+    font-size: 1.05rem;
+    border-radius: 0.5rem;
+    background: var(--theme-bg-color);
+    width: 100%;
+    height: 2.4rem; /* ✅ 고정 높이 */
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: var(--dark-color);
+
+    &.holiday {
+      color: #e07474;
+      background: var(--theme-bg-color);
+      font-weight: 500;
     }
   }
 
-  @keyframes twinkle {
+  /* 📆 날짜 셀 */
+  .day,
+  .holiday,
+  .wedding-date,
+  .empty {
+    aspect-ratio: 1;
+    min-height: 2.8rem; /* ✅ 모바일에서도 눌리지 않게 최소 높이 확보 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 1.15rem;
+    border-radius: 0.6rem;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+
+    &.holiday span {
+      color: var(--red-color);
+      font-weight: 500;
+      line-height: 1;
+      display: inline-block;
+    }
+
+    /* 💖 결혼식 날짜 강조 (로즈골드 하트) */
+    &.wedding-date {
+      position: relative;
+      font-weight: 700;
+      color: var(--theme-color);
+
+      /* 💕 작고 섬세한 하트 */
+      &::before {
+        content: "";
+        position: absolute;
+        width: 65%;
+        height: 65%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        background: var(--theme-color);
+        border-radius: 6%;
+        z-index: 0;
+        animation: softHeart 3s ease-in-out infinite;
+        box-shadow: 0 0 8px rgba(255, 130, 130, 0.4);
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 65%;
+        height: 65%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        background: var(--theme-color);
+        border-radius: 6%;
+        z-index: -1;
+        filter: blur(6px);
+        opacity: 0.4;
+      }
+
+      /* 하트 둥근 곡선 (before/after 조합) */
+      &::before,
+      &::after {
+        clip-path: polygon(
+          50% 0%,
+          100% 38%,
+          79% 100%,
+          50% 80%,
+          21% 100%,
+          0% 38%
+        );
+      }
+    }
+  }
+
+  /* 💓 부드러운 하트 숨쉬기 애니메이션 */
+  @keyframes softHeart {
     0%, 100% {
+      transform: translate(-50%, -50%) scale(1) rotate(45deg);
       opacity: 1;
-      filter: brightness(1);
     }
     50% {
+      transform: translate(-50%, -50%) scale(1.15) rotate(45deg);
       opacity: 0.85;
-      filter: brightness(1.3);
     }
   }
 
-  /* 날짜 & 장소 */
-  .wedding-date-line,
-  .info {
-    font-size: clamp(1rem, 3.4vw, 1.2rem);
-    font-weight: 500;
-    letter-spacing: 0.04rem;
-    color: var(--dark-color); /* ✅ 전역 색상 */
-    opacity: 0.88;
-    line-height: 1.6;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-    margin-bottom: 1.2rem;
-    max-width: 90%;
-  }
+  /* ⏰ 카운트다운 */
+  .countdown-wrapper {
+    margin-top: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
 
-  /* 구분선 */
-  .divider-line {
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(200, 150, 150, 0.25) 50%,
-      transparent 100%
-    );
-    margin: 1.6rem 0;
-  }
+    .countdown-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark-color);
+      opacity: 0.95;
+    }
 
-  /* 가족관계 */
-  .family-section {
-    font-size: clamp(1rem, 2.8vw, 1.1rem);
-    opacity: 0.9;
-    line-height: 1.8;
-    letter-spacing: 0.01rem;
-    margin-top: 1rem;
-    margin-bottom: 1.2rem;
-    color: var(--dark-color); /* ✅ 전역 색상 */
-
-    .name {
+    .countdown {
       display: flex;
       justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 0.4rem;
-      gap: 0.25rem;
+      align-items: baseline;
+      gap: 1.6rem;
+
+      .time-block {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.25rem;
+
+        .count {
+          font-size: 1.6rem;
+          font-weight: 700;
+          color: var(--dark-color);
+        }
+
+        .unit {
+          font-size: 0.9rem;
+          opacity: 0.7;
+          color: var(--dark-color);
+        }
+      }
     }
 
-    .parent-names {
-      font-weight: 600;
-      letter-spacing: 0.02rem;
-      white-space: nowrap;
+    .message {
+      margin-top: 1.4rem;
+      margin-bottom: 1.4rem;
+      color: var(--dark-color);
+      font-size: 1.05rem;
+
+      .d-day {
+        color: var(--theme-color);
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  /* 📱 반응형 */
+  @media (max-width: 500px) {
+    .calendar-wrapper {
+      max-width: 100%;
+      gap: 0.4rem;
+      padding: 1.2rem;
     }
 
-    .relation-name {
+    .head {
+      font-size: 0.95rem;
       font-weight: 500;
-      opacity: 0.85;
-    }
-  }
-
-  /* 버튼 */
-  .contact-button {
-    margin-top: 0.8rem;
-    z-index: 1;
-    position: relative;
-  }
-
-  /* 반응형 */
-  @media (max-width: 768px) {
-    padding: 3rem 1rem;
-
-    > .names {
-      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      height: 2.2rem;
     }
 
-    .divider-line {
-      width: 70%;
-      margin: 1.4rem 0;
+    .day,
+    .holiday,
+    .wedding-date {
+      font-size: 1.05rem;
+      min-height: 3.1rem; /* ✅ 모바일에서 높이 보정 */
     }
 
-    .family-section {
-      margin-top: 0.8rem;
-      margin-bottom: 1rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    padding: 2rem 1rem;
-
-    > .names {
-      font-size: clamp(1.5rem, 5vw, 1.8rem);
+    .wedding-date-text {
+      font-size: 1rem;
+      margin-top: 1rem;
     }
 
-    .divider-line {
-      width: 75%;
-      margin: 1.2rem 0;
+    .countdown-wrapper .countdown {
+      gap: 1.2rem;
     }
 
-    .family-section {
-      margin-top: 0.6rem;
-      margin-bottom: 0.8rem;
+    .countdown-wrapper .countdown .count {
+      font-size: 1.3rem;
     }
-  }
-
-  /* relation-name 폭 맞춤 */
-  .relation-name {
-    display: inline-block;
-    text-align: center;
-  }
-
-  .relation-name--adjust {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 3.5em;
   }
 }
