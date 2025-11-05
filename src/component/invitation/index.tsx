@@ -7,24 +7,26 @@ export const Invitation = () => {
 
       <div className="break" />
 
-      <div className="content">
+      <div className="inv-content">
         나는 오래된 거리처럼 너를 사랑하고 <br />별들은 벌들처럼 웅성거리고
       </div>
-      <div className="content">
+
+      <div className="inv-content">
         여름에는 작은 은색 드럼을 치는 것처럼 <br />네 손바닥을 두드리는 비를 줄게<br />
         과거에게 그랬듯 미래에게도 아첨하지 않을게
       </div>
-      <div className="content">
+
+      <div className="inv-content">
         어린 시절 순결한 비누 거품 속에서 우리가 했던 맹세들을 찾아<br />
         너의 팔에 모두 적어줄게<br />
         내가 나를 찾는 술래였던 시간을 모두 돌려줄게
       </div>
 
-      <div className="content poet">- 진은영, &lt;청혼&gt; 중</div>
+      <div className="inv-content poet">- 진은영, &lt;청혼&gt; 중</div>
 
       <div className="break" />
 
-      <div className="content">
+      <div className="inv-content">
         오래된 거리처럼 익숙하지만,<br />
         여름 비도 은색 드럼처럼 즐거워하고,<br />
         시간의 흐름에 기대지 않고 서로에게 최선을 다하며,<br />
