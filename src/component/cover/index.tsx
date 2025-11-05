@@ -43,6 +43,9 @@ export const Cover = () => {
       {/* 장소 */}
       <div className="info">{LOCATION}</div>
 
+      {/* 구분선 */}
+      <div className="divider-line" />
+
       {/* 가족관계 */}
       <div className="family-section">
         <div className="name">
@@ -60,6 +63,9 @@ export const Cover = () => {
           {BRIDE_FULLNAME}
         </div>
       </div>
+
+      {/* 구분선 */}
+      <div className="divider-line" />
 
       {/* 버튼 */}
       <Button
@@ -144,6 +150,9 @@ export const Cover = () => {
       >
         연락하기
       </Button>
+
+      {/* 스크롤 유도 표시 */}
+      <div className="scroll-hint">⌄</div>
     </LazyDiv>
   )
 }
