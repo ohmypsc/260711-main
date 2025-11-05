@@ -21,18 +21,15 @@
   --red-color: #ff0000;
 
   font-family: "MapoGoldenPier";
-  /* ✅ 중간 수준 폰트 크기 (적당히 여유 있고 과하지 않음) */
   font-size: clamp(16px, 3.2vw, 20px);
 }
 
 @media (max-width: 500px) {
-  /* ✅ 모바일에서 약간 확대 (루트 대비 10% 정도) */
   body {
     font-size: 1.1rem;
     color: #222222;
   }
 
-  /* ✅ 카드 폰트는 본문 중심 비율 유지 */
   .background,
   .background .card,
   .background .information,
@@ -42,7 +39,9 @@
     font-size: 1.1rem;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     line-height: 1.35;
   }
 
@@ -139,7 +138,6 @@ body {
   color: var(--dark-color);
 }
 
-/* 입력 가능 영역은 선택 허용 */
 input,
 textarea {
   user-select: text;
@@ -249,9 +247,23 @@ textarea {
 
 /* 제목 */
 h2 {
-  font-size: 1.45rem;
-  color: var(--theme-color);
-  font-weight: normal;
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.06rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+
+  /* 로즈골드 그라데이션 */
+  background: linear-gradient(90deg, #d7a6a2 0%, #f5d4c7 50%, #d7a6a2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+  @media (max-width: 500px) {
+    margin-bottom: 1.4rem;
+  }
 }
 
 /* 구분용 여백 */
