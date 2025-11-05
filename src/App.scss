@@ -281,3 +281,55 @@ div.break {
   z-index: 10;
   pointer-events: none;
 }
+
+
+
+/* 🌙 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --theme-color: #ff9f9f;
+    --theme-bg-color: #2b2b2b;
+    --alt-color: #ffb3b3;
+    --alt-bg-color: #3a3a3a;
+    --dark-color: #f2f2f2;
+    --dark-grey-color: #aaaaaa;
+    --light-grey-color: #444444;
+    --light-color: #1f1f1f;
+    --white-color: #141414;
+    --red-color: #ff6b6b;
+  }
+
+  body {
+    background-color: var(--theme-bg-color);
+    color: var(--dark-color);
+  }
+
+  * {
+    color: var(--dark-color);
+  }
+
+  h2 {
+    /* 다크모드용 로즈골드 그라데이션 (더 밝고 선명하게) */
+    background: linear-gradient(90deg, #ffbcbc 0%, #ffe3d4 50%, #ffbcbc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.15);
+  }
+
+  .card,
+  .footer {
+    background-color: var(--light-color);
+    border-color: var(--light-grey-color);
+    box-shadow: 0 0 0.6rem 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .background {
+    background-color: var(--theme-bg-color);
+  }
+
+  button {
+    color: var(--dark-color);
+  }
+}
+
