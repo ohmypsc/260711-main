@@ -146,4 +146,17 @@
       margin-bottom: 0.8rem;
     }
   }
+
+  /* relation-name 폭 맞춤용 */
+  .relation-name {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .relation-name--adjust {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 3.5em; /* 글자 길이에 상관없이 균등 정렬 */
+  }
 }
