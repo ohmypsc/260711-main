@@ -4,7 +4,6 @@ import {
   GROOM_FULLNAME,
   LOCATION,
   WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
   GROOM_INFO,
   BRIDE_INFO,
   GROOM_FATHER,
@@ -30,7 +29,7 @@ export const Cover = () => {
       {/* 이름 */}
       <div className="names">
         {GROOM_FULLNAME}
-       <div className="divider">✦</div>
+        <div className="divider">✦</div>
         {BRIDE_FULLNAME}
       </div>
 
@@ -52,14 +51,15 @@ export const Cover = () => {
           <span className="parent-names">
             {GROOM_FATHER} · {GROOM_MOTHER}의
           </span>{" "}
-          <span className="relation-name">{GROOM_TITLE}</span>{" "}
+          <span className="relation-name relation-name--adjust">{GROOM_TITLE}</span>{" "}
           {GROOM_FULLNAME}
         </div>
+
         <div className="name">
           <span className="parent-names">
             {BRIDE_FATHER} · {BRIDE_MOTHER}의
           </span>{" "}
-          <span className="relation-name">{BRIDE_TITLE}</span>{" "}
+          <span className="relation-name relation-name--adjust">{BRIDE_TITLE}</span>{" "}
           {BRIDE_FULLNAME}
         </div>
       </div>
@@ -106,7 +106,7 @@ export const Cover = () => {
                           />
                         </div>
                       </Fragment>
-                    ),
+                    )
                   )}
                 </div>
 
@@ -131,7 +131,7 @@ export const Cover = () => {
                           />
                         </div>
                       </Fragment>
-                    ),
+                    )
                   )}
                 </div>
               </>
