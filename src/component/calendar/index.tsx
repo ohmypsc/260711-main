@@ -39,7 +39,7 @@ export const Calendar = () => {
       <h2>결혼식 날</h2>
       {/* 💒 날짜/시간 텍스트 (달력 위로 이동) */}
       <div className="wedding-date-text">
-        💒 {WEDDING_DATE.format(WEDDING_DATE_FORMAT)} 💒
+         {WEDDING_DATE.format(WEDDING_DATE_FORMAT)} 
       </div>
 
       {/* 📅 달력 */}
