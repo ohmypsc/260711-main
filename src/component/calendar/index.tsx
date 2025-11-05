@@ -38,9 +38,8 @@ export const Calendar = () => {
   return (
     <LazyDiv className="card calendar">
       <h2>결혼식 날</h2>
-      <div className="break" />
-      {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
 
+      {/* 📅 달력 */}
       <div className="calendar-wrapper">
         {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
           <div key={i} className={`head ${i === 0 ? "holiday" : ""}`}>
@@ -50,7 +49,7 @@ export const Calendar = () => {
 
         {/* 빈칸 채우기 */}
         {Array.from({ length: firstDayOfWeek }).map((_, i) => (
-          <div key={`empty-${i}`} />
+          <div key={`empty-${i}`} className="empty" />
         ))}
 
         {/* 날짜 렌더링 */}
@@ -70,6 +69,11 @@ export const Calendar = () => {
             </div>
           )
         })}
+      </div>
+
+      {/* 날짜 문장 */}
+      <div className="wedding-date-text">
+        💒 {WEDDING_DATE.format(WEDDING_DATE_FORMAT)} 💒
       </div>
 
       {/* 카운트다운 영역 */}
