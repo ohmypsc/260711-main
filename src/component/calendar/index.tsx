@@ -67,9 +67,9 @@ export const Calendar = () => {
           return (
             <div key={i} className={classes.join(" ")}>
               <span>{date}</span>
-              {/* ✨ 결혼식 날짜 강조용 입자 */}
+              {/* ✨ 결혼식 날짜 강조용 스파클 */}
               {isWeddingDate && (
-                <div className="light-particle">
+                <div className="sparkles">
                   {Array.from({ length: 8 }).map((_, i) => (
                     <span key={i} />
                   ))}
@@ -90,14 +90,22 @@ export const Calendar = () => {
           ) : (
             <>
               <span className="d-day">
-                <span className="number">{diffs.days}</span>
-                <span className="unit">일</span>
-                <span className="number">{diffs.hours}</span>
-                <span className="unit">시간</span>
-                <span className="number">{diffs.minutes}</span>
-                <span className="unit">분</span>
-                <span className="number">{diffs.seconds}</span>
-                <span className="unit">초</span>
+                <span className="pair">
+                  <span className="number">{diffs.days}</span>
+                  <span className="unit">일</span>
+                </span>
+                <span className="pair">
+                  <span className="number">{diffs.hours}</span>
+                  <span className="unit">시간</span>
+                </span>
+                <span className="pair">
+                  <span className="number">{diffs.minutes}</span>
+                  <span className="unit">분</span>
+                </span>
+                <span className="pair">
+                  <span className="number">{diffs.seconds}</span>
+                  <span className="unit">초</span>
+                </span>
               </span>
               <br />
               {diffs.isAfter ? "지났습니다." : "남았습니다."}
