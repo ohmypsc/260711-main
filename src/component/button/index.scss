@@ -1,66 +1,62 @@
-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.7rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background: var(--white-color);
-  color: var(--dark-color);
-  border: 1px solid var(--dark-grey-color);
-  cursor: pointer;
+button.button {
+  font-family: inherit;
+  background: none;
   position: relative;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 3;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent; /* 모바일 파란 터치 제거 */
   touch-action: manipulation;
-
-  /* 🩰 모바일 기본 파란색 터치 반응 제거 */
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
 
-  img,
-  svg {
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
+  /* 🧡 기본 버튼 스타일 1 */
+  &.button-style-1 {
+    background-color: var(--white-color);
+    border: solid 0.05rem var(--alt-color);
+    color: var(--alt-color);
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+    &:active {
+      transform: scale(0.95);
+      background: color-mix(in oklab, var(--white-color) 80%, var(--alt-color));
+      box-shadow:
+        inset 0 2px 5px rgba(0, 0, 0, 0.08),
+        0 0 6px rgba(255, 133, 133, 0.2);
+    }
   }
 
-  /* 🧡 귀여운 터치/클릭 반응 */
-  &:active {
-    transform: scale(0.95);
-    background: color-mix(in oklab, var(--theme-bg-color) 60%, white);
-    border-color: var(--theme-color);
-    box-shadow:
-      inset 0 2px 6px rgba(0, 0, 0, 0.08),
-      0 0 8px rgba(255, 133, 133, 0.25);
+  /* 💕 강조 버튼 스타일 2 */
+  &.button-style-2 {
+    background-color: var(--alt-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+    &:active {
+      transform: scale(0.95);
+      background: color-mix(in oklab, var(--alt-color) 90%, white);
+      box-shadow:
+        inset 0 2px 6px rgba(255, 255, 255, 0.15),
+        0 0 8px rgba(255, 133, 133, 0.25);
+    }
   }
 
-  /* ✨ 감성적인 반짝임 효과 */
+  /* ✨ 공통 터치 반짝 효과 */
   &:active::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35), transparent 70%);
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
     animation: softTap 0.4s ease-out forwards;
-  }
-
-  /* 🖱️ 데스크톱에서는 손모양 커서 유지 */
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      transform: scale(0.98);
-      background: color-mix(in oklab, var(--theme-bg-color) 40%, white);
-      border-color: var(--theme-color);
-    }
   }
 }
 
-/* ✨ 반짝이는 터치 애니메이션 */
+/* ✨ 터치 반짝 애니메이션 */
 @keyframes softTap {
   0% {
     transform: scale(0.8);
