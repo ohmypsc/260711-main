@@ -4,28 +4,30 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 5rem 1.5rem;
+  padding: 8rem 1.5rem;
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
   transition: all 0.3s ease;
 
+  /* 이름 */
   > .names {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-size: clamp(2rem, 5vw, 2.6rem);
     font-weight: 700;
-    letter-spacing: 0.06rem;
-    margin-bottom: 2rem;
-    line-height: 1.3;
-    color: var(--dark-color);
+    letter-spacing: 0.05rem;
+    margin-bottom: 1.8rem;
+    line-height: 1.2;
+    color: var(--dark-color); /* ✅ 전역 색상 */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 
+    /* ✦ 심볼만 은은하게 반짝임 */
     .divider {
-      font-size: 1.6rem;
-      margin: 0 0.8rem;
-      color: var(--theme-color);
+      font-size: 1.4rem;
+      margin: 0 0.6rem;
+      color: var(--theme-color); /* ✅ 전역 포인트 색상 */
       text-shadow: 0 0 6px rgba(255, 200, 190, 0.8),
                    0 0 12px rgba(230, 180, 170, 0.5);
       animation: twinkle 3s ease-in-out infinite;
@@ -33,21 +35,31 @@
   }
 
   @keyframes twinkle {
-    0%, 100% { opacity: 1; filter: brightness(1); }
-    50% { opacity: 0.85; filter: brightness(1.3); }
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.85;
+      filter: brightness(1.3);
+    }
   }
 
+  /* 날짜 & 장소 */
   .wedding-date-line,
   .info {
-    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    font-size: clamp(1rem, 3.4vw, 1.2rem);
     font-weight: 500;
-    letter-spacing: 0.05rem;
-    line-height: 1.7;
-    opacity: 0.9;
-    margin-bottom: 1.4rem;
+    letter-spacing: 0.04rem;
+    color: var(--dark-color); /* ✅ 전역 색상 */
+    opacity: 0.88;
+    line-height: 1.6;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.2rem;
+    max-width: 90%;
   }
 
+  /* 구분선 */
   .divider-line {
     width: 60%;
     height: 1px;
@@ -57,7 +69,7 @@
       rgba(200, 150, 150, 0.25) 50%,
       transparent 100%
     );
-    margin: 2rem 0;
+    margin: 1.6rem 0;
   }
 
   /* 가족관계 */
@@ -68,7 +80,7 @@
     letter-spacing: 0.01rem;
     margin-top: 1rem;
     margin-bottom: 1.2rem;
-    color: var(--dark-color); 
+    color: var(--dark-color); /* ✅ 전역 색상 */
 
     .name {
       display: flex;
@@ -91,8 +103,60 @@
     }
   }
 
+  /* 버튼 */
   .contact-button {
-    margin-top: 1.2rem;
+    margin-top: 0.8rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  /* 반응형 */
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+
+    > .names {
+      font-size: clamp(1.8rem, 5vw, 2.2rem);
+    }
+
+    .divider-line {
+      width: 70%;
+      margin: 1.4rem 0;
+    }
+
+    .family-section {
+      margin-top: 0.8rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+
+    > .names {
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
+    }
+
+    .divider-line {
+      width: 75%;
+      margin: 1.2rem 0;
+    }
+
+    .family-section {
+      margin-top: 0.6rem;
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  /* relation-name 폭 맞춤 */
+  .relation-name {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .relation-name--adjust {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 3.5em;
   }
 }
- 
