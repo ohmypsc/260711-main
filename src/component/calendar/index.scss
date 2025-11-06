@@ -1,56 +1,52 @@
 .calendar {
-  /* 상단 날짜 */
-  .wedding-date-text {
-    display: block;
-    text-align: center;
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    font-weight: 600;
-    color: var(--theme-color);
-    letter-spacing: 0.03em;
-    margin-bottom: 1.6rem;
-    white-space: nowrap; /* ✅ 한 줄 유지 */
-    text-shadow: 0 1px 3px rgba(255, 133, 133, 0.25);
-  }
-
-  /* 📅 달력 */
+  /* 📅 달력 컨테이너 */
   .calendar-wrapper {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     margin: 1.8rem 1rem 0;
-    border: 1px solid var(--light-grey-color);
-    border-radius: 0.75rem;
-    background-color: var(--white-color);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      inset 0 0 20px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
 
     > div {
-      aspect-ratio: 1;
+      aspect-ratio: 1 / 1;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       font-size: 1.05rem;
       font-weight: 500;
       color: var(--dark-color);
       position: relative;
+      transition: background-color 0.3s ease;
 
+      /* 📆 요일 헤더 */
       &.head {
-        background-color: var(--light-grey-color);
+        aspect-ratio: auto;
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         color: var(--dark-color);
-        padding: 0.5rem 0; /* ✅ 세로 간격 축소 */
-        min-height: 2.2rem;
-        border-bottom: 1px solid var(--dark-grey-color);
+        padding: 0.35rem 0; /* ✅ 세로 간격 최소화 */
+        line-height: 1.3;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       }
 
-      /* ✨ 결혼식 날짜 — 은은한 원형 하이라이트 */
+      /* ✨ 결혼식 날짜 — 은은한 하이라이트 */
       &.wedding-date {
         position: relative;
         overflow: hidden;
 
         > span {
-          position: relative;
           z-index: 2;
+          position: relative;
           font-weight: 700;
           color: var(--dark-color);
         }
@@ -70,11 +66,23 @@
             transparent 75%
           );
           opacity: 0.55;
-          filter: blur(5px);
+          filter: blur(6px);
           z-index: 1;
           animation: softPulse 4s ease-in-out infinite;
         }
       }
+    }
+  }
+
+  /* ✨ 은은한 하이라이트 애니메이션 */
+  @keyframes softPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.45;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.08);
+      opacity: 0.65;
     }
   }
 
@@ -110,7 +118,7 @@
         .pair {
           display: inline-flex;
           align-items: flex-end;
-          gap: 0.15rem;
+          gap: 0.1rem;
         }
 
         .number {
@@ -126,64 +134,81 @@
           font-size: 0.85rem;
           font-weight: 500;
           color: rgba(0, 0, 0, 0.55);
+          transform: translateY(-2px);
 
           @media (prefers-color-scheme: dark) {
             color: rgba(255, 255, 255, 0.75);
-            text-shadow: 0 0 3px rgba(255, 255, 255, 0.25);
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.2);
           }
         }
       }
     }
   }
 
-  /* ✨ 은은한 빛 확산 애니메이션 */
-  @keyframes softPulse {
-    0%, 100% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.45;
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.08);
-      opacity: 0.65;
+  /* 🌙 다크모드 글라스 효과 */
+  @media (prefers-color-scheme: dark) {
+    .calendar-wrapper {
+      background: rgba(30, 30, 30, 0.45);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+
+      .head {
+        background: rgba(255, 255, 255, 0.08);
+        color: #f2f2f2;
+      }
+
+      .wedding-date::before {
+        background: radial-gradient(
+          circle at center,
+          color-mix(in oklab, var(--theme-color) 75%, white) 0%,
+          transparent 70%
+        );
+        opacity: 0.65;
+      }
     }
   }
 
   /* 📱 반응형 */
   @media (max-width: 768px) {
-    .wedding-date-text {
-      font-size: 1.1rem;
-    }
+    .calendar-wrapper {
+      margin: 1.5rem 0.5rem 0;
+      border-radius: 0.8rem;
+      backdrop-filter: blur(10px);
 
-    .calendar-wrapper > div {
-      font-size: 0.9rem;
-    }
+      > div {
+        font-size: 0.95rem;
+      }
 
-    .calendar-wrapper > div.head {
-      padding: 0.4rem 0;
-      min-height: 1.8rem;
+      .head {
+        font-size: 0.85rem;
+        padding: 0.3rem 0; /* ✅ 세로 크기 축소 */
+      }
     }
 
     .countdown-wrapper .message .middle .d-day .number {
       font-size: 1.5rem;
     }
+
     .countdown-wrapper .message .middle .d-day .unit {
       font-size: 0.8rem;
     }
   }
 
   @media (max-width: 480px) {
-    .wedding-date-text {
-      font-size: 1rem;
-    }
+    .calendar-wrapper {
+      margin: 1.2rem 0.4rem 0;
+      border-radius: 0.7rem;
 
-    .calendar-wrapper > div {
-      font-size: 0.85rem;
-    }
+      > div {
+        font-size: 0.85rem;
+      }
 
-    .calendar-wrapper > div.head {
-      padding: 0.3rem 0;
-      min-height: 1.6rem;
-      font-size: 0.8rem;
+      .head {
+        padding: 0.25rem 0;
+        font-size: 0.8rem;
+      }
     }
 
     .countdown-wrapper {
@@ -193,6 +218,7 @@
     .countdown-wrapper .message .middle .d-day .number {
       font-size: 1.3rem;
     }
+
     .countdown-wrapper .message .middle .d-day .unit {
       font-size: 0.75rem;
     }
