@@ -1,7 +1,3 @@
-/* ===============================
-   📝 GUESTBOOK (방명록 전체)
-   =============================== */
-
 .guestbook {
   .post {
     text-align: left;
@@ -10,12 +6,7 @@
     border-radius: 0.5rem;
     border: 1px solid var(--light-grey-color);
     font-size: 0.9rem;
-    margin-top: 0.5rem;
-    transition: transform 0.15s ease;
-
-    &:hover {
-      transform: translateY(-2px);
-    }
+    margin-top: 0.2rem;
 
     .heading {
       margin: 0.5rem;
@@ -27,32 +18,27 @@
         z-index: 3;
         width: 0.8rem;
         height: 0.8rem;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
 
-        &:hover {
-          opacity: 1;
+        &::before {
+          content: "";
+          width: 0.1rem;
+          height: 100%;
+          background-color: var(--dark-grey-color);
+          position: absolute;
+          transform: rotate(45deg);
+          top: 0;
+          left: 50%;
         }
 
-        &::before,
         &::after {
           content: "";
           width: 0.1rem;
           height: 100%;
           background-color: var(--dark-grey-color);
           position: absolute;
+          transform: rotate(135deg);
           top: 0;
           left: 50%;
-          transform-origin: center;
-        }
-
-        &::before {
-          transform: rotate(45deg);
-        }
-
-        &::after {
-          transform: rotate(135deg);
         }
       }
     }
@@ -67,20 +53,17 @@
 
         .name {
           margin-right: 0.5rem;
-          font-weight: 600;
-          color: var(--dark-color);
         }
 
         .date {
           font-size: 0.8rem;
-          opacity: 0.6;
+          opacity: 0.5;
         }
       }
 
       .content {
         word-wrap: break-word;
         white-space: pre-wrap;
-        line-height: 1.6;
       }
     }
   }
@@ -89,21 +72,20 @@
   .pagination {
     display: flex;
     justify-content: center;
-    margin: 1rem 0;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 
     .page {
-      padding: 0.3rem 0.6rem;
+      padding: 0.3rem 0.5rem;
       margin: 0 0.2rem;
       border: 1px solid var(--dark-grey-color);
       border-radius: 0.3rem;
       cursor: pointer;
       user-select: none;
-      transition: all 0.2s ease;
 
       &.current {
         background-color: var(--theme-color);
         color: var(--white-color);
-        border-color: var(--theme-color);
       }
 
       &:hover:not(.current) {
@@ -113,70 +95,56 @@
   }
 }
 
-/* ===============================
-   ✏️ WRITE GUESTBOOK MODAL
-   =============================== */
-
+/* ✏️ 방명록 작성 모달 */
 .write-guestbook-modal {
-  width: clamp(22rem, 90vw, 30rem);
+  width: 22rem;
+  height: clamp(26rem, 70vh, 34rem); /* ✅ 반응형 세로 크기 */
   max-height: 90vh;
   overflow-y: auto;
-  border-radius: 0.7rem;
-  background-color: var(--white-color);
-  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.15);
-  color: var(--dark-color);
-  animation: modalFadeIn 0.25s ease-out;
-  font-family: "MapoGoldenPier", sans-serif;
 
   .header {
     .title-group {
       text-align: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--dark-grey-color);
 
       .title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         color: var(--theme-color);
-        padding: 0.6rem;
-        font-weight: 700;
+        padding: 0.5rem;
       }
 
       .subtitle {
-        font-size: 1rem;
-        opacity: 0.85;
+        font-size: 0.9rem;
       }
+
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--dark-grey-color);
     }
   }
 
   .content {
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 0.7rem 0.7rem 0.7rem;
 
     .form {
       display: flex;
       flex-direction: column;
-      margin-top: 1.2rem;
+      margin-top: 1rem;
 
-      input,
-      textarea {
-        padding: 0.7rem;
-        margin-bottom: 0.7rem;
+      input {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
         border: 1px solid var(--light-grey-color);
-        border-radius: 0.4rem;
-        font-size: 0.9rem;
-        background-color: var(--white-color);
-        color: var(--dark-color);
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-        &:focus {
-          border-color: var(--theme-color);
-          box-shadow: 0 0 0 0.1rem rgba(255, 180, 180, 0.3);
-          outline: none;
-        }
+        border-radius: 0.3rem;
+        font-family: "MapoGoldenPier";
+        font-size: 0.8rem;
       }
 
       textarea {
-        min-height: 6rem;
-        resize: vertical;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid var(--light-grey-color);
+        border-radius: 0.3rem;
+        font-family: "MapoGoldenPier";
+        font-size: 0.8rem;
       }
     }
   }
@@ -184,103 +152,53 @@
   .footer {
     display: flex;
     flex-direction: row;
-    gap: 0.6rem;
-    padding: 0 1rem 1rem 1rem;
 
     button {
       width: 100%;
-      font-size: 1rem;
-      padding: 0.7rem 0;
-      border-radius: 0.4rem;
-      cursor: pointer;
-      transition: background-color 0.25s ease, transform 0.1s ease;
-
-      &:hover {
-        transform: translateY(-1px);
-      }
-
-      &:active {
-        transform: scale(0.98);
-      }
     }
   }
 }
 
-/* ===============================
-   🗑️ DELETE GUESTBOOK MODAL
-   =============================== */
-
+/* 🗑️ 삭제 모달 */
 .delete-guestbook-modal {
-  @extend .write-guestbook-modal; /* ✅ 동일한 구조 사용 */
+  width: 22rem;
+  height: clamp(22rem, 60vh, 28rem); /* ✅ 반응형 세로 크기 */
+  max-height: 85vh;
+  overflow-y: auto;
 
   .header {
     .title {
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--theme-color);
-      padding: 0.6rem;
-      font-weight: 700;
-      border-bottom: 1px solid var(--dark-grey-color);
     }
   }
 
   .content {
-    .form {
-      input {
-        padding: 0.7rem;
-        margin-bottom: 0.7rem;
-        border: 1px solid var(--light-grey-color);
-        border-radius: 0.4rem;
-        font-size: 0.9rem;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0 0.7rem 0.7rem 0.7rem;
 
-        &:focus {
-          border-color: var(--theme-color);
-          box-shadow: 0 0 0 0.1rem rgba(255, 180, 180, 0.3);
-          outline: none;
-        }
+    .form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+
+      input {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid var(--light-grey-color);
+        border-radius: 0.3rem;
+        font-family: "MapoGoldenPier";
+        font-size: 0.8rem;
       }
     }
   }
-}
 
-/* ===============================
-   📱 RESPONSIVE
-   =============================== */
-@media (max-width: 480px) {
-  .write-guestbook-modal,
-  .delete-guestbook-modal {
-    width: 92vw;
-    padding: 0.5rem;
-  }
+  .footer {
+    display: flex;
+    flex-direction: row;
 
-  .write-guestbook-modal .header .title,
-  .delete-guestbook-modal .header .title {
-    font-size: 1.1rem;
-  }
-
-  .write-guestbook-modal .content .form input,
-  .write-guestbook-modal .content .form textarea,
-  .delete-guestbook-modal .content .form input {
-    font-size: 0.9rem;
-  }
-
-  .footer button {
-    font-size: 0.95rem;
-    padding: 0.6rem 0;
-  }
-}
-
-/* ===============================
-   ✨ ANIMATIONS
-   =============================== */
-@keyframes modalFadeIn {
-  from {
-    transform: translateY(15px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+    button {
+      width: 100%;
+    }
   }
 }
