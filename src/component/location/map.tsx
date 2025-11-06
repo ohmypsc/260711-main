@@ -26,63 +26,64 @@ const NaverMap = () => {
   const lockMessageTimeout = useRef<number | null>(null)
 
   const checkDevice = () => {
-    const userAgent = window.navigator.userAgent
-    if (userAgent.match(/(iPhone|iPod|iPad)/)) return "ios"
-    else if (userAgent.match(/(Android)/)) return "android"
-    else return "other"
+    const ua = window.navigator.userAgent
+    if (ua.match(/iPhone|iPod|iPad/)) return "ios"
+    if (ua.match(/Android/)) return "android"
+    return "other"
   }
 
   useEffect(() => {
-    if (naver) {
-      const map = new naver.maps.Map(ref.current, {
-        center: WEDDING_HALL_POSITION,
-        zoom: 17,
-      })
-      new naver.maps.Marker({ position: WEDDING_HALL_POSITION, map })
-      return () => map.destroy()
-    }
-  }, [naver])
+    if (!naver || !ref.current) return
+    const map = new naver.maps.Map(ref.current, {
+      center: WEDDING_HALL_POSITION,
+      zoom: 17,
+      draggable: !locked,
+      pinchZoom: !locked,
+      scrollWheel: !locked,
+      keyboardShortcuts: false,
+      disableDoubleTapZoom: locked,
+    })
+    new naver.maps.Marker({ position: WEDDING_HALL_POSITION, map })
+    return () => map.destroy()
+  }, [naver, locked])
+
+  const handleLockMessage = () => {
+    setShowLockMessage(true)
+    if (lockMessageTimeout.current) clearTimeout(lockMessageTimeout.current)
+    lockMessageTimeout.current = window.setTimeout(
+      () => setShowLockMessage(false),
+      2500,
+    )
+  }
 
   return (
     <>
       <div className="map-wrapper">
+        {/* 🔒 터치 잠금 오버레이 */}
         {locked && (
           <div
             className="lock"
-            onTouchStart={() => {
-              setShowLockMessage(true)
-              if (lockMessageTimeout.current)
-                clearTimeout(lockMessageTimeout.current)
-              lockMessageTimeout.current = setTimeout(
-                () => setShowLockMessage(false),
-                3000,
-              )
-            }}
-            onMouseDown={() => {
-              setShowLockMessage(true)
-              if (lockMessageTimeout.current)
-                clearTimeout(lockMessageTimeout.current)
-              lockMessageTimeout.current = setTimeout(
-                () => setShowLockMessage(false),
-                3000,
-              )
-            }}
+            onTouchStart={handleLockMessage}
+            onMouseDown={handleLockMessage}
           >
             {showLockMessage && (
               <div className="lock-message">
-                <LockIcon /> 자물쇠 버튼을 눌러 확대·이동이 가능합니다.
+                <LockIcon /> 지도 조작이 잠겨 있습니다.
+                <br />
+                자물쇠 버튼을 눌러 해제하세요.
               </div>
             )}
           </div>
         )}
 
+        {/* 🔓 잠금 해제 버튼 */}
         <button
           className={"lock-button" + (locked ? "" : " unlocked")}
           onClick={() => {
             if (lockMessageTimeout.current)
               clearTimeout(lockMessageTimeout.current)
             setShowLockMessage(false)
-            setLocked((prev) => !prev)
+            setLocked((v) => !v)
           }}
         >
           {locked ? <LockIcon /> : <UnlockIcon />}
@@ -153,7 +154,7 @@ const NaverMap = () => {
       </div>
 
       {/* 🚶 간단 안내문 */}
-      <p className="map-guide">유성온천역 도보 약 8분 거리</p>
+      <p className="map-guide"><b>돌다리 얘기를 넣을지 말지 너무 고민되는구나</b></p>
     </>
   )
 }
