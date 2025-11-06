@@ -38,7 +38,7 @@
         font-weight: 600;
         font-size: 1rem;
         color: var(--dark-color);
-        padding: 0.9rem 0;
+        padding: 1rem 0;
         letter-spacing: 0.02em;
         border-bottom: 1px solid var(--dark-grey-color);
       }
@@ -94,15 +94,14 @@
     color: var(--dark-color);
 
     .message {
-      font-size: 1.15rem;
-      line-height: 1.8;
-      color: var(--dark-color);
-      text-align: center;
-
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--dark-color);
 
       > span,
       br {
@@ -111,6 +110,7 @@
         padding: 0;
       }
 
+      /* 📆 카운트다운 숫자 + 단위 */
       .d-day {
         display: inline-block;
         margin: 0.6rem 0;
@@ -121,6 +121,15 @@
           0 1px 3px rgba(255, 133, 133, 0.25),
           0 0 8px rgba(255, 230, 230, 0.3);
         letter-spacing: 0.02em;
+
+        /* 단위 디자인 */
+        .unit {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: rgba(0, 0, 0, 0.5);
+          margin-left: 0.2rem;
+          letter-spacing: 0.01em;
+        }
       }
     }
   }
@@ -152,7 +161,7 @@
 
       .head {
         font-size: 0.9rem;
-        padding: 0.7rem 0;
+        padding: 0.8rem 0;
       }
     }
 
@@ -165,6 +174,10 @@
 
         .d-day {
           font-size: 1.4rem;
+
+          .unit {
+            font-size: 0.8rem;
+          }
         }
       }
     }
@@ -188,6 +201,10 @@
 
         .d-day {
           font-size: 1.3rem;
+
+          .unit {
+            font-size: 0.75rem;
+          }
         }
       }
     }
