@@ -1,96 +1,115 @@
-import { useEffect, useMemo, useState } from "react"
-import {
-  BRIDE_FIRSTNAME,
-  GROOM_FIRSTNAME,
-  WEDDING_DATE,
-  WEDDING_DATE_FORMAT,
-} from "../../const"
-import { LazyDiv } from "../lazyDiv"
+.calendar {
+  .calendar-wrapper {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin: 1.8rem 1rem 0;
+    border: 1px solid var(--light-grey-color);
+    border-radius: 0.75rem;
+    background-color: var(--white-color);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
 
-const firstDayOfWeek = WEDDING_DATE.startOf("month").day()
-const daysInMonth = WEDDING_DATE.daysInMonth()
+    > div {
+      aspect-ratio: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--dark-color);
+      position: relative;
 
-export const Calendar = () => {
-  const [tsDiff, setTsDiff] = useState(WEDDING_DATE.diff())
+      &.head {
+        aspect-ratio: auto;
+        background-color: var(--light-grey-color);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.8rem 0;
+      }
 
-  const dayDiff = useMemo(() => {
-    const dayOffset = WEDDING_DATE.diff(WEDDING_DATE.startOf("day"))
-    return Math.ceil((tsDiff - dayOffset) / 1000 / 60 / 60 / 24)
-  }, [tsDiff])
+      &.wedding-date {
+        background: var(--theme-bg-color);
+        position: relative;
+        overflow: hidden;
+        span {
+          position: relative;
+          z-index: 2;
+          font-weight: 700;
+        }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTsDiff(WEDDING_DATE.diff())
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+        .fireflies {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
 
-  const diffs = useMemo(() => {
-    const tsDiffAbs = Math.abs(tsDiff)
-    const seconds = Math.floor((tsDiffAbs % 60000) / 1000)
-    const minutes = Math.floor((tsDiffAbs % 3600000) / 60000)
-    const hours = Math.floor((tsDiffAbs % 86400000) / 3600000)
-    const days = Math.floor(tsDiffAbs / 86400000)
-    const isAfter = tsDiff < 0
-    return { days, hours, minutes, seconds, isAfter }
-  }, [tsDiff])
+        .fireflies::before,
+        .fireflies::after {
+          content: "";
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--theme-color);
+          opacity: 0.7;
+          filter: blur(2px);
+          box-shadow:
+            0 0 8px var(--theme-color),
+            0 0 14px rgba(255, 160, 160, 0.6);
+          animation: firefly 3.5s ease-in-out infinite alternate;
+        }
 
-  return (
-    <LazyDiv className="card calendar">
-      <h2>결혼식 날</h2>
-      <div className="break" />
-      {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
+        .fireflies::before {
+          top: 30%;
+          left: 40%;
+          animation-delay: 0.5s;
+        }
 
-      <div className="calendar-wrapper">
-        {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
-          <div key={i} className={`head ${i === 0 ? "holiday" : ""}`}>
-            <span>{d}</span>
-          </div>
-        ))}
+        .fireflies::after {
+          top: 60%;
+          left: 55%;
+          width: 4px;
+          height: 4px;
+          opacity: 0.6;
+          animation-delay: 1.3s;
+        }
+      }
+    }
+  }
 
-        {/* 빈칸 채우기 */}
-        {Array.from({ length: firstDayOfWeek }).map((_, i) => (
-          <div key={`empty-${i}`} />
-        ))}
+  @keyframes firefly {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(3px, -3px) scale(1.15);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-3px, 3px) scale(0.9);
+      opacity: 0.5;
+    }
+  }
 
-        {/* 날짜 렌더링 */}
-        {Array.from({ length: daysInMonth }).map((_, i) => {
-          const date = i + 1
-          const classes: string[] = []
-          const isSunday = (i + firstDayOfWeek) % 7 === 0
-          if (isSunday) classes.push("holiday")
+  .countdown-wrapper {
+    margin-top: 2.5rem;
+    text-align: center;
 
-          const isWeddingDate = date === WEDDING_DATE.date()
-          if (isWeddingDate) classes.push("wedding-date")
+    .message {
+      font-size: 1.2rem;
+      line-height: 1.9;
 
-          return (
-            <div key={i} className={classes.join(" ")}>
-              <span>{date}</span>
-              {isWeddingDate && <div className="heart" />}
-            </div>
-          )
-        })}
-      </div>
-
-      {/* 카운트다운 영역 */}
-      <div className="countdown-wrapper">
-        <div className="message">
-          {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이
-          <br />
-          {dayDiff === 0 ? (
-            <>오늘입니다 🎉</>
-          ) : (
-            <>
-              <span className="d-day">
-                {diffs.days}일 {diffs.hours}시간 {diffs.minutes}분{" "}
-                {diffs.seconds}초
-              </span>
-              <br />
-              {diffs.isAfter ? "지났습니다." : "남았습니다."}
-            </>
-          )}
-        </div>
-      </div>
-    </LazyDiv>
-  )
+      .d-day {
+        display: inline-block;
+        margin-top: 0.6rem;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--theme-color);
+        text-shadow:
+          0 1px 3px rgba(255, 133, 133, 0.25),
+          0 0 8px rgba(255, 230, 230, 0.3);
+      }
+    }
+  }
 }
