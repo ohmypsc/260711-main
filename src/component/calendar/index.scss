@@ -43,55 +43,74 @@
         border-bottom: 1px solid var(--dark-grey-color);
       }
 
-      /* 💞 결혼식 날짜 — 은은한 하트 강조 */
+      /* 💫 결혼식 날짜 — 샴페인 스파클 효과 */
       &.wedding-date {
         position: relative;
         overflow: hidden;
         z-index: 0;
 
         > span {
-          z-index: 2;
           position: relative;
+          z-index: 3;
           font-weight: 700;
           color: var(--dark-color);
         }
 
-        /* 빛나는 하트 모양 */
-        &::before,
-        &::after {
-          content: "";
+        /* 빛 조각 컨테이너 */
+        .light-particle {
           position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 40%;
-          height: 40%;
-          background: var(--theme-color);
-          transform: translate(-50%, -50%) rotate(45deg);
-          border-radius: 6%;
-          filter: blur(6px);
-          opacity: 0.45;
-          animation: heartGlow 4s ease-in-out infinite;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          overflow: hidden;
           z-index: 1;
-        }
 
-        &::before {
-          box-shadow:
-            -50% 0 0 0 var(--theme-color),
-            0 -50% 0 0 var(--theme-color);
+          span {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(
+              circle,
+              #fffad0 0%,
+              #ffe993 60%,
+              transparent 100%
+            );
+            transform: rotate(45deg);
+            border-radius: 2px;
+            opacity: 0.7;
+            filter: blur(1px);
+            mix-blend-mode: screen; /* ✅ 다크모드 호환 */
+            animation: champagneSparkle 7s ease-in-out infinite alternate;
+          }
+
+          /* ✨ 8개의 랜덤 입자 생성 */
+          @for $i from 1 through 8 {
+            span:nth-child(#{$i}) {
+              top: random(80) * 1%;
+              left: random(80) * 1%;
+              width: (4 + random(3)) + px;
+              height: (4 + random(3)) + px;
+              animation-delay: (random(6) * 0.5s);
+              animation-duration: (5 + random(3)) + s;
+              opacity: (0.4 + random(5) * 0.1);
+            }
+          }
         }
       }
     }
   }
 
-  /* 💞 카운트다운 */
+  /* 🌸 카운트다운 */
   .countdown-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2.8rem;
-    margin-bottom: 3rem;
     text-align: center;
     color: var(--dark-color);
+    margin-top: 2.6rem;
+    margin-bottom: 2.6rem;
 
     .message {
       display: flex;
@@ -99,54 +118,74 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: 1.15rem;
-      line-height: 1.8;
       color: var(--dark-color);
+      font-size: 1.15rem;
+      line-height: 1.6;
 
       > span,
       br {
-        line-height: 1.6;
         margin: 0;
         padding: 0;
+        line-height: 1.4;
       }
 
       /* 📆 카운트다운 숫자 + 단위 */
       .d-day {
-        display: inline-block;
-        margin: 0.6rem 0;
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: var(--theme-color);
-        text-shadow:
-          0 1px 3px rgba(255, 133, 133, 0.25),
-          0 0 8px rgba(255, 230, 230, 0.3);
-        letter-spacing: 0.02em;
+        display: inline-flex;
+        align-items: flex-end;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin: 0.4rem 0;
+        line-height: 1.2;
+        font-variant-numeric: tabular-nums; /* 숫자 폭 고정 */
 
-        /* 단위 디자인 */
+        .number {
+          font-size: 1.7rem;
+          font-weight: 700;
+          color: var(--theme-color);
+          text-shadow:
+            0 1px 3px rgba(255, 133, 133, 0.25),
+            0 0 8px rgba(255, 230, 230, 0.3);
+        }
+
         .unit {
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 500;
           color: rgba(0, 0, 0, 0.5);
-          margin-left: 0.2rem;
+          margin-left: 0.1rem;
           letter-spacing: 0.01em;
+          transform: translateY(-2px);
         }
       }
     }
   }
 
-  /* 💫 하트 은은한 숨쉬기 애니메이션 */
-  @keyframes heartGlow {
-    0%, 100% {
-      transform: translate(-50%, -50%) rotate(45deg) scale(1);
-      opacity: 0.4;
+  /* ✨ 샴페인 스파클 입자 애니메이션 */
+  @keyframes champagneSparkle {
+    0% {
+      transform: rotate(45deg) translate(0, 0) scale(1);
+      opacity: 0.6;
+    }
+    25% {
+      transform: rotate(45deg) translate(-2px, -3px) scale(1.1);
+      opacity: 0.8;
     }
     50% {
-      transform: translate(-50%, -50%) rotate(45deg) scale(1.15);
+      transform: rotate(45deg) translate(3px, 2px) scale(0.9);
       opacity: 0.7;
+    }
+    75% {
+      transform: rotate(45deg) translate(-3px, 1px) scale(1.05);
+      opacity: 0.85;
+    }
+    100% {
+      transform: rotate(45deg) translate(2px, -2px) scale(1);
+      opacity: 0.6;
     }
   }
 
-  /* 📱 반응형 (모바일 중심) */
+  /* 📱 반응형 */
   @media (max-width: 768px) {
     .wedding-date-text {
       font-size: 1.2rem;
@@ -173,8 +212,9 @@
         font-size: 1.05rem;
 
         .d-day {
-          font-size: 1.4rem;
-
+          .number {
+            font-size: 1.5rem;
+          }
           .unit {
             font-size: 0.8rem;
           }
@@ -200,8 +240,9 @@
         font-size: 1rem;
 
         .d-day {
-          font-size: 1.3rem;
-
+          .number {
+            font-size: 1.3rem;
+          }
           .unit {
             font-size: 0.75rem;
           }
