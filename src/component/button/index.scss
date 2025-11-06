@@ -5,25 +5,34 @@ button.button {
   z-index: 3;
   cursor: pointer;
   user-select: none;
-  -webkit-tap-highlight-color: transparent; /* 모바일 파란 터치 제거 */
+  -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+
+  /* 글자 크기 자동 반응형 */
+  font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+  font-weight: 500;
+  line-height: 1.4;
+  transition: all 0.25s ease;
 
   &.button-style-1 {
     background-color: var(--white-color);
     border: solid 0.05rem var(--alt-color);
     color: var(--alt-color);
-    border-radius: 0.3rem;
-    padding: 0.5rem 1rem;
+    border-radius: 0.35rem;
+    padding: clamp(0.6rem, 2.5vw, 0.8rem)
+             clamp(1rem, 3vw, 1.4rem);
   }
 
   &.button-style-2 {
     background-color: var(--alt-color);
     color: var(--white-color);
     border: none;
-    padding: 0.5rem 1rem;
+    border-radius: 0.35rem;
+    padding: clamp(0.6rem, 2.5vw, 0.8rem)
+             clamp(1rem, 3vw, 1.4rem);
   }
 
-  /* ✨ 터치 반짝임 효과 추가 */
+  /* ✨ 터치 반짝임 효과 */
   &:active::after {
     content: "";
     position: absolute;
