@@ -42,6 +42,19 @@ export const GuestBook = () => {
 
       if (error) throw error
 
+
+        // ✅ 여기에 로그 추가
+    console.log(
+      "📊 현재 페이지:", page,
+      "| 전체 글 개수:", count,
+      "| 총 페이지 수:", Math.ceil((count || 0) / POSTS_PER_PAGE)
+    )
+
+
+
+
+      
+
       const formatted = data.map((item) => ({
         id: item.id,
         name: item.name,
