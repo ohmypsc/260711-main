@@ -98,14 +98,15 @@
 /* ✏️ 방명록 작성 모달 */
 .write-guestbook-modal {
   width: 22rem;
-  height: clamp(26rem, 70vh, 34rem);
+  height: clamp(26rem, 70vh, 34rem); /* ✅ 반응형 세로 크기 */
   max-height: 90vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* ✅ 내부 스크롤 제거 */
+  overflow: hidden;
 
   .header {
     flex: 0 0 auto;
+
     .title-group {
       text-align: center;
 
@@ -125,8 +126,8 @@
   }
 
   .content {
-    flex: 1 1 auto; /* ✅ 남는 공간 자동 사용 */
-    padding: 0 0.7rem 0.7rem 0.7rem;
+    flex: 1 1 auto;
+    padding: 0.9rem 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -134,28 +135,29 @@
     .form {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       height: 100%;
+      margin-top: 1rem;
+      gap: 0.9rem; /* ✅ 입력칸 간격 확대 */
 
       input {
-        flex: 0 0 auto;
-        padding: clamp(0.5rem, 1.5vh, 0.7rem); /* 📏 모달 높이에 비례 */
-        margin-bottom: clamp(0.4rem, 1vh, 0.6rem);
-        border: 1px solid var(--light-grey-color);
-        border-radius: 0.3rem;
-        font-family: "MapoGoldenPier";
-        font-size: clamp(0.8rem, 1.2vw, 1rem); /* 📏 화면 크기에 비례 */
-      }
-
-      textarea {
-        flex: 1 1 auto;
-        padding: clamp(0.6rem, 1.5vh, 0.9rem);
+        padding: 0.6rem 0.7rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
         font-size: clamp(0.8rem, 1.2vw, 1rem);
-        resize: none;
-        min-height: 6rem;
+      }
+
+      textarea {
+        flex: 0 0 auto;
+        min-height: 5.5rem; /* ✅ 살짝 축소 */
+        max-height: 10rem;
+        padding: 0.7rem 0.8rem;
+        border: 1px solid var(--light-grey-color);
+        border-radius: 0.3rem;
+        font-family: "MapoGoldenPier";
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+        resize: vertical;
       }
     }
   }
@@ -164,6 +166,8 @@
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
+    margin-top: 0.5rem;
+    padding: 0 1rem 1rem 1rem;
 
     button {
       width: 100%;
@@ -174,14 +178,8 @@
 /* 🗑️ 삭제 모달 */
 .delete-guestbook-modal {
   width: 22rem;
-  height: clamp(22rem, 60vh, 28rem);
-  max-height: 85vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 
   .header {
-    flex: 0 0 auto;
     .title {
       text-align: center;
       font-size: 1.2rem;
@@ -190,31 +188,25 @@
   }
 
   .content {
-    flex: 1 1 auto;
     padding: 0 0.7rem 0.7rem 0.7rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 
     .form {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      height: 100%;
+      margin-top: 1rem;
 
       input {
-        padding: clamp(0.5rem, 1.5vh, 0.7rem);
-        margin-bottom: clamp(0.4rem, 1vh, 0.6rem);
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: clamp(0.8rem, 1.2vw, 1rem);
+        font-size: 0.8rem;
       }
     }
   }
 
   .footer {
-    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
 
