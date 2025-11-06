@@ -1,15 +1,14 @@
 .cover {
-  font-size: 2rem; /* ✅ 폰트 사이즈 15% 확대*/
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 3.8rem 1.5rem;
-  min-height: 100svh;
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
   transition: all 0.3s ease;
+  min-height: auto; /* ✅ 강제 높이 제거 */
 
   /* 이름 */
   > .names {
@@ -17,19 +16,18 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    font-size: clamp(2rem, 5vw, 2.6rem);
+    font-size: clamp(2rem, 6vw, 2.8rem); /* 📈 모바일에서 더 커짐 */
     font-weight: 700;
-    letter-spacing: 0.05rem;
-    margin-bottom: 1.8rem;
-    line-height: 1.2;
-    color: var(--dark-color); /* ✅ 전역 색상 */
+    letter-spacing: 0.06rem; /* 📈 간격 살짝 넓힘 */
+    margin-bottom: 2rem; /* 📈 시각적 여백 확보 */
+    line-height: 1.3;
+    color: var(--dark-color);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 
-    /* ✦ 심볼만 은은하게 반짝임 */
     .divider {
-      font-size: 1.4rem;
-      margin: 0 0.6rem;
-      color: var(--theme-color); /* ✅ 전역 포인트 색상 */
+      font-size: 1.6rem;
+      margin: 0 0.8rem;
+      color: var(--theme-color);
       text-shadow: 0 0 6px rgba(255, 200, 190, 0.8),
                    0 0 12px rgba(230, 180, 170, 0.5);
       animation: twinkle 3s ease-in-out infinite;
@@ -50,15 +48,13 @@
   /* 날짜 & 장소 */
   .wedding-date-line,
   .info {
-    font-size: clamp(1rem, 3.4vw, 1.2rem);
+    font-size: clamp(1.2rem, 4vw, 1.5rem); /* 📈 폰트 확장 */
     font-weight: 500;
-    letter-spacing: 0.04rem;
-    color: var(--dark-color); /* ✅ 전역 색상 */
-    opacity: 0.88;
-    line-height: 1.6;
+    letter-spacing: 0.05rem;
+    line-height: 1.7; /* 📈 좀 더 여유롭게 */
+    opacity: 0.9;
+    margin-bottom: 1.4rem;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-    margin-bottom: 1.2rem;
-    max-width: 90%;
   }
 
   /* 구분선 */
@@ -71,32 +67,28 @@
       rgba(200, 150, 150, 0.25) 50%,
       transparent 100%
     );
-    margin: 1.6rem 0;
+    margin: 2rem 0;
   }
 
   /* 가족관계 */
   .family-section {
-    font-size: clamp(1rem, 2.8vw, 1.1rem);
-    opacity: 0.9;
-    line-height: 1.8;
-    letter-spacing: 0.01rem;
-    margin-top: 1rem;
-    margin-bottom: 1.2rem;
-    color: var(--dark-color); /* ✅ 전역 색상 */
+    font-size: clamp(1.1rem, 3.4vw, 1.3rem); /* 📈 살짝 확대 */
+    opacity: 0.95;
+    line-height: 1.9; /* 📈 시각적으로 더 여유롭게 */
+    margin-top: 1.5rem;
+    margin-bottom: 1.4rem;
 
     .name {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 0.4rem;
-      gap: 0.25rem;
+      margin-bottom: 0.6rem;
+      gap: 0.35rem;
     }
 
     .parent-names {
       font-weight: 600;
-      letter-spacing: 0.02rem;
-      white-space: nowrap;
     }
 
     .relation-name {
@@ -107,58 +99,47 @@
 
   /* 버튼 */
   .contact-button {
-    margin-top: 0.8rem;
-    z-index: 1;
-    position: relative;
+    margin-top: 1.2rem; /* 📈 아래 여백 늘림 */
   }
 
-  /* 반응형 */
-  @media  {
-    padding: 3rem 1rem;
+  /* 반응형 - 모바일일수록 폰트와 간격 확대 */
+  @media (max-width: 768px) {
+    padding: 4rem 1.5rem;
 
     > .names {
-      font-size: clamp(1.8rem, 5vw, 2.2rem);
+      font-size: clamp(2.2rem, 7vw, 3rem);
+      letter-spacing: 0.08rem;
     }
 
-    .divider-line {
-      width: 70%;
-      margin: 1.4rem 0;
+    .wedding-date-line,
+    .info {
+      font-size: clamp(1.3rem, 4.5vw, 1.6rem);
+      line-height: 1.8;
     }
 
     .family-section {
-      margin-top: 0.8rem;
-      margin-bottom: 1rem;
+      font-size: clamp(1.2rem, 3.8vw, 1.4rem);
+      line-height: 2;
     }
   }
 
   @media (max-width: 480px) {
-    padding: 2rem 1rem;
+    padding: 4.5rem 1.2rem;
 
     > .names {
-      font-size: clamp(1.5rem, 5vw, 1.8rem);
+      font-size: clamp(2.4rem, 8vw, 3.2rem);
+      margin-bottom: 2.4rem;
     }
 
-    .divider-line {
-      width: 75%;
-      margin: 1.2rem 0;
+    .wedding-date-line,
+    .info {
+      font-size: clamp(1.4rem, 5vw, 1.7rem);
+      line-height: 1.9;
     }
 
     .family-section {
-      margin-top: 0.6rem;
-      margin-bottom: 0.8rem;
+      font-size: clamp(1.3rem, 4.2vw, 1.5rem);
+      line-height: 2.1;
     }
-  }
-
-  /* relation-name 폭 맞춤 */
-  .relation-name {
-    display: inline-block;
-    text-align: center;
-  }
-
-  .relation-name--adjust {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 3.5em;
   }
 }
