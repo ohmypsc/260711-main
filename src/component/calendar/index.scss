@@ -1,246 +1,92 @@
 .calendar {
-  text-align: center;
-
-  h2 {
-    font-size: 1.6rem;
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-  }
-
-  /* 📅 결혼식 날짜 표시 */
-  .wedding-date-display {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1.8rem;
-    white-space: nowrap;
-  }
-
-  .wedding-date-display .date-text {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--dark-color);
-    letter-spacing: 0.04rem;
-  }
-
-  .wedding-date-display .icon {
-    font-size: 1.3rem;
-    line-height: 1;
-    transform: translateY(1px);
-  }
-
-  /* 📆 달력 */
   .calendar-wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin: 1.2rem auto;
+    margin: 1rem;
     border: 1px solid var(--light-grey-color);
-    width: 80%;
-    max-width: 340px; /* ✅ 데스크톱에서는 크기 제한 */
-    gap: 1px;
-    border-radius: 0.5rem;
-    background-color: var(--white-color);
-    overflow: hidden;
 
     > div {
       aspect-ratio: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: var(--white-color);
 
       &.head {
         aspect-ratio: auto;
-        background-color: var(--alt-bg-color);
-        color: var(--dark-color);
-        font-weight: bold;
-        font-size: 0.9rem;
-        padding: 0.8rem 0;
-        border-bottom: 1px solid var(--light-grey-color);
+        background-color: var(--light-grey-color);
       }
 
-      &.holiday > span {
-        color: var(--red-color);
+      &.holiday {
+        > span {
+          color: var(--red-color);
+        }
       }
 
-      /* 💖 반딧불이형 결혼식 날짜 표시 */
       &.wedding-date {
         position: relative;
 
-        > span {
-          z-index: 2;
-          font-weight: bold;
-        }
+        > span { z-index: 1; }
 
-        > .heart {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 65%;
-          height: 65%;
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
+        > div.heart {
+          width: 50%;
+          height: 50%;
           background: var(--theme-color);
-          opacity: 0.85;
-          filter: blur(4px);
-          box-shadow:
-            0 0 15px var(--theme-color),
-            0 0 35px var(--theme-color),
-            0 0 60px var(--theme-bg-color);
-          animation: fireflyPulse 4s ease-in-out infinite;
+          top: 35%;
+          left: 25%;
+          position: absolute;
+          transform: rotate(45deg);
+          transform-origin: center center;
+          z-index: 0;
+
+          /* 멈칫 없이 커졌다 작아졌다만 반복 */
+          animation: breathingHeart 3s linear infinite;
+
+          &::before,
+          &::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 50%;
+            background: var(--theme-color);
+          }
+
+          &::before { top: -50%; left: 0; }
+          &::after  { left: -50%; }
         }
       }
     }
   }
 
-  /* ⏰ 카운트다운 영역 */
   .countdown-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 1.8rem;
-
-    .countdown-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--dark-color);
-      margin-bottom: 1rem;
-      white-space: nowrap;
-    }
 
     .countdown {
-      display: flex;
+      display: grid;
+      width: 15rem;
+      grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
       align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
 
-      .count-item {
-        display: flex;
-        align-items: baseline;
-        gap: 0.3rem;
+      * { margin: 0 0.1rem; }
 
-        .count {
-          font-weight: 800;
-          font-size: 1.8rem;
-          line-height: 1;
-          opacity: 0.95;
-          font-variant-numeric: tabular-nums;
-          background: linear-gradient(
-            180deg,
-            var(--dark-color) 0%,
-            rgba(0, 0, 0, 0.85) 30%,
-            var(--theme-color) 100%
-          );
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-        }
-
-        .unit {
-          font-weight: 700;
-          font-size: 0.85rem;
-          opacity: 0.6;
-          line-height: 1;
-        }
-      }
-
-      span {
-        font-weight: 800;
-        font-size: 1.3rem;
-        line-height: 1;
-        opacity: 0.7;
-        transform: translateY(1px);
-        color: var(--dark-color);
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-      }
+      .count { opacity: 0.8; font-weight: bold; font-size: 1.2rem; }
+      .unit  { font-weight: bold; font-size: 0.6rem; opacity: 0.5; }
     }
 
     .message {
       margin-top: 2rem;
       margin-bottom: 1.5rem;
 
-      .d-day {
-        color: var(--theme-color);
-      }
-    }
-  }
-
-  /* 📱 모바일 최적화 */
-  @media (max-width: 480px) {
-    .wedding-date-display {
-      gap: 0.3rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .wedding-date-display .date-text,
-    .wedding-date-display .icon {
-      font-size: 1.15rem;
-    }
-
-    .calendar-wrapper {
-      width: 95%;
-      max-width: none; /* ✅ 모바일에서는 제약 해제 */
-      margin: 1.8rem auto;
-      gap: 2px;
-    }
-
-    .calendar-wrapper > div {
-      aspect-ratio: 1 / 1;
-      font-size: 1rem;
-    }
-
-    .calendar-wrapper > div.head {
-      font-size: 1rem;
-      padding: 1rem 0;
-    }
-
-    .countdown-wrapper {
-      margin-top: 2.5rem;
-    }
-
-    .countdown-wrapper .countdown .count-item .count {
-      font-size: 1.8rem;
-    }
-
-    .countdown-wrapper .countdown > span {
-      font-size: 1.2rem;
-    }
-
-    .countdown-wrapper .countdown .count-item .unit {
-      font-size: 0.85rem;
+      .d-day { color: var(--theme-color); }
     }
   }
 }
 
-/* 💫 반딧불이 맥동 효과 */
-@keyframes fireflyPulse {
-  0% {
-    transform: translate(-50%, -50%) scale(0.95);
-    opacity: 0.6;
-    filter: blur(3px);
-    box-shadow:
-      0 0 10px var(--theme-color),
-      0 0 25px var(--theme-color),
-      0 0 45px var(--theme-bg-color);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 1;
-    filter: blur(5px);
-    box-shadow:
-      0 0 25px var(--theme-color),
-      0 0 55px var(--theme-color),
-      0 0 80px var(--theme-bg-color);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(0.95);
-    opacity: 0.6;
-    filter: blur(3px);
-    box-shadow:
-      0 0 10px var(--theme-color),
-      0 0 25px var(--theme-color),
-      0 0 45px var(--theme-bg-color);
-  }
+/* 부드럽게 커졌다 작아졌다 (리듬 X) */
+@keyframes breathingHeart {
+  0%   { transform: rotate(45deg) scale(1); }
+  50%  { transform: rotate(45deg) scale(1.15); }
+  100% { transform: rotate(45deg) scale(1); }
 }
