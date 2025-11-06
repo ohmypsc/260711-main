@@ -3,11 +3,12 @@
   .wedding-date-text {
     display: block;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 3vw, 1.3rem);
     font-weight: 600;
     color: var(--theme-color);
     letter-spacing: 0.03em;
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.6rem;
+    white-space: nowrap; /* ✅ 한 줄 유지 */
     text-shadow: 0 1px 3px rgba(255, 133, 133, 0.25);
   }
 
@@ -33,66 +34,51 @@
       position: relative;
 
       &.head {
-        aspect-ratio: auto;
         background-color: var(--light-grey-color);
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         color: var(--dark-color);
-        padding: 1rem 0;
-        letter-spacing: 0.02em;
+        padding: 0.5rem 0; /* ✅ 세로 간격 축소 */
+        min-height: 2.2rem;
         border-bottom: 1px solid var(--dark-grey-color);
       }
 
-      /* 💫 결혼식 날짜 — 전역색 기반 “와르르” 스파클 */
+      /* ✨ 결혼식 날짜 — 은은한 원형 하이라이트 */
       &.wedding-date {
         position: relative;
         overflow: hidden;
-        z-index: 0;
 
         > span {
           position: relative;
-          z-index: 3;
+          z-index: 2;
           font-weight: 700;
           color: var(--dark-color);
         }
 
-        .sparkles {
+        &::before {
+          content: "";
           position: absolute;
-          inset: 0;
-          pointer-events: none;
-          z-index: 2;
-
-          span {
-            position: absolute;
-            display: block;
-            /* 전역 테마색을 중심으로 은은한 발광 */
-            background: radial-gradient(
-              circle at 50% 50%,
-              color-mix(in oklab, var(--theme-color) 88%, white) 0%,
-              var(--theme-color) 60%,
-              transparent 100%
-            );
-            transform: rotate(45deg);
-            border-radius: 2px;
-            filter: blur(0.6px);
-            mix-blend-mode: screen; /* 라이트/다크 모두 잘 보이게 */
-            animation: sparkleFloat 7s ease-in-out infinite;
-          }
+          top: 50%;
+          left: 50%;
+          width: 80%;
+          height: 80%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at center,
+            color-mix(in oklab, var(--theme-color) 85%, white) 0%,
+            transparent 75%
+          );
+          opacity: 0.55;
+          filter: blur(5px);
+          z-index: 1;
+          animation: softPulse 4s ease-in-out infinite;
         }
       }
     }
   }
 
-  /* 🕊️ 스파클 부유 애니메이션 */
-  @keyframes sparkleFloat {
-    0%   { transform: rotate(45deg) translate(0, 0)   scale(0.9);  }
-    25%  { transform: rotate(45deg) translate(-3px,-2px) scale(1.06); }
-    50%  { transform: rotate(45deg) translate(2px, 3px)  scale(1.0);  }
-    75%  { transform: rotate(45deg) translate(-2px, 2px) scale(1.04); }
-    100% { transform: rotate(45deg) translate(0, -3px)   scale(0.92); }
-  }
-
-  /* 💞 카운트다운 (위/아래 간격 동일) */
+  /* 💞 카운트다운 */
   .countdown-wrapper {
     display: flex;
     flex-direction: column;
@@ -106,24 +92,25 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      line-height: 1.6;
-      gap: 0.5rem; /* ← 위·중간·아래 세 줄 간격을 ‘딱 동일’하게 */
+      gap: 0.5rem;
 
-      .line { margin: 0; padding: 0; }
+      .line {
+        margin: 0;
+        padding: 0;
+      }
 
       .middle .d-day {
         display: flex;
         align-items: flex-end;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 1rem;              /* 단위 그룹 간 간격 */
-        line-height: 1;
-        font-variant-numeric: tabular-nums;
+        gap: 1.3rem;
+        line-height: 1.2;
 
         .pair {
           display: inline-flex;
           align-items: flex-end;
-          gap: 0.1rem;            /* 숫자와 단위는 거의 붙게 */
+          gap: 0.15rem;
         }
 
         .number {
@@ -131,27 +118,83 @@
           font-weight: 700;
           color: var(--theme-color);
           text-shadow:
-            0 1px 3px rgba(255,133,133,0.25),
-            0 0 8px rgba(255,230,230,0.3);
+            0 1px 3px rgba(255, 133, 133, 0.25),
+            0 0 8px rgba(255, 230, 230, 0.3);
         }
 
         .unit {
           font-size: 0.85rem;
           font-weight: 500;
-          color: rgba(0,0,0,0.5);
-          transform: translateY(-2px);
+          color: rgba(0, 0, 0, 0.55);
+
+          @media (prefers-color-scheme: dark) {
+            color: rgba(255, 255, 255, 0.75);
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.25);
+          }
         }
       }
     }
   }
 
-  /* 📱 반응형(필요 시) */
-  @media (max-width: 768px) {
-    .countdown-wrapper .message .middle .d-day .number { font-size: 1.5rem; }
-    .countdown-wrapper .message .middle .d-day .unit   { font-size: 0.8rem; }
+  /* ✨ 은은한 빛 확산 애니메이션 */
+  @keyframes softPulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.45;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.08);
+      opacity: 0.65;
+    }
   }
+
+  /* 📱 반응형 */
+  @media (max-width: 768px) {
+    .wedding-date-text {
+      font-size: 1.1rem;
+    }
+
+    .calendar-wrapper > div {
+      font-size: 0.9rem;
+    }
+
+    .calendar-wrapper > div.head {
+      padding: 0.4rem 0;
+      min-height: 1.8rem;
+    }
+
+    .countdown-wrapper .message .middle .d-day .number {
+      font-size: 1.5rem;
+    }
+    .countdown-wrapper .message .middle .d-day .unit {
+      font-size: 0.8rem;
+    }
+  }
+
   @media (max-width: 480px) {
-    .countdown-wrapper .message .middle .d-day .number { font-size: 1.3rem; }
-    .countdown-wrapper .message .middle .d-day .unit   { font-size: 0.75rem; }
+    .wedding-date-text {
+      font-size: 1rem;
+    }
+
+    .calendar-wrapper > div {
+      font-size: 0.85rem;
+    }
+
+    .calendar-wrapper > div.head {
+      padding: 0.3rem 0;
+      min-height: 1.6rem;
+      font-size: 0.8rem;
+    }
+
+    .countdown-wrapper {
+      margin-block: 2.2rem;
+    }
+
+    .countdown-wrapper .message .middle .d-day .number {
+      font-size: 1.3rem;
+    }
+    .countdown-wrapper .message .middle .d-day .unit {
+      font-size: 0.75rem;
+    }
   }
 }
