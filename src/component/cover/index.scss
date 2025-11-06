@@ -8,7 +8,6 @@
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
   transition: all 0.3s ease;
-  min-height: 100vh;
 
   > .names {
     display: flex;
@@ -61,32 +60,29 @@
     margin: 2rem 0;
   }
 
+  /* 가족관계 */
   .family-section {
-    font-size: clamp(1.1rem, 3.4vw, 1.3rem);
-    opacity: 0.95;
-    line-height: 1.9;
-    margin-top: 1.5rem;
-    margin-bottom: 1.4rem;
-    text-align: center;
+    font-size: clamp(1rem, 2.8vw, 1.1rem);
+    opacity: 0.9;
+    line-height: 1.8;
+    letter-spacing: 0.01rem;
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+    color: var(--dark-color); 
 
     .name {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 0.6rem;
-      gap: 0.35rem;
-      width: 24ch; /* 📏 두 줄의 전체 폭 고정 */
-    }
-
-    /* ✅ 딸 줄만 미세 조정 */
-    .name.daughter {
-      padding: 0 6px; /* 🔹 좌우 6px씩 여유 */
-      letter-spacing: 0.01rem; /* 🔹 자연스러운 폭 보정 */
+      margin-bottom: 0.4rem;
+      gap: 0.25rem;
     }
 
     .parent-names {
       font-weight: 600;
+      letter-spacing: 0.02rem;
+      white-space: nowrap;
     }
 
     .relation-name {
