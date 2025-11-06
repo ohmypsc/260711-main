@@ -1,57 +1,78 @@
 .location {
+  /* 🏠 주소 영역 */
   .addr {
-    line-height: 2;
-    margin-bottom: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    text-align: center;
+
+    strong {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
     .detail {
-      opacity: 0.6;
+      font-size: 0.95rem;
+      opacity: 0.7;
+      margin-top: 0.2rem;
     }
   }
 
+  /* 🗺️ 지도 영역 */
   .map-wrapper {
     height: 20rem;
     position: relative;
     z-index: 3;
-    .lock {
-      position: absolute;
-      top: 0;
-      left: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+
+    .map-inner {
       width: 100%;
       height: 100%;
-      z-index: 200;
+    }
+
+    .lock {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      z-index: 200;
+
       .lock-message {
-        background-color: var(--dark-color);
+        background: var(--dark-color);
         color: var(--white-color);
-        padding: 0.5rem;
-        text-align: center;
+        padding: 0.6rem;
         font-size: 0.8rem;
+        text-align: center;
+
         svg {
-          display: inline;
           width: 0.8rem;
           height: 0.8rem;
           fill: var(--white-color);
+          vertical-align: middle;
+          margin-right: 0.25rem;
         }
       }
     }
+
     .lock-button {
       position: absolute;
       top: 3%;
       left: 3%;
-      width: 10%;
-      height: 10%;
-      z-index: 201;
-      background-color: var(--white-color);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.4rem;
+      background: var(--white-color);
       border: 1px solid var(--dark-grey-color);
-      border-radius: 10%;
+      z-index: 201;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
+      transition: opacity 0.3s ease;
+
       svg {
-        width: 80%;
-        height: 80%;
+        width: 70%;
+        height: 70%;
         fill: var(--dark-color);
       }
 
@@ -59,43 +80,51 @@
         opacity: 0.5;
       }
     }
-    .map-inner {
-      height: 100%;
-      width: 100%;
-    }
   }
 
+  /* 🧭 길찾기 버튼 */
   .navigation {
     display: flex;
+    background: var(--alt-bg-color);
     padding: 0.7rem;
-    background-color: var(--alt-bg-color);
+    border-radius: 0.5rem;
+    margin-top: 0.8rem;
+    overflow: hidden;
+
     > button {
-      flex: 1.5;
+      flex: 1;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--dark-color);
       border-right: 1px solid var(--dark-grey-color);
-      position: relative;
-      z-index: 3;
-      font-size: 0.9rem;
+      background: none;
+      transition: background-color 0.2s;
 
       &:last-child {
-        flex: 1;
         border-right: none;
       }
 
       > img {
+        width: 1rem;
+        height: 1rem;
         vertical-align: middle;
         margin-right: 0.4rem;
-        width: 0.9rem;
-        height: 0.9rem;
+      }
+
+      &:active {
+        background: rgba(0, 0, 0, 0.04);
       }
     }
   }
 
+  /* 🚍 안내 구역 */
   .location-info {
     display: grid;
     grid-template-columns: 2rem 1fr;
-    text-align: left;
     row-gap: 0.7rem;
-    margin: 1rem 0;
+    column-gap: 0.8rem;
+    margin: 1.6rem 0;
+    text-align: left;
 
     > * {
       align-self: center;
@@ -104,23 +133,91 @@
     .transportation-icon-wrapper {
       display: flex;
       justify-content: center;
+
       .transportation-icon {
-        width: 1.3rem;
-        height: 1.3rem;
+        width: 1.4rem;
+        height: 1.4rem;
         fill: var(--theme-color);
-        opacity: 0.5;
+        opacity: 0.7;
       }
     }
 
     .heading {
-      font-size: 1rem;
-      opacity: 0.7;
+      font-size: 1.1rem;
+      font-weight: 600;
       color: var(--theme-color);
+      opacity: 0.9;
+      margin-bottom: 0.2rem;
     }
 
     .content {
+      grid-column: 2 / span 1;
+      font-size: 1rem;
+      line-height: 1.7;
+      opacity: 0.9;
+
+      b {
+        color: var(--dark-color);
+        font-weight: 600;
+      }
+    }
+  }
+
+  /* 🌙 다크모드 */
+  @media (prefers-color-scheme: dark) {
+    .content {
+      color: rgba(255, 255, 255, 0.85);
+
+      b {
+        color: rgba(255, 255, 255, 0.95);
+      }
+    }
+
+    .transportation-icon {
+      opacity: 0.8;
+    }
+  }
+
+  /* 📱 반응형 (모바일 중심) */
+  @media (max-width: 768px) {
+    .addr strong {
+      font-size: 1rem;
+    }
+
+    .map-wrapper {
+      height: 16rem;
+    }
+
+    .location-info {
+      grid-template-columns: 1.8rem 1fr;
+      margin: 1.2rem 0;
+
+      .heading {
+        font-size: 1rem;
+      }
+
+      .content {
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+    }
+
+    .navigation > button {
       font-size: 0.9rem;
-      line-height: 1.4;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .map-wrapper {
+      height: 14rem;
+    }
+
+    .location-info {
+      margin: 1rem 0;
+
+      .content {
+        font-size: 0.9rem;
+      }
     }
   }
 }
