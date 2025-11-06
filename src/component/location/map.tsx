@@ -154,7 +154,7 @@ const NaverMap = () => {
       </div>
 
       {/* 🚶 간단 안내문 */}
-      <p className="map-guide"><b>돌다리 얘기를 넣을지 말지 너무 고민되는구나</b></p>
+      <p className="map-guide"> <br /><b>주차는 무료입니다. <br />돌다리 얘기를 넣을지 말지 너무 고민되는구나</b></p>
     </>
   )
 }
