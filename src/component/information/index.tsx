@@ -13,7 +13,7 @@ export const Information1 = () => {
         <div className="content">
           식사시간: 오전 10시~오후 1시
           <br />
-          장소: 2층 또는 3층 연회장(당일 안내)
+          장소: 2층 또는 3층 연회장<br />(당일 안내)
         </div>
       </div>
     </>
@@ -28,9 +28,11 @@ export const Information2 = () => {
       <div className="info-card">
         <div className="label">마음 전하기</div>
         <div className="content">
-          참석이 어려워 직접 축하해주지 못하는
+          참석이 어려워 직접 축하하시기
           <br />
-          분들을 위해 계좌번호를 기재하였습니다.
+          어려운 분들을 위해 
+          <br />
+          계좌번호를 기재하였습니다.
           <br />
           넓은 마음으로 양해 부탁드립니다.
         </div>
@@ -43,7 +45,7 @@ export const Information2 = () => {
             openModal({
               className: "donation-modal",
               closeOnClickBackground: true,
-              header: <div className="title">신랑측 계좌번호</div>,
+              header: <div className="title">신랑 측 계좌번호</div>,
               content: (
                 <>
                   {GROOM_INFO.filter(({ account }) => !!account).map(
@@ -87,7 +89,7 @@ export const Information2 = () => {
             })
           }}
         >
-          신랑측 계좌번호 보기
+          신랑 측 계좌번호 보기
         </Button>
         <div className="break" />
         <Button
@@ -96,7 +98,7 @@ export const Information2 = () => {
             openModal({
               className: "donation-modal",
               closeOnClickBackground: true,
-              header: <div className="title">신부측 계좌번호</div>,
+              header: <div className="title">신부 측 계좌번호</div>,
               content: (
                 <>
                   {BRIDE_INFO.filter(({ account }) => !!account).map(
@@ -140,7 +142,7 @@ export const Information2 = () => {
             })
           }}
         >
-          신부측 계좌번호 보기
+          신부 측 계좌번호 보기
         </Button>
       </div>
     </>
