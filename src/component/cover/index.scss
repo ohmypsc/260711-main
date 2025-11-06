@@ -4,11 +4,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
   transition: all 0.3s ease;
-  min-height: 100dvh;;
+  min-height: 100vh;
 
   > .names {
     display: flex;
