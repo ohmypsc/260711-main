@@ -1,10 +1,12 @@
 .location {
+  /* 🏠 주소 */
   .addr {
     text-align: center;
     line-height: 1.8;
     margin-bottom: 1.4rem;
   }
 
+  /* 🗺️ 지도 */
   .map-wrapper {
     position: relative;
     height: 22rem;
@@ -15,43 +17,102 @@
       0 4px 12px rgba(0, 0, 0, 0.08),
       inset 0 0 20px rgba(255, 255, 255, 0.2);
     margin-bottom: 1.6rem;
+
+    .map-inner {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 🔒 자물쇠 버튼 */
+    .lock-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 205;
+      cursor: pointer;
+      transition: transform 0.25s ease, background-color 0.25s ease;
+
+      svg {
+        width: 70%;
+        height: 70%;
+        fill: var(--dark-color);
+      }
+
+      &:active {
+        transform: scale(0.92);
+      }
+
+      &.unlocked {
+        opacity: 0.7;
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    /* 🔐 안내문 */
+    .lock-message {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      color: var(--white-color);
+      padding: 0.7rem 0.6rem;
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      z-index: 204;
+      backdrop-filter: blur(6px);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      animation: fadeIn 0.3s ease;
+
+      svg {
+        width: 0.9rem;
+        height: 0.9rem;
+        fill: var(--white-color);
+        margin-right: 0.25rem;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* 🧭 길찾기 버튼 */
   .navigation {
     display: flex;
-    justify-content: space-between;
-    margin: 1.4rem 0 1.2rem;
-    background: var(--alt-bg-color);
-    border-radius: 0.8rem;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    padding-inline: 0.4rem; /* ✅ 좌우 여백 확보 */
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0 1.4rem;
+    background: transparent;
+    box-shadow: none;
 
     button {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 1rem;
+      width: 100%;
+      font-size: 0.95rem;
       font-weight: 600;
-      padding: 1rem 0.4rem; /* ✅ 버튼 내부 여백 추가 */
+      gap: 0.45rem;
+      padding: 0.95rem 0;
       color: var(--dark-color);
-      border: none;
-      border-right: 1px solid var(--dark-grey-color);
-      background: transparent;
+      background: var(--alt-bg-color);
+      border: 1px solid var(--dark-grey-color);
+      border-radius: 0.7rem;
       transition: background 0.2s ease, transform 0.1s ease;
-      border-radius: 0.6rem; /* ✅ 둥근 모서리로 부드럽게 */
-
-      &:last-child {
-        border-right: none;
-      }
 
       img {
-        width: 1.1rem;
-        height: 1.1rem;
-        flex-shrink: 0;
+        width: 1rem;
+        height: 1rem;
       }
 
       &:active {
@@ -61,87 +122,57 @@
     }
   }
 
+  /* 🚶 안내문 */
   .map-guide {
     text-align: center;
-    font-size: 1.05rem;
-    color: rgba(0, 0, 0, 0.7);
-    margin-top: 1.2rem;
-    margin-bottom: 0.8rem;
-    line-height: 1.7;
-    font-weight: 500;
+    font-size: 1.15rem; /* ✅ 버튼보다 큼 */
+    color: rgba(0, 0, 0, 0.75);
+    margin-top: 1.4rem;
+    margin-bottom: 0.9rem;
+    line-height: 1.8;
+    font-weight: 600;
   }
 
+  /* 🌙 다크모드 */
   @media (prefers-color-scheme: dark) {
+    .map-wrapper {
+      background: rgba(30, 30, 30, 0.7);
+    }
     .navigation button {
       color: rgba(255, 255, 255, 0.9);
-      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
     .map-guide {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.85);
     }
   }
 
   /* 📱 반응형 */
   @media (max-width: 768px) {
     .map-wrapper {
-      height: 20rem;
-      margin-bottom: 1.2rem;
+      height: 24rem; /* ✅ 세로 길이 늘림 */
     }
 
-    .navigation {
-      margin: 1rem 0 1rem;
-      padding-inline: 0.6rem; /* ✅ 모바일에서 여백 넓힘 */
-
-      button {
-        font-size: 0.95rem;
-        gap: 0.5rem;
-        padding: 0.9rem 0.6rem; /* ✅ 버튼 안쪽 여백 확보 */
-        border-radius: 0.6rem;
-      }
+    .navigation button {
+      font-size: 1rem;
+      padding: 1rem 0.6rem;
     }
 
     .map-guide {
-      font-size: 1rem;
-      margin-top: 1rem;
+      font-size: 1.25rem; /* ✅ 모바일에서 더 큼 */
+      margin-top: 1.2rem;
     }
   }
 
   @media (max-width: 480px) {
     .map-wrapper {
-      height: 18rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .navigation {
-      flex-direction: column; /* ✅ 작은 화면에서는 세로 배열 */
-      gap: 0.5rem;
-      padding: 0.6rem 0.6rem 0.7rem;
-      border-radius: 0.9rem;
-
-      button {
-        font-size: 0.95rem;
-        gap: 0.4rem;
-        padding: 0.85rem 0;
-        width: 100%;
-        border-right: none;
-        border-radius: 0.6rem;
-        background: rgba(255, 255, 255, 0.8);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-
-        &:active {
-          background: rgba(0, 0, 0, 0.05);
-        }
-
-        img {
-          width: 1rem;
-          height: 1rem;
-        }
-      }
+      height: 26rem; /* ✅ 더 큼 — 화면 비율 고려 */
     }
 
     .map-guide {
-      margin-top: 1rem;
-      font-size: 0.95rem;
+      font-size: 1.3rem;
+      margin-top: 1.3rem;
+      line-height: 1.9;
     }
   }
 }
