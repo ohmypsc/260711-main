@@ -13,6 +13,21 @@ const daysInMonth = WEDDING_DATE.daysInMonth()
 export const Calendar = () => {
   const [tsDiff, setTsDiff] = useState(WEDDING_DATE.diff())
 
+  // 스파클 입자(한 번만 생성)
+  const particles = useMemo(() => {
+    const N = 24
+    // 20~80% 영역 안에서, 4~7px 크기
+    return Array.from({ length: N }).map((_, i) => {
+      const top = 20 + Math.random() * 60
+      const left = 20 + Math.random() * 60
+      const size = 4 + Math.random() * 3
+      const delay = Math.random() * 4.0
+      const dur = 5 + Math.random() * 3.5
+      const opacity = 0.35 + Math.random() * 0.4
+      return { top, left, size, delay, dur, opacity }
+    })
+  }, [])
+
   const dayDiff = useMemo(() => {
     const dayOffset = WEDDING_DATE.diff(WEDDING_DATE.startOf("day"))
     return Math.ceil((tsDiff - dayOffset) / 1000 / 60 / 60 / 24)
@@ -60,18 +75,27 @@ export const Calendar = () => {
         {/* 날짜 렌더링 */}
         {Array.from({ length: daysInMonth }).map((_, i) => {
           const date = i + 1
-          const classes: string[] = []
           const isWeddingDate = date === WEDDING_DATE.date()
-          if (isWeddingDate) classes.push("wedding-date")
-
           return (
-            <div key={i} className={classes.join(" ")}>
+            <div key={i} className={isWeddingDate ? "wedding-date" : ""}>
               <span>{date}</span>
+
               {/* ✨ 결혼식 날짜 강조용 스파클 */}
               {isWeddingDate && (
                 <div className="sparkles">
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <span key={i} />
+                  {particles.map((p, idx) => (
+                    <span
+                      key={idx}
+                      style={{
+                        top: `${p.top}%`,
+                        left: `${p.left}%`,
+                        width: `${p.size}px`,
+                        height: `${p.size}px`,
+                        opacity: p.opacity,
+                        animationDelay: `${p.delay}s`,
+                        animationDuration: `${p.dur}s`,
+                      }}
+                    />
                   ))}
                 </div>
               )}
@@ -83,32 +107,38 @@ export const Calendar = () => {
       {/* 💞 카운트다운 */}
       <div className="countdown-wrapper">
         <div className="message">
-          {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이
-          <br />
+          <div className="line top">
+            {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이
+          </div>
+
           {dayDiff === 0 ? (
-            <>오늘입니다 🎉</>
+            <div className="line middle today">오늘입니다 🎉</div>
           ) : (
             <>
-              <span className="d-day">
-                <span className="pair">
-                  <span className="number">{diffs.days}</span>
-                  <span className="unit">일</span>
+              <div className="line middle">
+                <span className="d-day">
+                  <span className="pair">
+                    <span className="number">{diffs.days}</span>
+                    <span className="unit">일</span>
+                  </span>
+                  <span className="pair">
+                    <span className="number">{diffs.hours}</span>
+                    <span className="unit">시간</span>
+                  </span>
+                  <span className="pair">
+                    <span className="number">{diffs.minutes}</span>
+                    <span className="unit">분</span>
+                  </span>
+                  <span className="pair">
+                    <span className="number">{diffs.seconds}</span>
+                    <span className="unit">초</span>
+                  </span>
                 </span>
-                <span className="pair">
-                  <span className="number">{diffs.hours}</span>
-                  <span className="unit">시간</span>
-                </span>
-                <span className="pair">
-                  <span className="number">{diffs.minutes}</span>
-                  <span className="unit">분</span>
-                </span>
-                <span className="pair">
-                  <span className="number">{diffs.seconds}</span>
-                  <span className="unit">초</span>
-                </span>
-              </span>
-              <br />
-              {diffs.isAfter ? "지났습니다." : "남았습니다."}
+              </div>
+
+              <div className="line bottom">
+                {diffs.isAfter ? "지났습니다." : "남았습니다."}
+              </div>
             </>
           )}
         </div>
