@@ -1,45 +1,57 @@
 .calendar {
+  /* 📅 달력 영역 */
   .calendar-wrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    margin: 1rem;
+    margin: 1.5rem 1rem;
     border: 1px solid var(--light-grey-color);
+    border-radius: 0.75rem;
+    background-color: var(--white-color);
+    box-shadow: 0 4px 10px rgba(40, 44, 52, 0.06);
+    overflow: hidden;
 
     > div {
       aspect-ratio: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--dark-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
 
       &.head {
         aspect-ratio: auto;
         background-color: var(--light-grey-color);
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--dark-color);
       }
 
-      &.holiday {
-        > span {
-          color: var(--red-color);
-        }
-      }
+      /* 일요일 강조 제거 ✅ */
 
       &.wedding-date {
         position: relative;
+        background-color: var(--theme-bg-color);
+        border-radius: 0.4rem;
 
-        > span { z-index: 1; }
+        > span {
+          z-index: 1;
+          font-weight: 700;
+          color: var(--theme-color);
+        }
 
         > div.heart {
-          width: 50%;
-          height: 50%;
+          width: 45%;
+          height: 45%;
           background: var(--theme-color);
           top: 35%;
-          left: 25%;
+          left: 27%;
           position: absolute;
           transform: rotate(45deg);
-          transform-origin: center center;
+          transform-origin: center;
           z-index: 0;
-
-          /* 멈칫 없이 커졌다 작아졌다만 반복 */
-          animation: breathingHeart 3s linear infinite;
+          animation: breathingHeart 3s ease-in-out infinite;
 
           &::before,
           &::after {
@@ -51,42 +63,109 @@
             background: var(--theme-color);
           }
 
-          &::before { top: -50%; left: 0; }
-          &::after  { left: -50%; }
+          &::before {
+            top: -50%;
+            left: 0;
+          }
+
+          &::after {
+            left: -50%;
+          }
+        }
+      }
+
+      &:hover:not(.head):not(.wedding-date) {
+        background-color: var(--alt-bg-color);
+        color: var(--alt-color);
+      }
+    }
+  }
+
+  /* ⏰ 카운트다운 / D-Day 영역 */
+  .countdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+    text-align: center;
+
+    .countdown {
+      display: none;
+    }
+
+    .message {
+      margin: 2rem 0 1.5rem;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--dark-color);
+
+      .d-day {
+        display: inline-block;
+        margin: 0.8rem 0;
+        padding: 0.6rem 1.3rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--theme-color);
+        border: 2px solid var(--alt-color);
+        border-radius: 2rem;
+        background: var(--alt-bg-color);
+        box-shadow: 0 3px 8px rgba(216, 138, 138, 0.25);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          background: var(--theme-bg-color);
+          box-shadow: 0 4px 10px rgba(255, 133, 133, 0.4);
         }
       }
     }
   }
 
-  .countdown-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .countdown {
-      display: grid;
-      width: 15rem;
-      grid-template-columns: 1fr 1rem 1fr 1rem 1fr 1rem 1fr;
-      align-items: center;
-
-      * { margin: 0 0.1rem; }
-
-      .count { opacity: 0.8; font-weight: bold; font-size: 1.2rem; }
-      .unit  { font-weight: bold; font-size: 0.6rem; opacity: 0.5; }
+  /* 💓 하트 애니메이션 */
+  @keyframes breathingHeart {
+    0% {
+      transform: rotate(45deg) scale(1);
     }
-
-    .message {
-      margin-top: 2rem;
-      margin-bottom: 1.5rem;
-
-      .d-day { color: var(--theme-color); }
+    50% {
+      transform: rotate(45deg) scale(1.15);
+    }
+    100% {
+      transform: rotate(45deg) scale(1);
     }
   }
-}
 
-/* 부드럽게 커졌다 작아졌다 (리듬 X) */
-@keyframes breathingHeart {
-  0%   { transform: rotate(45deg) scale(1); }
-  50%  { transform: rotate(45deg) scale(1.15); }
-  100% { transform: rotate(45deg) scale(1); }
+  /* 📱 반응형 */
+  @media (max-width: 768px) {
+    .calendar-wrapper {
+      margin: 1rem 0.5rem;
+
+      > div {
+        font-size: 0.85rem;
+      }
+
+      .head {
+        font-size: 0.8rem;
+      }
+    }
+
+    .countdown-wrapper .message {
+      font-size: 1rem;
+
+      .d-day {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .calendar-wrapper > div {
+      font-size: 0.75rem;
+    }
+
+    .countdown-wrapper .message .d-day {
+      font-size: 1.3rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
 }
