@@ -43,7 +43,7 @@
         border-bottom: 1px solid var(--dark-grey-color);
       }
 
-      /* 💫 결혼식 날짜 — 샴페인 스파클 효과 */
+      /* 💫 결혼식 날짜 — 전역색 기반 마름모 스파클 효과 */
       &.wedding-date {
         position: relative;
         overflow: hidden;
@@ -56,8 +56,7 @@
           color: var(--dark-color);
         }
 
-        /* 빛 조각 컨테이너 */
-        .light-particle {
+        .sparkles {
           position: absolute;
           top: 0;
           left: 0;
@@ -69,32 +68,26 @@
 
           span {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: radial-gradient(
-              circle,
-              #fffad0 0%,
-              #ffe993 60%,
-              transparent 100%
-            );
+            width: 5px;
+            height: 5px;
+            background: var(--theme-color);
             transform: rotate(45deg);
-            border-radius: 2px;
-            opacity: 0.7;
-            filter: blur(1px);
-            mix-blend-mode: screen; /* ✅ 다크모드 호환 */
-            animation: champagneSparkle 7s ease-in-out infinite alternate;
+            opacity: 0.45;
+            border-radius: 1px;
+            filter: blur(1.2px);
+            animation: sparkleFloat 6s ease-in-out infinite alternate;
           }
 
-          /* ✨ 8개의 랜덤 입자 생성 */
+          /* ✨ 랜덤 입자 8개 */
           @for $i from 1 through 8 {
             span:nth-child(#{$i}) {
               top: random(80) * 1%;
               left: random(80) * 1%;
               width: (4 + random(3)) + px;
               height: (4 + random(3)) + px;
-              animation-delay: (random(6) * 0.5s);
+              opacity: (0.35 + random(4) * 0.1);
+              animation-delay: (random(8) * 0.4s);
               animation-duration: (5 + random(3)) + s;
-              opacity: (0.4 + random(5) * 0.1);
             }
           }
         }
@@ -102,15 +95,38 @@
     }
   }
 
-  /* 🌸 카운트다운 */
+  /* 🕊️ 마름모 스파클 부유 애니메이션 */
+  @keyframes sparkleFloat {
+    0% {
+      transform: rotate(45deg) translate(0, 0) scale(1);
+      opacity: 0.45;
+    }
+    25% {
+      transform: rotate(45deg) translate(-2px, -3px) scale(1.1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: rotate(45deg) translate(3px, 2px) scale(0.9);
+      opacity: 0.5;
+    }
+    75% {
+      transform: rotate(45deg) translate(-3px, 1px) scale(1.05);
+      opacity: 0.65;
+    }
+    100% {
+      transform: rotate(45deg) translate(2px, -2px) scale(1);
+      opacity: 0.45;
+    }
+  }
+
+  /* 💞 카운트다운 */
   .countdown-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     color: var(--dark-color);
-    margin-top: 2.6rem;
-    margin-bottom: 2.6rem;
+    margin-block: 2.6rem; /* ✅ 위/아래 균일 간격 */
 
     .message {
       display: flex;
@@ -118,16 +134,9 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: var(--dark-color);
       font-size: 1.15rem;
       line-height: 1.6;
-
-      > span,
-      br {
-        margin: 0;
-        padding: 0;
-        line-height: 1.4;
-      }
+      gap: 0.6rem; /* ✅ 위줄-아래줄 균일 */
 
       /* 📆 카운트다운 숫자 + 단위 */
       .d-day {
@@ -136,9 +145,8 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 0.3rem;
-        margin: 0.4rem 0;
         line-height: 1.2;
-        font-variant-numeric: tabular-nums; /* 숫자 폭 고정 */
+        font-variant-numeric: tabular-nums;
 
         .number {
           font-size: 1.7rem;
@@ -158,30 +166,6 @@
           transform: translateY(-2px);
         }
       }
-    }
-  }
-
-  /* ✨ 샴페인 스파클 입자 애니메이션 */
-  @keyframes champagneSparkle {
-    0% {
-      transform: rotate(45deg) translate(0, 0) scale(1);
-      opacity: 0.6;
-    }
-    25% {
-      transform: rotate(45deg) translate(-2px, -3px) scale(1.1);
-      opacity: 0.8;
-    }
-    50% {
-      transform: rotate(45deg) translate(3px, 2px) scale(0.9);
-      opacity: 0.7;
-    }
-    75% {
-      transform: rotate(45deg) translate(-3px, 1px) scale(1.05);
-      opacity: 0.85;
-    }
-    100% {
-      transform: rotate(45deg) translate(2px, -2px) scale(1);
-      opacity: 0.6;
     }
   }
 
@@ -205,8 +189,7 @@
     }
 
     .countdown-wrapper {
-      margin-top: 2.5rem;
-      margin-bottom: 2.5rem;
+      margin-block: 2.5rem;
 
       .message {
         font-size: 1.05rem;
@@ -233,8 +216,7 @@
     }
 
     .countdown-wrapper {
-      margin-top: 2.2rem;
-      margin-bottom: 2.2rem;
+      margin-block: 2.2rem;
 
       .message {
         font-size: 1rem;
