@@ -27,13 +27,9 @@ const NaverMap = () => {
 
   const checkDevice = () => {
     const userAgent = window.navigator.userAgent
-    if (userAgent.match(/(iPhone|iPod|iPad)/)) {
-      return "ios"
-    } else if (userAgent.match(/(Android)/)) {
-      return "android"
-    } else {
-      return "other"
-    }
+    if (userAgent.match(/(iPhone|iPod|iPad)/)) return "ios"
+    else if (userAgent.match(/(Android)/)) return "android"
+    else return "other"
   }
 
   useEffect(() => {
@@ -42,12 +38,8 @@ const NaverMap = () => {
         center: WEDDING_HALL_POSITION,
         zoom: 17,
       })
-
       new naver.maps.Marker({ position: WEDDING_HALL_POSITION, map })
-
-      return () => {
-        map.destroy()
-      }
+      return () => map.destroy()
     }
   }, [naver])
 
@@ -59,9 +51,8 @@ const NaverMap = () => {
             className="lock"
             onTouchStart={() => {
               setShowLockMessage(true)
-              if (lockMessageTimeout.current !== null) {
+              if (lockMessageTimeout.current)
                 clearTimeout(lockMessageTimeout.current)
-              }
               lockMessageTimeout.current = setTimeout(
                 () => setShowLockMessage(false),
                 3000,
@@ -69,9 +60,8 @@ const NaverMap = () => {
             }}
             onMouseDown={() => {
               setShowLockMessage(true)
-              if (lockMessageTimeout.current !== null) {
+              if (lockMessageTimeout.current)
                 clearTimeout(lockMessageTimeout.current)
-              }
               lockMessageTimeout.current = setTimeout(
                 () => setShowLockMessage(false),
                 3000,
@@ -80,89 +70,80 @@ const NaverMap = () => {
           >
             {showLockMessage && (
               <div className="lock-message">
-                <LockIcon /> 자물쇠 버튼을 눌러
-                <br />
-                터치 잠금 해제 후 확대 및 이동해 주세요.
+                <LockIcon /> 자물쇠 버튼을 눌러 확대·이동이 가능합니다.
               </div>
             )}
           </div>
         )}
+
         <button
           className={"lock-button" + (locked ? "" : " unlocked")}
           onClick={() => {
-            if (lockMessageTimeout.current !== null) {
+            if (lockMessageTimeout.current)
               clearTimeout(lockMessageTimeout.current)
-            }
             setShowLockMessage(false)
-            setLocked((locked) => !locked)
+            setLocked((prev) => !prev)
           }}
         >
           {locked ? <LockIcon /> : <UnlockIcon />}
         </button>
+
         <div className="map-inner" ref={ref}></div>
       </div>
+
+      {/* 🧭 길찾기 버튼 */}
       <div className="navigation">
         <button
           onClick={() => {
-            switch (checkDevice()) {
-              case "ios":
-              case "android":
-                window.open(`nmap://place?id=${NMAP_PLACE_ID}`, "_self")
-                break
-              default:
-                window.open(
-                  `https://map.naver.com/p/entry/place/${NMAP_PLACE_ID}`,
-                  "_blank",
-                )
-                break
-            }
+            const device = checkDevice()
+            if (device === "ios" || device === "android")
+              window.open(`nmap://place?id=${NMAP_PLACE_ID}`, "_self")
+            else
+              window.open(
+                `https://map.naver.com/p/entry/place/${NMAP_PLACE_ID}`,
+                "_blank",
+              )
           }}
         >
           <img src={nmapIcon} alt="naver-map-icon" />
           네이버 지도
         </button>
+
         <button
           onClick={() => {
-            switch (checkDevice()) {
-              case "ios":
-              case "android":
-                if (kakao)
-                  kakao.Navi.start({
-                    name: LOCATION,
-                    x: WEDDING_HALL_POSITION[0],
-                    y: WEDDING_HALL_POSITION[1],
-                    coordType: "wgs84",
-                  })
-                break
-              default:
-                window.open(
-                  `https://map.kakao.com/link/map/${KMAP_PLACE_ID}`,
-                  "_blank",
-                )
-                break
+            const device = checkDevice()
+            if (device === "ios" || device === "android") {
+              if (kakao)
+                kakao.Navi.start({
+                  name: LOCATION,
+                  x: WEDDING_HALL_POSITION[0],
+                  y: WEDDING_HALL_POSITION[1],
+                  coordType: "wgs84",
+                })
+            } else {
+              window.open(
+                `https://map.kakao.com/link/map/${KMAP_PLACE_ID}`,
+                "_blank",
+              )
             }
           }}
         >
           <img src={knaviIcon} alt="kakao-navi-icon" />
           카카오 내비
         </button>
+
         <button
           onClick={() => {
-            switch (checkDevice()) {
-              case "ios":
-              case "android": {
-                const params = new URLSearchParams({
-                  goalx: WEDDING_HALL_POSITION[0].toString(),
-                  goaly: WEDDING_HALL_POSITION[1].toString(),
-                  goalName: LOCATION,
-                })
-                window.open(`tmap://route?${params.toString()}`, "_self")
-                break
-              }
-              default: {
-                alert("모바일에서 확인하실 수 있습니다.")
-                break
-              }
+            const device = checkDevice()
+            if (device === "ios" || device === "android") {
+              const params = new URLSearchParams({
+                goalx: WEDDING_HALL_POSITION[0].toString(),
+                goaly: WEDDING_HALL_POSITION[1].toString(),
+                goalName: LOCATION,
+              })
+              window.open(`tmap://route?${params.toString()}`, "_self")
+            } else {
+              alert("모바일에서 이용 가능합니다.")
             }
           }}
         >
@@ -170,6 +151,9 @@ const NaverMap = () => {
           티맵
         </button>
       </div>
+
+      {/* 🚶 간단 안내문 */}
+      <p className="map-guide">유성온천역 도보 약 8분 거리</p>
     </>
   )
 }
