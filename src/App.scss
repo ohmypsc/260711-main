@@ -289,6 +289,9 @@ div.break {
 /* 🌙 다크모드 대응 */
 @media (prefers-color-scheme: dark) {
   :root {
+    /* ✅ 삼성인터넷 반전 방지 */
+    color-scheme: light dark;
+
     --theme-color: #ff9f9f;
     --theme-bg-color: #2b2b2b;
     --alt-color: #ffb3b3;
@@ -320,7 +323,7 @@ div.break {
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: #ffdcdc; /* ✅ 삼성 인터넷 fallback 색상 */
 
     /* 밝은 윤곽 추가 */
     text-shadow:
