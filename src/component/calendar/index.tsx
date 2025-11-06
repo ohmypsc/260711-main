@@ -23,7 +23,7 @@ export const Calendar = () => {
       setTsDiff(WEDDING_DATE.diff())
     }, 1000)
     return () => clearInterval(interval)
-  }, []) // ✅ 의존성 배열 추가 (불필요한 재등록 방지)
+  }, [])
 
   const diffs = useMemo(() => {
     const tsDiffAbs = Math.abs(tsDiff)
@@ -74,35 +74,19 @@ export const Calendar = () => {
 
       {/* 카운트다운 영역 */}
       <div className="countdown-wrapper">
-        <div className="countdown">
-          <div className="unit">DAY</div>
-          <div />
-          <div className="unit">HOUR</div>
-          <div />
-          <div className="unit">MIN</div>
-          <div />
-          <div className="unit">SEC</div>
-
-          <div className="count">{diffs.days}</div>
-          <span>:</span>
-          <div className="count">{diffs.hours}</div>
-          <span>:</span>
-          <div className="count">{diffs.minutes}</div>
-          <span>:</span>
-          <div className="count">{diffs.seconds}</div>
-        </div>
-
         <div className="message">
-          {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이{" "}
-          {dayDiff > 0 ? (
-            <>
-              <span className="d-day">{dayDiff}</span>일 남았습니다.
-            </>
-          ) : dayDiff === 0 ? (
-            <>오늘입니다.</>
+          {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이
+          <br />
+          {dayDiff === 0 ? (
+            <>오늘입니다 🎉</>
           ) : (
             <>
-              <span className="d-day">{-dayDiff}</span>일 지났습니다.
+              <span className="d-day">
+                {diffs.days}일 {diffs.hours}시간 {diffs.minutes}분{" "}
+                {diffs.seconds}초
+              </span>
+              <br />
+              {diffs.isAfter ? "지났습니다." : "남았습니다."}
             </>
           )}
         </div>
