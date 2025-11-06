@@ -98,11 +98,14 @@
 /* ✏️ 방명록 작성 모달 */
 .write-guestbook-modal {
   width: 22rem;
-  height: clamp(26rem, 70vh, 34rem); /* ✅ 모달 세로 반응형 */
+  height: clamp(26rem, 70vh, 34rem);
   max-height: 90vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* ✅ 내부 스크롤 제거 */
 
   .header {
+    flex: 0 0 auto;
     .title-group {
       text-align: center;
 
@@ -122,40 +125,43 @@
   }
 
   .content {
+    flex: 1 1 auto; /* ✅ 남는 공간 자동 사용 */
     padding: 0 0.7rem 0.7rem 0.7rem;
-    height: calc(100% - 4.5rem); /* ✅ 헤더·푸터 제외하고 내부가 자동 확장되도록 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .form {
       display: flex;
       flex-direction: column;
-      height: 100%; /* ✅ 폼 전체가 부모 높이에 맞춤 */
-      margin-top: 1rem;
+      justify-content: space-between;
+      height: 100%;
 
       input {
-        flex: 0 0 auto; /* 고정 높이 */
-        padding: 0.6rem;
-        margin-bottom: 0.6rem;
+        flex: 0 0 auto;
+        padding: clamp(0.5rem, 1.5vh, 0.7rem); /* 📏 모달 높이에 비례 */
+        margin-bottom: clamp(0.4rem, 1vh, 0.6rem);
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: clamp(0.8rem, 2vw, 0.95rem);
+        font-size: clamp(0.8rem, 1.2vw, 1rem); /* 📏 화면 크기에 비례 */
       }
 
       textarea {
-        flex: 1 1 auto; /* ✅ 남은 공간 자동 채움 */
-        min-height: 6rem;
-        padding: 0.7rem;
-        margin-bottom: 0.6rem;
+        flex: 1 1 auto;
+        padding: clamp(0.6rem, 1.5vh, 0.9rem);
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: clamp(0.8rem, 2vw, 0.95rem);
-        resize: vertical;
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+        resize: none;
+        min-height: 6rem;
       }
     }
   }
 
   .footer {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
 
@@ -168,11 +174,14 @@
 /* 🗑️ 삭제 모달 */
 .delete-guestbook-modal {
   width: 22rem;
-  height: clamp(22rem, 60vh, 28rem); /* ✅ 반응형 세로 크기 */
+  height: clamp(22rem, 60vh, 28rem);
   max-height: 85vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   .header {
+    flex: 0 0 auto;
     .title {
       text-align: center;
       font-size: 1.2rem;
@@ -181,27 +190,31 @@
   }
 
   .content {
+    flex: 1 1 auto;
     padding: 0 0.7rem 0.7rem 0.7rem;
-    height: calc(100% - 4rem); /* ✅ 헤더·푸터 제외한 영역 확장 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .form {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       height: 100%;
 
       input {
-        flex: 1 1 auto; /* ✅ 폼 비율 맞춤 */
-        padding: 0.6rem;
-        margin-bottom: 0.6rem;
+        padding: clamp(0.5rem, 1.5vh, 0.7rem);
+        margin-bottom: clamp(0.4rem, 1vh, 0.6rem);
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: clamp(0.8rem, 2vw, 0.95rem);
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
       }
     }
   }
 
   .footer {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: row;
 
