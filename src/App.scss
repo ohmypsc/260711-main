@@ -332,6 +332,16 @@ div.break {
       0 0 20px rgba(255, 160, 160, 0.4);
   }
 
+  /* ✅ 삼성 인터넷 전용 fallback */
+  @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    h2 {
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      -webkit-text-fill-color: #ffdcdc !important;
+      color: #ffdcdc !important;
+    }
+  }
+
   .card,
   .footer {
     background-color: var(--light-color);
