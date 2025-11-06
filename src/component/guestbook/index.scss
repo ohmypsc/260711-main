@@ -98,7 +98,7 @@
 /* ✏️ 방명록 작성 모달 */
 .write-guestbook-modal {
   width: 22rem;
-  height: clamp(26rem, 70vh, 34rem); /* ✅ 반응형 세로 크기 */
+  height: clamp(26rem, 70vh, 34rem); /* ✅ 모달 세로 반응형 */
   max-height: 90vh;
   overflow-y: auto;
 
@@ -123,28 +123,34 @@
 
   .content {
     padding: 0 0.7rem 0.7rem 0.7rem;
+    height: calc(100% - 4.5rem); /* ✅ 헤더·푸터 제외하고 내부가 자동 확장되도록 */
 
     .form {
       display: flex;
       flex-direction: column;
+      height: 100%; /* ✅ 폼 전체가 부모 높이에 맞춤 */
       margin-top: 1rem;
 
       input {
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        flex: 0 0 auto; /* 고정 높이 */
+        padding: 0.6rem;
+        margin-bottom: 0.6rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: 0.8rem;
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
       }
 
       textarea {
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        flex: 1 1 auto; /* ✅ 남은 공간 자동 채움 */
+        min-height: 6rem;
+        padding: 0.7rem;
+        margin-bottom: 0.6rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: 0.8rem;
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
+        resize: vertical;
       }
     }
   }
@@ -176,19 +182,21 @@
 
   .content {
     padding: 0 0.7rem 0.7rem 0.7rem;
+    height: calc(100% - 4rem); /* ✅ 헤더·푸터 제외한 영역 확장 */
 
     .form {
       display: flex;
       flex-direction: column;
-      margin-top: 1rem;
+      height: 100%;
 
       input {
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        flex: 1 1 auto; /* ✅ 폼 비율 맞춤 */
+        padding: 0.6rem;
+        margin-bottom: 0.6rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: 0.8rem;
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
       }
     }
   }
