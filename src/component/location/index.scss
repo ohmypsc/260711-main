@@ -20,7 +20,7 @@
   /* 🗺️ 지도 */
   .map-wrapper {
     position: relative;
-    height: 20rem; /* ✅ 지도 높이 확장 */
+    height: 20rem;
     border-radius: 0.9rem;
     overflow: hidden;
     background: var(--light-grey-color);
@@ -64,7 +64,7 @@
       position: absolute;
       top: 4%;
       left: 4%;
-      width: 2.5rem; /* ✅ 크기 조정 */
+      width: 2.5rem;
       height: 2.5rem;
       border-radius: 0.6rem;
       background: var(--white-color);
@@ -120,14 +120,18 @@
         flex-shrink: 0;
       }
 
-      /* 👆 터치/클릭 반응 */
+      /* ✨ 감성 웨딩 무드용 터치 반응 */
       &:active {
-        background: color-mix(in oklab, var(--theme-color) 35%, white);
-        border-color: var(--theme-color);
-        transform: scale(0.96);
+        transform: scale(0.96) translateY(1px);
+        background: color-mix(in oklab, var(--theme-bg-color) 70%, white);
+        border-color: color-mix(in oklab, var(--theme-color) 80%, var(--alt-bg-color));
         box-shadow:
-          0 0 8px rgba(255, 133, 133, 0.25),
-          inset 0 2px 4px rgba(0, 0, 0, 0.08);
+          inset 0 2px 6px rgba(0, 0, 0, 0.06),
+          0 1px 2px rgba(0, 0, 0, 0.04);
+      }
+
+      &:not(:active) {
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
       }
     }
   }
@@ -135,10 +139,10 @@
   /* 🚶 안내문 */
   .map-guide {
     text-align: center;
-    font-size: 1.05rem; /* ✅ 버튼보다 약간 큼 */
+    font-size: 1.1rem; /* ✅ 버튼보다 약간 큼 */
     color: rgba(0, 0, 0, 0.65);
-    margin-top: 1.2rem;
-    margin-bottom: 0.6rem;
+    margin-top: 1.4rem;
+    margin-bottom: 0.8rem;
     line-height: 1.7;
   }
 
@@ -169,12 +173,12 @@
   /* 📱 반응형 (모바일 중심) */
   @media (max-width: 768px) {
     .map-wrapper {
-      height: 22rem; /* ✅ 세로로 좀 더 길게 */
+      height: 22rem;
       margin-bottom: 1.3rem;
     }
 
     .navigation {
-      flex-direction: column; /* ✅ 세로 세 버튼 */
+      flex-direction: column;
       gap: 0.6rem;
       margin: 1rem 0 1rem;
 
@@ -192,7 +196,7 @@
 
     .map-guide {
       margin-top: 1rem;
-      font-size: 1rem;
+      font-size: 1.05rem;
     }
 
     .lock-button {
@@ -203,7 +207,7 @@
 
   @media (max-width: 480px) {
     .map-wrapper {
-      height: 23rem; /* ✅ 모바일에서 지도 좀 더 크게 */
+      height: 23rem;
       margin-bottom: 1rem;
     }
 
@@ -214,7 +218,7 @@
     }
 
     .map-guide {
-      font-size: 1.05rem;
+      font-size: 1.1rem;
     }
   }
 }
