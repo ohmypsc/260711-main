@@ -72,13 +72,12 @@
             height: 5px;
             background: var(--theme-color);
             transform: rotate(45deg);
-            opacity: 0.45;
+            opacity: 0.4;
             border-radius: 1px;
             filter: blur(1.2px);
             animation: sparkleFloat 6s ease-in-out infinite alternate;
           }
 
-          /* ✨ 랜덤 입자 8개 */
           @for $i from 1 through 8 {
             span:nth-child(#{$i}) {
               top: random(80) * 1%;
@@ -126,7 +125,7 @@
     align-items: center;
     text-align: center;
     color: var(--dark-color);
-    margin-block: 2.6rem; /* ✅ 위/아래 균일 간격 */
+    margin-block: 2.6rem;
 
     .message {
       display: flex;
@@ -136,17 +135,24 @@
       text-align: center;
       font-size: 1.15rem;
       line-height: 1.6;
-      gap: 0.6rem; /* ✅ 위줄-아래줄 균일 */
+      gap: 0.6rem;
 
       /* 📆 카운트다운 숫자 + 단위 */
       .d-day {
-        display: inline-flex;
+        display: flex;
         align-items: flex-end;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 0.3rem;
+        gap: 1.3rem; /* ✅ 단위 그룹 간 간격 */
         line-height: 1.2;
         font-variant-numeric: tabular-nums;
+
+        .pair {
+          display: inline-flex;
+          align-items: flex-end;
+          justify-content: center;
+          gap: 0.1rem; /* ✅ 숫자와 단위는 거의 붙게 */
+        }
 
         .number {
           font-size: 1.7rem;
@@ -161,73 +167,7 @@
           font-size: 0.85rem;
           font-weight: 500;
           color: rgba(0, 0, 0, 0.5);
-          margin-left: 0.1rem;
-          letter-spacing: 0.01em;
           transform: translateY(-2px);
-        }
-      }
-    }
-  }
-
-  /* 📱 반응형 */
-  @media (max-width: 768px) {
-    .wedding-date-text {
-      font-size: 1.2rem;
-    }
-
-    .calendar-wrapper {
-      margin: 1.5rem 0.5rem 0;
-
-      > div {
-        font-size: 0.95rem;
-      }
-
-      .head {
-        font-size: 0.9rem;
-        padding: 0.8rem 0;
-      }
-    }
-
-    .countdown-wrapper {
-      margin-block: 2.5rem;
-
-      .message {
-        font-size: 1.05rem;
-
-        .d-day {
-          .number {
-            font-size: 1.5rem;
-          }
-          .unit {
-            font-size: 0.8rem;
-          }
-        }
-      }
-    }
-  }
-
-  @media (max-width: 480px) {
-    .wedding-date-text {
-      font-size: 1.1rem;
-    }
-
-    .calendar-wrapper > div {
-      font-size: 0.85rem;
-    }
-
-    .countdown-wrapper {
-      margin-block: 2.2rem;
-
-      .message {
-        font-size: 1rem;
-
-        .d-day {
-          .number {
-            font-size: 1.3rem;
-          }
-          .unit {
-            font-size: 0.75rem;
-          }
         }
       }
     }
