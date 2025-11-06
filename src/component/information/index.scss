@@ -3,7 +3,6 @@
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     padding: 2rem 1rem 1rem 1rem;
-
     position: relative;
     border: 1px solid var(--alt-color);
     border-radius: 0.5rem;
@@ -17,19 +16,17 @@
       border-radius: 1rem;
       background-color: var(--alt-bg-color);
       border: 1px solid var(--alt-color);
-
-      /* ✅ 추가 (핵심 수정) */
-      display: inline-block;      /* 글자 길이에 맞게 라벨 폭 자동 조정 */
-      width: fit-content;         /* 내용에 맞게 가로폭 계산 */
-      white-space: nowrap;        /* 줄바꿈 방지 */
-      max-width: 100%;            /* 모바일 대응 (넘침 방지) */
-      text-align: center;         /* 가운데 정렬 */
+      display: inline-block;
+      width: fit-content;
+      white-space: nowrap;
+      max-width: 100%;
+      text-align: center;
     }
   }
 
   .content {
     line-height: 1.9;
-    font-size: 0.9rem;
+    font-size: 1.05rem; /* ✅ 기존 0.9rem → 보기 좋은 크기로 확대 */
   }
 }
 
@@ -39,7 +36,7 @@
   .header {
     .title {
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.25rem; /* ✅ 약간 키움 */
       color: var(--theme-color);
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--dark-grey-color);
@@ -48,6 +45,7 @@
 
   .content {
     padding: 0 0.7rem 0.7rem 0.7rem;
+    font-size: 1rem; /* ✅ 본문 통일 */
 
     .account-info {
       margin-top: 1rem;
@@ -66,7 +64,7 @@
       }
 
       .copy-button {
-        font-size: 0.8rem;
+        font-size: 0.9rem; /* ✅ 보기 좋게 */
         padding: 0.4rem 0.8rem;
       }
     }
@@ -84,7 +82,7 @@
   .header {
     .title {
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.25rem; /* ✅ 살짝 키움 */
       color: var(--theme-color);
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--dark-grey-color);
@@ -93,6 +91,7 @@
 
   .content {
     padding: 0 1rem 1rem 1rem;
+    font-size: 1rem; /* ✅ 전체 본문 확대 */
 
     .form {
       display: flex;
@@ -123,6 +122,7 @@
               text-align: center;
               width: 100%;
               background-color: var(--light-grey-color);
+              font-size: 0.95rem; /* ✅ 버튼 글씨도 커짐 */
             }
 
             input {
@@ -144,12 +144,12 @@
         }
 
         input {
-          padding: 0.5rem;
+          padding: 0.6rem;
           margin-bottom: 0.5rem;
           border: 1px solid var(--light-grey-color);
           border-radius: 0.3rem;
           font-family: "MapoGoldenPier";
-          font-size: 0.8rem;
+          font-size: 0.95rem; /* ✅ 기존 0.8rem → 보기 좋게 */
         }
       }
     }
@@ -171,7 +171,7 @@
   .header {
     .title {
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--theme-color);
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--dark-grey-color);
@@ -180,10 +180,11 @@
 
   .content {
     padding: 1.5rem 1rem 1.5rem 1rem;
+    font-size: 1rem; /* ✅ 본문 확대 */
 
     .info-message {
       text-align: center;
-      line-height: 1.5rem;
+      line-height: 1.7rem;
       padding-bottom: 1.5rem;
       border-bottom: 1px dotted var(--dark-grey-color);
     }
@@ -191,7 +192,7 @@
     .wedding-info {
       padding-top: 1.5rem;
       padding-left: 2rem;
-      line-height: 1.5rem;
+      line-height: 1.6rem;
 
       svg {
         width: 0.8rem;
