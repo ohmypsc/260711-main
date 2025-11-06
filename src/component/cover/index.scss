@@ -4,11 +4,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 3.8rem 1.5rem;
+  padding: 3rem 1.5rem;
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
   transition: all 0.3s ease;
-  min-height: auto;
+  min-height: 100dvh;;
 
   > .names {
     display: flex;
@@ -93,10 +93,10 @@
 
   /* 반응형 */
   @media (max-width: 768px) {
-    padding: 3rem 2rem; /* 🔹 위아래 여백 3.8 → 3rem으로 줄임 */
+    padding: 5rem 2rem; /* 🔹 위아래 여백 3.8 → 3rem으로 줄임 */
   }
 
   @media (max-width: 480px) {
-    padding: 2.8rem 2rem; /* 🔹 모바일: 위아래 더 줄이고 좌우 여백 확대 */
+    padding: 4rem 2rem; /* 🔹 모바일: 위아래 더 줄이고 좌우 여백 확대 */
   }
 }
