@@ -1,9 +1,8 @@
 .location {
-  /* 🏠 주소 영역 */
   .addr {
+    text-align: center;
     line-height: 1.8;
     margin-bottom: 1.2rem;
-    text-align: center;
 
     strong {
       font-size: 1.1rem;
@@ -19,61 +18,64 @@
 
   /* 🗺️ 지도 영역 */
   .map-wrapper {
-    height: 20rem;
     position: relative;
-    z-index: 3;
-    border-radius: 0.75rem;
+    height: 18rem;
+    border-radius: 0.9rem;
     overflow: hidden;
+    background: var(--light-grey-color);
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      inset 0 0 20px rgba(255, 255, 255, 0.2);
 
     .map-inner {
       width: 100%;
       height: 100%;
     }
 
-    .lock {
+    .lock-message {
       position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      z-index: 200;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      color: var(--white-color);
+      font-size: 0.9rem;
+      text-align: center;
+      line-height: 1.6;
+      padding: 0.7rem;
+      z-index: 300;
 
-      .lock-message {
-        background: var(--dark-color);
-        color: var(--white-color);
-        padding: 0.6rem;
-        font-size: 0.8rem;
-        text-align: center;
-
-        svg {
-          width: 0.8rem;
-          height: 0.8rem;
-          fill: var(--white-color);
-          vertical-align: middle;
-          margin-right: 0.25rem;
-        }
+      svg {
+        width: 0.9rem;
+        height: 0.9rem;
+        vertical-align: middle;
+        margin-right: 0.3rem;
       }
     }
 
     .lock-button {
       position: absolute;
-      top: 3%;
-      left: 3%;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 0.4rem;
+      top: 0.8rem;
+      left: 0.8rem;
+      width: 2.3rem;
+      height: 2.3rem;
+      border-radius: 0.6rem;
       background: var(--white-color);
       border: 1px solid var(--dark-grey-color);
-      z-index: 201;
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.3s ease;
+      z-index: 400;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease;
 
       svg {
-        width: 70%;
-        height: 70%;
+        width: 1.2rem;
+        height: 1.2rem;
         fill: var(--dark-color);
+      }
+
+      &:active {
+        transform: scale(0.93);
       }
 
       &.unlocked {
@@ -85,124 +87,84 @@
   /* 🧭 길찾기 버튼 */
   .navigation {
     display: flex;
+    margin-top: 0.9rem;
     background: var(--alt-bg-color);
-    padding: 0.7rem;
-    border-radius: 0.5rem;
-    margin-top: 0.8rem;
+    border-radius: 0.7rem;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
-    > button {
+    button {
       flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
+      padding: 0.9rem 0;
       color: var(--dark-color);
+      border: none;
       border-right: 1px solid var(--dark-grey-color);
-      background: none;
-      transition: background-color 0.2s;
+      background: transparent;
+      transition: background 0.2s ease, transform 0.1s ease;
 
       &:last-child {
         border-right: none;
       }
 
-      > img {
+      img {
         width: 1rem;
         height: 1rem;
-        vertical-align: middle;
-        margin-right: 0.4rem;
       }
 
       &:active {
-        background: rgba(0, 0, 0, 0.04);
+        background: rgba(0, 0, 0, 0.05);
+        transform: scale(0.97);
       }
     }
   }
 
-  /* 🚍 안내 구역 */
-  .location-info {
-    display: grid;
-    grid-template-columns: 2rem 1fr;
-    row-gap: 0.7rem;
-    column-gap: 0.8rem;
-    margin: 1.6rem 0;
-    text-align: left;
-
-    > * {
-      align-self: center;
-    }
-
-    .transportation-icon-wrapper {
-      display: flex;
-      justify-content: center;
-
-      .transportation-icon {
-        width: 1.4rem;
-        height: 1.4rem;
-        fill: var(--theme-color);
-        opacity: 0.7;
-      }
-    }
-
-    .heading {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--theme-color);
-      opacity: 0.9;
-      margin-bottom: 0.2rem;
-    }
-
-    .content {
-      grid-column: 2 / span 1;
-      font-size: 1rem;
-      line-height: 1.7;
-      opacity: 0.9;
-
-      b {
-        color: var(--dark-color);
-        font-weight: 600;
-      }
-    }
+  /* 🚶 안내문 */
+  .map-guide {
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 0.6rem;
   }
 
   /* 🌙 다크모드 */
   @media (prefers-color-scheme: dark) {
-    .content {
-      color: rgba(255, 255, 255, 0.85);
-
-      b {
-        color: rgba(255, 255, 255, 0.95);
-      }
+    .map-wrapper {
+      background: rgba(30, 30, 30, 0.7);
     }
 
-    .transportation-icon {
-      opacity: 0.8;
+    .lock-message {
+      background: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .map-guide {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .navigation button {
+      color: rgba(255, 255, 255, 0.9);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
     }
   }
 
-  /* 📱 반응형 (모바일 중심) */
+  /* 📱 반응형 */
   @media (max-width: 768px) {
-    .addr strong {
-      font-size: 1rem;
-    }
-
     .map-wrapper {
       height: 16rem;
     }
 
-    .location-info {
-      grid-template-columns: 1.8rem 1fr;
-      margin: 1.2rem 0;
-
-      .heading {
-        font-size: 1rem;
-      }
-
-      .content {
-        font-size: 0.95rem;
-        line-height: 1.6;
-      }
+    .navigation button {
+      font-size: 0.9rem;
+      padding: 0.8rem 0;
     }
 
-    .navigation > button {
+    .map-guide {
       font-size: 0.9rem;
     }
   }
@@ -212,12 +174,13 @@
       height: 14rem;
     }
 
-    .location-info {
-      margin: 1rem 0;
+    .navigation button {
+      font-size: 0.85rem;
+      padding: 0.7rem 0;
+    }
 
-      .content {
-        font-size: 0.9rem;
-      }
+    .map-guide {
+      font-size: 0.85rem;
     }
   }
 }
