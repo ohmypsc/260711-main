@@ -43,6 +43,7 @@ export const Calendar = () => {
         {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
       </span>
 
+      {/* 📅 달력 */}
       <div className="calendar-wrapper">
         {/* 요일 헤더 */}
         {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
@@ -66,13 +67,20 @@ export const Calendar = () => {
           return (
             <div key={i} className={classes.join(" ")}>
               <span>{date}</span>
-              {isWeddingDate && <div className="fireflies" />}
+              {/* ✨ 결혼식 날짜 강조용 입자 */}
+              {isWeddingDate && (
+                <div className="light-particle">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <span key={i} />
+                  ))}
+                </div>
+              )}
             </div>
           )
         })}
       </div>
 
-      {/* 카운트다운 영역 */}
+      {/* 💞 카운트다운 */}
       <div className="countdown-wrapper">
         <div className="message">
           {GROOM_FIRSTNAME} & {BRIDE_FIRSTNAME}의 결혼식이
@@ -82,8 +90,14 @@ export const Calendar = () => {
           ) : (
             <>
               <span className="d-day">
-                {diffs.days}일 {diffs.hours}시간 {diffs.minutes}분{" "}
-                {diffs.seconds}초
+                <span className="number">{diffs.days}</span>
+                <span className="unit">일</span>
+                <span className="number">{diffs.hours}</span>
+                <span className="unit">시간</span>
+                <span className="number">{diffs.minutes}</span>
+                <span className="unit">분</span>
+                <span className="number">{diffs.seconds}</span>
+                <span className="unit">초</span>
               </span>
               <br />
               {diffs.isAfter ? "지났습니다." : "남았습니다."}
