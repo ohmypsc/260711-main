@@ -23,7 +23,7 @@ export const Calendar = () => {
       setTsDiff(WEDDING_DATE.diff())
     }, 1000)
     return () => clearInterval(interval)
-  }, [])
+  }, []) // ✅ 의존성 배열 추가 (불필요한 재등록 방지)
 
   const diffs = useMemo(() => {
     const tsDiffAbs = Math.abs(tsDiff)
@@ -39,13 +39,7 @@ export const Calendar = () => {
     <LazyDiv className="card calendar">
       <h2>결혼식 날</h2>
       <div className="break" />
-
-      {/* 📅 결혼식 날짜 강조 표시 */}
-      <div className="wedding-date-display">
-        <span className="icon">💍</span>
-        <span className="date-text">{WEDDING_DATE.format(WEDDING_DATE_FORMAT)}</span>
-        <span className="icon">💐</span>
-      </div>
+      {WEDDING_DATE.format(WEDDING_DATE_FORMAT)}
 
       <div className="calendar-wrapper">
         {["일", "월", "화", "수", "목", "금", "토"].map((d, i) => (
@@ -78,30 +72,24 @@ export const Calendar = () => {
         })}
       </div>
 
-      {/* ⏰ 카운트다운 영역 */}
+      {/* 카운트다운 영역 */}
       <div className="countdown-wrapper">
-        <div className="countdown-title">💫 결혼까지 남은 시간 💫</div>
-
         <div className="countdown">
-          <div className="count-item">
-            <div className="count">{diffs.days}</div>
-            <div className="unit">일</div>
-          </div>
+          <div className="unit">DAY</div>
+          <div />
+          <div className="unit">HOUR</div>
+          <div />
+          <div className="unit">MIN</div>
+          <div />
+          <div className="unit">SEC</div>
+
+          <div className="count">{diffs.days}</div>
           <span>:</span>
-          <div className="count-item">
-            <div className="count">{diffs.hours}</div>
-            <div className="unit">시간</div>
-          </div>
+          <div className="count">{diffs.hours}</div>
           <span>:</span>
-          <div className="count-item">
-            <div className="count">{diffs.minutes}</div>
-            <div className="unit">분</div>
-          </div>
+          <div className="count">{diffs.minutes}</div>
           <span>:</span>
-          <div className="count-item">
-            <div className="count">{diffs.seconds}</div>
-            <div className="unit">초</div>
-          </div>
+          <div className="count">{diffs.seconds}</div>
         </div>
 
         <div className="message">
