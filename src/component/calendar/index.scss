@@ -43,7 +43,7 @@
         border-bottom: 1px solid var(--dark-grey-color);
       }
 
-      /* 💫 결혼식 날짜 — 전역색 기반 마름모 스파클 효과 */
+      /* 💫 결혼식 날짜 — 전역색 기반 “와르르” 스파클 */
       &.wedding-date {
         position: relative;
         overflow: hidden;
@@ -58,67 +58,41 @@
 
         .sparkles {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          inset: 0;
           pointer-events: none;
-          overflow: hidden;
-          z-index: 1;
+          z-index: 2;
 
           span {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background: var(--theme-color);
+            display: block;
+            /* 전역 테마색을 중심으로 은은한 발광 */
+            background: radial-gradient(
+              circle at 50% 50%,
+              color-mix(in oklab, var(--theme-color) 88%, white) 0%,
+              var(--theme-color) 60%,
+              transparent 100%
+            );
             transform: rotate(45deg);
-            opacity: 0.4;
-            border-radius: 1px;
-            filter: blur(1.2px);
-            animation: sparkleFloat 6s ease-in-out infinite alternate;
-          }
-
-          @for $i from 1 through 8 {
-            span:nth-child(#{$i}) {
-              top: random(80) * 1%;
-              left: random(80) * 1%;
-              width: (4 + random(3)) + px;
-              height: (4 + random(3)) + px;
-              opacity: (0.35 + random(4) * 0.1);
-              animation-delay: (random(8) * 0.4s);
-              animation-duration: (5 + random(3)) + s;
-            }
+            border-radius: 2px;
+            filter: blur(0.6px);
+            mix-blend-mode: screen; /* 라이트/다크 모두 잘 보이게 */
+            animation: sparkleFloat 7s ease-in-out infinite;
           }
         }
       }
     }
   }
 
-  /* 🕊️ 마름모 스파클 부유 애니메이션 */
+  /* 🕊️ 스파클 부유 애니메이션 */
   @keyframes sparkleFloat {
-    0% {
-      transform: rotate(45deg) translate(0, 0) scale(1);
-      opacity: 0.45;
-    }
-    25% {
-      transform: rotate(45deg) translate(-2px, -3px) scale(1.1);
-      opacity: 0.6;
-    }
-    50% {
-      transform: rotate(45deg) translate(3px, 2px) scale(0.9);
-      opacity: 0.5;
-    }
-    75% {
-      transform: rotate(45deg) translate(-3px, 1px) scale(1.05);
-      opacity: 0.65;
-    }
-    100% {
-      transform: rotate(45deg) translate(2px, -2px) scale(1);
-      opacity: 0.45;
-    }
+    0%   { transform: rotate(45deg) translate(0, 0)   scale(0.9);  }
+    25%  { transform: rotate(45deg) translate(-3px,-2px) scale(1.06); }
+    50%  { transform: rotate(45deg) translate(2px, 3px)  scale(1.0);  }
+    75%  { transform: rotate(45deg) translate(-2px, 2px) scale(1.04); }
+    100% { transform: rotate(45deg) translate(0, -3px)   scale(0.92); }
   }
 
-  /* 💞 카운트다운 */
+  /* 💞 카운트다운 (위/아래 간격 동일) */
   .countdown-wrapper {
     display: flex;
     flex-direction: column;
@@ -131,27 +105,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       text-align: center;
-      font-size: 1.15rem;
       line-height: 1.6;
-      gap: 0.6rem;
+      gap: 0.5rem; /* ← 위·중간·아래 세 줄 간격을 ‘딱 동일’하게 */
 
-      /* 📆 카운트다운 숫자 + 단위 */
-      .d-day {
+      .line { margin: 0; padding: 0; }
+
+      .middle .d-day {
         display: flex;
         align-items: flex-end;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 1.3rem; /* ✅ 단위 그룹 간 간격 */
-        line-height: 1.2;
+        gap: 1rem;              /* 단위 그룹 간 간격 */
+        line-height: 1;
         font-variant-numeric: tabular-nums;
 
         .pair {
           display: inline-flex;
           align-items: flex-end;
-          justify-content: center;
-          gap: 0.1rem; /* ✅ 숫자와 단위는 거의 붙게 */
+          gap: 0.1rem;            /* 숫자와 단위는 거의 붙게 */
         }
 
         .number {
@@ -159,17 +131,27 @@
           font-weight: 700;
           color: var(--theme-color);
           text-shadow:
-            0 1px 3px rgba(255, 133, 133, 0.25),
-            0 0 8px rgba(255, 230, 230, 0.3);
+            0 1px 3px rgba(255,133,133,0.25),
+            0 0 8px rgba(255,230,230,0.3);
         }
 
         .unit {
           font-size: 0.85rem;
           font-weight: 500;
-          color: rgba(0, 0, 0, 0.5);
+          color: rgba(0,0,0,0.5);
           transform: translateY(-2px);
         }
       }
     }
+  }
+
+  /* 📱 반응형(필요 시) */
+  @media (max-width: 768px) {
+    .countdown-wrapper .message .middle .d-day .number { font-size: 1.5rem; }
+    .countdown-wrapper .message .middle .d-day .unit   { font-size: 0.8rem; }
+  }
+  @media (max-width: 480px) {
+    .countdown-wrapper .message .middle .d-day .number { font-size: 1.3rem; }
+    .countdown-wrapper .message .middle .d-day .unit   { font-size: 0.75rem; }
   }
 }
