@@ -1,23 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useState, useRef } from "react"
 import { Button } from "../button"
 import { dayjs } from "../../const"
 import { LazyDiv } from "../lazyDiv"
 import { useModal } from "../modal"
 import { createClient } from "@supabase/supabase-js"
 
-// 🔑 Supabase 연결 (.env 값 사용)
+// 🔑 Supabase 연결
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL!,
   import.meta.env.VITE_SUPABASE_ANON_KEY!
 )
 
-const RULES = {
-  name: { maxLength: 10 },
-  content: { maxLength: 100 },
-  password: { minLength: 4, maxLength: 20 },
-}
-
-const PAGES_PER_BLOCK = 5
 const POSTS_PER_PAGE = 5
 
 type Post = {
@@ -27,18 +20,25 @@ type Post = {
   content: string
 }
 
+// ==========================
+// 🧭 메인 GuestBook 컴포넌트
+// ==========================
 export const GuestBook = () => {
   const { openModal, closeModal } = useModal()
   const [posts, setPosts] = useState<Post[]>([])
+  const [totalCount, setTotalCount] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
+  const totalPages = Math.ceil(totalCount / POSTS_PER_PAGE)
 
-  // 🔹 글 불러오기
-  const loadPosts = async () => {
+  // 🔹 페이지별 글 불러오기
+  const loadPage = async (page = 0) => {
+    const offset = page * POSTS_PER_PAGE
     try {
-      const { data, error } = await supabase
+      const { data, count, error } = await supabase
         .from("guestbook")
-        .select("id, name, content, created_at")
+        .select("id, name, content, created_at", { count: "exact" })
         .order("created_at", { ascending: false })
-        .limit(3)
+        .range(offset, offset + POSTS_PER_PAGE - 1)
 
       if (error) throw error
 
@@ -50,60 +50,54 @@ export const GuestBook = () => {
       }))
 
       setPosts(formatted)
+      setTotalCount(count || 0)
+      setCurrentPage(page)
     } catch (error) {
       console.error("Error loading posts:", error)
     }
   }
 
-  // 🔹 초기 로드 + 실시간 구독
+  // 🔹 초기 로드
   useEffect(() => {
-    loadPosts()
+    loadPage(0)
+  }, [])
 
+  // 🔹 실시간 갱신 (추가/삭제 시 자동 갱신)
+  useEffect(() => {
     const subscription = supabase
       .channel("guestbook-realtime")
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "guestbook" },
-        (payload) => {
-          const newPost = payload.new
-          setPosts((prev) => [
-            {
-              id: newPost.id,
-              name: newPost.name,
-              content: newPost.content,
-              timestamp: Math.floor(new Date(newPost.created_at).getTime() / 1000),
-            },
-            ...prev,
-          ])
-        }
+        () => loadPage(currentPage)
       )
       .on(
         "postgres_changes",
         { event: "DELETE", schema: "public", table: "guestbook" },
-        (payload) => {
-          const deletedId = payload.old.id
-          setPosts((prev) => prev.filter((p) => p.id !== deletedId))
-        }
+        () => loadPage(currentPage)
       )
       .subscribe()
 
-    return () => {
-      supabase.removeChannel(subscription)
-    }
-  }, [])
+    return () => supabase.removeChannel(subscription)
+  }, [currentPage])
+
+  // 🔹 페이지 버튼 계산
+  const pages = useMemo(() => {
+    return Array.from({ length: totalPages }, (_, i) => i)
+  }, [totalPages])
 
   return (
     <LazyDiv className="card guestbook">
       <h2>방명록</h2>
-
       <div className="break" />
 
+      {/* 게시글 목록 */}
       {posts.map((post) => (
         <div key={post.id} className="post">
           <div className="heading">
             <button
               className="close-button"
-              onClick={() => {
+              onClick={() =>
                 openModal({
                   className: "delete-guestbook-modal",
                   closeOnClickBackground: false,
@@ -111,7 +105,7 @@ export const GuestBook = () => {
                   content: (
                     <DeleteGuestBookModal
                       postId={post.id}
-                      onSuccess={() => loadPosts()}
+                      onSuccess={() => loadPage(currentPage)}
                     />
                   ),
                   footer: (
@@ -133,7 +127,7 @@ export const GuestBook = () => {
                     </>
                   ),
                 })
-              }}
+              }
             />
           </div>
           <div className="body">
@@ -148,8 +142,34 @@ export const GuestBook = () => {
         </div>
       ))}
 
+      {/* 페이지네이션 */}
+      {totalPages > 1 && (
+        <div className="pagination">
+          {currentPage > 0 && (
+            <div className="page" onClick={() => loadPage(currentPage - 1)}>
+              이전
+            </div>
+          )}
+          {pages.map((page) => (
+            <div
+              key={page}
+              className={`page${page === currentPage ? " current" : ""}`}
+              onClick={() => loadPage(page)}
+            >
+              {page + 1}
+            </div>
+          ))}
+          {currentPage < totalPages - 1 && (
+            <div className="page" onClick={() => loadPage(currentPage + 1)}>
+              다음
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="break" />
 
+      {/* 작성 버튼 */}
       <Button
         onClick={() =>
           openModal({
@@ -163,7 +183,7 @@ export const GuestBook = () => {
                 </div>
               </div>
             ),
-            content: <WriteGuestBookModal loadPosts={loadPosts} />,
+            content: <WriteGuestBookModal loadPosts={() => loadPage(0)} />,
             footer: (
               <>
                 <Button
@@ -187,35 +207,13 @@ export const GuestBook = () => {
       >
         방명록 작성하기
       </Button>
-
-      <div className="break" />
-
-      <Button
-        onClick={() =>
-          openModal({
-            className: "all-guestbook-modal",
-            closeOnClickBackground: true,
-            header: <div className="title">방명록 전체보기</div>,
-            content: <AllGuestBookModal loadPosts={loadPosts} />,
-            footer: (
-              <Button
-                buttonStyle="style2"
-                className="bg-light-grey-color text-dark-color"
-                onClick={closeModal}
-              >
-                닫기
-              </Button>
-            ),
-          })
-        }
-      >
-        방명록 전체보기
-      </Button>
     </LazyDiv>
   )
 }
 
+// ==========================
 // ✏️ 작성 모달
+// ==========================
 const WriteGuestBookModal = ({ loadPosts }: { loadPosts: () => void }) => {
   const inputRef = useRef({}) as React.RefObject<{
     name: HTMLInputElement
@@ -282,133 +280,9 @@ const WriteGuestBookModal = ({ loadPosts }: { loadPosts: () => void }) => {
   )
 }
 
-// 📜 전체보기 모달
-const AllGuestBookModal = ({
-  loadPosts,
-}: {
-  loadPosts: () => Promise<void>
-}) => {
-  const [posts, setPosts] = useState<Post[]>([])
-  const [currentPage, setCurrentPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(1)
-  const { openModal, closeModal } = useModal()
-
-  const loadPage = async (page: number) => {
-    setCurrentPage(page)
-    const offset = page * POSTS_PER_PAGE
-    const { data, count, error } = await supabase
-      .from("guestbook")
-      .select("*", { count: "exact" })
-      .order("created_at", { ascending: false })
-      .range(offset, offset + POSTS_PER_PAGE - 1)
-
-    if (error) return console.error(error)
-
-    setPosts(
-      data.map((item) => ({
-        id: item.id,
-        name: item.name,
-        content: item.content,
-        timestamp: Math.floor(new Date(item.created_at).getTime() / 1000),
-      }))
-    )
-    setTotalPages(Math.ceil((count || 1) / POSTS_PER_PAGE))
-  }
-
-  useEffect(() => {
-    loadPage(0)
-  }, [])
-
-  const pages = useMemo(() => {
-    const start = Math.floor(currentPage / PAGES_PER_BLOCK) * PAGES_PER_BLOCK
-    const end = Math.min(start + PAGES_PER_BLOCK, totalPages)
-    return Array.from({ length: end - start }).map((_, i) => i + start)
-  }, [currentPage, totalPages])
-
-  return (
-    <>
-      {posts.map((post) => (
-        <div key={post.id} className="post">
-          <div className="heading">
-            <div
-              className="close-button"
-              onClick={() => {
-                openModal({
-                  className: "delete-guestbook-modal",
-                  closeOnClickBackground: false,
-                  header: <div className="title">삭제하시겠습니까?</div>,
-                  content: (
-                    <DeleteGuestBookModal
-                      postId={post.id}
-                      onSuccess={() => {
-                        loadPosts()
-                        loadPage(currentPage)
-                      }}
-                    />
-                  ),
-                  footer: (
-                    <>
-                      <Button
-                        buttonStyle="style2"
-                        type="submit"
-                        form="guestbook-delete-form"
-                      >
-                        삭제하기
-                      </Button>
-                      <Button
-                        buttonStyle="style2"
-                        className="bg-light-grey-color text-dark-color"
-                        onClick={closeModal}
-                      >
-                        닫기
-                      </Button>
-                    </>
-                  ),
-                })
-              }}
-            />
-          </div>
-          <div className="body">
-            <div className="title">
-              <div className="name">{post.name}</div>
-              <div className="date">
-                {dayjs.unix(post.timestamp).format("YYYY-MM-DD")}
-              </div>
-            </div>
-            <div className="content">{post.content}</div>
-          </div>
-        </div>
-      ))}
-
-      <div className="pagination">
-        {pages[0] > 0 && (
-          <div className="page" onClick={() => loadPage(pages[0] - 1)}>
-            이전
-          </div>
-        )}
-        {pages.map((page) => (
-          <div
-            className={`page${page === currentPage ? " current" : ""}`}
-            key={page}
-            onClick={() => page !== currentPage && loadPage(page)}
-          >
-            {page + 1}
-          </div>
-        ))}
-        {pages[pages.length - 1] < totalPages - 1 && (
-          <div
-            className="page"
-            onClick={() => loadPage(pages[pages.length - 1] + 1)}
-          >
-            다음
-          </div>
-        )}
-      </div>
-    </>
-  )
-}
-
+// ==========================
 // 🗑️ 삭제 모달
+// ==========================
 const DeleteGuestBookModal = ({
   postId,
   onSuccess,
