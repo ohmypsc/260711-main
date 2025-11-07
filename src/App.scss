@@ -257,44 +257,22 @@ h2 {
   margin-bottom: 1.8rem;
   text-align: center;
 
-  /* 🌸 더 화사한 로즈핑크 그라데이션 */
-  background: linear-gradient(90deg, #ffb6c1 0%, #ffcdd2 50%, #ff9aa2 100%);
+  /* ✨ 라이트모드용 은은한 로즈골드 그라데이션 */
+  background: linear-gradient(90deg, #c47b85 0%, #e8b0a7 50%, #c47b85 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 
-  /* ✨ 빛나는 효과 */
+  /* 🌸 메탈 느낌을 위한 살짝의 광택 */
   text-shadow:
-    0 0 6px rgba(255, 190, 200, 0.7),
-    0 0 12px rgba(255, 170, 180, 0.6),
-    0 0 18px rgba(255, 140, 160, 0.5),
-    0 0 25px rgba(255, 120, 140, 0.4);
-
-  /* 🌟 반짝이는 애니메이션 */
-  animation: glow 3s ease-in-out infinite alternate;
+    0 1px 2px rgba(255, 220, 220, 0.4),
+    0 0 6px rgba(235, 190, 190, 0.2);
 
   @media (max-width: 500px) {
     margin-bottom: 1.4rem;
   }
 }
 
-/* 💫 반짝임 애니메이션 정의 */
-@keyframes glow {
-  0% {
-    text-shadow:
-      0 0 4px rgba(255, 180, 190, 0.5),
-      0 0 8px rgba(255, 150, 160, 0.5),
-      0 0 14px rgba(255, 130, 150, 0.4),
-      0 0 20px rgba(255, 100, 130, 0.3);
-  }
-  100% {
-    text-shadow:
-      0 0 8px rgba(255, 200, 210, 0.9),
-      0 0 16px rgba(255, 170, 180, 0.8),
-      0 0 25px rgba(255, 150, 160, 0.7),
-      0 0 35px rgba(255, 120, 140, 0.6);
-  }
-}
 
 
 /* 구분용 여백 */
