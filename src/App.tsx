@@ -5,6 +5,7 @@ import { Location } from "./component/location";
 import "./App.scss";
 import { BGEffect } from "./component/bgEffect";
 import { Invitation } from "./component/invitation";
+import { Timeline } from "./component/timeline";
 import { Calendar } from "./component/calendar";
 import { Information } from "./component/information";
 import { GuestBook } from "./component/guestbook";
