@@ -9,16 +9,16 @@
 @use "./component/modal";
 
 :root {
-  --theme-color: #ff8585;
-  --theme-bg-color: #ffe7e7;
-  --alt-color: #d88a8a;
-  --alt-bg-color: #f7eaea;
-  --dark-color: #282c34;
-  --dark-grey-color: #d2d2d2;
-  --light-grey-color: #eaeaea;
-  --light-color: #f9f9f9;
+  --theme-color: #85c88a;
+  --theme-bg-color: #f0f9f0;
+  --alt-color: #7bb661;
+  --alt-bg-color: #e8f5e9;
+  --dark-color: #2f3e2f;
+  --dark-grey-color: #a7b7a7;
+  --light-grey-color: #dce5dc;
+  --light-color: #ffffff;
   --white-color: #ffffff;
-  --red-color: #ff0000;
+  --red-color: #ffb6a6;
 
   font-family: "MapoGoldenPier";
   font-size: clamp(16px, 3.2vw, 20px);
