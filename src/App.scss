@@ -9,16 +9,16 @@
 @use "./component/modal";
 
 :root {
-  --theme-color: #f27b8b;
+  --theme-color: #e78b9c;
   --theme-bg-color: #fff7f8;
-  --alt-color: #e8647a;
+  --alt-color: #d97285;
   --alt-bg-color: #ffe5ea;
   --dark-color: #2e2525;
   --dark-grey-color: #bdaaaa;
   --light-grey-color: #f3e9eb;
   --light-color: #fffefe;
   --white-color: #ffffff;
-  --red-color: #eb5f70;
+  --red-color: #e88392;
   
   font-family: "MapoGoldenPier";
   font-size: clamp(16px, 3.2vw, 20px);
