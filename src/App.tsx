@@ -32,7 +32,8 @@ function App() {
             {/* 모시는 글 */}
             <Invitation />
           </LazyDiv>
-
+            {/* 타임라인 */}
+          <Timeline />
           <LazyDiv className="card-group">
             {/* 결혼식 날짜 (달력) */}
             <Calendar />
