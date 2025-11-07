@@ -166,3 +166,48 @@
     }
   }
 }
+
+
+
+/* 🗑️ 삭제 모달 */
+.delete-guestbook-modal {
+  width: 22rem; /* 그대로 유지 */
+
+  .header {
+    .title {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--theme-color);
+    }
+  }
+
+  .content {
+    padding: 0 0.7rem 0.7rem 0.7rem;
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+
+      input {
+        padding: 0.8rem; /* ✅ 높이 살짝 키움 */
+        margin-bottom: 0.8rem;
+        border: 1px solid var(--light-grey-color);
+        border-radius: 0.3rem;
+        font-family: "MapoGoldenPier";
+        font-size: 1rem; /* ✅ 글자 크게 */
+        width: 100%; /* ✅ 가로 길이를 전체로 확장 */
+        box-sizing: border-box; /* ✅ 패딩 포함 폭 계산 */
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      width: 100%;
+    }
+  }
+}
