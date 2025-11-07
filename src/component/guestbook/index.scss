@@ -1,109 +1,11 @@
-.guestbook {
-  .post {
-    text-align: left;
-    box-shadow: 0.1rem 0.1rem 0.3rem 0 rgba(0, 0, 0, 0.1);
-    background-color: var(--white-color);
-    border-radius: 0.5rem;
-    border: 1px solid var(--light-grey-color);
-    font-size: 0.9rem;
-    margin-top: 0.2rem;
-
-    .heading {
-      margin: 0.5rem;
-      display: flex;
-      justify-content: flex-end;
-
-      .close-button {
-        position: relative;
-        z-index: 3;
-        width: 0.8rem;
-        height: 0.8rem;
-
-        &::before {
-          content: "";
-          width: 0.1rem;
-          height: 100%;
-          background-color: var(--dark-grey-color);
-          position: absolute;
-          transform: rotate(45deg);
-          top: 0;
-          left: 50%;
-        }
-
-        &::after {
-          content: "";
-          width: 0.1rem;
-          height: 100%;
-          background-color: var(--dark-grey-color);
-          position: absolute;
-          transform: rotate(135deg);
-          top: 0;
-          left: 50%;
-        }
-      }
-    }
-
-    .body {
-      margin: 0 1.3rem 1.3rem 1.3rem;
-
-      .title {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.8rem;
-
-        .name {
-          margin-right: 0.5rem;
-        }
-
-        .date {
-          font-size: 0.8rem;
-          opacity: 0.5;
-        }
-      }
-
-      .content {
-        word-wrap: break-word;
-        white-space: pre-wrap;
-      }
-    }
-  }
-
-  /* ✅ 페이지네이션 추가 */
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-
-    .page {
-      padding: 0.3rem 0.5rem;
-      margin: 0 0.2rem;
-      border: 1px solid var(--dark-grey-color);
-      border-radius: 0.3rem;
-      cursor: pointer;
-      user-select: none;
-
-      &.current {
-        background-color: var(--theme-color);
-        color: var(--white-color);
-      }
-
-      &:hover:not(.current) {
-        background-color: var(--light-grey-color);
-      }
-    }
-  }
-}
-
-/* ✏️ 방명록 작성 모달 */
 .write-guestbook-modal {
-  width: 22rem; /* ✅ 기존 그대로 */
-  height: auto; /* ✅ 내용 길이에 따라 자동 조절 */
-  max-height: 90vh; /* ✅ 너무 커지면 화면을 넘지 않게 제한 */
-  overflow: hidden; /* ✅ 모달 전체엔 스크롤 절대 없음 */
+  width: 22rem;
+  height: auto;
+  max-height: 90vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* ✅ footer가 아래쪽에 밀착되도록 */
+  justify-content: space-between;
 
   .header {
     .title-group {
@@ -125,7 +27,7 @@
   }
 
   .content {
-    padding: 0 0.7rem 0.5rem 0.7rem; /* ✅ 아래 여백 줄임 */
+    padding: 0 0.7rem 0.5rem 0.7rem;
 
     .form {
       display: flex;
@@ -133,64 +35,24 @@
       margin-top: 1rem;
 
       input {
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        padding: 0.7rem; /* ✅ 높이 살짝 증가 */
+        margin-bottom: 0.7rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: 0.8rem;
+        font-size: 0.95rem; /* ✅ 글자 크기 증가 */
       }
 
       textarea {
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        padding: 0.7rem;
+        margin-bottom: 0.7rem;
         border: 1px solid var(--light-grey-color);
         border-radius: 0.3rem;
         font-family: "MapoGoldenPier";
-        font-size: 0.8rem;
-        overflow-y: auto; /* ✅ 내용이 많을 때만 내부 스크롤 */
+        font-size: 0.95rem; /* ✅ 글자 크기 증가 */
+        height: 8rem; /* ✅ 기본 입력창 크기 확대 */
+        overflow-y: auto; /* ✅ 내용이 많을 때만 스크롤 */
         resize: none; /* ✅ 크기 조절 방지 */
-      }
-    }
-  }
-
-  .footer {
-    display: flex;
-    flex-direction: row;
-
-    button {
-      width: 100%;
-    }
-  }
-}
-
-/* 🗑️ 삭제 모달 */
-.delete-guestbook-modal {
-  width: 22rem; /* ✅ 원본 그대로 (수정 없음) */
-
-  .header {
-    .title {
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--theme-color);
-    }
-  }
-
-  .content {
-    padding: 0 0.7rem 0.7rem 0.7rem;
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      margin-top: 1rem;
-
-      input {
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid var(--light-grey-color);
-        border-radius: 0.3rem;
-        font-family: "MapoGoldenPier";
-        font-size: 0.8rem;
       }
     }
   }
