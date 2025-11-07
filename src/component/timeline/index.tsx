@@ -4,24 +4,24 @@ import "../App.scss"; // SCSS 변수 사용 위해 import
 export const Timeline = () => {
   const photos = [
     {
-      date: "2019.03.02",
+      date: "2024.가을",
       caption: "처음 만난 날 💕",
-      img: "/images/love1.jpg",
+      img: "/images/love1.png",
     },
     {
-      date: "2020.05.17",
-      caption: "첫 여행 ✈️",
-      img: "/images/love2.jpg",
+      date: "2025.봄",
+      caption: "꽃놀이 🩷",
+      img: "/images/love2.png",
     },
     {
-      date: "2021.09.25",
-      caption: "함께한 1000일 🌸",
+      date: "2025.여름",
+      caption: "여행 ✈️",
       img: "/images/love3.jpg",
     },
     {
-      date: "2023.02.14",
-      caption: "결혼을 약속한 날 💍",
-      img: "/images/love4.jpg",
+      date: "2026.여름",
+      caption: "결혼합니다",
+      img: "/images/love4.png",
     },
   ];
 
