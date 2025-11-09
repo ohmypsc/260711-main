@@ -1,7 +1,5 @@
-/* 타임라인 카드가 전역 .card 스타일을 그대로 따르도록 최소만 정의 */
 .timeline {
-  /* 전역 .card가 이미 적용됨: 배경/보더/섀도우/라운드 재정의 금지 */
-  padding: 2rem 1.5rem; /* 내용 여백만 조정 */
+  padding: 2rem 1.5rem; 
   text-align: center;
 
   .timeline-gallery {
@@ -14,7 +12,6 @@
     }
   }
 
-  /* 내부 아이템은 ‘미니 카드’ 느낌만 살짝 */
   .timeline-item {
     background-color: var(--theme-bg-color);
     border: 1px solid var(--light-grey-color);
