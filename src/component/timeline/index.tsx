@@ -2,10 +2,10 @@ import { LazyDiv } from "../lazyDiv";
 
 export const Timeline = () => {
   const photos = [
-    { date: "2024.가을", caption: "처음 만난 날 💕", img: "/love1.png" },
-    { date: "2025.봄", caption: "꽃놀이 🩷", img: "/love2.png" },
-    { date: "2025.여름", caption: "여행 ✈️", img: "/love3.jpg" },
-    { date: "2026.여름", caption: "결혼합니다 💍", img: "/love4.png" },
+    { date: "2024.가을", caption: "처음 만난 날 💕", img: `${import.meta.env.BASE_URL}love1.png` },
+    { date: "2025.봄", caption: "꽃놀이 🩷", img: `${import.meta.env.BASE_URL}love2.png` },
+    { date: "2025.여름", caption: "여행 ✈️", img: `${import.meta.env.BASE_URL}love3.jpg` },
+    { date: "2026.여름", caption: "결혼합니다 💍", img: `${import.meta.env.BASE_URL}love4.png` },
   ];
 
   return (
