@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.scss"; // SCSS 변수 사용 위해 import
+import "../index.scss";
 
 export const Timeline = () => {
   const photos = [
