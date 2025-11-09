@@ -26,29 +26,30 @@ function App() {
     <>
       <div className="background">
         <div className="card-view">
+          {/* 표지 + 모시는 글 */}
           <LazyDiv className="card-group">
-            {/* 표지 */}
             <Cover />
-
-            {/* 모시는 글 */}
             <Invitation />
           </LazyDiv>
-            {/* 타임라인 */}
-          <Timeline />
+
+          {/* 타임라인 */}
           <LazyDiv className="card-group">
-            {/* 결혼식 날짜 (달력) */}
+            <Timeline />
+          </LazyDiv>
+
+          {/* 결혼식 날짜 */}
+          <LazyDiv className="card-group">
             <Calendar />
           </LazyDiv>
 
+          {/* 오시는 길 */}
           <LazyDiv className="card-group">
-            {/* 오시는길 */}
             <Location />
           </LazyDiv>
 
+          {/* 마음 전하기 + 방명록 */}
           <LazyDiv className="card-group">
-            {/* 마음 전하기 */}
             <Information />
-            {/* 방명록 */}
             {!STATIC_ONLY && <GuestBook />}
           </LazyDiv>
         </div>
