@@ -1,54 +1,44 @@
+/* 타임라인 카드가 전역 .card 스타일을 그대로 따르도록 최소만 정의 */
 .timeline {
-  background-color: var(--light-color);
-  border: 1px solid var(--light-grey-color);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.15);
-  border-radius: 1rem;
-  padding: 2rem 1.5rem;
+  /* 전역 .card가 이미 적용됨: 배경/보더/섀도우/라운드 재정의 금지 */
+  padding: 2rem 1.5rem; /* 내용 여백만 조정 */
   text-align: center;
 
   .timeline-gallery {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 
     @media (min-width: 700px) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
+      grid-template-columns: 1fr 1fr; /* 두 칼럼 */
+    }
+  }
+
+  /* 내부 아이템은 ‘미니 카드’ 느낌만 살짝 */
+  .timeline-item {
+    background-color: var(--theme-bg-color);
+    border: 1px solid var(--light-grey-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 0.4rem;
+      margin-bottom: 0.8rem;
+      display: block;
     }
 
-    .timeline-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: var(--theme-bg-color);
-      border-radius: 1rem;
-      padding: 1rem;
-      box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.1);
-      width: 100%;
-
-      @media (min-width: 700px) {
-        width: 45%;
+    .timeline-caption {
+      .date {
+        font-weight: 600;
+        color: var(--alt-color);
       }
-
-      img {
-        width: 100%;
-        border-radius: 0.8rem;
-        object-fit: cover;
-        max-height: 300px;
-        margin-bottom: 0.8rem;
-      }
-
-      .timeline-caption {
-        .date {
-          font-weight: 600;
-          color: var(--alt-color);
-        }
-
-        .text {
-          color: var(--dark-color);
-          margin-top: 0.3rem;
-        }
+      .text {
+        color: var(--dark-color);
+        margin-top: 0.3rem;
       }
     }
   }
