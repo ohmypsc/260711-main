@@ -1,42 +1,81 @@
 .timeline {
-  padding: 2rem 1.5rem; 
+  padding: 2rem 1rem;
   text-align: center;
 
-  .timeline-gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
 
-    @media (min-width: 700px) {
-      grid-template-columns: 1fr 1fr; /* 두 칼럼 */
+  .timeline-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: rgba(201, 122, 126, 0.2);
     }
   }
 
   .timeline-item {
-    background-color: var(--theme-bg-color);
-    border: 1px solid var(--light-grey-color);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.1);
+    position: relative;
+    background: #fff;
+    border-radius: 1rem;
+    width: 85%;
+    max-width: 420px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    animation: fadeUp 0.8s ease both;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: #c97a7e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(201, 122, 126, 0.15);
+    }
 
     img {
       width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 0.4rem;
+      border-radius: 0.75rem;
       margin-bottom: 0.8rem;
-      display: block;
+      object-fit: cover;
     }
 
     .timeline-caption {
       .date {
         font-weight: 600;
-        color: var(--alt-color);
+        font-size: 0.9rem;
+        color: #c97a7e;
+        margin-bottom: 0.4rem;
       }
+
       .text {
-        color: var(--dark-color);
-        margin-top: 0.3rem;
+        color: #444;
+        font-size: 1rem;
+        line-height: 1.5;
       }
+    }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
