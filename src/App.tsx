@@ -13,6 +13,35 @@ import { LazyDiv } from "./component/lazyDiv";
 import { STATIC_ONLY } from "./env";
 
 function App() {
+  /* ✅ 전체 확대 방지 설정 */
+  useEffect(() => {
+    // 더블탭 확대 방지
+    let lastTouchEnd = 0;
+    const preventZoom = (e: TouchEvent) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+      }
+      lastTouchEnd = now;
+    };
+
+    // 핀치 줌 및 제스처 확대 방지
+    const preventGesture = (e: Event) => e.preventDefault();
+
+    document.addEventListener("touchend", preventZoom, false);
+    document.addEventListener("gesturestart", preventGesture, false);
+    document.addEventListener("gesturechange", preventGesture, false);
+    document.addEventListener("gestureend", preventGesture, false);
+
+    return () => {
+      document.removeEventListener("touchend", preventZoom);
+      document.removeEventListener("gesturestart", preventGesture);
+      document.removeEventListener("gesturechange", preventGesture);
+      document.removeEventListener("gestureend", preventGesture);
+    };
+  }, []);
+  /* ✅ 끝 */
+
   // ✅ GitHub Pages 배포 환경에서도 동작하도록 보정
   const path = window.location.pathname.replace(import.meta.env.BASE_URL, "");
 
@@ -26,28 +55,23 @@ function App() {
     <>
       <div className="background">
         <div className="card-view">
-          {/* 표지 + 모시는 글 */}
           <LazyDiv className="card-group">
             <Cover />
             <Invitation />
           </LazyDiv>
 
-          {/* 타임라인 */}
           <LazyDiv className="card-group">
             <Timeline />
           </LazyDiv>
 
-          {/* 결혼식 날짜 */}
           <LazyDiv className="card-group">
             <Calendar />
           </LazyDiv>
 
-          {/* 오시는 길 */}
           <LazyDiv className="card-group">
             <Location />
           </LazyDiv>
 
-          {/* 마음 전하기 + 방명록 */}
           <LazyDiv className="card-group">
             <Information />
             {!STATIC_ONLY && <GuestBook />}
@@ -55,7 +79,6 @@ function App() {
         </div>
       </div>
 
-      {/* 🌸 꽃잎 효과는 항상 카드 위에 표시되도록 background 밖으로 이동 */}
       <BGEffect />
     </>
   );
