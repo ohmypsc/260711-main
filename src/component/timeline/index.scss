@@ -1,9 +1,9 @@
 .timeline {
   position: relative;
   padding: 3rem 1rem;
-  text-align: center;
   display: flex;
   justify-content: center;
+  text-align: center;
 
   .timeline-gallery {
     position: relative;
@@ -31,10 +31,10 @@
     position: relative;
     z-index: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* 사진 아래 텍스트 */
     align-items: center;
     margin: 3rem 0;
-    width: 100%;
+    width: 50%;
     max-width: 420px;
 
     .circle-image {
@@ -64,7 +64,7 @@
         font-weight: 600;
         color: #b8696f;
         font-size: 1rem;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.1rem;
       }
 
       .caption {
@@ -79,14 +79,14 @@
   /* 왼쪽 카드 */
   .timeline-item.left {
     align-self: flex-start;
-    transform: translateX(-50%); /* ✅ 왼쪽 카드 중앙선 기준 이동 */
     text-align: right;
+    padding-right: calc(50% + 40px); /* ✅ 컨테이너 벗어나지 않게 중앙선까지 확보 */
 
     &::before {
       content: "";
       position: absolute;
       top: 60px;
-      right: -32px; /* ✅ 중앙선에 딱 붙도록 조정 */
+      right: calc(50% - 1px); /* ✅ 중앙선 정확히 */
       width: 12px;
       height: 12px;
       background: #c97a7e;
@@ -99,14 +99,14 @@
   /* 오른쪽 카드 */
   .timeline-item.right {
     align-self: flex-end;
-    transform: translateX(50%); /* ✅ 오른쪽 카드 중앙선 기준 이동 */
     text-align: left;
+    padding-left: calc(50% + 40px);
 
     &::before {
       content: "";
       position: absolute;
       top: 60px;
-      left: -32px; /* ✅ 중앙선에 딱 붙도록 조정 */
+      left: calc(50% - 1px);
       width: 12px;
       height: 12px;
       background: #c97a7e;
@@ -116,7 +116,7 @@
     }
   }
 
-  /* ✅ 모바일에서도 교차 유지 + 선/점 자연스러운 위치 조정 */
+  /* ✅ 모바일에서도 좌우 교차 유지 */
   @media (max-width: 768px) {
     .timeline-gallery::before {
       left: 50%;
@@ -126,25 +126,36 @@
     }
 
     .timeline-item {
-      width: 80%;
-      margin: 2.5rem 0;
+      width: 100%;
+      max-width: 90%;
+      margin: 2rem 0;
     }
 
     .timeline-item.left {
-      transform: translateX(-20%); /* ✅ 중앙선과 살짝 거리 두기 */
+      padding-right: 0;
+      align-self: flex-start;
       text-align: right;
 
       &::before {
-        right: -12px; /* ✅ 선에 붙음 */
+        right: calc(50% - 6px); /* ✅ 점이 선에 맞게 */
+      }
+
+      .circle-image {
+        margin-right: 1rem; /* ✅ 선과 겹치지 않게 */
       }
     }
 
     .timeline-item.right {
-      transform: translateX(20%); /* ✅ 반대쪽으로 같은 거리 */
+      padding-left: 0;
+      align-self: flex-end;
       text-align: left;
 
       &::before {
-        left: -12px;
+        left: calc(50% - 6px);
+      }
+
+      .circle-image {
+        margin-left: 1rem;
       }
     }
 
