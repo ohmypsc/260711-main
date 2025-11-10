@@ -26,7 +26,7 @@ export const Timeline = () => {
   ];
 
   return (
-    <LazyDiv className="timeline">
+    <LazyDiv className="card timeline">
       <h2>우리의 시간</h2>
       <div className="timeline-gallery">
         {items.map((item, i) => (
