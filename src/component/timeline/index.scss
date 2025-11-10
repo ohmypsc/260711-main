@@ -13,6 +13,7 @@
     flex-direction: column;
     align-items: center;
 
+    /* 중앙 수직선 */
     &::before {
       content: "";
       position: absolute;
@@ -128,23 +129,24 @@
     }
   }
 
+  /* ✅ 모바일에서도 좌우 교차 유지 */
   @media (max-width: 600px) {
     .timeline-item {
-      flex-direction: column;
-      text-align: center;
+      max-width: 90%;
       margin: 2rem 0;
+      /* 교차 유지하되 크기만 살짝 줄임 */
+      .circle-image {
+        width: 90px;
+        height: 90px;
+      }
 
       .timeline-text {
-        align-items: center !important;
-        margin: 0 !important;
-      }
-
-      .circle-image {
-        margin: 0 0 1rem 0 !important;
-      }
-
-      &::before {
-        display: none;
+        .year {
+          font-size: 0.85rem;
+        }
+        .caption {
+          font-size: 0.95rem;
+        }
       }
     }
 
