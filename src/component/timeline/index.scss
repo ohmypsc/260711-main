@@ -1,97 +1,46 @@
-.timeline {
-  position: relative;
-  text-align: center;
+import { LazyDiv } from "../lazyDiv";
 
-  .timeline-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    position: relative;
+export const Timeline = () => {
+  const photos = [
+    {
+      date: "2024.가을",
+      caption: "처음 만난 날 💕",
+      img: `${import.meta.env.BASE_URL}love1.png`,
+    },
+    {
+      date: "2025.봄",
+      caption: "꽃놀이 🩷",
+      img: `${import.meta.env.BASE_URL}love2.png`,
+    },
+    {
+      date: "2025.여름",
+      caption: "여행 ✈️",
+      img: `${import.meta.env.BASE_URL}love3.jpg`,
+    },
+    {
+      date: "2026.여름",
+      caption: "결혼합니다 💍",
+      img: `${import.meta.env.BASE_URL}love4.png`,
+    },
+  ];
 
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 2px;
-      height: 100%;
-      background: rgba(201, 122, 126, 0.2);
-      transform: translateX(-50%);
-      z-index: 0;
-    }
-  }
-
-  .timeline-item {
-    position: relative;
-    background: #fff;
-    border-radius: 1rem;
-    padding: 1rem;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    z-index: 1;
-    animation: fadeUp 0.8s ease both;
-
-    /* 중앙 점 */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 1.5rem;
-      width: 12px;
-      height: 12px;
-      background: #c97a7e;
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(201, 122, 126, 0.15);
-    }
-
-    /* 왼쪽 카드 */
-    &:nth-child(odd) {
-      justify-self: end;
-      text-align: right;
-
-      &::before {
-        right: -30px;
-      }
-    }
-
-    /* 오른쪽 카드 */
-    &:nth-child(even) {
-      justify-self: start;
-      text-align: left;
-
-      &::before {
-        left: -30px;
-      }
-    }
-
-    img {
-      width: 100%;
-      border-radius: 0.75rem;
-      margin-bottom: 0.8rem;
-      object-fit: cover;
-    }
-
-    .timeline-caption {
-      .date {
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: #c97a7e;
-      }
-
-      .text {
-        color: #444;
-        font-size: 1rem;
-        line-height: 1.5;
-      }
-    }
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
+  return (
+    <LazyDiv className="timeline">
+      <h2>우리의 시간</h2>
+      <div className="timeline-gallery">
+        {photos.map((p, i) => (
+          <div
+            key={i}
+            className={`timeline-item ${i % 2 === 0 ? "left" : "right"}`}
+          >
+            <img src={p.img} alt={p.caption} />
+            <div className="timeline-caption">
+              <p className="date">{p.date}</p>
+              <p className="text">{p.caption}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </LazyDiv>
+  );
+};
