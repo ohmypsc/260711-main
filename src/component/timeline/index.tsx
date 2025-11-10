@@ -32,14 +32,16 @@ export const Timeline = () => {
         {items.map((item, i) => (
           <div
             key={i}
-            className={`timeline-item ${i % 2 === 0 ? "right" : "left"}`}
+            className={`timeline-item ${i % 2 === 0 ? "left" : "right"}`}
           >
-            <div className="circle-image">
-              <img src={item.img} alt={item.text} />
-            </div>
-            <div className="timeline-text">
-              <p className="year">{item.year}</p>
-              <p className="caption">{item.text}</p>
+            <div className="content">
+              <div className="circle-image">
+                <img src={item.img} alt={item.text} />
+              </div>
+              <div className="timeline-text">
+                <p className="year">{item.year}</p>
+                <p className="caption">{item.text}</p>
+              </div>
             </div>
           </div>
         ))}
