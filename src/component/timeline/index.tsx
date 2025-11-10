@@ -32,7 +32,7 @@ export const Timeline = () => {
         {items.map((item, i) => (
           <div
             key={i}
-            className={`timeline-item ${i % 2 === 0 ? "left" : "right"}`}
+            className={`timeline-item ${i % 2 === 0 ? "right" : "left"}`}
           >
             <div className="circle-image">
               <img src={item.img} alt={item.text} />
