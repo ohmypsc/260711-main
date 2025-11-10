@@ -1,42 +1,45 @@
 import { LazyDiv } from "../lazyDiv";
+import "./index.scss";
 
 export const Timeline = () => {
-  const photos = [
+  const items = [
     {
-      date: "2024.가을",
-      caption: "처음 만난 날 💕",
+      year: "2021",
+      text: "처음 만난 날 💕",
       img: `${import.meta.env.BASE_URL}love1.png`,
     },
     {
-      date: "2025.봄",
-      caption: "꽃놀이 🩷",
+      year: "2022",
+      text: "함께한 시간 🌿",
       img: `${import.meta.env.BASE_URL}love2.png`,
     },
     {
-      date: "2025.여름",
-      caption: "여행 ✈️",
+      year: "2023",
+      text: "프로포즈 💍",
       img: `${import.meta.env.BASE_URL}love3.jpg`,
     },
     {
-      date: "2026.여름",
-      caption: "결혼합니다 💍",
+      year: "2024",
+      text: "우리, 결혼합니다 🌸",
       img: `${import.meta.env.BASE_URL}love4.png`,
     },
   ];
 
   return (
-    <LazyDiv className="card timeline">
+    <LazyDiv className="timeline">
       <h2>우리의 시간</h2>
-
-      <div className="break" />
-
       <div className="timeline-gallery">
-        {photos.map((p, i) => (
-          <div key={i} className="timeline-item">
-            <img src={p.img} alt={p.caption} />
-            <div className="timeline-caption">
-              <p className="date">{p.date}</p>
-              <p className="text">{p.caption}</p>
+        {items.map((item, i) => (
+          <div
+            key={i}
+            className={`timeline-item ${i % 2 === 0 ? "left" : "right"}`}
+          >
+            <div className="circle-image">
+              <img src={item.img} alt={item.text} />
+            </div>
+            <div className="timeline-text">
+              <p className="year">{item.year}</p>
+              <p className="caption">{item.text}</p>
             </div>
           </div>
         ))}
