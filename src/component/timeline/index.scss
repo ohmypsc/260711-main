@@ -1,55 +1,70 @@
 .timeline {
-  padding: 3rem 1rem;
   position: relative;
+  padding: 3rem 1rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
 
   .timeline-gallery {
     position: relative;
+    width: 100%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3.5rem;
 
     &::before {
       content: "";
       position: absolute;
       top: 0;
       left: 50%;
+      transform: translateX(-50%);
       width: 2px;
       height: 100%;
-      background: rgba(201, 122, 126, 0.25);
-      transform: translateX(-50%);
-      z-index: 0;
+      background-color: rgba(201, 122, 126, 0.25);
     }
   }
 
   .timeline-item {
+    display: flex;
+    align-items: center;
+    margin: 2.5rem 0;
+    width: 100%;
+    max-width: 480px;
     position: relative;
-    background: #fff;
-    border-radius: 1rem;
-    padding: 1rem 1.5rem;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    max-width: 380px;
-    width: 85%;
     z-index: 1;
-    animation: fadeUp 0.8s ease both;
 
-    img {
-      width: 100%;
-      border-radius: 0.75rem;
-      margin-bottom: 0.8rem;
-      object-fit: cover;
+    .circle-image {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid #f2d5d8;
+      background-color: #fff;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+      z-index: 2;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
-    .timeline-caption {
-      .date {
+    .timeline-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      font-family: "Pretendard", sans-serif;
+
+      .year {
         font-weight: 600;
+        color: #b8696f;
         font-size: 0.9rem;
-        color: #c97a7e;
-        margin-bottom: 0.4rem;
       }
 
-      .text {
+      .caption {
         color: #444;
         font-size: 1rem;
         line-height: 1.5;
@@ -57,53 +72,86 @@
     }
   }
 
-  /* 🎀 좌우 교차 구조 */
+  /* 왼쪽 카드 */
   .timeline-item.left {
-    align-self: flex-start;
-    transform: translateX(-6%);
-    margin-right: auto;
-    margin-top: 1rem;
+    justify-content: flex-end;
+    text-align: right;
+
+    .timeline-text {
+      margin-right: 1rem;
+      align-items: flex-end;
+    }
+
+    .circle-image {
+      order: 2;
+      margin-left: 1.5rem;
+    }
 
     &::before {
       content: "";
       position: absolute;
-      top: 1.4rem;
-      right: -38px;
-      width: 14px;
-      height: 14px;
+      top: 50%;
+      right: calc(50% - 2px);
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
       background: #c97a7e;
       border-radius: 50%;
-      box-shadow: 0 0 0 6px rgba(201, 122, 126, 0.15);
     }
   }
 
+  /* 오른쪽 카드 */
   .timeline-item.right {
-    align-self: flex-end;
-    transform: translateX(6%);
-    margin-left: auto;
-    margin-top: 3rem;
+    justify-content: flex-start;
+    text-align: left;
+
+    .timeline-text {
+      margin-left: 1rem;
+      align-items: flex-start;
+    }
+
+    .circle-image {
+      order: 0;
+      margin-right: 1.5rem;
+    }
 
     &::before {
       content: "";
       position: absolute;
-      top: 1.4rem;
-      left: -38px;
-      width: 14px;
-      height: 14px;
+      top: 50%;
+      left: calc(50% - 2px);
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
       background: #c97a7e;
       border-radius: 50%;
-      box-shadow: 0 0 0 6px rgba(201, 122, 126, 0.15);
     }
   }
 
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
+  @media (max-width: 600px) {
+    .timeline-item {
+      flex-direction: column;
+      text-align: center;
+      margin: 2rem 0;
+
+      .timeline-text {
+        align-items: center !important;
+        margin: 0 !important;
+      }
+
+      .circle-image {
+        margin: 0 0 1rem 0 !important;
+      }
+
+      &::before {
+        display: none;
+      }
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .timeline-gallery::before {
+      left: 50%;
+      width: 1px;
+      background-color: rgba(201, 122, 126, 0.2);
     }
   }
 }
