@@ -57,7 +57,10 @@ function App() {
         <div className="card-view">
           <LazyDiv className="card-group">
             <Cover />
-            <Invitation />
+          </LazyDiv>
+
+          <LazyDiv className="card-group">
+             <Invitation />
           </LazyDiv>
 
           <LazyDiv className="card-group">
