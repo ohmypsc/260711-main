@@ -49,13 +49,12 @@
     }
 
     .content {
-      width: 45%;
-      max-width: 380px;
+      width: 42%;
+      max-width: 360px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      background: transparent;
     }
 
     .circle-image {
@@ -90,22 +89,26 @@
   }
 
   /* 왼쪽 카드 */
-  .timeline-item.left .content {
-    align-items: flex-end;
-    text-align: right;
-    margin-right: 50%;
-    padding-right: 2rem;
+  .timeline-item.left {
+    justify-content: flex-end; /* ✅ 왼쪽 정렬 */
+    .content {
+      align-items: flex-end;
+      text-align: right;
+      padding-right: 3rem; /* 중앙선에서 약간 여백 */
+    }
   }
 
   /* 오른쪽 카드 */
-  .timeline-item.right .content {
-    align-items: flex-start;
-    text-align: left;
-    margin-left: 50%;
-    padding-left: 2rem;
+  .timeline-item.right {
+    justify-content: flex-start; /* ✅ 오른쪽 정렬 */
+    .content {
+      align-items: flex-start;
+      text-align: left;
+      padding-left: 3rem; /* 중앙선에서 약간 여백 */
+    }
   }
 
-  /* ✅ 모바일에서도 좌우 교차 유지 */
+  /* ✅ 모바일에서도 교차 유지 */
   @media (max-width: 768px) {
     .timeline-gallery::before {
       width: 1px;
@@ -119,7 +122,6 @@
 
       .content {
         width: 80%;
-        margin: 0 !important;
         padding: 0 !important;
         align-items: center !important;
         text-align: center !important;
