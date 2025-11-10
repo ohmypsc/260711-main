@@ -1,46 +1,109 @@
-import { LazyDiv } from "../lazyDiv";
+.timeline {
+  padding: 3rem 1rem;
+  position: relative;
+  text-align: center;
 
-export const Timeline = () => {
-  const photos = [
-    {
-      date: "2024.가을",
-      caption: "처음 만난 날 💕",
-      img: `${import.meta.env.BASE_URL}love1.png`,
-    },
-    {
-      date: "2025.봄",
-      caption: "꽃놀이 🩷",
-      img: `${import.meta.env.BASE_URL}love2.png`,
-    },
-    {
-      date: "2025.여름",
-      caption: "여행 ✈️",
-      img: `${import.meta.env.BASE_URL}love3.jpg`,
-    },
-    {
-      date: "2026.여름",
-      caption: "결혼합니다 💍",
-      img: `${import.meta.env.BASE_URL}love4.png`,
-    },
-  ];
+  .timeline-gallery {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
 
-  return (
-    <LazyDiv className="timeline">
-      <h2>우리의 시간</h2>
-      <div className="timeline-gallery">
-        {photos.map((p, i) => (
-          <div
-            key={i}
-            className={`timeline-item ${i % 2 === 0 ? "left" : "right"}`}
-          >
-            <img src={p.img} alt={p.caption} />
-            <div className="timeline-caption">
-              <p className="date">{p.date}</p>
-              <p className="text">{p.caption}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </LazyDiv>
-  );
-};
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: rgba(201, 122, 126, 0.25);
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    max-width: 380px;
+    width: 85%;
+    z-index: 1;
+    animation: fadeUp 0.8s ease both;
+
+    img {
+      width: 100%;
+      border-radius: 0.75rem;
+      margin-bottom: 0.8rem;
+      object-fit: cover;
+    }
+
+    .timeline-caption {
+      .date {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #c97a7e;
+        margin-bottom: 0.4rem;
+      }
+
+      .text {
+        color: #444;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  /* 🎀 좌우 교차 구조 */
+  .timeline-item.left {
+    align-self: flex-start;
+    transform: translateX(-6%);
+    margin-right: auto;
+    margin-top: 1rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 1.4rem;
+      right: -38px;
+      width: 14px;
+      height: 14px;
+      background: #c97a7e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(201, 122, 126, 0.15);
+    }
+  }
+
+  .timeline-item.right {
+    align-self: flex-end;
+    transform: translateX(6%);
+    margin-left: auto;
+    margin-top: 3rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 1.4rem;
+      left: -38px;
+      width: 14px;
+      height: 14px;
+      background: #c97a7e;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(201, 122, 126, 0.15);
+    }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
