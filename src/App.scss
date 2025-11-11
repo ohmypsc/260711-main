@@ -20,7 +20,7 @@
   --light-color: #fffefe;
   --white-color: #ffffff;
   --red-color: #e88392;
-  
+
   font-family: "MapoGoldenPier";
   font-size: clamp(16px, 3.2vw, 20px);
 }
@@ -51,10 +51,7 @@
     font-size: 1.45rem;
   }
 
-  button {
-    font-size: 1.05rem;
-  }
-
+  button,
   input,
   textarea {
     font-size: 1.05rem;
@@ -78,7 +75,7 @@ $colors: (
   light-grey-color: var(--light-grey-color),
   light-color: var(--light-color),
   white-color: var(--white-color),
-  red-color: var(--red-color),
+  red-color: var(--red-color)
 );
 
 @each $name, $color in $colors {
@@ -122,6 +119,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100dvh;
+
   @supports not (height: 100dvh) {
     height: 100vh;
   }
@@ -171,10 +169,7 @@ textarea {
   .card-view {
     width: 980px;
     text-align: center;
-    margin: 0 auto; /* 브라우저 기준 중앙 정렬 */
-    display: flex;
-    flex-direction: column;
-
+    margin: 0 auto; /* 중앙 정렬 유지 */
 
     @media (max-width: 980px) {
       width: 500px;
@@ -194,8 +189,7 @@ textarea {
       opacity: 0;
 
       &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
+        animation: lazy-fade-in 3s;
         opacity: 1;
       }
 
@@ -208,11 +202,10 @@ textarea {
         background-color: var(--light-color);
         padding: 1rem;
         border: 1px solid var(--light-grey-color);
-        width: 100%;
+        width: 100%; /* ✅ 모든 카드 동일 폭 유지 */
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center; /* ✅ 카드 내부 콘텐츠도 가운데 */
+        align-items: center; /* ✅ 가로 중앙만 유지 (세로는 자유) */
         position: relative;
         margin: 0.5rem 0;
         box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.2);
@@ -220,8 +213,7 @@ textarea {
         z-index: 0;
 
         &.lazy-active {
-          animation-name: lazy-fade-in;
-          animation-duration: 3s;
+          animation: lazy-fade-in 3s;
           opacity: 1;
         }
 
@@ -242,8 +234,7 @@ textarea {
       z-index: 0;
 
       &.lazy-active {
-        animation-name: lazy-fade-in;
-        animation-duration: 3s;
+        animation: lazy-fade-in 3s;
         opacity: 1;
       }
 
@@ -263,13 +254,11 @@ h2 {
   margin-bottom: 1.8rem;
   text-align: center;
 
-  /* ✨ 라이트모드용 은은한 로즈골드 그라데이션 */
   background: linear-gradient(90deg, #c47b85 0%, #e8b0a7 50%, #c47b85 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
 
-  /* 🌸 메탈 느낌을 위한 살짝의 광택 */
   text-shadow:
     0 1px 2px rgba(255, 220, 220, 0.4),
     0 0 6px rgba(235, 190, 190, 0.2);
@@ -299,7 +288,6 @@ div.break {
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: light dark;
-
     --theme-color: #ff9f9f;
     --theme-bg-color: #2b2b2b;
     --alt-color: #ffb3b3;
