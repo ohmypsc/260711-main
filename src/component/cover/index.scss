@@ -6,9 +6,9 @@
   text-align: center;
   box-sizing: border-box;
 
-  /* 뷰포트가 아니라, rem 기준 여백 확보 */
-  padding-top: 10rem;   // 상단 넉넉하게
-  padding-bottom: 8rem; // 하단도 충분히
+  /* 📏 여백을 크게 늘림 */
+  padding-top: clamp(16rem, 22vh, 20rem);
+  padding-bottom: clamp(14rem, 18vh, 18rem);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 
@@ -26,17 +26,17 @@
     font-size: clamp(2rem, 5vw, 2.6rem);
     font-weight: 700;
     letter-spacing: 0.05rem;
-    margin-bottom: 1.8rem;
+    margin-bottom: 2.4rem;
     line-height: 1.2;
     color: var(--dark-color);
     text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05);
 
     .divider {
-      font-size: 1.4rem;
-      margin: 0 0.6rem;
+      font-size: 1.6rem;
+      margin: 0 0.8rem;
       color: var(--theme-color);
-      text-shadow: 0 0 4px rgba(255, 200, 190, 0.4),
-                   0 0 8px rgba(230, 180, 170, 0.3);
+      text-shadow: 0 0 6px rgba(255, 200, 190, 0.4),
+                   0 0 10px rgba(230, 180, 170, 0.3);
       animation: twinkle 3s ease-in-out infinite;
     }
   }
@@ -50,7 +50,7 @@
     opacity: 0.88;
     line-height: 1.6;
     text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.4rem;
     max-width: 90%;
   }
 
@@ -63,7 +63,7 @@
       rgba(200, 150, 150, 0.25) 50%,
       transparent 100%
     );
-    margin: 1.8rem 0;
+    margin: 2rem 0;
   }
 
   .family-section {
@@ -106,19 +106,24 @@
   }
 
   .contact-button {
-    margin-top: 2.4rem;
+    margin-top: 3rem;
     z-index: 1;
     position: relative;
   }
 
+  @media (max-width: 1024px) {
+    padding-top: clamp(14rem, 20vh, 18rem);
+    padding-bottom: clamp(12rem, 16vh, 16rem);
+  }
+
   @media (max-width: 768px) {
-    padding-top: 8rem;
-    padding-bottom: 6rem;
+    padding-top: 12rem;
+    padding-bottom: 10rem;
   }
 
   @media (max-width: 480px) {
-    padding-top: 6rem;
-    padding-bottom: 5rem;
+    padding-top: 10rem;
+    padding-bottom: 8rem;
   }
 }
 
