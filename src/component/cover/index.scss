@@ -1,13 +1,16 @@
+/* ================================
+   COVER SECTION
+   ================================ */
 .cover {
-  min-height: 100vh;
+  min-height: 100vh; /* 화면 전체 높이 확보 */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 상단 배치 유지 */
+  justify-content: flex-start; /* 상단 기준 배치 */
   align-items: center;
   text-align: center;
 
-  /* 뷰포트 비율 기반 여백 (데스크톱+모바일 겸용) */
+  /* 자연스러운 세로 여백 (뷰포트 기준) */
   padding-top: 12vh;
   padding-bottom: 10vh;
   padding-left: 1.5rem;
@@ -18,17 +21,136 @@
   transition: all 0.3s ease;
 }
 
-/* 반응형 보정 */
-@media (max-width: 768px) {
+/* 이름 */
+.cover > .names {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.2;
+  color: var(--dark-color);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.cover > .names .divider {
+  font-size: 1.4rem;
+  margin: 0 0.6rem;
+  color: var(--theme-color);
+  text-shadow: 0 0 6px rgba(255, 200, 190, 0.8),
+               0 0 12px rgba(230, 180, 170, 0.5);
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* 반짝임 애니메이션 */
+@keyframes twinkle {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.85; filter: brightness(1.3); }
+}
+
+/* 날짜 & 장소 */
+.cover .wedding-date-line,
+.cover .info {
+  font-size: clamp(1rem, 3.4vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.04rem;
+  color: var(--dark-color);
+  opacity: 0.88;
+  line-height: 1.6;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.2rem;
+  max-width: 90%;
+}
+
+/* 구분선 */
+.cover .divider-line {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(200, 150, 150, 0.25) 50%,
+    transparent 100%
+  );
+  margin: 1.6rem 0;
+}
+
+/* 가족관계 섹션 */
+.cover .family-section {
+  font-size: clamp(1rem, 2.8vw, 1.1rem);
+  opacity: 0.9;
+  line-height: 1.8;
+  letter-spacing: 0.01rem;
+  margin-top: 1rem;
+  margin-bottom: 1.2rem;
+  color: var(--dark-color);
+}
+
+.cover .family-section .name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+  gap: 0.25rem;
+}
+
+.cover .family-section .parent-names {
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  white-space: nowrap;
+}
+
+.cover .family-section .relation-name {
+  font-weight: 500;
+  opacity: 0.85;
+  display: inline-block;
+  text-align: center;
+}
+
+.cover .relation-name--adjust {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 3.5em;
+}
+
+/* 버튼 */
+.cover .contact-button {
+  margin-top: 1.6rem;
+  z-index: 1;
+  position: relative;
+}
+
+/* ================================
+   반응형 여백 조정
+   ================================ */
+@media (max-width: 1024px) {
   .cover {
     padding-top: 10vh;
     padding-bottom: 8vh;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cover {
+    padding-top: 8vh;
+    padding-bottom: 7vh;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .cover {
-    padding-top: 8vh;
-    padding-bottom: 7vh;
+    padding-top: 7vh;
+    padding-bottom: 6vh;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
