@@ -82,7 +82,7 @@
       align-items: center;
       margin: 0;
       padding: 0;
-      gap: 0.05rem; /* ✅ 연도-캡션 거의 붙게 */
+      gap: 0.05rem;
 
       p {
         margin: 0;
@@ -105,13 +105,13 @@
     }
   }
 
-  /* 💫 왼쪽부터 시작 (좌-우 교차, 선에 근접) */
+  /* 좌우 배치 */
   .timeline-item.left {
     justify-content: flex-end;
     .content {
       align-items: center;
       text-align: center;
-      padding-right: 1rem; /* ✅ transform 대신 padding */
+      padding-right: 1rem;
     }
   }
 
@@ -124,13 +124,14 @@
     }
   }
 
-  /* 📱 모바일에서도 동일한 구조 + 카드 내부에 안전하게 */
+  /* 📱 모바일 */
   @media (max-width: 768px) {
     .timeline-item {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       margin: 1rem 0;
+
       &::before {
         top: 50px;
         left: 50%;
@@ -152,9 +153,11 @@
         p {
           margin: 0;
         }
+
         .year {
           font-size: 0.85rem;
         }
+
         .caption {
           font-size: 0.85rem;
           line-height: 1.2;
@@ -168,6 +171,28 @@
 
     .timeline-item.right .content {
       padding-left: 0.8rem;
+    }
+  }
+
+  /* 💻 데스크톱에서 이미지-선 간격 줄이기 */
+  @media (min-width: 769px) {
+    .timeline-item {
+      .content {
+        width: 42%; /* 기존 45% → 중앙선 가까이 */
+        max-width: 300px;
+      }
+
+      &.left .content {
+        padding-right: 0.5rem; /* 기존 1rem → 0.5rem */
+      }
+
+      &.right .content {
+        padding-left: 0.5rem;
+      }
+
+      &::before {
+        top: 50px; /* 점 위치 미세 조정 */
+      }
     }
   }
 }
