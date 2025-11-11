@@ -8,7 +8,6 @@
   .timeline-gallery {
     position: relative;
     width: 100%;
-    max-width: none;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,14 +32,14 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 0; /* 기본 여백 제거 */
+    margin: -4rem 0; /* ✅ 기본 간격을 겹침형으로 조정 */
     z-index: 1;
 
     /* 중앙 점 */
     &::before {
       content: "";
       position: absolute;
-      top: 60px; /* 사진 중심 근처 */
+      top: 60px;
       left: 50%;
       transform: translateX(-50%);
       width: 12px;
@@ -59,6 +58,8 @@
       align-items: center;
       text-align: center;
       background: transparent;
+      position: relative;
+      z-index: 3;
     }
 
     /* 사진 */
@@ -69,7 +70,7 @@
       overflow: hidden;
       background-color: #fff;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.4rem; /* ✅ 사진-텍스트 간 간격 축소 */
 
       img {
         width: 100%;
@@ -84,6 +85,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 0.2rem; /* ✅ 연도-캡션 간 간격 축소 */
 
       .year {
         font-weight: 600;
@@ -94,7 +96,7 @@
       .caption {
         color: #444;
         font-size: 1rem;
-        line-height: 1.4;
+        line-height: 1.35;
         word-break: keep-all;
       }
     }
@@ -102,47 +104,38 @@
 
   /* 왼쪽 카드 */
   .timeline-item.left {
-    margin-top: 3rem; /* 아래로 살짝 밀기 */
     .content {
       margin-right: auto;
-      padding-right: 0.6rem; /* 선과 이미지 간 거리 */
+      padding-right: 0.8rem;
     }
   }
 
   /* 오른쪽 카드 */
   .timeline-item.right {
     flex-direction: row-reverse;
-    margin-top: -6rem; /* 절반 겹침 */
     .content {
       margin-left: auto;
-      padding-left: 0.6rem;
+      padding-left: 0.8rem;
     }
   }
 
   /* ✅ 모든 화면 크기에서 동일 구조 유지 */
   @media (max-width: 768px) {
     .timeline-item {
+      margin: -3rem 0; /* ✅ 모바일에서도 동일한 겹침 간격 */
       .circle-image {
         width: 90px;
         height: 90px;
+        margin-bottom: 0.3rem;
       }
-
       .timeline-text {
+        gap: 0.15rem;
         .year {
           font-size: 0.9rem;
         }
         .caption {
           font-size: 0.9rem;
         }
-      }
-    }
-  }
-
-  /* ✅ 초소형 화면에서도 선 중앙 정렬만 유지 */
-  @media (max-width: 500px) {
-    .timeline-gallery {
-      &::before {
-        left: 50%;
       }
     }
   }
