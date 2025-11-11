@@ -21,7 +21,7 @@
       transform: translateX(-50%);
       width: 2px;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.12);
+      background-color: rgba(0, 0, 0, 0.15);
       z-index: 0;
     }
   }
@@ -30,33 +30,33 @@
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
-    margin: 2.4rem 0; /* ✅ 일정한 세로 간격 */
+    margin: 1.4rem 0; /* ✅ 세로 간격 줄임 */
     z-index: 1;
 
     /* 중앙 점 */
     &::before {
       content: "";
       position: absolute;
-      top: 65px; /* 이미지 중심 근처 */
+      top: 55px;
       left: 50%;
       transform: translateX(-50%);
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background-color: #c97a7e;
       border-radius: 50%;
       z-index: 2;
     }
 
+    /* 공통 콘텐츠 */
     .content {
-      width: 44%;
-      max-width: 340px;
+      width: 42%;
+      max-width: 320px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      background: transparent;
     }
 
     /* 사진 */
@@ -66,8 +66,8 @@
       border-radius: 50%;
       overflow: hidden;
       background-color: #fff;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 0.3rem; /* ✅ 연도와 간격 줄임 */
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
+      margin-bottom: 0.3rem; /* ✅ 텍스트와의 간격 줄임 */
 
       img {
         width: 100%;
@@ -82,72 +82,71 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.05rem;
+      gap: 0.05rem; /* ✅ 연도–캡션 간격 최소화 */
 
       .year {
         font-weight: 600;
         color: #b8696f;
         font-size: 1rem;
+        margin: 0;
       }
 
       .caption {
         color: #444;
         font-size: 0.95rem;
         line-height: 1.35;
-        word-break: keep-all;
+        margin: 0;
       }
     }
   }
 
-  /* 💫 좌우 완벽 대칭 + 선 근처로 배치 */
+  /* 💫 좌우 완벽 대칭 + 선에 가까이 */
   .timeline-item.left {
     justify-content: flex-end;
-    transform: translateY(-0.8rem); /* 살짝 위로 */
+    transform: translateY(-0.6rem);
     .content {
       align-items: flex-end;
       text-align: right;
-      margin-right: 1.2rem; /* ✅ 선과의 거리 조정 */
+      margin-right: 0.6rem; /* ✅ 선과의 거리 매우 근접 */
     }
   }
 
   .timeline-item.right {
     justify-content: flex-start;
-    transform: translateY(0.8rem); /* 살짝 아래로 */
+    transform: translateY(0.6rem);
     .content {
       align-items: flex-start;
       text-align: left;
-      margin-left: 1.2rem; /* ✅ 동일 거리 */
+      margin-left: 0.6rem; /* ✅ 동일 거리로 완전 대칭 */
     }
   }
 
-  /* 📱 모바일도 완전히 동일한 형태 유지 */
+  /* 📱 모바일도 데스크톱과 동일한 구조 */
   @media (max-width: 768px) {
     .timeline-item {
-      flex-direction: row; /* ✅ column 절대 금지 */
-      justify-content: space-between;
-      align-items: flex-start;
-      margin: 2.4rem 0;
+      flex-direction: row;
+      justify-content: center;
+      margin: 1.4rem 0;
     }
 
     .timeline-item.left {
-      justify-content: flex-end;
       transform: translateY(-0.6rem);
       .content {
-        margin-right: 0.8rem;
+        margin-right: 0.5rem;
       }
     }
 
     .timeline-item.right {
-      justify-content: flex-start;
       transform: translateY(0.6rem);
       .content {
-        margin-left: 0.8rem;
+        margin-left: 0.5rem;
       }
     }
 
     .circle-image {
       width: 90px;
       height: 90px;
+      margin-bottom: 0.25rem;
     }
 
     .timeline-text {
