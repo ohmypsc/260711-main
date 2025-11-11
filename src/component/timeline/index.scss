@@ -30,16 +30,16 @@
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 1.4rem 0; /* ✅ 세로 간격 줄임 */
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.6rem 0; /* ✅ 세로 간격 균일 */
     z-index: 1;
 
     /* 중앙 점 */
     &::before {
       content: "";
       position: absolute;
-      top: 55px;
+      top: 60px;
       left: 50%;
       transform: translateX(-50%);
       width: 10px;
@@ -49,9 +49,8 @@
       z-index: 2;
     }
 
-    /* 공통 콘텐츠 */
     .content {
-      width: 42%;
+      width: 44%;
       max-width: 320px;
       display: flex;
       flex-direction: column;
@@ -66,14 +65,13 @@
       border-radius: 50%;
       overflow: hidden;
       background-color: #fff;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.06);
-      margin-bottom: 0.3rem; /* ✅ 텍스트와의 간격 줄임 */
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 0.35rem;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 50%;
       }
     }
 
@@ -82,74 +80,80 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.05rem; /* ✅ 연도–캡션 간격 최소화 */
+      gap: 0.1rem;
+      margin-top: 0.8rem; /* ✅ 이미지 바로 아래 */
 
       .year {
         font-weight: 600;
         color: #b8696f;
         font-size: 1rem;
-        margin: 0;
       }
 
       .caption {
         color: #444;
         font-size: 0.95rem;
         line-height: 1.35;
-        margin: 0;
+        word-break: keep-all;
       }
     }
   }
 
-  /* 💫 좌우 완벽 대칭 + 선에 가까이 */
+  /* 💫 좌우 완벽 대칭 + 선 근접 배치 */
   .timeline-item.left {
     justify-content: flex-end;
-    transform: translateY(-0.6rem);
+    transform: translateY(-0.5rem);
+
     .content {
       align-items: flex-end;
       text-align: right;
-      margin-right: 0.6rem; /* ✅ 선과의 거리 매우 근접 */
+      margin-right: 0.3rem; /* ✅ 선과 거의 붙임 */
     }
   }
 
   .timeline-item.right {
     justify-content: flex-start;
-    transform: translateY(0.6rem);
+    transform: translateY(0.5rem);
+
     .content {
       align-items: flex-start;
       text-align: left;
-      margin-left: 0.6rem; /* ✅ 동일 거리로 완전 대칭 */
+      margin-left: 0.3rem; /* ✅ 동일 거리 */
     }
   }
 
-  /* 📱 모바일도 데스크톱과 동일한 구조 */
+  /* 📱 모바일에서도 동일한 구조 유지 */
   @media (max-width: 768px) {
     .timeline-item {
       flex-direction: row;
-      justify-content: center;
-      margin: 1.4rem 0;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1.6rem 0;
     }
 
     .timeline-item.left {
-      transform: translateY(-0.6rem);
+      justify-content: flex-end;
+      transform: translateY(-0.4rem);
       .content {
-        margin-right: 0.5rem;
+        margin-right: 0.25rem;
       }
     }
 
     .timeline-item.right {
-      transform: translateY(0.6rem);
+      justify-content: flex-start;
+      transform: translateY(0.4rem);
       .content {
-        margin-left: 0.5rem;
+        margin-left: 0.25rem;
       }
     }
 
     .circle-image {
       width: 90px;
       height: 90px;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.3rem;
     }
 
     .timeline-text {
+      margin-top: 0.2rem;
       .year {
         font-size: 0.9rem;
       }
