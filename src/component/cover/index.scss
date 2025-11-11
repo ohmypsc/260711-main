@@ -1,9 +1,11 @@
 /* ================================
-   COVER SECTION (꿀렁임 방지 SCSS)
+   COVER SECTION (내용 기반 높이 + 넉넉한 여백)
    ================================ */
 .cover {
-  // JS에서 설정한 --vh 변수 기반으로 높이 계산
-  height: calc(var(--vh, 1vh) * 100);
+  // 높이를 뷰포트 기준으로 고정하지 않음
+  min-height: auto;
+  height: auto;
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -11,16 +13,21 @@
   align-items: center;
   text-align: center;
 
-  padding: 12vh 1.5rem 10vh;
+  // 충분한 여백 확보 (뷰포트 기반이 아니라 고정 rem 사용)
+  padding-top: clamp(8rem, 12vh, 10rem);
+  padding-bottom: clamp(6rem, 10vh, 8rem);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
+
+  // 자연스러운 전환 (색상만)
   transition: background-color 0.3s ease, color 0.3s ease;
 
-  // 글자 꿀렁거림 방지
+  // 글자 흔들림 방지
   -webkit-font-smoothing: antialiased;
   backface-visibility: hidden;
-  transform: translateZ(0);
-  will-change: transform;
 
   // 이름
   > .names {
@@ -35,8 +42,6 @@
     line-height: 1.2;
     color: var(--dark-color);
     text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.05);
-    transform: translateZ(0);
-    will-change: transform;
 
     .divider {
       font-size: 1.4rem;
@@ -117,25 +122,25 @@
 
   // 버튼
   .contact-button {
-    margin-top: 1.6rem;
+    margin-top: 2rem;
     z-index: 1;
     position: relative;
   }
 
   /* 반응형 여백 조정 */
   @media (max-width: 1024px) {
-    padding-top: 10vh;
-    padding-bottom: 8vh;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
   }
 
   @media (max-width: 768px) {
-    padding-top: 8vh;
-    padding-bottom: 7vh;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
   }
 
   @media (max-width: 480px) {
-    padding-top: 7vh;
-    padding-bottom: 6vh;
+    padding-top: 5rem;
+    padding-bottom: 4rem;
   }
 }
 
