@@ -1,13 +1,14 @@
 .cover {
-  min-height: 90vh;
+  min-height: auto;
   box-sizing: border-box;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start; /* 패딩 기반 여백 확보용 */
   align-items: center;
   text-align: center;
 
   /* 자연스러운 세로 여백 */
-  padding: 20rem 1.5rem;
+  padding: 15rem 1.5rem;
 
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
