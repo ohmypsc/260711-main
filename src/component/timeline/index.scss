@@ -12,7 +12,6 @@
     flex-direction: column;
     align-items: center;
 
-    /* 중앙 수직선 */
     &::before {
       content: "";
       position: absolute;
@@ -32,10 +31,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 1rem 0; /* ✅ 기본 간격을 겹침형으로 조정 */
+    margin: -4rem 0;
     z-index: 1;
 
-    /* 중앙 점 */
     &::before {
       content: "";
       position: absolute;
@@ -49,7 +47,6 @@
       z-index: 2;
     }
 
-    /* 공통 내용 영역 */
     .content {
       width: 46%;
       max-width: 360px;
@@ -58,11 +55,8 @@
       align-items: center;
       text-align: center;
       background: transparent;
-      position: relative;
-      z-index: 3;
     }
 
-    /* 사진 */
     .circle-image {
       width: 120px;
       height: 120px;
@@ -70,7 +64,7 @@
       overflow: hidden;
       background-color: #fff;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 0.4rem; /* ✅ 사진-텍스트 간 간격 축소 */
+      margin-bottom: 0.4rem;
 
       img {
         width: 100%;
@@ -80,12 +74,18 @@
       }
     }
 
-    /* 텍스트 */
     .timeline-text {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.2rem; /* ✅ 연도-캡션 간 간격 축소 */
+      gap: 0.1rem; /* ✅ 진짜 간격은 여기서만 제어 */
+      margin: 0;
+      padding: 0;
+
+      p {
+        margin: 0; /* ✅ p 태그 기본 여백 제거 */
+        padding: 0;
+      }
 
       .year {
         font-weight: 600;
@@ -102,15 +102,11 @@
     }
   }
 
-  /* 왼쪽 카드 */
-  .timeline-item.left {
-    .content {
-      margin-right: auto;
-      padding-right: 0.8rem;
-    }
+  .timeline-item.left .content {
+    margin-right: auto;
+    padding-right: 0.8rem;
   }
 
-  /* 오른쪽 카드 */
   .timeline-item.right {
     flex-direction: row-reverse;
     .content {
@@ -119,20 +115,26 @@
     }
   }
 
-  /* ✅ 모든 화면 크기에서 동일 구조 유지 */
   @media (max-width: 768px) {
     .timeline-item {
-      margin: 1rem 0; /* ✅ 모바일에서도 동일한 겹침 간격 */
+      margin: -3rem 0;
+
       .circle-image {
         width: 90px;
         height: 90px;
         margin-bottom: 0.3rem;
       }
+
       .timeline-text {
-        gap: 0.15rem;
+        gap: 0.1rem; /* ✅ 모바일도 동일하게 밀착 */
+        p {
+          margin: 0;
+        }
+
         .year {
           font-size: 0.9rem;
         }
+
         .caption {
           font-size: 0.9rem;
         }
