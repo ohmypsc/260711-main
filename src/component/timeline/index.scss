@@ -5,15 +5,15 @@
   display: flex;
   justify-content: center;
 
-  --image-size: 110px;
-  --overlap: 35px; /* ✅ 선과의 겹침 정도 조절 */
-
   .timeline-gallery {
     position: relative;
-    width: 90%;
-    max-width: 900px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    /* 중앙 수직선 */
     &::before {
       content: "";
       position: absolute;
@@ -29,16 +29,18 @@
 
   .timeline-item {
     position: relative;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 2rem 0;
+    align-items: flex-start;
+    margin: 3rem 0;
     z-index: 1;
 
+    /* 중앙 점 */
     &::before {
       content: "";
       position: absolute;
-      top: calc(var(--image-size) / 2);
+      top: 70px; /* 이미지 중심 */
       left: 50%;
       transform: translateX(-50%);
       width: 10px;
@@ -49,80 +51,111 @@
     }
 
     .content {
+      width: 45%;
+      max-width: 340px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
+    /* 사진 */
     .circle-image {
-      width: var(--image-size);
-      height: var(--image-size);
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       overflow: hidden;
       background-color: #fff;
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
       margin-bottom: 0.3rem;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 50%;
       }
     }
 
+    /* 텍스트 */
     .timeline-text {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.05rem;
-      margin-top: 0.2rem;
+      gap: 0.1rem;
+      margin-top: 0.3rem;
 
       .year {
         font-weight: 600;
         color: #b8696f;
         font-size: 1rem;
+        margin-bottom: 0.1rem;
       }
 
       .caption {
         color: #444;
         font-size: 0.95rem;
-        line-height: 1.3;
+        line-height: 1.35;
         word-break: keep-all;
       }
     }
   }
 
-  /* 💫 선에 살짝 겹치게 이동 */
+  /* 좌우 배치 */
   .timeline-item.left {
-    justify-content: flex-end;
-
     .content {
-      align-items: center;
-      text-align: center;
-      transform: translateX(var(--overlap)); /* 오른쪽으로 겹치기 */
+      margin-right: auto;
+      padding-right: 2.5rem; /* 선과의 거리 */
+      align-items: flex-end;
+      text-align: right;
     }
   }
 
   .timeline-item.right {
-    justify-content: flex-start;
+    flex-direction: row-reverse;
 
     .content {
-      align-items: center;
-      text-align: center;
-      transform: translateX(calc(-1 * var(--overlap))); /* 왼쪽으로 겹치기 */
+      margin-left: auto;
+      padding-left: 2.5rem; /* 선과의 거리 */
+      align-items: flex-start;
+      text-align: left;
     }
   }
 
-  /* 📱 모바일도 동일하게 유지 */
+  /* ✅ 모바일에서도 동일한 구조 */
   @media (max-width: 768px) {
-    :root {
-      --image-size: 90px;
-      --overlap: 28px;
-    }
-
     .timeline-item {
-      margin: 1.6rem 0;
+      flex-direction: column;
+      align-items: center;
+      margin: 2.5rem 0;
+
+      &::before {
+        top: 65px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .content {
+        width: 80%;
+        padding: 0;
+        align-items: center;
+        text-align: center;
+      }
+
+      .circle-image {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 0.2rem;
+      }
+
+      .timeline-text {
+        .year {
+          font-size: 0.9rem;
+        }
+        .caption {
+          font-size: 0.9rem;
+        }
+      }
     }
   }
 }
