@@ -29,9 +29,9 @@
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
-    margin: 2.2rem 0;
+    margin: 2rem 0;
     z-index: 1;
 
     &::before {
@@ -48,12 +48,13 @@
     }
 
     .content {
-      width: 46%;
+      width: 45%;
       max-width: 360px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      background: transparent;
     }
 
     .circle-image {
@@ -78,53 +79,67 @@
       flex-direction: column;
       align-items: center;
       gap: 0.1rem;
+
       p {
         margin: 0;
       }
+
       .year {
         font-weight: 600;
         color: #b8696f;
         font-size: 1rem;
       }
+
       .caption {
         color: #444;
         font-size: 1rem;
         line-height: 1.35;
-        word-break: keep-all;
       }
     }
   }
 
-  /* 💫 왼쪽은 살짝 위로, 오른쪽은 살짝 아래로 */
+  /* 💫 좌우 완벽 대칭 & 일정 겹침 */
+  .timeline-item.left,
+  .timeline-item.right {
+    transform-origin: center;
+  }
+
   .timeline-item.left {
+    justify-content: flex-end;
     transform: translateY(-1.5rem);
+
     .content {
-      margin-right: auto;
-      padding-right: 0.5rem;
+      margin-right: 2%;
+      text-align: right;
+      align-items: flex-end;
     }
   }
 
   .timeline-item.right {
-    flex-direction: row-reverse;
+    justify-content: flex-start;
     transform: translateY(1.5rem);
+
     .content {
-      margin-left: auto;
-      padding-left: 0.5rem;
+      margin-left: 2%;
+      text-align: left;
+      align-items: flex-start;
     }
   }
 
-  /* 📱 모바일에서도 같은 느낌 유지 */
+  /* 📱 모바일에서는 깔끔하게 세로 정렬 */
   @media (max-width: 768px) {
-    .timeline-item.left,
-    .timeline-item.right {
-      transform: none; /* ✅ 너무 좁은 화면에서는 정렬 복원 */
+    .timeline-item {
       flex-direction: column;
       align-items: center;
+      transform: none;
       margin: 2.2rem 0;
 
       .content {
         width: 80%;
+        margin: 0;
         padding: 0;
+        align-items: center;
+        text-align: center;
       }
 
       .circle-image {
