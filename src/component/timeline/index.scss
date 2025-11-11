@@ -174,25 +174,23 @@
     }
   }
 
-  /* 💻 데스크톱에서 이미지-선 간격 줄이기 */
+  /* 💻 데스크톱: 이미지-선 간격 줄이기 (안전 평탄화 버전) */
   @media (min-width: 769px) {
-    .timeline-item {
-      .content {
-        width: 42%; /* 기존 45% → 중앙선 가까이 */
-        max-width: 300px;
-      }
+    .timeline-item .content {
+      width: 42%; /* 기존 45% → 중앙선 가까이 */
+      max-width: 300px;
+    }
 
-      &.left .content {
-        padding-right: 0.5rem; /* 기존 1rem → 0.5rem */
-      }
+    .timeline-item.left .content {
+      padding-right: 0.5rem;
+    }
 
-      &.right .content {
-        padding-left: 0.5rem;
-      }
+    .timeline-item.right .content {
+      padding-left: 0.5rem;
+    }
 
-      &::before {
-        top: 50px; /* 점 위치 미세 조정 */
-      }
+    .timeline-item::before {
+      top: 50px;
     }
   }
 }
