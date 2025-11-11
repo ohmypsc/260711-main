@@ -33,7 +33,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 3rem 0;
+    margin: 0; /* 기본 여백 제거 */
     z-index: 1;
 
     /* 중앙 점 */
@@ -69,7 +69,7 @@
       overflow: hidden;
       background-color: #fff;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 0.6rem; /* 사진과 텍스트 간격 조정 */
+      margin-bottom: 0.6rem;
 
       img {
         width: 100%;
@@ -102,9 +102,9 @@
 
   /* 왼쪽 카드 */
   .timeline-item.left {
+    margin-top: 3rem; /* 아래로 살짝 밀기 */
     .content {
       margin-right: auto;
-      margin-left: 0;
       padding-right: 0.6rem; /* 선과 이미지 간 거리 */
     }
   }
@@ -112,41 +112,19 @@
   /* 오른쪽 카드 */
   .timeline-item.right {
     flex-direction: row-reverse;
-
+    margin-top: -6rem; /* 절반 겹침 */
     .content {
       margin-left: auto;
-      margin-right: 0;
       padding-left: 0.6rem;
     }
   }
 
-  /* ✅ 모바일에서도 지그재그 유지 */
+  /* ✅ 모든 화면 크기에서 동일 구조 유지 */
   @media (max-width: 768px) {
     .timeline-item {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin: 2.6rem 0;
-
-      &::before {
-        top: 55px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .content {
-        width: 42%;
-        max-width: none;
-        padding: 0 0.6rem;
-        align-items: center;
-        text-align: center;
-      }
-
       .circle-image {
         width: 90px;
         height: 90px;
-        margin-bottom: 0.4rem;
       }
 
       .timeline-text {
@@ -155,21 +133,12 @@
         }
         .caption {
           font-size: 0.9rem;
-          line-height: 1.4;
         }
       }
     }
-
-    .timeline-item.left .content {
-      padding-right: 1rem;
-    }
-
-    .timeline-item.right .content {
-      padding-left: 1rem;
-    }
   }
 
-  /* ✅ 초소형 화면(아이폰 SE 등)에서도 중앙 정렬 유지 */
+  /* ✅ 초소형 화면에서도 선 중앙 정렬만 유지 */
   @media (max-width: 500px) {
     .timeline-gallery {
       &::before {
