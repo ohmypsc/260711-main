@@ -12,7 +12,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
 
     /* 중앙 수직선 */
     &::before {
@@ -23,18 +22,19 @@
       transform: translateX(-50%);
       width: 2px;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.12);
+      background-color: rgba(0, 0, 0, 0.15);
       z-index: 0;
     }
   }
 
+  /* 공통 */
   .timeline-item {
     position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 1.2rem 0; /* ✅ 세로 간격 줄임 */
+    margin: 1.2rem 0;
     z-index: 1;
 
     /* 중앙 점 */
@@ -51,7 +51,6 @@
       z-index: 2;
     }
 
-    /* 공통 콘텐츠 */
     .content {
       width: 45%;
       max-width: 340px;
@@ -61,7 +60,6 @@
       text-align: center;
     }
 
-    /* 사진 */
     .circle-image {
       width: 110px;
       height: 110px;
@@ -69,105 +67,107 @@
       overflow: hidden;
       background-color: #fff;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 0.15rem; /* ✅ 사진-텍스트 간격 최소화 */
+      margin-bottom: 0.15rem;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 50%;
       }
     }
 
-    /* 텍스트 */
     .timeline-text {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0rem; /* ✅ 연도-캡션 간격 완전히 밀착 */
-      margin-top: 0rem;
+      margin: 0;
+      padding: 0;
+      gap: 0.05rem; /* ✅ 연도-캡션 거의 붙게 */
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
 
       .year {
         font-weight: 600;
         color: #b8696f;
         font-size: 0.95rem;
-        line-height: 1;
+        line-height: 1.1;
       }
 
       .caption {
         color: #444;
         font-size: 0.9rem;
-        line-height: 1.25;
+        line-height: 1.2;
         word-break: keep-all;
       }
     }
   }
 
-  /* 💫 좌우 교차 (왼쪽부터 시작) */
+  /* 💫 왼쪽부터 시작 (좌-우 교차, 선에 근접) */
   .timeline-item.left {
     justify-content: flex-end;
-    transform: translateY(-0.6rem);
-
     .content {
       align-items: center;
       text-align: center;
-      transform: translateX(24px); /* ✅ 선과 가까이 */
+      padding-right: 1rem; /* ✅ transform 대신 padding */
     }
   }
 
   .timeline-item.right {
     justify-content: flex-start;
-    transform: translateY(0.6rem);
-
     .content {
       align-items: center;
       text-align: center;
-      transform: translateX(-24px);
+      padding-left: 1rem;
     }
   }
 
-  /* ✅ 모바일에서도 동일한 구조 유지하되 카드 안쪽으로만 */
+  /* 📱 모바일에서도 동일한 구조 + 카드 내부에 안전하게 */
   @media (max-width: 768px) {
     .timeline-item {
-      margin: 1.2rem 0;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-
+      margin: 1rem 0;
       &::before {
         top: 50px;
         left: 50%;
-        transform: translateX(-50%);
       }
 
       .content {
         width: 46%;
-        padding: 0;
+        max-width: none;
+        padding: 0 0.8rem;
       }
 
       .circle-image {
         width: 90px;
         height: 90px;
+        margin-bottom: 0.1rem;
       }
 
       .timeline-text {
-        margin-top: 0.05rem;
+        p {
+          margin: 0;
+        }
         .year {
           font-size: 0.85rem;
         }
         .caption {
           font-size: 0.85rem;
-          line-height: 1.25;
+          line-height: 1.2;
         }
       }
     }
 
     .timeline-item.left .content {
-      transform: translateX(18px); /* ✅ 선에 붙이되 바깥 안나감 */
+      padding-right: 0.8rem;
     }
 
     .timeline-item.right .content {
-      transform: translateX(-18px);
+      padding-left: 0.8rem;
     }
   }
 }
