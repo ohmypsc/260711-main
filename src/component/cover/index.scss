@@ -1,35 +1,23 @@
-/* ================================
-   COVER SECTION (내용 기반 높이 + 넉넉한 여백)
-   ================================ */
 .cover {
-  // 높이를 뷰포트 기준으로 고정하지 않음
-  min-height: auto;
-  height: auto;
-
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
 
-  // 충분한 여백 확보 (뷰포트 기반이 아니라 고정 rem 사용)
-  padding-top: clamp(8rem, 12vh, 10rem);
-  padding-bottom: clamp(6rem, 10vh, 8rem);
+  /* 뷰포트가 아니라, rem 기준 여백 확보 */
+  padding-top: 10rem;   // 상단 넉넉하게
+  padding-bottom: 8rem; // 하단도 충분히
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 
   background-color: var(--light-bg-color, #fff);
   color: var(--dark-color);
-
-  // 자연스러운 전환 (색상만)
   transition: background-color 0.3s ease, color 0.3s ease;
-
-  // 글자 흔들림 방지
   -webkit-font-smoothing: antialiased;
   backface-visibility: hidden;
 
-  // 이름
   > .names {
     display: flex;
     justify-content: center;
@@ -53,7 +41,6 @@
     }
   }
 
-  // 날짜 & 장소
   .wedding-date-line,
   .info {
     font-size: clamp(1rem, 3.4vw, 1.2rem);
@@ -67,7 +54,6 @@
     max-width: 90%;
   }
 
-  // 구분선
   .divider-line {
     width: 60%;
     height: 1px;
@@ -77,17 +63,16 @@
       rgba(200, 150, 150, 0.25) 50%,
       transparent 100%
     );
-    margin: 1.6rem 0;
+    margin: 1.8rem 0;
   }
 
-  // 가족관계 섹션
   .family-section {
     font-size: clamp(1rem, 2.8vw, 1.1rem);
     opacity: 0.9;
     line-height: 1.8;
     letter-spacing: 0.01rem;
-    margin-top: 1rem;
-    margin-bottom: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     color: var(--dark-color);
 
     .name {
@@ -120,31 +105,23 @@
     }
   }
 
-  // 버튼
   .contact-button {
-    margin-top: 2rem;
+    margin-top: 2.4rem;
     z-index: 1;
     position: relative;
   }
 
-  /* 반응형 여백 조정 */
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     padding-top: 8rem;
     padding-bottom: 6rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 480px) {
     padding-top: 6rem;
     padding-bottom: 5rem;
   }
-
-  @media (max-width: 480px) {
-    padding-top: 5rem;
-    padding-bottom: 4rem;
-  }
 }
 
-/* 반짝임 애니메이션 */
 @keyframes twinkle {
   0%, 100% { opacity: 1; filter: brightness(1); }
   50% { opacity: 0.85; filter: brightness(1.2); }
