@@ -8,10 +8,11 @@
   .timeline-gallery {
     position: relative;
     width: 100%;
-    max-width: 900px;
+    max-width: 880px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
 
     /* 중앙 수직선 */
     &::before {
@@ -22,7 +23,7 @@
       transform: translateX(-50%);
       width: 2px;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.15);
+      background-color: rgba(0, 0, 0, 0.12);
       z-index: 0;
     }
   }
@@ -31,15 +32,16 @@
     position: relative;
     width: 100%;
     display: flex;
-    align-items: center;
-    margin: 2.6rem 0;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 1.2rem 0; /* ✅ 세로 간격 줄임 */
     z-index: 1;
 
     /* 중앙 점 */
     &::before {
       content: "";
       position: absolute;
-      top: 60px;
+      top: 55px;
       left: 50%;
       transform: translateX(-50%);
       width: 10px;
@@ -49,8 +51,9 @@
       z-index: 2;
     }
 
+    /* 공통 콘텐츠 */
     .content {
-      width: 42%;
+      width: 45%;
       max-width: 340px;
       display: flex;
       flex-direction: column;
@@ -60,13 +63,13 @@
 
     /* 사진 */
     .circle-image {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       overflow: hidden;
       background-color: #fff;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem; /* ✅ 사진-텍스트 간격 최소화 */
 
       img {
         width: 100%;
@@ -81,93 +84,90 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 0.25rem; /* 사진과 텍스트 간 간격 최소화 */
-      gap: 0.05rem;
+      gap: 0rem; /* ✅ 연도-캡션 간격 완전히 밀착 */
+      margin-top: 0rem;
 
       .year {
         font-weight: 600;
         color: #b8696f;
-        font-size: 1rem;
+        font-size: 0.95rem;
+        line-height: 1;
       }
 
       .caption {
         color: #444;
-        font-size: 0.95rem;
-        line-height: 1.35;
+        font-size: 0.9rem;
+        line-height: 1.25;
         word-break: keep-all;
       }
     }
   }
 
-  /* 💫 좌우 교차 구조 */
+  /* 💫 좌우 교차 (왼쪽부터 시작) */
   .timeline-item.left {
     justify-content: flex-end;
+    transform: translateY(-0.6rem);
 
     .content {
       align-items: center;
       text-align: center;
-      transform: translateX(30px); /* ✅ 선 쪽으로 살짝 당김 */
+      transform: translateX(24px); /* ✅ 선과 가까이 */
     }
   }
 
   .timeline-item.right {
     justify-content: flex-start;
+    transform: translateY(0.6rem);
 
     .content {
       align-items: center;
       text-align: center;
-      transform: translateX(-30px); /* ✅ 좌우 대칭으로 당김 */
+      transform: translateX(-24px);
     }
   }
 
-  /* 📱 모바일에서도 동일한 지그재그 유지 */
+  /* ✅ 모바일에서도 동일한 구조 유지하되 카드 안쪽으로만 */
   @media (max-width: 768px) {
     .timeline-item {
-      margin: 2.4rem 0;
+      margin: 1.2rem 0;
       flex-direction: row;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
 
       &::before {
-        top: 55px;
+        top: 50px;
         left: 50%;
         transform: translateX(-50%);
       }
 
       .content {
-        width: 42%;
-        max-width: none;
+        width: 46%;
+        padding: 0;
+      }
+
+      .circle-image {
+        width: 90px;
+        height: 90px;
+      }
+
+      .timeline-text {
+        margin-top: 0.05rem;
+        .year {
+          font-size: 0.85rem;
+        }
+        .caption {
+          font-size: 0.85rem;
+          line-height: 1.25;
+        }
       }
     }
 
-    .timeline-item.left {
-      justify-content: flex-end;
-
-      .content {
-        transform: translateX(24px); /* ✅ 모바일에서도 동일 비율 */
-      }
+    .timeline-item.left .content {
+      transform: translateX(18px); /* ✅ 선에 붙이되 바깥 안나감 */
     }
 
-    .timeline-item.right {
-      justify-content: flex-start;
-
-      .content {
-        transform: translateX(-24px);
-      }
-    }
-
-    .circle-image {
-      width: 100px;
-      height: 100px;
-    }
-
-    .timeline-text {
-      .year {
-        font-size: 0.9rem;
-      }
-      .caption {
-        font-size: 0.9rem;
-      }
+    .timeline-item.right .content {
+      transform: translateX(-18px);
     }
   }
 }
